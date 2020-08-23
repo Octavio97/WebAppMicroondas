@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="MicroondasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ciudad" Type="varchar" MaxLength="50" />
+          <Property Name="idEstado" Type="uniqueidentifier" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
         <EntityType Name="CodigoPostal">
           <Key>
             <PropertyRef Name="idCP" />
@@ -12,6 +21,7 @@
           <Property Name="idCP" Type="uniqueidentifier" Nullable="false" />
           <Property Name="codigo" Type="int" />
           <Property Name="activo" Type="bit" />
+          <Property Name="idCiudad" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Colonia">
           <Key>
@@ -27,7 +37,7 @@
             <PropertyRef Name="idContrato" />
           </Key>
           <Property Name="idContrato" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Pdf" Type="binary" MaxLength="1" />
+          <Property Name="pdf" Type="binary" MaxLength="1" />
           <Property Name="archivo" Type="varchar" MaxLength="20" />
           <Property Name="idPaquete" Type="uniqueidentifier" />
           <Property Name="idEstatus" Type="uniqueidentifier" />
@@ -40,6 +50,14 @@
           <Property Name="idEquipo" Type="uniqueidentifier" Nullable="false" />
           <Property Name="equipo" Type="varchar" MaxLength="30" />
           <Property Name="idPropiedad" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="30" />
+          <Property Name="activo" Type="bit" />
         </EntityType>
         <EntityType Name="Estatus">
           <Key>
@@ -54,7 +72,7 @@
             <PropertyRef Name="idPaquete" />
           </Key>
           <Property Name="idPaquete" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="NOMBRE" Type="varchar" MaxLength="30" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" />
           <Property Name="precio" Type="money" />
           <Property Name="activo" Type="bit" />
         </EntityType>
@@ -98,8 +116,33 @@
           <Property Name="idCP" Type="uniqueidentifier" />
           <Property Name="idRol" Type="uniqueidentifier" />
           <Property Name="idContrato" Type="uniqueidentifier" />
-          <Property Name="Activo" Type="bit" />
+          <Property Name="activo" Type="bit" />
+          <Property Name="contrasena" Type="varchar" MaxLength="16" />
         </EntityType>
+        <Association Name="FK__Ciudad__idEstado__59063A47">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Ciudad">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CodigoPos__idCiu__59FA5E80">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="CodigoPostal">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Colonia__idCP__47DBAE45">
           <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="0..1" />
           <End Role="Colonia" Type="Self.Colonia" Multiplicity="*" />
@@ -221,16 +264,26 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MicroondasModelStoreContainer">
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colonia" EntityType="Self.Colonia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contrato" EntityType="Self.Contrato" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaqueteEquipo" EntityType="Self.PaqueteEquipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Propiedad" EntityType="Self.Propiedad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Ciudad__idEstado__59063A47" Association="Self.FK__Ciudad__idEstado__59063A47">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CodigoPos__idCiu__59FA5E80" Association="Self.FK__CodigoPos__idCiu__59FA5E80">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="CodigoPostal" EntitySet="CodigoPostal" />
+          </AssociationSet>
           <AssociationSet Name="FK__Colonia__idCP__47DBAE45" Association="Self.FK__Colonia__idCP__47DBAE45">
             <End Role="CodigoPostal" EntitySet="CodigoPostal" />
             <End Role="Colonia" EntitySet="Colonia" />
@@ -277,6 +330,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MicroondasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="Guid" Nullable="false" />
+          <Property Name="ciudad1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idEstado" Type="Guid" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK__Ciudad__idEstado__59063A47" FromRole="Ciudad" ToRole="Estado" />
+          <NavigationProperty Name="CodigoPostal" Relationship="Self.FK__CodigoPos__idCiu__59FA5E80" FromRole="Ciudad" ToRole="CodigoPostal" />
+        </EntityType>
         <EntityType Name="CodigoPostal">
           <Key>
             <PropertyRef Name="idCP" />
@@ -284,6 +348,8 @@
           <Property Name="idCP" Type="Guid" Nullable="false" />
           <Property Name="codigo" Type="Int32" />
           <Property Name="activo" Type="Boolean" />
+          <Property Name="idCiudad" Type="Guid" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK__CodigoPos__idCiu__59FA5E80" FromRole="CodigoPostal" ToRole="Ciudad" />
           <NavigationProperty Name="Colonia" Relationship="Self.FK__Colonia__idCP__47DBAE45" FromRole="CodigoPostal" ToRole="Colonia" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idCP__5165187F" FromRole="CodigoPostal" ToRole="Usuario" />
         </EntityType>
@@ -303,7 +369,7 @@
             <PropertyRef Name="idContrato" />
           </Key>
           <Property Name="idContrato" Type="Guid" Nullable="false" />
-          <Property Name="Pdf" Type="Binary" MaxLength="1" FixedLength="true" />
+          <Property Name="pdf" Type="Binary" MaxLength="1" FixedLength="true" />
           <Property Name="archivo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="idPaquete" Type="Guid" />
           <Property Name="idEstatus" Type="Guid" />
@@ -322,6 +388,15 @@
           <NavigationProperty Name="Propiedad" Relationship="Self.FK__Equipo__idPropie__412EB0B6" FromRole="Equipo" ToRole="Propiedad" />
           <NavigationProperty Name="PaqueteEquipo" Relationship="Self.FK__PaqueteEq__idEqu__44FF419A" FromRole="Equipo" ToRole="PaqueteEquipo" />
         </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Guid" Nullable="false" />
+          <Property Name="estado1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK__Ciudad__idEstado__59063A47" FromRole="Estado" ToRole="Ciudad" />
+        </EntityType>
         <EntityType Name="Estatus">
           <Key>
             <PropertyRef Name="idEstatus" />
@@ -336,7 +411,7 @@
             <PropertyRef Name="idPaquete" />
           </Key>
           <Property Name="idPaquete" Type="Guid" Nullable="false" />
-          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="activo" Type="Boolean" />
           <NavigationProperty Name="Contrato" Relationship="Self.FK__Contrato__idPaqu__4AB81AF0" FromRole="Paquete" ToRole="Contrato" />
@@ -386,12 +461,37 @@
           <Property Name="idCP" Type="Guid" />
           <Property Name="idRol" Type="Guid" />
           <Property Name="idContrato" Type="Guid" />
-          <Property Name="Activo" Type="Boolean" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="contrasena" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CodigoPostal" Relationship="Self.FK__Usuario__idCP__5165187F" FromRole="Usuario" ToRole="CodigoPostal" />
           <NavigationProperty Name="Colonia" Relationship="Self.FK__Usuario__idColon__5070F446" FromRole="Usuario" ToRole="Colonia" />
           <NavigationProperty Name="Contrato" Relationship="Self.FK__Usuario__idContr__534D60F1" FromRole="Usuario" ToRole="Contrato" />
           <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__idRol__52593CB8" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
+        <Association Name="FK__Ciudad__idEstado__59063A47">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Ciudad">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CodigoPos__idCiu__59FA5E80">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="CodigoPostal">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Colonia__idCP__47DBAE45">
           <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="0..1" />
           <End Role="Colonia" Type="Self.Colonia" Multiplicity="*" />
@@ -513,16 +613,26 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MicroondasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
           <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" />
           <EntitySet Name="Colonia" EntityType="Self.Colonia" />
           <EntitySet Name="Contrato" EntityType="Self.Contrato" />
           <EntitySet Name="Equipo" EntityType="Self.Equipo" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="Estatus" EntityType="Self.Estatus" />
           <EntitySet Name="Paquete" EntityType="Self.Paquete" />
           <EntitySet Name="PaqueteEquipo" EntityType="Self.PaqueteEquipo" />
           <EntitySet Name="Propiedad" EntityType="Self.Propiedad" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Ciudad__idEstado__59063A47" Association="Self.FK__Ciudad__idEstado__59063A47">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CodigoPos__idCiu__59FA5E80" Association="Self.FK__CodigoPos__idCiu__59FA5E80">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="CodigoPostal" EntitySet="CodigoPostal" />
+          </AssociationSet>
           <AssociationSet Name="FK__Colonia__idCP__47DBAE45" Association="Self.FK__Colonia__idCP__47DBAE45">
             <End Role="CodigoPostal" EntitySet="CodigoPostal" />
             <End Role="Colonia" EntitySet="Colonia" />
@@ -570,12 +680,23 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MicroondasModelStoreContainer" CdmEntityContainer="MicroondasEntities">
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="MicroondasModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="ciudad1" ColumnName="ciudad" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CodigoPostal">
             <EntityTypeMapping TypeName="MicroondasModel.CodigoPostal">
               <MappingFragment StoreEntitySet="CodigoPostal">
                 <ScalarProperty Name="idCP" ColumnName="idCP" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -593,7 +714,7 @@
             <EntityTypeMapping TypeName="MicroondasModel.Contrato">
               <MappingFragment StoreEntitySet="Contrato">
                 <ScalarProperty Name="idContrato" ColumnName="idContrato" />
-                <ScalarProperty Name="Pdf" ColumnName="Pdf" />
+                <ScalarProperty Name="pdf" ColumnName="pdf" />
                 <ScalarProperty Name="archivo" ColumnName="archivo" />
                 <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
                 <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
@@ -610,6 +731,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="MicroondasModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="estado1" ColumnName="estado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Estatus">
             <EntityTypeMapping TypeName="MicroondasModel.Estatus">
               <MappingFragment StoreEntitySet="Estatus">
@@ -623,7 +753,7 @@
             <EntityTypeMapping TypeName="MicroondasModel.Paquete">
               <MappingFragment StoreEntitySet="Paquete">
                 <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
               </MappingFragment>
@@ -671,7 +801,8 @@
                 <ScalarProperty Name="idCP" ColumnName="idCP" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="idContrato" ColumnName="idContrato" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

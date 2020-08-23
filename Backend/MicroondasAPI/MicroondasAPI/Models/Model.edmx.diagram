@@ -4,17 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="08505a7760434a6e90bd0235c336fd13" Name="Diagram1">
-        <EntityTypeShape EntityType="MicroondasModel.CodigoPostal" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Colonia" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Contrato" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Equipo" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Estatus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Paquete" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.PaqueteEquipo" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Propiedad" Width="1.5" PointX="1.5" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Rol" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MicroondasModel.Usuario" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+      <Diagram DiagramId="ee5ab67fd1a44352a24671ce270fcd4e" Name="Diagram1">
+        <EntityTypeShape EntityType="MicroondasModel.Ciudad" Width="1.5" PointX="3.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.CodigoPostal" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Colonia" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Contrato" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Equipo" Width="1.5" PointX="3.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Estado" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Estatus" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Paquete" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.PaqueteEquipo" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Propiedad" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Rol" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Usuario" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="MicroondasModel.FK__Ciudad__idEstado__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="MicroondasModel.FK__CodigoPos__idCiu__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="MicroondasModel.FK__Colonia__idCP__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="MicroondasModel.FK__Usuario__idCP__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="MicroondasModel.FK__Usuario__idColon__5070F446" ManuallyRouted="false" />

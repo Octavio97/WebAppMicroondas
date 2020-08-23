@@ -20,9 +20,23 @@ CREATE TABLE Propiedad (
     activo BIT
 );
 
+CREATE TABLE  Estado (
+    idEstado UNIQUEIDENTIFIER PRIMARY KEY,
+    estado VARCHAR(30),
+    activo BIT
+);
+
+CREATE TABLE Ciudad (
+    idCiudad UNIQUEIDENTIFIER PRIMARY KEY,
+    Ciudad VARCHAR(50),
+    idEstado UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estado(idEstado),
+    activo BIT
+);
+
 CREATE TABLE CodigoPostal (
     idCP UNIQUEIDENTIFIER PRIMARY KEY,
     codigo INT,
+    idCiudad UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Ciudad(idCiudad),
     activo BIT
 );
 
@@ -67,6 +81,7 @@ CREATE TABLE Usuario (
     apellido VARCHAR(50),
     telefono VARCHAR(50),
     correoE VARCHAR (50),
+    contrasena VARCHAR(16),
     calle VARCHAR (50),
     numInt NCHAR,
     numExt INT,

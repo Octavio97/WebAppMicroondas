@@ -26,7 +26,8 @@ namespace MicroondasAPI.Models
         public Nullable<System.Guid> idCP { get; set; }
         public Nullable<System.Guid> idRol { get; set; }
         public Nullable<System.Guid> idContrato { get; set; }
-        public Nullable<bool> Activo { get; set; }
+        public Nullable<bool> activo { get; set; }
+        public string contrasena { get; set; }
     
         public virtual CodigoPostal CodigoPostal { get; set; }
         public virtual Colonia Colonia { get; set; }

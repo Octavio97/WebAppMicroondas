@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MicroondasModelStoreContainer" CdmEntityContainer="MicroondasEntities">
+    <EntitySetMapping Name="Ciudad">
+      <EntityTypeMapping TypeName="MicroondasModel.Ciudad">
+        <MappingFragment StoreEntitySet="Ciudad">
+          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+          <ScalarProperty Name="ciudad1" ColumnName="ciudad" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodigoPostal">
+      <EntityTypeMapping TypeName="MicroondasModel.CodigoPostal">
+        <MappingFragment StoreEntitySet="CodigoPostal">
+          <ScalarProperty Name="idCP" ColumnName="idCP" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colonia">
+      <EntityTypeMapping TypeName="MicroondasModel.Colonia">
+        <MappingFragment StoreEntitySet="Colonia">
+          <ScalarProperty Name="idColonia" ColumnName="idColonia" />
+          <ScalarProperty Name="colonia1" ColumnName="colonia" />
+          <ScalarProperty Name="idCP" ColumnName="idCP" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contrato">
+      <EntityTypeMapping TypeName="MicroondasModel.Contrato">
+        <MappingFragment StoreEntitySet="Contrato">
+          <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+          <ScalarProperty Name="pdf" ColumnName="pdf" />
+          <ScalarProperty Name="archivo" ColumnName="archivo" />
+          <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
+          <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipo">
+      <EntityTypeMapping TypeName="MicroondasModel.Equipo">
+        <MappingFragment StoreEntitySet="Equipo">
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+          <ScalarProperty Name="equipo1" ColumnName="equipo" />
+          <ScalarProperty Name="idPropiedad" ColumnName="idPropiedad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estado">
+      <EntityTypeMapping TypeName="MicroondasModel.Estado">
+        <MappingFragment StoreEntitySet="Estado">
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="estado1" ColumnName="estado" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estatus">
+      <EntityTypeMapping TypeName="MicroondasModel.Estatus">
+        <MappingFragment StoreEntitySet="Estatus">
+          <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
+          <ScalarProperty Name="estatus1" ColumnName="estatus" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paquete">
+      <EntityTypeMapping TypeName="MicroondasModel.Paquete">
+        <MappingFragment StoreEntitySet="Paquete">
+          <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaqueteEquipo">
+      <EntityTypeMapping TypeName="MicroondasModel.PaqueteEquipo">
+        <MappingFragment StoreEntitySet="PaqueteEquipo">
+          <ScalarProperty Name="idPE" ColumnName="idPE" />
+          <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Propiedad">
+      <EntityTypeMapping TypeName="MicroondasModel.Propiedad">
+        <MappingFragment StoreEntitySet="Propiedad">
+          <ScalarProperty Name="idPropiedad" ColumnName="idPropiedad" />
+          <ScalarProperty Name="propiedad1" ColumnName="propiedad" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol">
+      <EntityTypeMapping TypeName="MicroondasModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="rol1" ColumnName="rol" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="MicroondasModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="correoE" ColumnName="correoE" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="numInt" ColumnName="numInt" />
+          <ScalarProperty Name="numExt" ColumnName="numExt" />
+          <ScalarProperty Name="idColonia" ColumnName="idColonia" />
+          <ScalarProperty Name="idCP" ColumnName="idCP" />
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -21,7 +21,7 @@ namespace MicroondasAPI.Models
         }
     
         public System.Guid idContrato { get; set; }
-        public byte[] Pdf { get; set; }
+        public byte[] pdf { get; set; }
         public string archivo { get; set; }
         public Nullable<System.Guid> idPaquete { get; set; }
         public Nullable<System.Guid> idEstatus { get; set; }

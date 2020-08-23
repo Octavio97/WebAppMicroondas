@@ -24,7 +24,9 @@ namespace MicroondasAPI.Models
         public System.Guid idCP { get; set; }
         public Nullable<int> codigo { get; set; }
         public Nullable<bool> activo { get; set; }
+        public Nullable<System.Guid> idCiudad { get; set; }
     
+        public virtual Ciudad Ciudad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Colonia> Colonia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

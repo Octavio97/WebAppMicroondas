@@ -25,10 +25,12 @@ namespace MicroondasAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<CodigoPostal> CodigoPostal { get; set; }
         public virtual DbSet<Colonia> Colonia { get; set; }
         public virtual DbSet<Contrato> Contrato { get; set; }
         public virtual DbSet<Equipo> Equipo { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Estatus> Estatus { get; set; }
         public virtual DbSet<Paquete> Paquete { get; set; }
         public virtual DbSet<PaqueteEquipo> PaqueteEquipo { get; set; }
