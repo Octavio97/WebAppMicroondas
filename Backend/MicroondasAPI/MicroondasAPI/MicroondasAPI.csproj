@@ -162,7 +162,16 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
+    <Compile Include="Controllers\CodigoPostalController.cs" />
+    <Compile Include="Controllers\ColoniaController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\EquipoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
+    <Compile Include="Controllers\EstatusController.cs" />
+    <Compile Include="Controllers\PaqueteController.cs" />
+    <Compile Include="Controllers\PaqueteEquipoController.cs" />
+    <Compile Include="Controllers\PropiedadController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">

@@ -8,33 +8,34 @@ using System.Web.Http;
 
 namespace MicroondasAPI.Controllers
 {
-    public class EstadoController : ApiController
+    public class CodigoPostalController : ApiController
     {
         [HttpPost]
-        [Route("api/MicroondasAPI/agregarEstado")]
-        public IHttpActionResult agregarEstado(Estado estado)
+        [Route("api/MicroondasAPI/agregarCP")]
+        public IHttpActionResult agregarCP(CodigoPostal cp)
         {
             try
             {
-                // variable para devolver
+                // variable a devolver
                 bool i = false;
 
-                // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                // buscamos si existe el codigo postal a ingresar
+                var accion = SessionController.getInstance().CodigoPostal.Where(w => w.codigo == cp.codigo).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // estructuramos los datos
-                    Estado datos = new Estado()
+                    CodigoPostal datos = new CodigoPostal()
                     {
-                        idEstado = Guid.NewGuid(),
-                        estado1 = estado.estado1,
-                        activo = estado.activo
+                        idCP = Guid.NewGuid(),
+                        codigo = cp.codigo,
+                        idCiudad = cp.idCiudad,
+                        activo = cp.activo
                     };
 
                     // guardamos los datos
-                    SessionController.getInstance().Estado.Add(datos);
+                    SessionController.getInstance().CodigoPostal.Add(datos);
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();
@@ -52,19 +53,19 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/MicroondasAPI/eliminarEstado")]
-        public IHttpActionResult eliminarEstado(string id)
+        [HttpPost]
+        [Route("api/MicroondasAPI/eliminarCP")]
+        public IHttpActionResult eliminarCP(string id)
         {
             try
             {
                 // convertimos el id en guid
                 Guid guid = Guid.Parse(id.ToString());
 
-                // buscamos al estado a eliminar
-                var accion = SessionController.getInstance().Estado.Where(w => w.idEstado == guid).FirstOrDefault();
+                // buscamos al codigo postal a eliminar
+                var accion = SessionController.getInstance().CodigoPostal.Where(w => w.idCP == guid).FirstOrDefault();
 
-                // Deshabilitamos al estado
+                // Deshabilitamos al codigo postal
                 accion.activo = false;
 
                 // ejecutamos las acciones
@@ -79,20 +80,21 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/MicroondasAPI/consultaEstado")]
-        public IHttpActionResult consultaEstado()
+        [HttpPost]
+        [Route("api/MicroondasAPI/consultaCP")]
+        public IHttpActionResult consultaCP()
         {
             try
             {
-                // consultamos la tabla estado
-                var accion = SessionController.getInstance().Estado.ToList();
+                // consultamos la tabla codigo postal
+                var accion = SessionController.getInstance().CodigoPostal.ToList();
 
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
-                    idEstado = s.idEstado,
-                    estado = s.estado1,
+                    idCP = s.idCP,
+                    codigo = s.codigo,
+                    idCiudad = s.idCiudad,
                     activo = s.activo
                 });
 
@@ -105,24 +107,25 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/MicroondasAPI/modificarEstado")]
-        public IHttpActionResult modificarEstado(Estado estado)
+        [HttpPost]
+        [Route("api/MicroondasAPI/modificarCP")]
+        public IHttpActionResult modificarCP(CodigoPostal cp)
         {
             try
             {
                 // variable para devolver
                 bool i = false;
 
-                // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                // buscamos si existe el codigo postal a ingresar
+                var accion = SessionController.getInstance().CodigoPostal.Where(w => w.codigo == cp.codigo).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // Hacemos los cambios
-                    accion.estado1 = estado.estado1;
-                    accion.activo = estado.activo;
+                    accion.codigo = cp.codigo;
+                    accion.idCiudad = cp.idCiudad;
+                    accion.activo = cp.activo;
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();

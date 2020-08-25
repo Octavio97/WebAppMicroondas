@@ -14,17 +14,11 @@ namespace MicroondasAPI.Models
     
     public partial class Propiedad
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Propiedad()
-        {
-            this.Equipo = new HashSet<Equipo>();
-        }
-    
         public System.Guid idPropiedad { get; set; }
-        public string propiedad1 { get; set; }
-        public Nullable<bool> activo { get; set; }
+        public Nullable<System.Guid> idUsuario { get; set; }
+        public Nullable<System.Guid> idEquipo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipo> Equipo { get; set; }
+        public virtual Equipo Equipo { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

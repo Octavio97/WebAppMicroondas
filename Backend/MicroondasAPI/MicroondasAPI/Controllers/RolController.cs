@@ -8,33 +8,33 @@ using System.Web.Http;
 
 namespace MicroondasAPI.Controllers
 {
-    public class EstadoController : ApiController
+    public class RolController : ApiController
     {
         [HttpPost]
-        [Route("api/MicroondasAPI/agregarEstado")]
-        public IHttpActionResult agregarEstado(Estado estado)
+        [Route("api/MicroondasAPI/agregarRol")]
+        public IHttpActionResult agregarRol(Rol rol)
         {
             try
             {
-                // variable para devolver
+                // variable a devolver
                 bool i = false;
 
-                // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                // buscamos si existe el rol a ingresar
+                var accion = SessionController.getInstance().Rol.Where(w => w.rol1 == rol.rol1).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // estructuramos los datos
-                    Estado datos = new Estado()
+                    Rol datos = new Rol()
                     {
-                        idEstado = Guid.NewGuid(),
-                        estado1 = estado.estado1,
-                        activo = estado.activo
+                        idRol = Guid.NewGuid(),
+                        rol1 = rol.rol1,
+                        activo = rol.activo
                     };
 
                     // guardamos los datos
-                    SessionController.getInstance().Estado.Add(datos);
+                    SessionController.getInstance().Rol.Add(datos);
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();
@@ -52,19 +52,19 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/MicroondasAPI/eliminarEstado")]
-        public IHttpActionResult eliminarEstado(string id)
+        [HttpPost]
+        [Route("api/MicroondasAPI/eliminarRol")]
+        public IHttpActionResult eliminarRol(string id)
         {
             try
             {
                 // convertimos el id en guid
                 Guid guid = Guid.Parse(id.ToString());
 
-                // buscamos al estado a eliminar
-                var accion = SessionController.getInstance().Estado.Where(w => w.idEstado == guid).FirstOrDefault();
+                // buscamos el rol a eliminar
+                var accion = SessionController.getInstance().Rol.Where(w => w.idRol == guid).FirstOrDefault();
 
-                // Deshabilitamos al estado
+                // Deshabilitamos el rol
                 accion.activo = false;
 
                 // ejecutamos las acciones
@@ -79,20 +79,20 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/MicroondasAPI/consultaEstado")]
-        public IHttpActionResult consultaEstado()
+        [HttpPost]
+        [Route("api/MicroondasAPI/consultaRol")]
+        public IHttpActionResult consultaRol()
         {
             try
             {
-                // consultamos la tabla estado
-                var accion = SessionController.getInstance().Estado.ToList();
+                // consultamos la tabla rol
+                var accion = SessionController.getInstance().Rol.ToList();
 
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
-                    idEstado = s.idEstado,
-                    estado = s.estado1,
+                    idRol = s.idRol,
+                    rol = s.rol1,
                     activo = s.activo
                 });
 
@@ -105,24 +105,24 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/MicroondasAPI/modificarEstado")]
-        public IHttpActionResult modificarEstado(Estado estado)
+        [HttpPost]
+        [Route("api/MicroondasAPI/modificarRol")]
+        public IHttpActionResult modificarColonia(Rol rol)
         {
             try
             {
                 // variable para devolver
                 bool i = false;
 
-                // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                // buscamos si existe el rol a ingresar
+                var accion = SessionController.getInstance().Rol.Where(w => w.rol1 == rol.rol1).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // Hacemos los cambios
-                    accion.estado1 = estado.estado1;
-                    accion.activo = estado.activo;
+                    accion.rol1 = rol.rol1;
+                    accion.activo = rol.activo;
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();

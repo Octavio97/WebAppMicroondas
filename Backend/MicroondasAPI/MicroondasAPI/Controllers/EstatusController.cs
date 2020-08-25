@@ -8,33 +8,33 @@ using System.Web.Http;
 
 namespace MicroondasAPI.Controllers
 {
-    public class EstadoController : ApiController
+    public class EstatusController : ApiController
     {
         [HttpPost]
-        [Route("api/MicroondasAPI/agregarEstado")]
-        public IHttpActionResult agregarEstado(Estado estado)
+        [Route("api/MicroondasAPI/agregarEstatus")]
+        public IHttpActionResult agregarRol(Estatus estatus)
         {
             try
             {
-                // variable para devolver
+                // variable a devolver
                 bool i = false;
 
-                // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                // buscamos si existe el estatus a ingresar
+                var accion = SessionController.getInstance().Estatus.Where(w => w.estatus1 == estatus.estatus1).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // estructuramos los datos
-                    Estado datos = new Estado()
+                    Estatus datos = new Estatus()
                     {
-                        idEstado = Guid.NewGuid(),
-                        estado1 = estado.estado1,
-                        activo = estado.activo
+                        idEstatus = Guid.NewGuid(),
+                        estatus1 = estatus.estatus1,
+                        activo = estatus.activo
                     };
 
                     // guardamos los datos
-                    SessionController.getInstance().Estado.Add(datos);
+                    SessionController.getInstance().Estatus.Add(datos);
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();
@@ -52,19 +52,19 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/MicroondasAPI/eliminarEstado")]
-        public IHttpActionResult eliminarEstado(string id)
+        [HttpPost]
+        [Route("api/MicroondasAPI/eliminarEstatus")]
+        public IHttpActionResult eliminarRol(string id)
         {
             try
             {
                 // convertimos el id en guid
                 Guid guid = Guid.Parse(id.ToString());
 
-                // buscamos al estado a eliminar
-                var accion = SessionController.getInstance().Estado.Where(w => w.idEstado == guid).FirstOrDefault();
+                // buscamos el estatus a eliminar
+                var accion = SessionController.getInstance().Estatus.Where(w => w.idEstatus == guid).FirstOrDefault();
 
-                // Deshabilitamos al estado
+                // Deshabilitamos el estatus
                 accion.activo = false;
 
                 // ejecutamos las acciones
@@ -79,20 +79,20 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("api/MicroondasAPI/consultaEstado")]
-        public IHttpActionResult consultaEstado()
+        [HttpPost]
+        [Route("api/MicroondasAPI/consultaEstatus")]
+        public IHttpActionResult consultaRol()
         {
             try
             {
-                // consultamos la tabla estado
-                var accion = SessionController.getInstance().Estado.ToList();
+                // consultamos la tabla estatus
+                var accion = SessionController.getInstance().Estatus.ToList();
 
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
-                    idEstado = s.idEstado,
-                    estado = s.estado1,
+                    idEstatus= s.idEstatus,
+                    estatus = s.estatus1,
                     activo = s.activo
                 });
 
@@ -105,24 +105,24 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/MicroondasAPI/modificarEstado")]
-        public IHttpActionResult modificarEstado(Estado estado)
+        [HttpPost]
+        [Route("api/MicroondasAPI/modificarEstatus")]
+        public IHttpActionResult modificarColonia(Estatus estatus)
         {
             try
             {
                 // variable para devolver
                 bool i = false;
 
-                // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                // buscamos si existe el estatus a ingresar
+                var accion = SessionController.getInstance().Estatus.Where(w => w.estatus1 == estatus.estatus1).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // Hacemos los cambios
-                    accion.estado1 = estado.estado1;
-                    accion.activo = estado.activo;
+                    accion.estatus1 = estatus.estatus1;
+                    accion.activo = estatus.activo;
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();

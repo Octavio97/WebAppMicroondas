@@ -40,6 +40,9 @@
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
           <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
+          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -48,7 +51,7 @@
         <MappingFragment StoreEntitySet="Equipo">
           <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
           <ScalarProperty Name="equipo1" ColumnName="equipo" />
-          <ScalarProperty Name="idPropiedad" ColumnName="idPropiedad" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -93,8 +96,8 @@
       <EntityTypeMapping TypeName="MicroondasModel.Propiedad">
         <MappingFragment StoreEntitySet="Propiedad">
           <ScalarProperty Name="idPropiedad" ColumnName="idPropiedad" />
-          <ScalarProperty Name="propiedad1" ColumnName="propiedad" />
-          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -121,7 +124,6 @@
           <ScalarProperty Name="idColonia" ColumnName="idColonia" />
           <ScalarProperty Name="idCP" ColumnName="idCP" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
-          <ScalarProperty Name="idContrato" ColumnName="idContrato" />
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="contrasena" ColumnName="contrasena" />
         </MappingFragment>

@@ -11,7 +11,7 @@ namespace MicroondasAPI.Controllers
     public class UsuarioController : ApiController
     {
         [HttpPost]
-        [Route("api/altaUsuario")]
+        [Route("api/MicroondasAPI/altaUsuario")]
         public IHttpActionResult altaUsuario(Usuario usuario)
         {
             try
@@ -35,7 +35,6 @@ namespace MicroondasAPI.Controllers
                         numExt = usuario.numExt,
                         idCP = usuario.idCP,
                         idRol = usuario.idRol,
-                        idContrato = usuario.idContrato,
                         activo = usuario.activo,
                         contrasena = usuario.contrasena
                     };
@@ -56,7 +55,7 @@ namespace MicroondasAPI.Controllers
         }
         
         [HttpPut]
-        [Route("api/eliminarUsuario")]
+        [Route("api/MicroondasAPI/eliminarUsuario")]
         public IHttpActionResult eliminarUsuario(string id)
         {
             try
@@ -83,7 +82,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/consultaUsuario")]
+        [Route("api/MicroondasAPI/consultaUsuario")]
         public IHttpActionResult consultaUsuario()
         {
             try
@@ -104,7 +103,6 @@ namespace MicroondasAPI.Controllers
                     numExt = s.numExt,
                     idCP = s.idCP,
                     idRol = s.idRol,
-                    idContrato = s.idContrato,
                     Activo = s.activo,
                     contrasena = s.contrasena
                 });
@@ -119,7 +117,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/modificarUsuario")]
+        [Route("api/MicroondasAPI/modificarUsuario")]
         public IHttpActionResult modificarUsuario(Usuario usuario)
         {
             try
@@ -147,7 +145,6 @@ namespace MicroondasAPI.Controllers
                     consulta.idColonia = usuario.idColonia;
                     consulta.idCP = usuario.idCP;
                     consulta.idRol = usuario.idRol;
-                    consulta.idContrato = usuario.idContrato;
                     consulta.activo = usuario.activo;
                     consulta.contrasena = usuario.contrasena;
 

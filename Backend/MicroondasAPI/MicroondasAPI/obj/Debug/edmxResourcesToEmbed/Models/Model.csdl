@@ -44,9 +44,12 @@
     <Property Name="idPaquete" Type="Guid" />
     <Property Name="idEstatus" Type="Guid" />
     <Property Name="activo" Type="Boolean" />
+    <Property Name="idUsuario" Type="Guid" />
+    <Property Name="fechaFinal" Type="DateTime" Precision="0" />
+    <Property Name="fechaInicio" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Estatus" Relationship="Self.FK__Contrato__idEsta__4BAC3F29" FromRole="Contrato" ToRole="Estatus" />
     <NavigationProperty Name="Paquete" Relationship="Self.FK__Contrato__idPaqu__4AB81AF0" FromRole="Contrato" ToRole="Paquete" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idContr__534D60F1" FromRole="Contrato" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Contrato__idUsua__6E01572D" FromRole="Contrato" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Equipo">
     <Key>
@@ -54,9 +57,9 @@
     </Key>
     <Property Name="idEquipo" Type="Guid" Nullable="false" />
     <Property Name="equipo1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="idPropiedad" Type="Guid" />
-    <NavigationProperty Name="Propiedad" Relationship="Self.FK__Equipo__idPropie__412EB0B6" FromRole="Equipo" ToRole="Propiedad" />
+    <Property Name="activo" Type="Boolean" />
     <NavigationProperty Name="PaqueteEquipo" Relationship="Self.FK__PaqueteEq__idEqu__44FF419A" FromRole="Equipo" ToRole="PaqueteEquipo" />
+    <NavigationProperty Name="Propiedad" Relationship="Self.FK__Propiedad__idEqu__70DDC3D8" FromRole="Equipo" ToRole="Propiedad" />
   </EntityType>
   <EntityType Name="Estado">
     <Key>
@@ -102,9 +105,10 @@
       <PropertyRef Name="idPropiedad" />
     </Key>
     <Property Name="idPropiedad" Type="Guid" Nullable="false" />
-    <Property Name="propiedad1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="activo" Type="Boolean" />
-    <NavigationProperty Name="Equipo" Relationship="Self.FK__Equipo__idPropie__412EB0B6" FromRole="Propiedad" ToRole="Equipo" />
+    <Property Name="idUsuario" Type="Guid" />
+    <Property Name="idEquipo" Type="Guid" />
+    <NavigationProperty Name="Equipo" Relationship="Self.FK__Propiedad__idEqu__70DDC3D8" FromRole="Propiedad" ToRole="Equipo" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__Propiedad__idUsu__6FE99F9F" FromRole="Propiedad" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -130,12 +134,12 @@
     <Property Name="idColonia" Type="Guid" />
     <Property Name="idCP" Type="Guid" />
     <Property Name="idRol" Type="Guid" />
-    <Property Name="idContrato" Type="Guid" />
     <Property Name="activo" Type="Boolean" />
     <Property Name="contrasena" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CodigoPostal" Relationship="Self.FK__Usuario__idCP__5165187F" FromRole="Usuario" ToRole="CodigoPostal" />
     <NavigationProperty Name="Colonia" Relationship="Self.FK__Usuario__idColon__5070F446" FromRole="Usuario" ToRole="Colonia" />
-    <NavigationProperty Name="Contrato" Relationship="Self.FK__Usuario__idContr__534D60F1" FromRole="Usuario" ToRole="Contrato" />
+    <NavigationProperty Name="Contrato" Relationship="Self.FK__Contrato__idUsua__6E01572D" FromRole="Usuario" ToRole="Contrato" />
+    <NavigationProperty Name="Propiedad" Relationship="Self.FK__Propiedad__idUsu__6FE99F9F" FromRole="Usuario" ToRole="Propiedad" />
     <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__idRol__52593CB8" FromRole="Usuario" ToRole="Rol" />
   </EntityType>
   <Association Name="FK__Ciudad__idEstado__59063A47">
@@ -222,27 +226,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__idContr__534D60F1">
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+  <Association Name="FK__Contrato__idUsua__6E01572D">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Contrato">
-        <PropertyRef Name="idContrato" />
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
       </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="idContrato" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Equipo__idPropie__412EB0B6">
-    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="0..1" />
-    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Propiedad">
-        <PropertyRef Name="idPropiedad" />
-      </Principal>
-      <Dependent Role="Equipo">
-        <PropertyRef Name="idPropiedad" />
+      <Dependent Role="Contrato">
+        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -258,6 +250,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Propiedad__idEqu__70DDC3D8">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="idEquipo" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="idEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__PaqueteEq__idPaq__440B1D61">
     <End Role="Paquete" Type="Self.Paquete" Multiplicity="0..1" />
     <End Role="PaqueteEquipo" Type="Self.PaqueteEquipo" Multiplicity="*" />
@@ -267,6 +271,18 @@
       </Principal>
       <Dependent Role="PaqueteEquipo">
         <PropertyRef Name="idPaquete" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Propiedad__idUsu__6FE99F9F">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Propiedad">
+        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -323,21 +339,25 @@
       <End Role="Paquete" EntitySet="Paquete" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__idContr__534D60F1" Association="Self.FK__Usuario__idContr__534D60F1">
-      <End Role="Contrato" EntitySet="Contrato" />
+    <AssociationSet Name="FK__Contrato__idUsua__6E01572D" Association="Self.FK__Contrato__idUsua__6E01572D">
       <End Role="Usuario" EntitySet="Usuario" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Equipo__idPropie__412EB0B6" Association="Self.FK__Equipo__idPropie__412EB0B6">
-      <End Role="Propiedad" EntitySet="Propiedad" />
-      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
     <AssociationSet Name="FK__PaqueteEq__idEqu__44FF419A" Association="Self.FK__PaqueteEq__idEqu__44FF419A">
       <End Role="Equipo" EntitySet="Equipo" />
       <End Role="PaqueteEquipo" EntitySet="PaqueteEquipo" />
     </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__idEqu__70DDC3D8" Association="Self.FK__Propiedad__idEqu__70DDC3D8">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
+    </AssociationSet>
     <AssociationSet Name="FK__PaqueteEq__idPaq__440B1D61" Association="Self.FK__PaqueteEq__idPaq__440B1D61">
       <End Role="Paquete" EntitySet="Paquete" />
       <End Role="PaqueteEquipo" EntitySet="PaqueteEquipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Propiedad__idUsu__6FE99F9F" Association="Self.FK__Propiedad__idUsu__6FE99F9F">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Propiedad" EntitySet="Propiedad" />
     </AssociationSet>
     <AssociationSet Name="FK__Usuario__idRol__52593CB8" Association="Self.FK__Usuario__idRol__52593CB8">
       <End Role="Rol" EntitySet="Rol" />

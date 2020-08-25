@@ -11,7 +11,7 @@ namespace MicroondasAPI.Controllers
     public class CiudadController : ApiController
     {
         [HttpPost]
-        [Route("api/agregarCiudad")]
+        [Route("api/MicroondasAPI/agregarCiudad")]
         public IHttpActionResult agregarCiudad(Ciudad ciudad)
         {
             try
@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/eliminarCiudad")]
+        [Route("api/MicroondasAPI/eliminarCiudad")]
         public IHttpActionResult eliminarCiudad(string id)
         {
             try
@@ -80,7 +80,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/consultaCiudad")]
+        [Route("api/MicroondasAPI/consultaCiudad")]
         public IHttpActionResult consultaCiudad()
         {
             // Consultamos la tabla Ciudad
@@ -100,7 +100,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/modificarCiudad")]
+        [Route("api/MicroondasAPI/modificarCiudad")]
         public IHttpActionResult modificarCiudad(Ciudad ciudad)
         {
             try

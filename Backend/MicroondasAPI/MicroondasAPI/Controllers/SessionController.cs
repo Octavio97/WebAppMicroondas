@@ -13,7 +13,7 @@ namespace MicroondasAPI.Controllers
         private static MicroondasEntities bd;
 
         [HttpGet]
-        [Route("api/login")]
+        [Route("api/MicroondasAPI/login")]
         public IHttpActionResult login(string correo, string contra)
         {
             try

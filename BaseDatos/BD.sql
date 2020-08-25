@@ -16,8 +16,8 @@ CREATE TABLE Estatus (
 
 CREATE TABLE Propiedad (
     idPropiedad UNIQUEIDENTIFIER PRIMARY KEY,
-    propiedad VARCHAR(30),
-    activo BIT
+    idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario), 
+    idEquipo UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Equipo(idEquipo)
 );
 
 CREATE TABLE  Estado (
@@ -50,7 +50,7 @@ CREATE TABLE Paquete (
 CREATE TABLE Equipo (
     idEquipo UNIQUEIDENTIFIER PRIMARY KEY,
     equipo VARCHAR(30),
-    idPropiedad UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Propiedad(idPropiedad)
+    activo BIT
 );
 
 CREATE TABLE PaqueteEquipo (
@@ -70,6 +70,9 @@ CREATE TABLE Contrato (
     idContrato UNIQUEIDENTIFIER PRIMARY KEY,
     Pdf BINARY,
     archivo VARCHAR(20),
+    fechaInicio DATE, 
+    fechaFinal DATE,
+    idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
     idPaquete UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paquete(idPaquete),
     idEstatus UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estatus(idEstatus),
     activo BIT

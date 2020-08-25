@@ -18,14 +18,16 @@ namespace MicroondasAPI.Models
         public Equipo()
         {
             this.PaqueteEquipo = new HashSet<PaqueteEquipo>();
+            this.Propiedad = new HashSet<Propiedad>();
         }
     
         public System.Guid idEquipo { get; set; }
         public string equipo1 { get; set; }
-        public Nullable<System.Guid> idPropiedad { get; set; }
+        public Nullable<bool> activo { get; set; }
     
-        public virtual Propiedad Propiedad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaqueteEquipo> PaqueteEquipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Propiedad> Propiedad { get; set; }
     }
 }
