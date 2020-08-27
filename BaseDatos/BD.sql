@@ -14,13 +14,7 @@ CREATE TABLE Estatus (
     activo BIT
 );
 
-CREATE TABLE Propiedad (
-    idPropiedad UNIQUEIDENTIFIER PRIMARY KEY,
-    idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario), 
-    idEquipo UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Equipo(idEquipo)
-);
-
-CREATE TABLE  Estado (
+CREATE TABLE Estado (
     idEstado UNIQUEIDENTIFIER PRIMARY KEY,
     estado VARCHAR(30),
     activo BIT
@@ -66,18 +60,6 @@ CREATE TABLE Colonia (
     activo BIT
 );
 
-CREATE TABLE Contrato (
-    idContrato UNIQUEIDENTIFIER PRIMARY KEY,
-    Pdf BINARY,
-    archivo VARCHAR(20),
-    fechaInicio DATE, 
-    fechaFinal DATE,
-    idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
-    idPaquete UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paquete(idPaquete),
-    idEstatus UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estatus(idEstatus),
-    activo BIT
-);
-
 CREATE TABLE Usuario (
     idUsuario UNIQUEIDENTIFIER PRIMARY KEY,
     nombre VARCHAR(50),
@@ -91,6 +73,23 @@ CREATE TABLE Usuario (
     idColonia UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Colonia(idColonia),
     idCP UNIQUEIDENTIFIER FOREIGN KEY REFERENCES CodigoPostal(idCP),
     idRol UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Rol(idRol), 
-    idContrato UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Contrato(idContrato),
     Activo BIT
+);
+
+CREATE TABLE Propiedad (
+    idPropiedad UNIQUEIDENTIFIER PRIMARY KEY,
+    idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario), 
+    idEquipo UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Equipo(idEquipo)
+);
+
+CREATE TABLE Contrato (
+    idContrato UNIQUEIDENTIFIER PRIMARY KEY,
+    Pdf BINARY,
+    archivo VARCHAR(20),
+    fechaInicio DATE, 
+    fechaFinal DATE,
+    idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
+    idPaquete UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paquete(idPaquete),
+    idEstatus UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estatus(idEstatus),
+    activo BIT
 );
