@@ -1,30 +1,32 @@
 <!-- Barra de navegacio -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo" style="height: 48px;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Inicio<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#paquetes">Paquetes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#cobertura">Cobertura</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#nosotros">Nosotros</a>
-            </li>
-        </ul>
-        <button class="btn btn-outline-light my-2 my-sm-0" routerLink="['/login']">
-            <i class="far fa-user"></i> Login
-        </button>
-    </div>
-</nav>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo" style="height: 48px;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Inicio<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#nosotros">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#paquetes">Paquetes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cobertura">Cobertura</a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-light my-2 my-sm-0" [routerLink]="['/login']">
+                <i class="far fa-user"></i> Login
+            </button>
+        </div>
+    </nav>
+</header>
 <br><br>
 
 <!-- Slide de imagenes -->
@@ -60,15 +62,24 @@
     <!-- Acerca de -->
     <section id="nosotros">
         <h1 class="display-2">Nosotros</h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum in sunt eaque nemo saepe deleniti reprehenderit quasi quisquam, adipisci architecto nihil officia dignissimos repudiandae laboriosam quia dolorem soluta numquam ipsam.
-        </p>
+        <blockquote class="blockquote">
+            <p class="mb-0">Misión</p>
+            <footer class="blockquote-footer"><cite title="Source Title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ducimus a dolor aperiam et! Rem similique id iste vero veritatis quia numquam iusto error? Itaque exercitationem quidem delectus tenetur consequatur.</cite></footer>
+        </blockquote>
+        <blockquote class="blockquote">
+            <p class="mb-0">Visión</p>
+            <footer class="blockquote-footer"><cite title="Source Title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ducimus a dolor aperiam et! Rem similique id iste vero veritatis quia numquam iusto error? Itaque exercitationem quidem delectus tenetur consequatur.</cite></footer>
+        </blockquote>
+        <blockquote class="blockquote">
+            <p class="mb-0">Valores</p>
+            <footer class="blockquote-footer"><cite title="Source Title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ducimus a dolor aperiam et! Rem similique id iste vero veritatis quia numquam iusto error? Itaque exercitationem quidem delectus tenetur consequatur.</cite></footer>
+        </blockquote>
     </section>
 
     <!-- Paquetes -->
     <section id="paquetes">
         <h1 class="display-2">Nuestros Paquetes</h1>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-content-start flex-wrap">
             <img src="/assets/img/paquete1.png" alt="p1" class="rounded float-left">
             <img src="/assets/img/paquete2.png" alt="p2" class="rounded">
             <img src="/assets/img/paquete3.png" alt="p3" class="rounded float-right">
@@ -80,27 +91,26 @@
     <section id="cobertura">
         <h1 class="display-2">Nuestra Cobertura</h1>
     </section>
-
 </div>
 
 <!-- Informes y formulario de ac -->
-<footer style="background-color: cornflowerblue;" class="d-flex justify-content-between">
-
-    <!-- Informes de la empresa -->
-    <div class="float-left container text-justify" style="color: white;">
-        <br>
-        <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo">
-        <h6>Desarrollo de sistemas TJ S.A de C.V</h6>
-        <h6>Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, México</h6>
-        <h6>Teléfono: (664) 199-8146</h6>
-    </div>
-
-    <!-- Formulario -->
-    <div style="background-color: cornflowerblue; color: white;" class="float-right container">       
-        <h1 class="display-4">Mayores informes</h1>
-        <div class="text-justify">
-            <h4>Ingrese sus datos para obtener mas informacion sobre nuestros servicios y cobertura</h4>
-            <form>
+<footer style="background-color: cornflowerblue; color: white;" class="d-flex flex-row bd-highlight mb-3 flex-wrap">
+        <!-- Informes de la empresa -->
+        <div class="container text-justify animated fadeIn">
+            <br>
+            <div>
+                <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo" style="height: 90px; width: 341;">
+                <h6>Desarrollo de sistemas TJ S.A de C.V</h6>
+                <h6>Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, México</h6>
+                <h6>Teléfono: (664) 199-8146</h6>
+            </div>
+        </div>
+    
+        <!-- Formulario -->
+        <div class="container animated fadeIn justify-content-center text-justify">       
+            <form class="p-3 mb-5 rounded">
+                <h1 class="display-4">Mayores informes</h1>
+                <h4>Ingrese sus datos para obtener mas informacion sobre nuestros servicios y cobertura</h4>
                 <div class="form-group">
                     <label for="input1">Nombre</label>
                     <input type="text" class="form-control" id="input1" placeholder="Ingrese su nombre completo">
@@ -118,5 +128,4 @@
                 </div>
             </form>
         </div>
-    </div>
 </footer>
