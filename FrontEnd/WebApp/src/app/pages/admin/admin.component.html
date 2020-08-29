@@ -1,87 +1,88 @@
 <!-- Barra de navegacion -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo"
+            style="height: 48px;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <button href="#" class="my-2 my-lg-0 btn btn-outline-light" style="margin-right: 2%;"><i class="fa fa-user"></i> Perfil</button>
+            <button href="#" class="my-2 my-lg-0 btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Salir</button>
         </div>
-      </nav>
+    </nav>
 </header>
 
 <!-- Administrador -->
-<div class="container">
+<div class="container animated fadeIn">
     <br>
-    <div class="">
+    <!-- Botones agregar, tabla y activos -->
+    <div>
         <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;"><i class="fas fa-plus"></i> Agregar</button>
 
-    <div class="dropdown float-left">
-        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown float-left">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Seleccione tabla...
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+
+        <div class="form-check float-right">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+          Activos
+        </label>
         </div>
     </div>
 
-    <div class="form-check float-right">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">
-          Activos
-        </label>
-    </div>
-    </div>
-
+    <!-- Tabla clientes -->
     <table class="table">
         <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
         </tbody>
     </table>
 </div>
 <!-- Tecnico -->
-<div></div>
+<div class="container animated fadeIn">
+    <h1 class="display-4">Reportes</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <!-- Usuario -->
 <div></div>

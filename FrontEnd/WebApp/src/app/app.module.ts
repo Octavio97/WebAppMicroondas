@@ -18,7 +18,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     RouterModule.forRoot([
       { path: '', component: InicioComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin', component: AdminComponent }
+      { path: 'inicio', component: AdminComponent }
     ])
   ],
   providers: [],
