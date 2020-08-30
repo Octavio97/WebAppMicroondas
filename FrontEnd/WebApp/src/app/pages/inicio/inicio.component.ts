@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html'
 })
 export class InicioComponent implements OnInit {
+private mymap: L.Maps;
 
   constructor() { }
   title = 'My first AGM project';
@@ -13,6 +15,11 @@ export class InicioComponent implements OnInit {
   lng = 7.809007;
 
   ngOnInit(): void {
+    this.mymap = L.map('mapid').setView([22.021667, -102.356389], 5);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+     }).addTo(this.mymap);
+
     // Swal.fire({
     //   html:
     //   '<img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="logoxd" style="width:100px; heigth:100px;">' +

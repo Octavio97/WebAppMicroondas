@@ -58,8 +58,7 @@
 <br><br>
 
 <!-- Paquetes, Cobertura, Acerca de -->
-<div class="container animated fadeIn">
-
+<div class="animated fadeIn container">
     <!-- Acerca de -->
     <section id="nosotros">
         <h1 class="display-2">Nosotros</h1>
@@ -90,8 +89,88 @@
 
     <!-- Cobertura -->
     <section id="cobertura">
-        <h1 class="display-2">Nuestra Cobertura</h1>
+        <!-- Titulo -->
+        <div>
+            <h1 class="display-2 d-inline-flex p-2 bd-highlight">Nuestra Cobertura</h1>
+        </div>
+        
+        <!-- Mapa y formulario -->
+        <div class="d-flex flex-wrap justify-content-around bd-highlight">
+            <!-- Mapa -->
+            <div id="mapid" class="p-2 flex-grow-1 bd-highlight"></div>
+            <!-- Formulario -->
+            <form class="p-2 bd-highlight">
+                <div class="form-group">
+                    <div class="form-group"><p class="lead">Ingrese sus datos de tu ubicación</p></div>
+                    <div class="form-group">
+                        <label for="state">Estado: &nbsp;</label>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Selecione Estado...
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ciudad: &nbsp;</label>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Seleccione Ciudad...
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Código postal: &nbsp;</label>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Seleccione Código postal...
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Colonia: &nbsp;</label>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Seleccione Colonia...
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Calle y número: &nbsp;</label>
+                        <input type="text">
+                    </div>
+                </div>
+            </form>
+        </div>  
     </section>
+    <br>
 </div>
 
 <!-- Informes y formulario de ac -->
