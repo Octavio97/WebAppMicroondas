@@ -93,90 +93,56 @@
         <div>
             <h1 class="display-2 d-inline-flex p-2 bd-highlight">Nuestra Cobertura</h1>
         </div>
-        
+
         <!-- Mapa y formulario -->
         <div class="d-flex flex-wrap justify-content-around bd-highlight">
             <!-- Mapa -->
-            <div id="mapid" class="p-2 flex-grow-1 bd-highlight"></div>
+            <div id="mapid" class="p-2 flex-grow-1 bd-highlight rounded border border-primary animated fadeIn"></div>
             <!-- Formulario -->
             <form class="p-2 bd-highlight">
                 <div class="form-group">
-                    <div class="form-group"><p class="lead">Ingrese sus datos de tu ubicación</p></div>
+                    <div class="form-group">
+                        <p class="lead">Ingrese los datos de tu ubicación</p>
+                    </div>
                     <div class="form-group">
                         <label for="state">Estado: &nbsp;</label>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Selecione Estado...
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                          </div>
+                        <select class="form-control" name="" id="">
+                            <option>Seleccione estado...</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="city">Ciudad: &nbsp;</label>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Seleccione Ciudad...
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                          </div>
+                        <select class="form-control" name="" id="">
+                            <option value="">Seleccione ciudad...</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Código postal: &nbsp;</label>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Seleccione Código postal...
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                          </div>
+                        <select class="form-control" name="" id="">
+                            <option value="">Seleccionar código posta...</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Colonia: &nbsp;</label>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Seleccione Colonia...
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                          </div>
+                        <select class="form-control" name="" id="">
+                            <option value="">Seleccione colonia...</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Calle y número: &nbsp;</label>
-                        <input type="text">
+                        <input type="text" class="form-control" placeholder="Ingrese calle y número">
                     </div>
                 </div>
             </form>
-        </div>  
+        </div>
     </section>
     <br>
 </div>
 
 <!-- Informes y formulario de ac -->
-<footer style="background-color: cornflowerblue; color: white;" class="d-flex flex-row bd-highlight mb-3 flex-wrap">
+<footer style="background-color: cornflowerblue; color: white;" class="d-flex justify-content-center">
     <!-- Informes de la empresa -->
-    <div class="container text-justify animated fadeIn">
+    <div class="animated fadeIn" style="margin-left: 2%;">
         <br>
         <div>
             <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo"
@@ -188,25 +154,33 @@
     </div>
 
     <!-- Formulario -->
-    <div class="container animated fadeIn justify-content-center text-justify">
-        <form class="p-3 mb-5 rounded">
-            <h1 class="display-4">Mayores informes</h1>
-            <h4>Ingrese sus datos para obtener mas informacion sobre nuestros servicios y cobertura</h4>
+    <form class="animated fadeIn">
+        <div class="form-group container">
             <div class="form-group">
-                <label for="input1">Nombre</label>
-                <input type="text" class="form-control" id="input1" placeholder="Ingrese su nombre completo">
+                <h1 class="display-4">Mayores informes</h1>
+                <h4>Ingrese sus datos para obtener mas informacion sobre nuestros servicios y cobertura</h4>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="input1">Nombre: &nbsp;</label>
+                    <input type="text" id="input1" class="form-control" placeholder="Ingrese su nombre completo">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="input1">Código postal: &nbsp;</label>
+                    <input type="number" id="input3" class="form-control" placeholder="Ingrese su código postal">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="input1">Correo electrónico: &nbsp;</label>
+                <input type="email" id="input2" class="form-control" placeholder="Ingrese su correo electronico">
             </div>
             <div class="form-group">
-                <label for="input1">Correo electrónico</label>
-                <input type="email" class="form-control" id="input2" placeholder="Ingrese su correo electronico">
-            </div>
-            <div class="form-group">
-                <label for="input1">Código pastal</label>
-                <input type="number" class="form-control" id="input3" placeholder="Ingrese su código postal">
+
             </div>
             <div class="form-group">
                 <button class="btn btn-secondary">Enviar</button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </footer>
