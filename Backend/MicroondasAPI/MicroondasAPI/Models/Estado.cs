@@ -18,6 +18,7 @@ namespace MicroondasAPI.Models
         public Estado()
         {
             this.Ciudad = new HashSet<Ciudad>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public System.Guid idEstado { get; set; }
@@ -26,5 +27,7 @@ namespace MicroondasAPI.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ciudad> Ciudad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

@@ -33,9 +33,11 @@ namespace MicroondasAPI.Controllers
                         calle = usuario.calle,
                         numInt = usuario.numInt,
                         numExt = usuario.numExt,
+                        idEstado = usuario.idEstado,
+                        idCiudad = usuario.idCiudad,
                         idCP = usuario.idCP,
                         idRol = usuario.idRol,
-                        activo = usuario.activo,
+                        Activo = usuario.Activo,
                         contrasena = usuario.contrasena
                     };
                     // Agregamos el registro
@@ -67,7 +69,7 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().Usuario.Where(w => w.idUsuario == guid).FirstOrDefault();
 
                 // Deshabilitamos al usuario
-                accion.activo = false;
+                accion.Activo = false;
 
                 // Guardamos los cambios
                 SessionController.getInstance().SaveChanges();
@@ -101,9 +103,11 @@ namespace MicroondasAPI.Controllers
                     calle = s.calle,
                     numInt = s.numInt,
                     numExt = s.numExt,
+                    idEstado= s.idEstado,
+                    idCiudad = s.idCiudad,
                     idCP = s.idCP,
                     idRol = s.idRol,
-                    Activo = s.activo,
+                    Activo = s.Activo,
                     contrasena = s.contrasena
                 });
 
@@ -142,10 +146,12 @@ namespace MicroondasAPI.Controllers
                     consulta.calle = usuario.calle;
                     consulta.numExt = usuario.numExt;
                     consulta.numInt = usuario.numInt;
+                    consulta.idEstado = usuario.idEstado;
+                    consulta.idCiudad = usuario.idCiudad;
                     consulta.idColonia = usuario.idColonia;
                     consulta.idCP = usuario.idCP;
                     consulta.idRol = usuario.idRol;
-                    consulta.activo = usuario.activo;
+                    consulta.Activo = usuario.Activo;
                     consulta.contrasena = usuario.contrasena;
 
                     // ejecutan los cambios

@@ -1,0 +1,111 @@
+<div class="container">
+    <h1 class="display-4">Display 4</h1>
+    <!-- Usuario -->
+    <div>
+        <form #log="ngForm" (submit)=alta(log)>
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" class="form-control" id="telefono" placeholder="Ingrese teléfono" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingrese correo electrónico" required>
+            </div>
+            <div class="form-group">
+                <label for="pass">Contraseña:</label>
+                <input type="text" class="form-control" id="pass" placeholder="Ingrese contraseña" required>
+            </div>
+            <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input type="text" class="form-control" id="calle" placeholder="Ingrese calle" required>
+            </div>     
+            <div class="form-group">
+                <label for="int">Num.Int:</label>
+                <input type="number" class="form-control" id="int" placeholder="ingrese Num.Int" required>
+            </div>
+            <div class="form-group">
+              <label for="ext">Num.Ext:</label>
+              <input type="number" class="form-control" id="ext" placeholder="Ingrese Num.Ext">
+            </div>
+            <div class="form-group">
+              <label for="estado">Estado:</label>
+              <select class="form-control" required>
+                <option>Seleccionar estado...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ciudad">Ciudad:</label>
+              <select class="form-control" required>
+                <option>Seleccionar ciudad...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cp">Código Postal:</label>
+              <select class="form-control" required>
+                <option>Seleccionar código postal...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="colonia">Colonia:</label>
+              <select class="form-control" required>
+                <option>Seleccionar colonia...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ext">Rol:</label>
+              <select class="form-control" required>
+                <option>Seleccionar rol...</option>
+              </select>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Aceptar</button>
+        </form>
+    </div>
+    <!-- Rol -->
+    <div>
+        <form #log="ngForm" (submit)=alta(log)>
+            <div class="form-group">
+                <label for="rol">Rol: </label>
+                <input class="form-control" type="text" id="rol" placeholder="Ingresar Rol" required>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                <label class="custom-control-label" for="customSwitch2">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Aceptar</button>
+        </form>
+    </div>
+    <!-- Estatus -->
+    <div></div>
+    <!-- Estado -->
+    <div></div>
+    <!-- Ciudad -->
+    <div></div>
+    <!-- Codigo Postal -->
+    <div></div>
+    <!-- Paquete -->
+    <div></div>
+    <!-- Equipo -->
+    <div></div>
+    <!-- PaqueteEquipo -->
+    <div></div>
+    <!-- Colonia -->
+    <div></div>
+    <!-- Propiedad -->
+    <div></div>
+    <!-- Contrato -->
+    <div></div>
+</div>

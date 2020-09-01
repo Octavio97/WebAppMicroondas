@@ -22,7 +22,7 @@ namespace MicroondasAPI.Models
         }
     
         public System.Guid idPaquete { get; set; }
-        public string nombre { get; set; }
+        public string NOMBRE { get; set; }
         public Nullable<decimal> precio { get; set; }
         public Nullable<bool> activo { get; set; }
     

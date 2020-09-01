@@ -18,15 +18,18 @@ namespace MicroondasAPI.Models
         public Ciudad()
         {
             this.CodigoPostal = new HashSet<CodigoPostal>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public System.Guid idCiudad { get; set; }
-        public string ciudad1 { get; set; }
+        public string Ciudad1 { get; set; }
         public Nullable<System.Guid> idEstado { get; set; }
         public Nullable<bool> activo { get; set; }
     
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CodigoPostal> CodigoPostal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }
