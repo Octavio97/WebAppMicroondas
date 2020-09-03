@@ -21,16 +21,16 @@
     <br>
     <!-- Botones agregar, tabla y activos -->
     <div>
-        <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;"><i class="fas fa-plus"></i> Agregar</button>
+        <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;" [routerLink]="['/inicio', seleccion, 'new']"><i class="fas fa-plus"></i> Agregar</button>
 
         <div class="dropdown float-left">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Seleccione tabla...
+          {{ seleccion }}
         </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <div *ngFor="let item of tablas;">
+                   <button class="dropdown-item" type="button" (click)="change(item)">{{ item }}</button> 
+                </div>
             </div>
         </div>
 
@@ -43,13 +43,14 @@
     </div>
 
     <!-- Tabla Usuarios -->
-    <table class="table">
+    <table class="table" *ngIf="seleccion === 'Usuario' || seleccion === 'Seleccione tabla...'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col">Handle</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -58,34 +59,225 @@
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Rol -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Rol'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID Rol</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Activo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of rol; let i = index" class="animated fadeIn">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idRol }}</td>
+                <td>{{ item.rol1 }}</td>
+                <td>{{ item.activo }}</td>
+                <td><button class="btn btn-light" [routerLink]="['/inicio', seleccion, item.idRol]"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Estatus -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Estatus'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Estado -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Estado'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID Estado</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Activo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of estado; let i = index" class="animated fadeIn">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idEstado }}</td>
+                <td>{{ item.estado1 }}</td>
+                <td>{{ item.activo }}</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Ciudad -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Ciudad'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Codigo Postal -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Código postal'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Paquete -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Paquete'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Equipo -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Equipo'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla PaqueteEquipo -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'PaqueteEquipo'"></table>
     <!-- Tabla Colonia -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Colonia'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Propiedad -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Propiedad'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
     <!-- Tabla Contrato -->
-    <table></table>
+    <table class="table" *ngIf="seleccion === 'Contrato'">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <!-- Tecnico -->
-<div class="container animated fadeIn">
+<div class="container animated fadeIn" *ngIf="">
     <div>
         <h1 class="display-4">Reportes</h1>
         <div class="form-check float-right">

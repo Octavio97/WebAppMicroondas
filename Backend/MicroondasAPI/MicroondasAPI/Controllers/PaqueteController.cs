@@ -20,7 +20,7 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe el paquete a ingresar
-                var accion = SessionController.getInstance().Paquete.Where(w => w.NOMBRE == paquete.NOMBRE).FirstOrDefault();
+                var accion = SessionController.getInstance().Paquete.Where(w => w.nombre == paquete.nombre).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
@@ -29,7 +29,7 @@ namespace MicroondasAPI.Controllers
                     Paquete datos = new Paquete()
                     {
                         idPaquete = Guid.NewGuid(),
-                        NOMBRE = paquete.NOMBRE,
+                        nombre = paquete.nombre,
                         precio = paquete.precio,
                         activo = paquete.activo
                     };
@@ -93,7 +93,7 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idPaquete = s.idPaquete,
-                    nombre = s.NOMBRE,
+                    nombre = s.nombre,
                     precio = s.precio,
                     activo = s.activo
                 });
@@ -117,13 +117,13 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe el rol a ingresar
-                var accion = SessionController.getInstance().Paquete.Where(w => w.NOMBRE == paquete.NOMBRE).FirstOrDefault();
+                var accion = SessionController.getInstance().Paquete.Where(w => w.nombre == paquete.nombre).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
                     // Hacemos los cambios
-                    accion.NOMBRE = paquete.NOMBRE;
+                    accion.nombre = paquete.nombre;
                     accion.precio = paquete.precio;
                     accion.activo = paquete.activo;
 

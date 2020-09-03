@@ -80,7 +80,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/Rol/consultaRol")]
+        [Route("api/MicroondasAPI/consultaRol")]
         public IHttpActionResult consultaRol()
         {
             try
@@ -92,14 +92,14 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idRol = s.idRol,
-                    rol = s.rol1,
+                    rol1 = s.rol1,
                     activo = s.activo
                 });
 
                 // Devolvemos los datos
                 return Ok(resultado);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }

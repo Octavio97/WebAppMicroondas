@@ -1,6 +1,6 @@
 export class Estado {
     idEstado: string;
-    estado: string;
+    estado1: string;
     activo: boolean;
 
     constructor(){}

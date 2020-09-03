@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7f855cd4ace345b6956975729bf7b953" Name="Diagram1">
+      <Diagram DiagramId="9ec1cc09eaaf48309e9b4694eb785250" Name="Diagram1">
         <EntityTypeShape EntityType="MicroondasModel.Ciudad" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.CodigoPostal" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.Colonia" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />

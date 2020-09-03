@@ -1,6 +1,6 @@
 export class Equipo {
     idEquipo: string;
-    equipo: string;
+    equipo1: string;
     activo: boolean;
 
     constructor(){}

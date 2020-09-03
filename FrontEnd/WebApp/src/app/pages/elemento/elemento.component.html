@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container animated fadeIn">
     <!-- Usuario -->
-    <div *ngIf="this.id === 'usuario'">
+    <div *ngIf="this.id === 'Usuario'">
         <h1 class="display-4">Usuario</h1>
         <form #log="ngForm" (submit)=alta(log)>
             <div class="form-group">
@@ -74,12 +74,12 @@
         </form>
     </div>
     <!-- Rol -->
-    <div *ngIf="this.id === 'rol'">
+    <div *ngIf="this.id === 'Rol'">
         <h1 class="display-4">Rol</h1>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol">Rol: </label>
-                <input class="form-control" type="text" id="rol" name="rol" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol" required>
+                <input class="form-control" type="text" id="rol" name="rol" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" required>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch2" name="activo" [(ngModel)]="this.rol.activo">
@@ -90,12 +90,12 @@
         </form>
     </div>
     <!-- Estatus -->
-    <div *ngIf="this.id === 'estatus'">
+    <div *ngIf="this.id === 'Estatus'">
         <h1 class="display-4">Estatus</h1>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="estatus">Estatus: </label>
-                <input class="form-control" type="text" id="estatus" name="estatus" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus" required>
+                <input class="form-control" type="text" id="estatus" name="estatus" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus1" required>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch3" name="activo" [(ngModel)]="this.estatus.activo">
@@ -106,12 +106,12 @@
         </form>
     </div>
     <!-- Estado -->
-    <div *ngIf="this.id === 'estado'">
+    <div *ngIf="this.id === 'Estado'">
         <h1 class="display-4">Estado</h1>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
-                <label for="estatus">Estado: </label>
-                <input class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado" required>
+                <label for="estado">Estado: </label>
+                <input class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado1" required>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch4" name="activo" [(ngModel)]="this.estado.activo">
@@ -122,7 +122,7 @@
         </form>
     </div>
     <!-- Ciudad -->
-    <div *ngIf="this.id === 'ciudad'">
+    <div *ngIf="this.id === 'Ciudad'">
         <h1 class="display-4">Ciudad</h1>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="estado">Estado: </label>
@@ -131,7 +131,7 @@
             </select>
             <div class="form-group">
                 <label for="ciudad">Ciudad: </label>
-                <input class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.ciudad" required>
+                <input class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.Ciudad1" required>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch5" name="activo" [(ngModel)]="this.ciudad.activo">
@@ -142,17 +142,17 @@
         </form>
     </div>
     <!-- Codigo Postal -->
-    <div></div>
+    <div *ngIf="this.id === 'Código postal'"></div>
     <!-- Paquete -->
-    <div></div>
+    <div *ngIf="this.id === 'Paquete'"></div>
     <!-- Equipo -->
-    <div></div>
+    <div *ngIf="this.id === 'Equipo'"></div>
     <!-- PaqueteEquipo -->
-    <div></div>
+    <div *ngIf="this.id === 'PaqueteEquipo'"></div>
     <!-- Colonia -->
     <div></div>
     <!-- Propiedad -->
-    <div></div>
+    <div *ngIf="this.id === 'Propiedad'"></div>
     <!-- Contrato -->
-    <div></div>
+    <div *ngIf="this.id === 'Contrato'"></div>
 </div>

@@ -70,9 +70,9 @@
       <PropertyRef Name="idPaquete" />
     </Key>
     <Property Name="idPaquete" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="NOMBRE" Type="varchar" MaxLength="30" />
     <Property Name="precio" Type="money" />
     <Property Name="activo" Type="bit" />
+    <Property Name="nombre" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="PaqueteEquipo">
     <Key>

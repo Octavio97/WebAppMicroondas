@@ -1,6 +1,6 @@
 export class Ciudad {
     idCiudad: string;
-    ciudad: string;
+    Ciudad1: string;
     idEstado: string;
     activo: boolean;
 

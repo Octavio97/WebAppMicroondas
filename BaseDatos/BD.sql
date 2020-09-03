@@ -36,7 +36,7 @@ CREATE TABLE CodigoPostal (
 
 CREATE TABLE Paquete (
     idPaquete UNIQUEIDENTIFIER PRIMARY KEY,
-    NOMBRE VARCHAR(30),
+    nombre VARCHAR(30),
     precio MONEY,
     activo BIT
 );

@@ -1,6 +1,6 @@
 export class Contrato {
     idContrato: string;
-    pdf: BigInt64Array;
+    pdf: Int16Array;
     archivo: string;
     fechsInicio: Date;
     fechaFinal: Date;

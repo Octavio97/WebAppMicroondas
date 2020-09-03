@@ -22,7 +22,7 @@ export class RolService {
     return this.http.get( this.url + 'consultaRol' );
   }
 
-  modificarRol() {
-
+  modificarRol(rol: Rol) {
+    return this.http.put( this.url + 'modificarRol', rol );
  }
 }

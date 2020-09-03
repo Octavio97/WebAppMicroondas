@@ -92,7 +92,7 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idEquipo = s.idEquipo,
-                    equipo = s.equipo1,
+                    equipo1 = s.equipo1,
                     activo = s.activo
                 });
 

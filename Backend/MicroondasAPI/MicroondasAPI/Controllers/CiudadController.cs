@@ -90,7 +90,7 @@ namespace MicroondasAPI.Controllers
             var resultado = accion.Select(s => new
             {
                 idCiudad = s.idCiudad,
-                ciudad1 = s.Ciudad1,
+                Ciudad1 = s.Ciudad1,
                 idEstado = s.idEstado,
                 activo = s.activo
             });
