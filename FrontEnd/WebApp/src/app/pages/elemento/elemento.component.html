@@ -1,11 +1,11 @@
 <div class="container">
-    <h1 class="display-4">Display 4</h1>
     <!-- Usuario -->
-    <!-- <div>
+    <div *ngIf="this.id === 'usuario'">
+        <h1 class="display-4">Usuario</h1>
         <form #log="ngForm" (submit)=alta(log)>
             <div class="form-group">
-              <label for="nombre">Nombre:</label>
-              <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" required>
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" required>
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
@@ -26,42 +26,42 @@
             <div class="form-group">
                 <label for="calle">Calle:</label>
                 <input type="text" class="form-control" id="calle" placeholder="Ingrese calle" required>
-            </div>     
+            </div>
             <div class="form-group">
                 <label for="int">Num.Int:</label>
                 <input type="number" class="form-control" id="int" placeholder="ingrese Num.Int" required>
             </div>
             <div class="form-group">
-              <label for="ext">Num.Ext:</label>
-              <input type="number" class="form-control" id="ext" placeholder="Ingrese Num.Ext">
+                <label for="ext">Num.Ext:</label>
+                <input type="number" class="form-control" id="ext" placeholder="Ingrese Num.Ext">
             </div>
             <div class="form-group">
-              <label for="estado">Estado:</label>
-              <select class="form-control" required>
+                <label for="estado">Estado:</label>
+                <select class="form-control" required>
                 <option>Seleccionar estado...</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="ciudad">Ciudad:</label>
-              <select class="form-control" required>
+                <label for="ciudad">Ciudad:</label>
+                <select class="form-control" required>
                 <option>Seleccionar ciudad...</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="cp">Código Postal:</label>
-              <select class="form-control" required>
+                <label for="cp">Código Postal:</label>
+                <select class="form-control" required>
                 <option>Seleccionar código postal...</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="colonia">Colonia:</label>
-              <select class="form-control" required>
+                <label for="colonia">Colonia:</label>
+                <select class="form-control" required>
                 <option>Seleccionar colonia...</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="ext">Rol:</label>
-              <select class="form-control" required>
+                <label for="ext">Rol:</label>
+                <select class="form-control" required>
                 <option>Seleccionar rol...</option>
               </select>
             </div>
@@ -72,28 +72,75 @@
             <br>
             <button type="submit" class="btn btn-success">Aceptar</button>
         </form>
-    </div> -->
+    </div>
     <!-- Rol -->
-    <div>
+    <div *ngIf="this.id === 'rol'">
+        <h1 class="display-4">Rol</h1>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol">Rol: </label>
-                <input class="form-control" type="text" id="rol" name="rol" placeholder="Ingresar Rol" [(ngModel)]="this.rol.rol" required>
+                <input class="form-control" type="text" id="rol" name="rol" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol" required>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch2" name="activo" [(ngModel)]="this.rol.activo">
                 <label class="custom-control-label" for="customSwitch2">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">Aceptar</button>
+            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Estatus -->
-    <div></div>
+    <div *ngIf="this.id === 'estatus'">
+        <h1 class="display-4">Estatus</h1>
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="estatus">Estatus: </label>
+                <input class="form-control" type="text" id="estatus" name="estatus" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus" required>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch3" name="activo" [(ngModel)]="this.estatus.activo">
+                <label class="custom-control-label" for="customSwitch3">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
     <!-- Estado -->
-    <div></div>
+    <div *ngIf="this.id === 'estado'">
+        <h1 class="display-4">Estado</h1>
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="estatus">Estado: </label>
+                <input class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado" required>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch4" name="activo" [(ngModel)]="this.estado.activo">
+                <label class="custom-control-label" for="customSwitch4">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
     <!-- Ciudad -->
-    <div></div>
+    <div *ngIf="this.id === 'ciudad'">
+        <h1 class="display-4">Ciudad</h1>
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <label for="estado">Estado: </label>
+            <select class="form-control" required>
+              <option>Seleccionar estado...</option>
+            </select>
+            <div class="form-group">
+                <label for="ciudad">Ciudad: </label>
+                <input class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.ciudad" required>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch5" name="activo" [(ngModel)]="this.ciudad.activo">
+                <label class="custom-control-label" for="customSwitch5">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
     <!-- Codigo Postal -->
     <div></div>
     <!-- Paquete -->

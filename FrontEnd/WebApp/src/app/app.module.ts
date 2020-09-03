@@ -25,7 +25,7 @@ import { ElementoComponent } from './pages/elemento/elemento.component';
       { path: '', component: InicioComponent },
       { path: 'login', component: LoginComponent },
       { path: 'inicio', component: AdminComponent },
-      { path: 'ele', component: ElementoComponent }
+      { path: 'inicio/:id', component: ElementoComponent }
     ])
   ],
   providers: [],
