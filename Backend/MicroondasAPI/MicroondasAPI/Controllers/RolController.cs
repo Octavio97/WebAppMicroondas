@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarRol")]
         public IHttpActionResult eliminarRol(string id)
         {
@@ -79,8 +79,8 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("api/MicroondasAPI/consultaRol")]
+        [HttpGet]
+        [Route("api/Rol/consultaRol")]
         public IHttpActionResult consultaRol()
         {
             try
@@ -105,7 +105,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarRol")]
         public IHttpActionResult modificarColonia(Rol rol)
         {

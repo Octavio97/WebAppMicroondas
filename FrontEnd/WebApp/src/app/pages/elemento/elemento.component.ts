@@ -13,6 +13,7 @@ export class ElementoComponent implements OnInit {
   constructor(private rolS: RolService) { }
 
   ngOnInit(): void {
+    this.rol.activo = false;
   }
 
   alta(data: NgForm) {
@@ -35,7 +36,6 @@ export class ElementoComponent implements OnInit {
     });
     Swal.showLoading();
     if (this.rol.idRol) {
-
     }
     else {
       this.rolS.altaRol(this.rol).subscribe( resp => {

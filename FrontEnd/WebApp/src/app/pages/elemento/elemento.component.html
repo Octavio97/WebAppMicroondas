@@ -75,14 +75,14 @@
     </div> -->
     <!-- Rol -->
     <div>
-        <form #log="ngForm" (submit)=alta(log)>
+        <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol">Rol: </label>
-                <input class="form-control" type="text" id="rol" placeholder="Ingresar Rol" [(ngModel)]="this.rol.rol" required>
+                <input class="form-control" type="text" id="rol" name="rol" placeholder="Ingresar Rol" [(ngModel)]="this.rol.rol" required>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                <label class="custom-control-label" for="customSwitch2" [(ngModel)]="this.rol.activo">Activo</label>
+                <input type="checkbox" class="custom-control-input" id="customSwitch2" name="activo" [(ngModel)]="this.rol.activo">
+                <label class="custom-control-label" for="customSwitch2">Activo</label>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Aceptar</button>

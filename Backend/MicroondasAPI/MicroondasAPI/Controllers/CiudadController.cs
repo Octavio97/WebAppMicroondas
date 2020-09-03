@@ -20,7 +20,7 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // hacemos consulta si ya existe esa ciudad
-                var accion = SessionController.getInstance().Ciudad.Where(w => w.ciudad1 == ciudad.ciudad1).FirstOrDefault();
+                var accion = SessionController.getInstance().Ciudad.Where(w => w.Ciudad1 == ciudad.Ciudad1).FirstOrDefault();
 
                 // si no existe registro
                 if (accion == null)
@@ -28,7 +28,7 @@ namespace MicroondasAPI.Controllers
                     Ciudad datos = new Ciudad()
                     {
                         idCiudad = Guid.NewGuid(),
-                        ciudad1 = ciudad.ciudad1,
+                        Ciudad1 = ciudad.Ciudad1,
                         idEstado = ciudad.idEstado,
                         activo = ciudad.activo
                     };
@@ -90,7 +90,7 @@ namespace MicroondasAPI.Controllers
             var resultado = accion.Select(s => new
             {
                 idCiudad = s.idCiudad,
-                ciudad1 = s.ciudad1,
+                ciudad1 = s.Ciudad1,
                 idEstado = s.idEstado,
                 activo = s.activo
             });
@@ -109,13 +109,13 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // hacemos consulta si ya existe esa ciudad
-                var accion = SessionController.getInstance().Ciudad.Where(w => w.ciudad1 == ciudad.ciudad1).FirstOrDefault();
+                var accion = SessionController.getInstance().Ciudad.Where(w => w.Ciudad1 == ciudad.Ciudad1).FirstOrDefault();
 
                 // si no existe registro
                 if (accion == null)
                 {
                     // Hacemos los cambios
-                    accion.ciudad1 = ciudad.ciudad1;
+                    accion.Ciudad1 = ciudad.Ciudad1;
                     accion.idEstado = ciudad.idEstado;
                     accion.activo = ciudad.activo;
 

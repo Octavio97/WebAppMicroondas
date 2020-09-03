@@ -8,10 +8,10 @@ import { HttpClient } from '@angular/common/http';
 export class RolService {
 
   constructor(private http: HttpClient) { }
-  public readonly url = 'http://localhost:53165/api/MicroondasAPI/';
+  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
 
   altaRol(rol: Rol) {
-    return this.http.post( this.url + 'agregarRol', { params: { rol } });
+    return this.http.post( this.url + 'agregarRol', rol);
   }
 
   bajaRol() {
@@ -19,7 +19,7 @@ export class RolService {
   }
 
   consultaRol() {
-
+    return this.http.get( this.url + 'consultaRol' );
   }
 
   modificarRol() {
