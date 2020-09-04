@@ -14,6 +14,16 @@ import { PaqueteService } from 'src/app/services/paquete.service';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { ContratoService } from 'src/app/services/contrato.service';
 import { CodigopostalService } from 'src/app/services/codigopostal.service';
+import { Usuario } from 'src/app/models/usuario.model';
+import { Estatus } from 'src/app/models/estatus.model';
+import { Ciudad } from '../../models/ciudad.model';
+import { CodigoPostal } from '../../models/codigopostal.model';
+import { Colonia } from '../../models/colonia.model';
+import { Contrato } from '../../models/contrato.model';
+import { Equipo } from '../../models/equipo.model';
+import { Paquete } from 'src/app/models/paquete.model';
+import { PaqueteEquipo } from '../../models/paqueteequipo.model';
+import { Propiedad } from '../../models/propiedad.model';
 
 @Component({
   selector: 'app-admin',
@@ -24,6 +34,16 @@ export class AdminComponent implements OnInit {
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad'];
   rol: Rol[] = [];
   estado: Estado[];
+  estatus: Estatus[];
+  usuario: Usuario[];
+  ciudad: Ciudad[];
+  codigo: CodigoPostal[];
+  colonia: Colonia[];
+  contrato: Contrato[];
+  equipo: Equipo[];
+  paquete: Paquete[];
+  paqueteEquipo: PaqueteEquipo[];
+  propiedad: Propiedad[];
 
   constructor(
     private rolS: RolService,

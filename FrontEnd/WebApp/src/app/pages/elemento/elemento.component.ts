@@ -46,6 +46,7 @@ export class ElementoComponent implements OnInit {
   paquete = new Paquete();
   paqueteEquipo = new PaqueteEquipo();
   propiedad = new Propiedad();
+  e: Estado[];
 
   constructor(
     private rolS: RolService,
@@ -67,6 +68,9 @@ export class ElementoComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.id2 = this.route.snapshot.paramMap.get('id2');
 
+    this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+      this.e = resp;
+    });
     if (this.id2 === 'new') {
       // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
       this.rol.activo = false;

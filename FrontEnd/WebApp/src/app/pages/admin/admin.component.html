@@ -29,7 +29,7 @@
         </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <div *ngFor="let item of tablas;">
-                   <button class="dropdown-item" type="button" (click)="change(item)">{{ item }}</button> 
+                    <button class="dropdown-item" type="button" (click)="change(item)">{{ item }}</button>
                 </div>
             </div>
         </div>
@@ -43,28 +43,40 @@
     </div>
 
     <!-- Tabla Usuarios -->
-    <table class="table" *ngIf="seleccion === 'Usuario' || seleccion === 'Seleccione tabla...'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Usuario' || seleccion === 'Seleccione tabla...'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Correo electrónico</th>
+                <th scope="col">Contraseña</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of usuario; let i=index">
+                <th scope="row">{{ i +1 }}</th>
+                <td>{{ item.idUsuario }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.apellido }}</td>
+                <td>{{ item.telefono }}</td>
+                <td>{{ item.correoE }}</td>
+                <td>{{ item.contrasena }}</td>
+                <td>{{ item.calle }} {{ item.numExt }} {{ item.numExt }}, CP:{{item.idCP}}, {{item.idColonia}}, {{ item.idCiudad }}, {{ item.idEstado }}</td>
+                <td>{{ item.idRol }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Rol -->
-    <table class="table" *ngIf="seleccion === 'Rol'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Rol'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -85,28 +97,28 @@
         </tbody>
     </table>
     <!-- Tabla Estatus -->
-    <table class="table" *ngIf="seleccion === 'Estatus'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Estatus'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Estatus</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of estatus; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idEstatus }}</td>
+                <td>{{ item.estatus1 }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Estado -->
-    <table class="table" *ngIf="seleccion === 'Estado'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Estado'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -127,141 +139,153 @@
         </tbody>
     </table>
     <!-- Tabla Ciudad -->
-    <table class="table" *ngIf="seleccion === 'Ciudad'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Ciudad'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Ciudad</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of ciudad; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idCiudad }}</td>
+                <td>{{ item.Ciudad1 }}</td>
+                <td>{{ item.idEstado }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Codigo Postal -->
-    <table class="table" *ngIf="seleccion === 'Código postal'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Código postal'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Código postal</th>
+                <th scope="col">Código postal</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of codigo; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idCP }}</td>
+                <td>{{ item.codigo }}</td>
+                <td>{{ item.idCiudad }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Paquete -->
-    <table class="table" *ngIf="seleccion === 'Paquete'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Paquete'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Paquete</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of paquete; let i=index;">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idPaquete }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.precio }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Equipo -->
-    <table class="table" *ngIf="seleccion === 'Equipo'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Equipo'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Equipo</th>
+                <th scope="col">Equipo</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of equipo; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idEquipo }}</td>
+                <td>{{ item.equipo1 }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla PaqueteEquipo -->
-    <table class="table" *ngIf="seleccion === 'PaqueteEquipo'"></table>
+    <table class="table animated fadeIn" *ngIf="seleccion === 'PaqueteEquipo'"></table>
     <!-- Tabla Colonia -->
-    <table class="table" *ngIf="seleccion === 'Colonia'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Colonia'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Colonia</th>
+                <th scope="col">Colonia</th>
+                <th scope="col">Código postal</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of colonia; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idColonia }}</td>
+                <td>{{ item.colonia1 }}</td>
+                <td>{{ item.idCP }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Propiedad -->
-    <table class="table" *ngIf="seleccion === 'Propiedad'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Propiedad'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Propiedad</th>
+                <th scope="col">Técnico</th>
+                <th scope="col">Equipo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of propiedad; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idPropiedad }}</td>
+                <td>{{ item.idUsuario }}</td>
+                <td>{{ item.idEquipo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Contrato -->
-    <table class="table" *ngIf="seleccion === 'Contrato'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Contrato'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID Contrato</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha de inicio</th>
+                <th scope="col">Fecha final</th>
+                <th scope="col">Paquete</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Activo</th>
                 <th></th>
             </tr>
         </thead>
