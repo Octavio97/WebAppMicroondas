@@ -143,7 +143,42 @@ export class ElementoComponent implements OnInit {
     });
     Swal.showLoading();
     if (this.id === 'Ciudad') {
-
+      if (this.ciudad.idCiudad) {
+        this.ciudadS.modificarCiudad(this.ciudad).subscribe( resp => {
+          if (resp === true) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'La ciudad se ha actualizado con exito',
+              icon: 'success'
+            });
+          }
+          else {
+            Swal.fire({
+              title: 'Error',
+              text: 'Parece que hubo un error corrige tus datos',
+              icon: 'error'
+            });
+          }
+        });
+      }
+      else {
+        this.ciudadS.altaCiudad(this.ciudad).subscribe( resp => {
+        if (resp === true) {
+          Swal.fire({
+            title: 'Exito',
+            text: 'La ciudad se ha agregado con exito',
+            icon: 'success'
+          });
+        }
+        else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Parece que este estado ya existe',
+            icon: 'error'
+          });
+        }
+        });
+      }
     }
     else if (this.id === 'Código postal') {
 

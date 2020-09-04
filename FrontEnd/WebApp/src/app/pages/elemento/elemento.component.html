@@ -126,8 +126,8 @@
         <h1 class="display-4">Ciudad</h1>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="estado">Estado: </label>
-            <select class="form-control" for="estate" required>
-                <option *ngFor="let item of e" [value]="item.idEstado" [ngModel]="this.ciudad.idEstado" name="estate" id="estate">{{ item.estado1 }}</option>           
+            <select class="form-control" name="estado" id="estado" [ngModel]="this.ciudad.idEstado" required>
+                <option *ngFor="let item of e" [value]="item.idEstado">{{ item.estado1 }}</option>           
             </select>
             <div class="form-group">
                 <label for="ciudad">Ciudad: </label>
