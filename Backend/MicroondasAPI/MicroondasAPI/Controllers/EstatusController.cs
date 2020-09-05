@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarEstatus")]
         public IHttpActionResult eliminarRol(string id)
         {
@@ -79,7 +79,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaEstatus")]
         public IHttpActionResult consultaRol()
         {
@@ -105,7 +105,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarEstatus")]
         public IHttpActionResult modificarColonia(Estatus estatus)
         {

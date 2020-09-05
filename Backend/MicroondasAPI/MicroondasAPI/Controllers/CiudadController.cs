@@ -79,7 +79,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaCiudad")]
         public IHttpActionResult consultaCiudad()
         {
@@ -91,7 +91,7 @@ namespace MicroondasAPI.Controllers
             {
                 idCiudad = s.idCiudad,
                 Ciudad1 = s.Ciudad1,
-                idEstado = s.idEstado,
+                idEstado = s.Estado.estado1,
                 activo = s.activo
             });
 
@@ -133,6 +133,23 @@ namespace MicroondasAPI.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnica")]
+        public IHttpActionResult consultaUnica(string id)
+        {
+            Guid i = Guid.Parse(id.ToString());
+
+            var accion = SessionController.getInstance().Ciudad.Where(w => w.idEstado == i).ToList();
+
+            var resultado = accion.Select(s => new
+            {
+                idCiudad = s.idCiudad,
+                Ciudad1 = s.Ciudad1
+            });
+
+            return Ok(resultado);
         }
     }
 }

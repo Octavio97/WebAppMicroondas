@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarCP")]
         public IHttpActionResult eliminarCP(string id)
         {
@@ -80,7 +80,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaCP")]
         public IHttpActionResult consultaCP()
         {
@@ -107,7 +107,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarCP")]
         public IHttpActionResult modificarCP(CodigoPostal cp)
         {

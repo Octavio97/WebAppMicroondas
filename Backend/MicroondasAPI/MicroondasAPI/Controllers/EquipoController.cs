@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarEquipo")]
         public IHttpActionResult eliminarEquipo(string id)
         {
@@ -79,7 +79,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaEquipo")]
         public IHttpActionResult consultaEquipo()
         {
@@ -105,7 +105,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarEquipo")]
         public IHttpActionResult modificarEquipo(Equipo equipo)
         {

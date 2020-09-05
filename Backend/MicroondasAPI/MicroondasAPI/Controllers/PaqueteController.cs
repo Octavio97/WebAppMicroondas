@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarPaquete")]
         public IHttpActionResult eliminarPaquete(string id)
         {
@@ -80,7 +80,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaPaquete")]
         public IHttpActionResult consultaPaquete()
         {
@@ -107,7 +107,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarPaquete")]
         public IHttpActionResult modificarPaquete(Paquete paquete)
         {

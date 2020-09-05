@@ -92,5 +92,35 @@ export class AdminComponent implements OnInit {
         }
       });
     }
+    else if (i === 'Ciudad') {
+      this.ciudadS.consultaCiudad().subscribe( (resp: Ciudad[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.ciudad = resp;
+        }
+      });
+    }
+    else if (i === 'Colonia') {
+    }
+    else if (i === 'Código postal') {
+    }
+    else if (i === 'Paquete') {
+    }
+    else if (i === 'Usuario') {
+    }
+    else if (i === 'Estatus') {
+    }
+    else if (i === 'Contrato') {
+    }
+    else if (i === 'Equipo') {
+    }
+    else if (i === 'Propiedad') {
+    }
   }
 }

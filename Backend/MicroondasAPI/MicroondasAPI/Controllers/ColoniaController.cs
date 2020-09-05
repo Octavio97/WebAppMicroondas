@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarColonia")]
         public IHttpActionResult eliminarColonia(string id)
         {
@@ -80,7 +80,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaColonia")]
         public IHttpActionResult consultaColonia()
         {
@@ -107,7 +107,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarColonia")]
         public IHttpActionResult modificarColonia(Colonia colonia)
         {

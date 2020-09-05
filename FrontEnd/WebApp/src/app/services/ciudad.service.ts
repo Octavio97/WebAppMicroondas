@@ -26,4 +26,8 @@ export class CiudadService {
   modificarCiudad(ciudad: Ciudad) {
     return this.http.post( this.url + 'modificarCiudad', ciudad );
   }
+
+  consultaUnica(id: string) {
+    return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+  }
 }

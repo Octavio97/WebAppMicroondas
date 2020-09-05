@@ -2,7 +2,7 @@ export class Contrato {
     idContrato: string;
     pdf: Int16Array;
     archivo: string;
-    fechsInicio: Date;
+    fechaInicio: Date;
     fechaFinal: Date;
     idPaquete: string;
     idEstatus: string;

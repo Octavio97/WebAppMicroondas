@@ -290,11 +290,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+            <tr *ngFor="let item of contrato; let i=index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.idContrato }}</td>
+                <td>{{ item.idUsuario }}</td>
+                <td>{{ item.fechaInicio }}</td>
+                <td>{{ item.fechaFinal }}</td>
+                <td>{{ item.idPaquete }}</td>
+                <td>{{ item.idEstatus }}</td>
+                <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -330,4 +334,3 @@
         </tbody>
     </table>
 </div>
-<div></div>

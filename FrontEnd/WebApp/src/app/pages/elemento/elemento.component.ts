@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RolService } from '../../services/rol.service';
 import Swal from 'sweetalert2';
@@ -31,8 +31,9 @@ import { PropiedadService } from '../../services/propiedad.service';
   selector: 'app-elemento',
   templateUrl: './elemento.component.html'
 })
-export class ElementoComponent implements OnInit {
+export class ElementoComponent implements OnInit, AfterViewInit {
   id;
+  i = 'Selección';
   id2;
   rol = new Rol();
   usuario = new Usuario();
@@ -47,6 +48,7 @@ export class ElementoComponent implements OnInit {
   paqueteEquipo = new PaqueteEquipo();
   propiedad = new Propiedad();
   e: Estado[];
+  c: Ciudad[];
 
   constructor(
     private rolS: RolService,
@@ -64,13 +66,46 @@ export class ElementoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { }
 
+  ngAfterViewInit(): void {
+    if (this.id === 'Ciudad') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
+      });
+    }
+    else if (this.id === 'Código postal') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
+      });
+    }
+    else if (this.id === 'Colonia') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
+      });
+    }
+    else if (this.id === 'Contrato') {
+    }
+    else if (this.id === 'Equipo') {
+    }
+    else if (this.id === 'Estado') {
+    }
+    else if (this.id === 'Estatus') {
+    }
+    else if (this.id === 'Paquete') {
+    }
+    else if (this.id === 'PaqueteEquipo') {
+    }
+    else if (this.id === 'Propiedad') {
+    }
+    else if (this.id === 'Rol') {
+    }
+    else if (this.id === 'Usuario') {
+    }
+  }
+
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.id2 = this.route.snapshot.paramMap.get('id2');
 
-    this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-      this.e = resp;
-    });
     if (this.id2 === 'new') {
       // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
       this.rol.activo = false;
@@ -282,6 +317,38 @@ export class ElementoComponent implements OnInit {
     }
     else if (this.id === 'Usuario') {
 
+    }
+  }
+
+  cambio(id, y) {
+    this.i = y;
+    if (this.id === 'Código postal') {
+      this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
+        this.c = resp;
+      });
+    }
+    else if (this.id === 'Ciudad') {
+      this.ciudad.idEstado = id;
+    }
+    else if (this.id === 'Colonia') {
+    }
+    else if (this.id === 'Contrato') {
+    }
+    else if (this.id === 'Equipo') {
+    }
+    else if (this.id === 'Estado') {
+    }
+    else if (this.id === 'Estatus') {
+    }
+    else if (this.id === 'Paquete') {
+    }
+    else if (this.id === 'PaqueteEquipo') {
+    }
+    else if (this.id === 'Propiedad') {
+    }
+    else if (this.id === 'Rol') {
+    }
+    else if (this.id === 'Usuario') {
     }
   }
 }

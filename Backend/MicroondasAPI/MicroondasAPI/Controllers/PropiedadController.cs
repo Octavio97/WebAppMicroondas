@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/eliminarPropiedad")]
         public IHttpActionResult eliminarPropiedad(string id)
         {
@@ -79,7 +79,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/MicroondasAPI/consultaPropiedad")]
         public IHttpActionResult consultaPropiedad()
         {
@@ -105,7 +105,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarPropiedad")]
         public IHttpActionResult modificarPropiedad(Propiedad propiedad)
         {
