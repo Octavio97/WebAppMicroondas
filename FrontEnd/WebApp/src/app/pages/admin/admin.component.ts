@@ -62,6 +62,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // Metodo para cargar las tablas a elegir
   change(i: string) {
     this.seleccion = i;
     if (i === 'Rol') {
@@ -107,20 +108,116 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Colonia') {
+      this.coloniaS.consultaColonia().subscribe( (resp: Colonia[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.colonia = resp;
+        }
+      });
     }
     else if (i === 'Código postal') {
+      this.codigoS.consultaCodigo().subscribe( (resp: CodigoPostal[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.codigo = resp;
+        }
+      });
     }
     else if (i === 'Paquete') {
+      this.paqueteS.consultaPaquete().subscribe( (resp: Paquete[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.paquete = resp;
+        }
+      });
     }
     else if (i === 'Usuario') {
+      this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.usuario = resp;
+        }
+      });
     }
     else if (i === 'Estatus') {
+      this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.estatus = resp;
+        }
+      });
     }
     else if (i === 'Contrato') {
+      this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.contrato = resp;
+        }
+      });
     }
     else if (i === 'Equipo') {
+      this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.equipo = resp;
+        }
+      });
     }
     else if (i === 'Propiedad') {
+      this.propiedadS.consultaPropiedad().subscribe( (resp: Propiedad[]) => {
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.propiedad = resp;
+        }
+      });
     }
   }
 }

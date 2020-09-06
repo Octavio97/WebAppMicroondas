@@ -128,10 +128,10 @@
             <label for="estado">Estado: </label><br>
             <div class="btn-group">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="estado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i }}
+                    {{ this.i1 }}
                   </button>
                 <div class="dropdown-menu" aria-labelledby="estado">
-                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio(item.idEstado, item.estado1)">{{ item.estado1 }}</option>
+                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio(item.estado1, item.idEstado)">{{ item.estado1 }}</option>
                 </div>
             </div>
             <div class="form-group">
@@ -153,20 +153,20 @@
             <label for="estado">Estado: </label><br>
             <div class="btn-group">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="estado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i }}
+                    {{ this.i1 }}
                   </button>
                 <div class="dropdown-menu" aria-labelledby="estado">
-                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio(item.idEstado, item.estado1)">{{ item.estado1 }}</option>
+                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio(item.estado1, item.idEstado)">{{ item.estado1 }}</option>
                 </div>
             </div>
             <br>
             <label for="ciudad">Ciudad: </label><br>
             <div class="btn-group">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="ciudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i }}
+                    {{ this.i2 }}
                   </button>
                 <div class="dropdown-menu" aria-labelledby="ciudad">
-                    <option class="dropdown-item" *ngFor="let item of c" [value]="item.idCiudad">{{ item.Ciudad1 }}</option>
+                    <option class="dropdown-item" *ngFor="let item of c" (click)="cambio(item.Ciudad1)">{{ item.Ciudad1 }}</option>
                 </div>
             </div><br>
             <div class="form-group">

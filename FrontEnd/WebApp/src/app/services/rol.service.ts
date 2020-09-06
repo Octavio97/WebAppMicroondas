@@ -14,8 +14,8 @@ export class RolService {
     return this.http.post( this.url + 'agregarRol', rol);
   }
 
-  bajaRol() {
-
+  bajaRol(id: string) {
+    return this.http.put( this.url + 'eliminarRol', id );
   }
 
   consultaRol() {
@@ -24,5 +24,9 @@ export class RolService {
 
   modificarRol(rol: Rol) {
     return this.http.put( this.url + 'modificarRol', rol );
- }
+  }
+
+ consultaUnica(id: string) {
+    return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+  }
 }
