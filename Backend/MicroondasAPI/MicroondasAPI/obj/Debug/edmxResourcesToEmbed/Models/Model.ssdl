@@ -73,6 +73,7 @@
     <Property Name="precio" Type="money" />
     <Property Name="activo" Type="bit" />
     <Property Name="nombre" Type="varchar" MaxLength="30" />
+    <Property Name="descripcion" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="PaqueteEquipo">
     <Key>

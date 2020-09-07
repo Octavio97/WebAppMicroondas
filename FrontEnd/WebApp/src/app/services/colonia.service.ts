@@ -28,6 +28,6 @@ export class ColoniaService {
   }
 
   consultaUnica(id: string) {
-    return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+    return this.http.get( this.url + 'consultaUnicaCo', { params: { id } } );
   }
 }

@@ -142,5 +142,29 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaCP")]
+        public IHttpActionResult consultaUnicaCP(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().CodigoPostal.Where(w => w.idCiudad == i).ToList();
+
+                var resultado = accion.Select(s => new
+                {
+                    idCP = s.idCP,
+                    codigo = s.codigo
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

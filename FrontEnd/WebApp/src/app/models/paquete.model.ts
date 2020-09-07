@@ -3,6 +3,7 @@ export class Paquete {
     precio: number;
     nombre: string;
     activo: boolean;
+    descripcion: string;
 
     constructor(){}
 }

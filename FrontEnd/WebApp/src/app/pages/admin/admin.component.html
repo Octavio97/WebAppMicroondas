@@ -21,11 +21,11 @@
     <br>
     <!-- Botones agregar, tabla y activos -->
     <div>
-        <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;" [routerLink]="['/inicio', seleccion, 'new']"><i class="fas fa-plus"></i> Agregar</button>
+        <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;" [routerLink]="['/inicio', this.seleccion, 'new']"><i class="fas fa-plus"></i> Agregar</button>
 
         <div class="dropdown float-left">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ seleccion }}
+          {{ this.seleccion }}
         </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <div *ngFor="let item of tablas;">
@@ -191,6 +191,7 @@
                 <th scope="col">#</th>
                 <th scope="col">ID Paquete</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Activo</th>
                 <th></th>
@@ -201,7 +202,8 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idPaquete }}</td>
                 <td>{{ item.nombre }}</td>
-                <td>{{ item.precio }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td>${{ item.precio }}</td>
                 <td>{{ item.activo }}</td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>

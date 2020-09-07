@@ -91,6 +91,7 @@
     <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Contrato" Relationship="Self.FK__Contrato__idPaqu__68487DD7" FromRole="Paquete" ToRole="Contrato" />
     <NavigationProperty Name="PaqueteEquipo" Relationship="Self.FK__PaqueteEq__idPaq__4D94879B" FromRole="Paquete" ToRole="PaqueteEquipo" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PaqueteEquipo">
     <Key>

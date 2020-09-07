@@ -28,6 +28,6 @@ export class CodigopostalService {
   }
 
   consultaUnica(id: string) {
-    return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+    return this.http.get( this.url + 'consultaUnicaCP', { params: { id } } );
   }
 }

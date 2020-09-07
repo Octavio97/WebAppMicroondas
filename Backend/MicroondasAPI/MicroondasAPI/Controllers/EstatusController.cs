@@ -12,7 +12,7 @@ namespace MicroondasAPI.Controllers
     {
         [HttpPost]
         [Route("api/MicroondasAPI/agregarEstatus")]
-        public IHttpActionResult agregarRol(Estatus estatus)
+        public IHttpActionResult agregarEstatus(Estatus estatus)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace MicroondasAPI.Controllers
 
         [HttpPut]
         [Route("api/MicroondasAPI/eliminarEstatus")]
-        public IHttpActionResult eliminarRol(string id)
+        public IHttpActionResult eliminarEstatus(string id)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace MicroondasAPI.Controllers
 
         [HttpGet]
         [Route("api/MicroondasAPI/consultaEstatus")]
-        public IHttpActionResult consultaRol()
+        public IHttpActionResult consultaEstatus()
         {
             try
             {
@@ -107,7 +107,7 @@ namespace MicroondasAPI.Controllers
 
         [HttpPut]
         [Route("api/MicroondasAPI/modificarEstatus")]
-        public IHttpActionResult modificarColonia(Estatus estatus)
+        public IHttpActionResult modificarEstatus(Estatus estatus)
         {
             try
             {

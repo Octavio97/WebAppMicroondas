@@ -76,6 +76,7 @@
     <EntitySetMapping Name="Paquete">
       <EntityTypeMapping TypeName="MicroondasModel.Paquete">
         <MappingFragment StoreEntitySet="Paquete">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="activo" ColumnName="activo" />

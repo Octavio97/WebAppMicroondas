@@ -31,7 +31,8 @@ namespace MicroondasAPI.Controllers
                         idPaquete = Guid.NewGuid(),
                         nombre = paquete.nombre,
                         precio = paquete.precio,
-                        activo = paquete.activo
+                        activo = paquete.activo,
+                        descripcion = paquete.descripcion
                     };
 
                     // guardamos los datos
@@ -95,7 +96,8 @@ namespace MicroondasAPI.Controllers
                     idPaquete = s.idPaquete,
                     nombre = s.nombre,
                     precio = s.precio,
-                    activo = s.activo
+                    activo = s.activo,
+                    descripcion = s.descripcion
                 });
 
                 // Devolvemos los datos
@@ -126,6 +128,7 @@ namespace MicroondasAPI.Controllers
                     accion.nombre = paquete.nombre;
                     accion.precio = paquete.precio;
                     accion.activo = paquete.activo;
+                    accion.descripcion = paquete.descripcion;
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();

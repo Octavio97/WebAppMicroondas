@@ -86,8 +86,8 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/MicroondasAPI/consultaPaquete")]
-        public IHttpActionResult consultaPaquete()
+        [Route("api/MicroondasAPI/consultaContrato")]
+        public IHttpActionResult consultaContrato()
         {
             try
             {
@@ -118,8 +118,8 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/MicroondasAPI/modificarPaquete")]
-        public IHttpActionResult modificarPaquete(Contrato contrato)
+        [Route("api/MicroondasAPI/modificarContrato")]
+        public IHttpActionResult modificarContrato(Contrato contrato)
         {
             try
             {

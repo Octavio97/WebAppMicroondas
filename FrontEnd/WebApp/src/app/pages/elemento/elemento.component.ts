@@ -24,12 +24,14 @@ import { ContratoService } from '../../services/contrato.service';
 import { EquipoService } from '../../services/equipo.service';
 import { PaqueteService } from '../../services/paquete.service';
 import { PropiedadService } from '../../services/propiedad.service';
+import { EstatusService } from '../../services/estatus.service';
 
 @Component({
   selector: 'app-elemento',
   templateUrl: './elemento.component.html'
 })
 export class ElementoComponent implements OnInit, AfterViewInit {
+  // id del navegador
   id;
   id2;
 
@@ -38,6 +40,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   i2 = 'Seleccionar ciudad...';
   i3 = 'Seleccionar código postal...';
   i4 = 'Seleccionar colonia';
+  i5 = 'Seleccionar rol...';
 
   // Arreglos para CRUD
   rol = new Rol();
@@ -56,55 +59,36 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   // arreglos para los dropbox
   e: Estado[];
   c: Ciudad[];
+  cp: CodigoPostal[];
+  co: Colonia[];
+  r: Rol[];
 
   constructor(
     private coloniaS: ColoniaService,
     private contratoS: ContratoService,
     private equipoS: EquipoService,
     private paqueteS: PaqueteService,
-    propiedadS: PropiedadService,
+    private propiedadS: PropiedadService,
     private rolS: RolService,
     private estadoS: EstadoService,
     private ciudadS: CiudadService,
     private usuarioS: UsuarioService,
     private codigoS: CodigopostalService,
+    private estatusS: EstatusService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
-    if (this.id === 'Ciudad') {
+    if (this.id === 'Ciudad' || this.id === 'Código postal' || this.id === 'Colonia' || this.id === 'Usuario') {
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
       });
     }
-    else if (this.id === 'Código postal') {
-      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-        this.e = resp;
+    if (this.id === 'Usuario') {
+      this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
+        this.r = resp;
       });
-    }
-    else if (this.id === 'Colonia') {
-      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-        this.e = resp;
-      });
-    }
-    else if (this.id === 'Contrato') {
-    }
-    else if (this.id === 'Equipo') {
-    }
-    else if (this.id === 'Estado') {
-    }
-    else if (this.id === 'Estatus') {
-    }
-    else if (this.id === 'Paquete') {
-    }
-    else if (this.id === 'PaqueteEquipo') {
-    }
-    else if (this.id === 'Propiedad') {
-    }
-    else if (this.id === 'Rol') {
-    }
-    else if (this.id === 'Usuario') {
     }
   }
 
@@ -112,7 +96,11 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.id2 = this.route.snapshot.paramMap.get('id2');
 
-    // Definimos la accion ya sea para agregar o modificar
+    if (this.id === 'Seleccione tabla...') {
+      this.router.navigate(['/inicio']);
+    }
+    else {
+      // Definimos la accion ya sea para agregar o modificar
     if (this.id2 === 'new') { // si es nuevo
       // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
       this.rol.activo = false;
@@ -163,6 +151,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         this.usuario.idUsuario = this.id2;
       }
     }
+    }
   }
 
   // Metodo para dar altas y modificaciones
@@ -211,6 +200,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     text: 'La ciudad fue actualizada con exito',
                     icon: 'success'
                   });
+                  this.router.navigate(['/inicio']);
                 }
                 else {
                   Swal.fire({
@@ -229,6 +219,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     text: 'La ciudad fue guardada con exito',
                     icon: 'success'
                   });
+                  this.router.navigate(['/inicio']);
                 }
                 else {
                   Swal.fire({
@@ -253,6 +244,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     text: 'El código postal fue actualizada con exito',
                     icon: 'success'
                   });
+                  this.router.navigate(['/inicio']);
                 }
                 else {
                   Swal.fire({
@@ -271,6 +263,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     text: 'El código postal fue guardada con exito',
                     icon: 'success'
                   });
+                  this.router.navigate(['/inicio']);
                 }
                 else {
                   Swal.fire({
@@ -292,22 +285,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                       text: 'La colonia fue actualizada con exito',
                       icon: 'success'
                     });
-                  }
-                  else {
-                    Swal.fire({
-                      title: 'Error',
-                      text: 'Hubo un error corrige tus datos',
-                      icon: 'error'
-                    });
-                  }
-                }
-                else {
-                  if (resp === true) {
-                    Swal.fire({
-                      title: 'Exito',
-                      text: 'La colonia fue guardada con exito',
-                      icon: 'success'
-                    });
+                    this.router.navigate(['/inicio']);
                   }
                   else {
                     Swal.fire({
@@ -320,68 +298,338 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-
+              this.coloniaS.altaColonia(this.colonia).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'La colonia fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Contrato') {
             if (this.contrato.idContrato) {
-
+              this.contratoS.modificarContrato(this.contrato).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El contrato fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
             else {
-
+              this.contratoS.altaContrato(this.contrato).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El contrato fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Equipo') {
             if (this.equipo.idEquipo) {
-
+              this.equipoS.modificarEquipo(this.equipo).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El equipo fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
             else {
-
+              this.equipoS.altaEquipo(this.equipo).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El equipo fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                } else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Estado') {
             if (this.estado.idEstado) {
-
+              this.estadoS.modificarEstado(this.estado).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El estado fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                } else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
             else {
-
+              this.estadoS.altaEstado(this.estado).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El estado fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Estatus') {
             if (this.estatus.idEstatus) {
-
+              this.estatusS.modificarEstatus(this.estatus).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El estatus fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             } else {
-
+              this.estatusS.altaEstatus(this.estatus).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El estatus fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Paquete') {
             if (this.paquete.idPaquete) {
-
-            } else {
-
+              this.paqueteS.modificarPaquete(this.paquete).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El paquete fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+            else {
+              this.paqueteS.altaPaquete(this.paquete).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El paquete fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'PaqueteEquipo') {}
           else if (this.id === 'Propiedad') {
             if (this.propiedad.idPropiedad) {
-
-            } else {
-
+              this.propiedadS.modificarPropiedad(this.propiedad).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'La propiedad fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+            else {
+              this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'La propiedad fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Rol') {
             if (this.rol.idRol) {
-
+              this.rolS.modificarRol(this.rol).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El rol fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
             else {
-
+              this.rolS.altaRol(this.rol).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El rol fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Usuario') {
             if (this.usuario.idUsuario) {
-
+              this.usuarioS.modificarUsuario(this.usuario).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El usuario fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                } else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             } else {
-
+              this.usuarioS.altaUsuario(this.usuario).subscribe( resp => {
+                if (resp === true) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El usuario fue guardada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                } else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error corrige tus datos',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
         }
@@ -389,43 +637,40 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // Metodo para cambiar valores del combobox
-  cambio(y, id?) {
-    if (this.id === 'Código postal') {
-      if (id === undefined) {
-        this.i2 = y;
-        this.codigo.idCiudad = id;
-      }
-      else {
-        this.i1 = y;
-        this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
-          this.c = resp;
-        });
-      }
-    }
-    else if (this.id === 'Ciudad') {
-      this.i1 = y;
-      this.ciudad.idEstado = id;
-    }
-    else if (this.id === 'Colonia') {
-    }
-    else if (this.id === 'Contrato') {
-    }
-    else if (this.id === 'Equipo') {
-    }
-    else if (this.id === 'Estado') {
-    }
-    else if (this.id === 'Estatus') {
-    }
-    else if (this.id === 'Paquete') {
-    }
-    else if (this.id === 'PaqueteEquipo') {
-    }
-    else if (this.id === 'Propiedad') {
-    }
-    else if (this.id === 'Rol') {
-    }
-    else if (this.id === 'Usuario') {
-    }
+  // Metodos para cambiar valores del combobox
+  cambio1(y, id?) {
+    this.i1 = y;
+    this.usuario.idEstado = y;
+    this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
+      this.c = resp;
+    });
+  }
+
+  cambio2(y, id?) {
+    this.i2 = y;
+    this.codigo.idCiudad = id;
+    this.usuario.idCiudad = y;
+    this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
+      this.cp = resp;
+    });
+  }
+
+  cambio3(y, id?) {
+    this.i3 = y;
+    this.colonia.idCP = id;
+    this.usuario.idCP = y;
+    this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
+      this.co = resp;
+    });
+  }
+
+  cambio4(y, id?) {
+    this.i4 = y;
+    this.usuario.idColonia = y;
+  }
+
+  cambio5(y, id?) {
+    this.i5 = y;
+    this.usuario.idRol = id;
   }
 }

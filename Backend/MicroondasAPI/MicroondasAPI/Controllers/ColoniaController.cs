@@ -142,5 +142,28 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaCo")]
+        public IHttpActionResult consultaUnicaCo(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Colonia.Where(w => w.idCP == i).ToList();
+
+                var resultado = accion.Select(s => new {
+                    idColonia = s.idColonia,
+                    colonia1 = s.colonia1
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace MicroondasAPI.Controllers
     public class UsuarioController : ApiController
     {
         [HttpPost]
-        [Route("api/MicroondasAPI/altaUsuario")]
-        public IHttpActionResult altaUsuario(Usuario usuario)
+        [Route("api/MicroondasAPI/agregarUsuario")]
+        public IHttpActionResult agregarUsuarios(Usuario usuario)
         {
             try
             {

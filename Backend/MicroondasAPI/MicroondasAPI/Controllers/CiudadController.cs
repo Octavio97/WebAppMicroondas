@@ -136,20 +136,27 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/MicroondasAPI/consultaUnica")]
-        public IHttpActionResult consultaUnica(string id)
+        [Route("api/MicroondasAPI/consultaUnicaCi")]
+        public IHttpActionResult consultaUnicaCi(string id)
         {
-            Guid i = Guid.Parse(id.ToString());
-
-            var accion = SessionController.getInstance().Ciudad.Where(w => w.idEstado == i).ToList();
-
-            var resultado = accion.Select(s => new
+            try
             {
-                idCiudad = s.idCiudad,
-                Ciudad1 = s.Ciudad1
-            });
+                Guid i = Guid.Parse(id.ToString());
 
-            return Ok(resultado);
+                var accion = SessionController.getInstance().Ciudad.Where(w => w.idEstado == i).ToList();
+
+                var resultado = accion.Select(s => new
+                {
+                    idCiudad = s.idCiudad,
+                    Ciudad1 = s.Ciudad1
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MicroondasAPI.Controllers
     {
         [HttpPost]
         [Route("api/MicroondasAPI/agregarPaqueteEquipo")]
-        public IHttpActionResult agregarCP(PaqueteEquipo pe)
+        public IHttpActionResult agregarPaqueteEquipo(PaqueteEquipo pe)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
 
         [HttpPut]
         [Route("api/MicroondasAPI/eliminarPaqueteEquipo")]
-        public IHttpActionResult eliminarCP(string id)
+        public IHttpActionResult eliminarPaqueteEquipo(string id)
         {
             try
             {
