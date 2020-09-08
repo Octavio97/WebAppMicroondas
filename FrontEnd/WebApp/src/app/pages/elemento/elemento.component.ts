@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { RolService } from '../../services/rol.service';
 import Swal from 'sweetalert2';
 import { Rol } from 'src/app/models/rol.model';
@@ -34,6 +34,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   // id del navegador
   id;
   id2;
+  invalid = false;
 
   // Objetos para los valores deldropbox a visualizar
   i1 = 'Seleccionar estado...';
@@ -164,6 +165,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         icon: 'error',
         text: 'Verifique sus datos'
       });
+      this.invalid = true;
       return;
     }
     else{
@@ -640,7 +642,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   // Metodos para cambiar valores del combobox
   cambio1(y, id?) {
     this.i1 = y;
-    this.usuario.idEstado = y;
+    this.usuario.idEstado = id;
     this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
       this.c = resp;
     });
@@ -649,7 +651,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   cambio2(y, id?) {
     this.i2 = y;
     this.codigo.idCiudad = id;
-    this.usuario.idCiudad = y;
+    this.usuario.idCiudad = id;
     this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
       this.cp = resp;
     });
@@ -658,7 +660,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   cambio3(y, id?) {
     this.i3 = y;
     this.colonia.idCP = id;
-    this.usuario.idCP = y;
+    this.usuario.idCP = id;
     this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
       this.co = resp;
     });
@@ -666,7 +668,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   cambio4(y, id?) {
     this.i4 = y;
-    this.usuario.idColonia = y;
+    this.usuario.idColonia = id;
   }
 
   cambio5(y, id?) {

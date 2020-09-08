@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 #mapid { height: 600px; width: 600px;}
+
+input.ng-dirty.ng-invalid {
+    border-color: #DC3545;
+}
