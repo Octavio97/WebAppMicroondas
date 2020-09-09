@@ -60,6 +60,18 @@ export class AdminComponent implements OnInit {
     private propiedadS: PropiedadService) { }
 
   ngOnInit(): void {
+    this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
+      if (resp === null) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error inesperado',
+          icon: 'error'
+        });
+      }
+      else {
+        this.usuario = resp;
+      }
+    });
   }
 
   // Metodo para cargar las tablas a elegir

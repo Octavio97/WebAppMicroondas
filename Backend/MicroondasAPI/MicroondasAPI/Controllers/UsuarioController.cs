@@ -20,7 +20,7 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // comprobamos si el usuario existe por medio del correoE
-                if (SessionController.getInstance().Usuario.Where(w => w.correoE == usuario.correoE) == null)
+                if (SessionController.getInstance().Usuario.Where(w => w.correoE == usuario.correoE).FirstOrDefault() == null)
                 {
                     // Guardamos los datos para convertirlos a datos para la clase Usuario
                     Usuario tabla = new Usuario()
@@ -35,6 +35,7 @@ namespace MicroondasAPI.Controllers
                         numExt = usuario.numExt,
                         idEstado = usuario.idEstado,
                         idCiudad = usuario.idCiudad,
+                        idColonia = usuario.idColonia,
                         idCP = usuario.idCP,
                         idRol = usuario.idRol,
                         Activo = usuario.Activo,
@@ -103,10 +104,11 @@ namespace MicroondasAPI.Controllers
                     calle = s.calle,
                     numInt = s.numInt,
                     numExt = s.numExt,
-                    idEstado= s.idEstado,
-                    idCiudad = s.idCiudad,
-                    idCP = s.idCP,
-                    idRol = s.idRol,
+                    idEstado= s.Estado.estado1,
+                    idCiudad = s.Ciudad.Ciudad1,
+                    idCP = s.CodigoPostal.codigo,
+                    idColonia = s.Colonia.colonia1,
+                    idRol = s.Rol.rol1,
                     Activo = s.Activo,
                     contrasena = s.contrasena
                 });
