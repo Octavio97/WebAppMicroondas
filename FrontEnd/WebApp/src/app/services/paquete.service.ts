@@ -27,7 +27,7 @@ export class PaqueteService {
     return this.http.post( this.url + 'modificarPaquete', paquete );
   }
 
-  consultaUnica(id: string) {
-    return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+  consultaUnica() {
+    return this.http.get( this.url + 'consultaUnicaPaq' );
   }
 }

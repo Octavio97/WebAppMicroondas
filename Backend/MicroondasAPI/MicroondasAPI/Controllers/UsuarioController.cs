@@ -38,7 +38,7 @@ namespace MicroondasAPI.Controllers
                         idColonia = usuario.idColonia,
                         idCP = usuario.idCP,
                         idRol = usuario.idRol,
-                        Activo = usuario.Activo,
+                        activo = usuario.activo,
                         contrasena = usuario.contrasena
                     };
                     // Agregamos el registro
@@ -70,7 +70,7 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().Usuario.Where(w => w.idUsuario == guid).FirstOrDefault();
 
                 // Deshabilitamos al usuario
-                accion.Activo = false;
+                accion.activo = false;
 
                 // Guardamos los cambios
                 SessionController.getInstance().SaveChanges();
@@ -105,11 +105,11 @@ namespace MicroondasAPI.Controllers
                     numInt = s.numInt,
                     numExt = s.numExt,
                     idEstado= s.Estado.estado1,
-                    idCiudad = s.Ciudad.Ciudad1,
+                    idCiudad = s.Ciudad.ciudad1,
                     idCP = s.CodigoPostal.codigo,
                     idColonia = s.Colonia.colonia1,
                     idRol = s.Rol.rol1,
-                    Activo = s.Activo,
+                    activo = s.activo,
                     contrasena = s.contrasena
                 });
 
@@ -153,7 +153,7 @@ namespace MicroondasAPI.Controllers
                     consulta.idColonia = usuario.idColonia;
                     consulta.idCP = usuario.idCP;
                     consulta.idRol = usuario.idRol;
-                    consulta.Activo = usuario.Activo;
+                    consulta.activo = usuario.activo;
                     consulta.contrasena = usuario.contrasena;
 
                     // ejecutan los cambios

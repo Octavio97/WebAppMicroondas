@@ -145,5 +145,30 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaPaq")]
+        public IHttpActionResult consultaUnicaPaq()
+        {
+            try
+            {
+                // buscamos los paquetes activos
+                var accion = SessionController.getInstance().Paquete.Where(w => w.activo == true).ToList();
+
+                // estructuramos la informacion
+                var resultado = accion.Select(s => new
+                {
+                    idPaquete = s.idPaquete,
+                    nombre = s.nombre
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

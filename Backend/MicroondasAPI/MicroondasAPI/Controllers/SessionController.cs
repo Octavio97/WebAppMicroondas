@@ -35,7 +35,7 @@ namespace MicroondasAPI.Controllers
                     cp = consulta.CodigoPostal,
                     rol = consulta.Rol,
                     contrato = consulta.Contrato,
-                    activo = consulta.Activo,
+                    activo = consulta.activo,
                     contrasena = consulta.contrasena
                 };
 

@@ -38,6 +38,7 @@ CREATE TABLE Paquete (
     idPaquete UNIQUEIDENTIFIER PRIMARY KEY,
     nombre VARCHAR(30),
     precio MONEY,
+    descripcion VARCHAR(max),
     activo BIT
 );
 

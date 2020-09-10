@@ -34,7 +34,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   // id del navegador
   id;
   id2;
-  invalid = false;
 
   // Objetos para los valores deldropbox a visualizar
   i1 = 'Seleccionar estado...';
@@ -49,7 +48,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   estatus = new Estatus();
   estado = new Estado();
   ciudad = new Ciudad();
-  codigo = new CodigoPostal();
+  codigoP = new CodigoPostal();
   colonia = new Colonia();
   contrato = new Contrato();
   equipo = new Equipo();
@@ -59,6 +58,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   // arreglos para los dropbox
   e: Estado[];
+  u: Usuario[];
+  p: Paquete[];
   c: Ciudad[];
   cp: CodigoPostal[];
   co: Colonia[];
@@ -91,6 +92,13 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         this.r = resp;
       });
     }
+    if (this.id === 'Contrato') {
+      this.paqueteS.consultaUnica().subscribe( (resp: Paquete[]) => {
+        if (resp !== null) {
+          this.p = resp;
+        }
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -102,14 +110,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     }
     else {
       // Definimos la accion ya sea para agregar o modificar
-    if (this.id2 === 'new') { // si es nuevo
+    if (this.id2 === 'new') { // si es nuevo (LO COMENTE)
       // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
       this.rol.activo = false;
       this.estado.activo = false;
       this.usuario.activo = false;
       this.estatus.activo = false;
       this.ciudad.activo = false;
-      this.codigo.activo = false;
+      this.codigoP.activo = false;
       this.colonia.activo = false;
       this.contrato.activo = false;
       this.equipo.activo = false;
@@ -120,7 +128,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         this.ciudad.idCiudad = this.id2;
       }
       else if (this.id === 'Código postal') {
-        this.codigo.idCP = this.id2;
+        this.codigoP.idCP = this.id2;
       }
       else if (this.id === 'Colonia') {
         this.colonia.idColonia = this.id2;
@@ -165,7 +173,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         icon: 'error',
         text: 'Verifique sus datos'
       });
-      this.invalid = true;
       return;
     }
     else{
@@ -238,8 +245,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             this.i2 === 'Seleccionar ciudad...') {
               return;
             }
-            if (this.codigo.idCP) {
-              this.codigoS.modificarCodigo(this.codigo).subscribe( resp => {
+            if (this.codigoP.idCP) {
+              this.codigoS.modificarCodigo(this.codigoP).subscribe( resp => {
                 if (resp === true) {
                   Swal.fire({
                     title: 'Exito',
@@ -258,7 +265,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-              this.codigoS.altaCodigo(this.codigo).subscribe( resp => {
+              this.codigoS.altaCodigo(this.codigoP).subscribe( resp => {
                 if (resp === true) {
                   Swal.fire({
                     title: 'Exito',
@@ -650,7 +657,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   cambio2(y, id?) {
     this.i2 = y;
-    this.codigo.idCiudad = id;
+    this.codigoP.idCiudad = id;
     this.usuario.idCiudad = id;
     this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
       this.cp = resp;
@@ -674,5 +681,10 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   cambio5(y, id?) {
     this.i5 = y;
     this.usuario.idRol = id;
+  }
+
+  prueba(i: string) {
+    this.contrato.idPaquete = i;
+    console.log(this.contrato.idPaquete);
   }
 }

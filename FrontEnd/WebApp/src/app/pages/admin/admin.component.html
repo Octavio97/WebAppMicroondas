@@ -70,8 +70,9 @@
                 <td>{{ item.contrasena }}</td>
                 <td>{{ item.calle }} {{ item.numInt }} {{ item.numExt }}, CP: {{item.idCP}}, {{item.idColonia}}, {{ item.idCiudad }}, {{ item.idEstado }}</td>
                 <td>{{ item.idRol }}</td>
-                <td>{{ item.activo }}</td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -91,7 +92,8 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idRol }}</td>
                 <td>{{ item.rol1 }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light" [routerLink]="['/inicio', seleccion, item.idRol]"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -112,7 +114,8 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idEstatus }}</td>
                 <td>{{ item.estatus1 }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -133,7 +136,8 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idEstado }}</td>
                 <td>{{ item.estado1 }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -156,7 +160,8 @@
                 <td>{{ item.idCiudad }}</td>
                 <td>{{ item.Ciudad1 }}</td>
                 <td>{{ item.idEstado }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -179,7 +184,8 @@
                 <td>{{ item.idCP }}</td>
                 <td>{{ item.codigo }}</td>
                 <td>{{ item.idCiudad }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -204,7 +210,8 @@
                 <td>{{ item.nombre }}</td>
                 <td>{{ item.descripcion }}</td>
                 <td>${{ item.precio }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -225,7 +232,8 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idEquipo }}</td>
                 <td>{{ item.equipo1 }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -250,7 +258,8 @@
                 <td>{{ item.idColonia }}</td>
                 <td>{{ item.colonia1 }}</td>
                 <td>{{ item.idCP }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>
@@ -300,7 +309,8 @@
                 <td>{{ item.fechaFinal }}</td>
                 <td>{{ item.idPaquete }}</td>
                 <td>{{ item.idEstatus }}</td>
-                <td>{{ item.activo }}</td>
+                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
             </tr>
         </tbody>

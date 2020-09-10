@@ -20,7 +20,7 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // hacemos consulta si ya existe esa ciudad
-                var accion = SessionController.getInstance().Ciudad.Where(w => w.Ciudad1 == ciudad.Ciudad1).FirstOrDefault();
+                var accion = SessionController.getInstance().Ciudad.Where(w => w.ciudad1 == ciudad.ciudad1).FirstOrDefault();
 
                 // si no existe registro
                 if (accion == null)
@@ -28,7 +28,7 @@ namespace MicroondasAPI.Controllers
                     Ciudad datos = new Ciudad()
                     {
                         idCiudad = Guid.NewGuid(),
-                        Ciudad1 = ciudad.Ciudad1,
+                        ciudad1 = ciudad.ciudad1,
                         idEstado = ciudad.idEstado,
                         activo = ciudad.activo
                     };
@@ -90,7 +90,7 @@ namespace MicroondasAPI.Controllers
             var resultado = accion.Select(s => new
             {
                 idCiudad = s.idCiudad,
-                Ciudad1 = s.Ciudad1,
+                Ciudad1 = s.ciudad1,
                 idEstado = s.Estado.estado1,
                 activo = s.activo
             });
@@ -109,13 +109,13 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // hacemos consulta si ya existe esa ciudad
-                var accion = SessionController.getInstance().Ciudad.Where(w => w.Ciudad1 == ciudad.Ciudad1).FirstOrDefault();
+                var accion = SessionController.getInstance().Ciudad.Where(w => w.ciudad1 == ciudad.ciudad1).FirstOrDefault();
 
                 // si no existe registro
                 if (accion == null)
                 {
                     // Hacemos los cambios
-                    accion.Ciudad1 = ciudad.Ciudad1;
+                    accion.ciudad1 = ciudad.ciudad1;
                     accion.idEstado = ciudad.idEstado;
                     accion.activo = ciudad.activo;
 
@@ -148,7 +148,7 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idCiudad = s.idCiudad,
-                    Ciudad1 = s.Ciudad1
+                    Ciudad1 = s.ciudad1
                 });
 
                 return Ok(resultado);

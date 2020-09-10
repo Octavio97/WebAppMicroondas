@@ -29,7 +29,7 @@ namespace MicroondasAPI.Controllers
                     Contrato datos = new Contrato()
                     {
                         idContrato = Guid.NewGuid(),
-                        Pdf = contrato.Pdf,
+                        pdf = contrato.pdf,
                         archivo = contrato.archivo,
                         fechaInicio = contrato.fechaInicio,
                         fechaFinal = contrato.fechaFinal,
@@ -98,7 +98,7 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idContrato = s.idContrato,
-                    pdf = s.Pdf,
+                    pdf = s.pdf,
                     archivo = s.archivo,
                     fechaInicio = s.fechaInicio,
                     fechaFinal = s.fechaFinal,
@@ -134,7 +134,7 @@ namespace MicroondasAPI.Controllers
                 {
                     // Hacemos los cambios
                     accion.idContrato = contrato.idContrato;
-                    accion.Pdf = contrato.Pdf;
+                    accion.pdf = contrato.pdf;
                     accion.archivo = contrato.archivo;
                     accion.fechaInicio = contrato.fechaInicio;
                     accion.fechaFinal = contrato.fechaFinal;

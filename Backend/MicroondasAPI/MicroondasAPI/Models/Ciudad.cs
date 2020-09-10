@@ -22,7 +22,7 @@ namespace MicroondasAPI.Models
         }
     
         public System.Guid idCiudad { get; set; }
-        public string Ciudad1 { get; set; }
+        public string ciudad1 { get; set; }
         public Nullable<System.Guid> idEstado { get; set; }
         public Nullable<bool> activo { get; set; }
     

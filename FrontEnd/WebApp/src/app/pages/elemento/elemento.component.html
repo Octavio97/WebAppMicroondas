@@ -9,7 +9,7 @@
                     title="hola esta mal xd" pattern="[A-Za-z ]*">
                 <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
-                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo ingrese letras</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
@@ -17,7 +17,7 @@
                     maxlength="50" pattern="[A-Za-z ]*" title="hola esta mal xd">
                 <div *ngIf="apellido.errors?.required" class="invalid-feedback">Ingrese sus apellidos</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
-                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo ingrese letras</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
@@ -44,7 +44,7 @@
                 <label for="calle">Calle:</label>
                 <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z ]*" [(ngModel)]="this.usuario.calle" #calle="ngModel">
                 <div *ngIf="calle.errors?.required" class="invalid-feedback">Solo ingresa tu calle</div>
-                <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo ingrese letras</div>
+                <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
             </div>
             <div class="form-group">
                 <label for="int">Num.Int:</label>
@@ -111,43 +111,48 @@
                 </div><br>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch1" [checked]="invalid" (change)="this.invalid = !this.invalid">
+                <input type="checkbox" class="custom-control-input" name="activo" id="customSwitch1" [(ngModel)]="this.usuario.activo">
                 <label class="custom-control-label" for="customSwitch1">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Rol -->
     <div *ngIf="this.id === 'Rol'">
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
-                <label for="rol">Rol: </label>
-                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol" name="rol" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" required #rol1="ngModel" pattern="[A-Za-z ]*">
-                <div *ngIf="rol1.errors?.require" class="invalid-feedback">Ingrese rol</div>
-                <div *ngIf="rol1.errors?.pattern" class="invalid-feedback">No ingreses numeros</div>
+                <label for="rol1">Rol: </label>
+                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol1" name="rol1" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" #rol1="ngModel" required pattern="[A-Za-z ]*" maxlength="30">
+                <div *ngIf="rol1.errors?.required" class="invalid-feedback">Ingrese rol</div>
+                <div *ngIf="rol1.errors?.pattern" class="invalid-feedback">No ingrese numeros</div>
+                <div *ngIf="rol1.errors?.maxlength" class="invalid-feedback">No debe pasar de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch2" name="activo" [(ngModel)]="this.rol.activo">
                 <label class="custom-control-label" for="customSwitch2">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Estatus -->
     <div *ngIf="this.id === 'Estatus'">
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
-                <label for="estatus">Estatus: </label>
-                <input class="form-control" type="text" id="estatus" name="estatus" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus1" required>
+                <label for="estatus1">Estatus: </label>
+                <input [ngClass]="{ 'is-invalid' : estatus1.invalid && (estatus1.dirty || estatus1.touched) }" #estatus1="ngModel" class="form-control" type="text" id="estatus" name="estatus1" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus1" required
+                    maxlength="30" pattern="[A-Za-z ]*">
+                <div *ngIf="estatus1.errors?.required" class="invalid-feedback">Ingrese estatus</div>
+                <div *ngIf="estatus1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="estatus1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch3" name="activo" [(ngModel)]="this.estatus.activo">
                 <label class="custom-control-label" for="customSwitch3">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Estado -->
@@ -155,14 +160,18 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="estado">Estado: </label>
-                <input class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado1" required>
+                <input [ngClass]="{ 'is-invalid' : estado1.invalid && (estado1.dirty || estado1.touched) }" class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado1" #estado1="ngModel" required pattern="[A-Za-z ]*"
+                    maxlength="30">
+                <div *ngIf="estado1.errors?.required" class="invalid-feedback">Ingrese estado</div>
+                <div *ngIf="estado1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="estado1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch4" name="activo" [(ngModel)]="this.estado.activo">
                 <label class="custom-control-label" for="customSwitch4">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Ciudad -->
@@ -179,14 +188,18 @@
             </div>
             <div class="form-group">
                 <label for="ciudad">Ciudad: </label>
-                <input class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.Ciudad1" required>
+                <input [ngClass]="{ 'is-invalid' : ciudad1.invalid && (ciudad1.dirty || ciudad1.touched) }" class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.Ciudad1" #ciudad1="ngModel" required pattern="[A-Za-z ]*"
+                    maxlength="50">
+                <div *ngIf="ciudad1.errors?.required" class="invalid-feedback">Ingrese ciudad</div>
+                <div *ngIf="ciudad1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="ciudad1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch5" name="activo" [(ngModel)]="this.ciudad.activo">
                 <label class="custom-control-label" for="customSwitch5">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Codigo Postal -->
@@ -213,37 +226,49 @@
             </div><br>
             <div class="form-group">
                 <label for="codigo">Código postal: </label>
-                <input class="form-control" type="text" id="codigo" name="codigo" placeholder="Ingresar código postal" [(ngModel)]="this.codigo.codigo" required>
+                <input [ngClass]="{ 'is-invalid' : codigo.invalid && (codigo.dirty || codigo.touched) }" class="form-control" type="text" id="codigo" name="codigo" placeholder="Ingresar código postal" [(ngModel)]="this.codigoP.codigo" #codigo="ngModel" required pattern="[0-9]"
+                    maxlength="5">
+                <div *ngIf="codigo.errors?.required" class="invalid-feedback">Ingrese código postal</div>
+                <div *ngIf="codigo.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
+                <div *ngIf="codigo.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch6" name="activo" [(ngModel)]="this.codigo.activo">
+                <input type="checkbox" class="custom-control-input" id="customSwitch6" name="activo" [(ngModel)]="this.codigoP.activo">
                 <label class="custom-control-label" for="customSwitch6">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Paquete -->
     <div *ngIf="this.id === 'Paquete'">
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
-                <label for="paquete">Nombre del paquete: </label>
-                <input class="form-control" type="text" name="paquete" id="paquete" [(ngModel)]="this.paquete.nombre" placeholder="Ingrese nombre del paquete" required>
+                <label for="nombre">Nombre del paquete: </label>
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched ) }" class="form-control" type="text" name="nombre" id="nombre" [(ngModel)]="this.paquete.nombre" #nombre="ngModel" placeholder="Ingrese nombre del paquete" required
+                    pattern="[A-Z a-z ]*" maxlength="30">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese paquete</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="nombre.errors?.maxlength">No debes ingresar mas de 30 caracteres</div>
             </div>
             <div class="form-group">
                 <label for="precio">Precio: </label>
-                <input class="form-control" type="number" name="precio" id="precio" [(ngModel)]="this.paquete.precio" placeholder="Ingrese precio" required>
+                <input [ngClass]="{ 'is-invalid' : precio.invalid && (precio.dirty || precio.touched) }" class="form-control" type="number" name="precio" id="precio" [(ngModel)]="this.paquete.precio" #precio="ngModel" placeholder="Ingrese precio" require>
+                <div *ngIf="precio.errors?.required" class="invalid-feedback">Ingrese precio</div>
+                <div *ngIf="precio.errors?.pattern" class="invalid-feedback">Ingrese solo numeros</div>
             </div>
             <div class="form-group">
                 <label for="desc">Descripción: </label>
-                <textarea class="form-control" aria-label="With textarea" id="desc" name="desc" [(ngModel)]="this.paquete.descripcion" placeholder="Ingresar descripción" required></textarea>
+                <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="desc" name="desc" [(ngModel)]="this.paquete.descripcion" #descripcion="ngModel" placeholder="Ingresar descripción"
+                    required maxlength="50"></textarea>
+                <div *ngIf="descripcion.errors?.required" class="invalid-feedback">Ingrese descripción</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch7" name="activo" [(ngModel)]="this.paquete.activo">
                 <label class="custom-control-label" for="customSwitch7">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Equipo -->
@@ -251,14 +276,18 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="equipo">Equipo: </label>
-                <input class="form-control" type="text" name="equipo" id="equipo" [(ngModel)]="this.equipo.equipo1" placeholder="Ingrese equipo" required>
+                <input [ngClass]="{ 'is-invalid' : equipo1.invalid && (equipo1.dirty || equipo1.touched)}" class="form-control" type="text" name="equipo" id="equipo" [(ngModel)]="this.equipo.equipo1" #equipo1="ngModel" placeholder="Ingrese equipo" required pattern="[A-Za-z ]*"
+                    maxlength="30">
+                <div *ngIf="equipo1.errors?.required" class="invalid-feedback">Ingrese equipo</div>
+                <div *ngIf="equipo1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="equipo1.errors.maxlength" class="invalid-feedback">No debes ingresar mas de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch8" name="activo" [(ngModel)]="this.equipo.activo">
                 <label class="custom-control-label" for="customSwitch8">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- PaqueteEquipo -->
@@ -296,18 +325,46 @@
             </div><br>
             <div class="form-group">
                 <label for="colonia">Colonia: </label>
-                <input class="form-control" type="text" id="colonia" name="colonia" placeholder="Ingresar código postal" [(ngModel)]="this.colonia.colonia1" required>
+                <input [ngClass]="{ 'is-invalid' :  colonia1.invalid && (colonia1.dirty || colonia1.touched)}" class="form-control" type="text" id="colonia" name="colonia" placeholder="Ingresar código postal" [(ngModel)]="this.colonia.colonia1" #colonia1="ngModel" required
+                    pattern="[A-Za-z ]*" max="50">
+                <div *ngIf="colonia1.errors?.required" class="invalid-feedback">Ingrese colonia</div>
+                <div *ngIf="colonia1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="colonia1.errors?.maxlenght" class="invalid-feedback">No debes de ingresar mas de 50 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="customSwitch10" name="activo" [(ngModel)]="this.codigo.activo">
+                <input type="checkbox" class="custom-control-input" id="customSwitch10" name="activo" [(ngModel)]="this.colonia.activo">
                 <label class="custom-control-label" for="customSwitch10">Activo</label>
             </div>
             <br>
-            <button type="submit" class="btn btn-success w-25"><i class="far fa-save"></i> Aceptar</button>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
     <!-- Propiedad -->
     <div></div>
     <!-- Contrato -->
-    <div *ngIf="this.id === 'Contrato'"></div>
+    <div *ngIf="this.id === 'Contrato'">
+        <form #log=ngForm (submit)="alta(log)">
+            <div class="form-group">
+                <label for="fechaI">Fecha de inicio: </label>
+                <input class="form-control" type="date" id="fechaI" name="fechaI" [(ngModel)]="this.contrato.fechaInicio">
+            </div>
+            <div>
+                <label for="fechaF">Fecha Limite: </label>
+                <input class="form-control" type="date" name="fechaF" id="fechaF" [(ngModel)]="this.contrato.fechaFinal">
+            </div>
+            <div class="form-group">
+                <label for="cliente">Paquete: </label>
+                <select class="form-control" name="cliente" id="cliente">
+                    <option *ngFor="let item of p" [value]="item.idPaquete" (change)="prueba($event)">{{ item.nombre }}</option>
+                </select>
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch12" name="activo" [(ngModel)]="this.contrato.activo">
+                <label class="custom-control-label" for="customSwitch12">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
 </div>
