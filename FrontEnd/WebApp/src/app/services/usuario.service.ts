@@ -26,7 +26,11 @@ export class UsuarioService {
     return this.http.put( this.url + 'modificarUsuario', usuario );
   }
 
- consultaUnica(id: string) {
+  consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+  }
+
+  login(correo: string, contra: string) {
+    return this.http.get( this.url + 'login', { params: { correo, contra } } );
   }
 }

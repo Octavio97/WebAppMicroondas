@@ -29,20 +29,29 @@ namespace MicroondasAPI.Controllers
                     apellido = consulta.apellido,
                     telefono = consulta.telefono,
                     correoE = consulta.correoE,
+                    contrasena = consulta.contrasena,
                     calle = consulta.calle,
                     numInt = consulta.numInt,
                     numExt = consulta.numExt,
-                    cp = consulta.CodigoPostal,
-                    rol = consulta.Rol,
-                    contrato = consulta.Contrato,
+                    idEstado = consulta.idEstado,
+                    idCiudad = consulta.idCiudad,
+                    idColonia = consulta.idColonia,
+                    idCP = consulta.idCP,
+                    idRol = consulta.idRol,
                     activo = consulta.activo,
-                    contrasena = consulta.contrasena
+                    CP = consulta.CodigoPostal,
+                    Colonia = consulta.Colonia,    
+                    Contrato = consulta.Contrato,
+                    Ciudad = consulta.Ciudad,
+                    Estado = consulta.Estado,
+                    Propiedad = consulta.Propiedad,
+                    Rol = consulta.Rol
                 };
 
                 // regresamos el resultado
                 return Ok(resultado);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }

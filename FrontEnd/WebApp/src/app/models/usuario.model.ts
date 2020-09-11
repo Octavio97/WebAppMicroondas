@@ -1,3 +1,11 @@
+import { Contrato } from './contrato.model';
+import { Estado } from './estado.model';
+import { Propiedad } from './propiedad.model';
+import { Rol } from './rol.model';
+import { CodigoPostal } from './codigopostal.model';
+import { Colonia } from './colonia.model';
+import { Ciudad } from './ciudad.model';
+
 export class Usuario {
     idUsuario: string;
     nombre: string;
@@ -14,6 +22,14 @@ export class Usuario {
     idCP: string;
     idRol: string;
     activo: boolean;
+
+    CP: CodigoPostal[];
+    Colonia: Colonia[];
+    Contrato: Contrato[];
+    Ciudad: Ciudad[];
+    Estado: Estado[];
+    Propiedad: Propiedad[];
+    Rol: Rol[];
 
     constructor() {}
 }

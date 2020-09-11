@@ -1,3 +1,6 @@
+import { Contrato } from './contrato.model';
+import { PaqueteEquipo } from './paqueteequipo.model';
+
 export class Paquete {
     idPaquete: string;
     precio: number;
@@ -5,5 +8,7 @@ export class Paquete {
     activo: boolean;
     descripcion: string;
 
+    Contrato: Contrato[];
+    PaqueteEquipo: PaqueteEquipo[];
     constructor(){}
 }
