@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import * as L from 'leaflet';
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-inicio',
@@ -8,6 +9,8 @@ import * as L from 'leaflet';
 })
 export class InicioComponent implements OnInit {
 private mymap: L.Maps;
+usuario: Usuario;
+i = 'Login';
 
   constructor() { }
   title = 'My first AGM project';
@@ -15,6 +18,10 @@ private mymap: L.Maps;
   lng = 7.809007;
 
   ngOnInit(): void {
+    if (localStorage.getItem('currentUser')) {
+      this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+      this.i = this.usuario.nombre;
+    }
     this.mymap = L.map('mapid').setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

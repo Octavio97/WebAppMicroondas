@@ -12,12 +12,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   usuario = new Usuario();
+  i = false;
 
   constructor(private usuarioS: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) {
-      this.router.navigate(['/lista']);
+      this.router.navigate(['/inicio']);
     }
   }
 
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
       });
     }
     else {
+      this.i = true;
       this.usuarioS.login(this.usuario.correoE, this.usuario.contrasena).subscribe( (resp: any) => {
         if (resp === null) {
           Swal.fire({
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('currentUser', JSON.stringify(this.usuario)); // guardamos el usuario que inicio sesion
           localStorage.setItem('accessToken', this.usuario.idUsuario); // guardamos la id del usuario
           // se envia a la pagina principal y el id del usuario para evitar el ingresar por la ruta en el navegador
-          this.router.navigate(['/lista']);
+          this.router.navigate(['/inicio']);
         }
       });
     }

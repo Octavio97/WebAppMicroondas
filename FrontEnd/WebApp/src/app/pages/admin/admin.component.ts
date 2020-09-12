@@ -24,6 +24,7 @@ import { Equipo } from '../../models/equipo.model';
 import { Paquete } from 'src/app/models/paquete.model';
 import { PaqueteEquipo } from '../../models/paqueteequipo.model';
 import { Propiedad } from '../../models/propiedad.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -57,10 +58,15 @@ export class AdminComponent implements OnInit {
     private equipoS: EquipoService,
     private paqueteS: PaqueteService,
     private paqueteEquipoS: PaqueteequipoService,
-    private propiedadS: PropiedadService) { }
+    private propiedadS: PropiedadService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
+    if (!localStorage.getItem('accessToken')) {
+      this.router.navigate(['/']);
+    }
+    else {
+      this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
       if (resp === null) {
         Swal.fire({
           title: 'Error',
@@ -71,7 +77,8 @@ export class AdminComponent implements OnInit {
       else {
         this.usuario = resp;
       }
-    });
+      });
+    }
   }
 
   // Metodo para cargar las tablas a elegir
@@ -231,5 +238,23 @@ export class AdminComponent implements OnInit {
         }
       });
     }
+  }
+
+  logout() {
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Estas seguro de salir?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      cancelButtonColor: '#d33'
+    }).then( (result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/']);
+      }
+    });
   }
 }

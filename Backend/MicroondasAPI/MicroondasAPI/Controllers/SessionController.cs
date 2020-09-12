@@ -39,13 +39,13 @@ namespace MicroondasAPI.Controllers
                     idCP = consulta.idCP,
                     idRol = consulta.idRol,
                     activo = consulta.activo,
-                    CP = consulta.CodigoPostal,
-                    Colonia = consulta.Colonia,    
-                    Contrato = consulta.Contrato,
-                    Ciudad = consulta.Ciudad,
-                    Estado = consulta.Estado,
-                    Propiedad = consulta.Propiedad,
-                    Rol = consulta.Rol
+                    //CP = consulta.CodigoPostal,
+                    //Colonia = consulta.Colonia,    
+                    //Contrato = consulta.Contrato,
+                    //Ciudad = consulta.Ciudad,
+                    //Estado = consulta.Estado,
+                    //Propiedad = consulta.Propiedad,
+                    //Rol = consulta.Rol
                 };
 
                 // regresamos el resultado

@@ -60,55 +60,40 @@
                 <div *ngIf="ext.errors?.required" class="invalid-feedback">Ingrese su número de casa exterior</div>
                 <div *ngIf="ext.errors?.pattern" class="invalid-feedback">Debe ser un numero entre 2 y 5 dígitos</div>
             </div>
+            <label for="estado">Estado: </label><br>
             <div class="form-group">
-                <label for="estado">Estado: </label><br>
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="estado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ this.i1 }}
-                      </button>
-                    <div class="dropdown-menu" aria-labelledby="estado">
-                        <option class="dropdown-item" *ngFor="let item of e" (click)="cambio1(item.estado1, item.idEstado)">{{ item.estado1 }}</option>
-                    </div>
-                </div>
-                <br>
-                <label for="ciudad">Ciudad: </label><br>
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="ciudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ this.i2 }}
-                      </button>
-                    <div class="dropdown-menu" aria-labelledby="ciudad">
-                        <option class="dropdown-item" *ngFor="let item of c" (click)="cambio2(item.Ciudad1, item.idCiudad)">{{ item.Ciudad1 }}</option>
-                    </div>
-                </div><br>
-                <label for="codigo">Código postal: </label><br>
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="codigo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ this.i3 }}
-                      </button>
-                    <div class="dropdown-menu" aria-labelledby="codigo">
-                        <option class="dropdown-item" *ngFor="let item of cp" (click)="cambio3(item.codigo, item.idCP)">{{ item.codigo }}</option>
-                    </div>
-                </div><br>
-                <label for="colonia">Colonia: </label><br>
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="colonia" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ this.i4 }}
-                      </button>
-                    <div class="dropdown-menu" aria-labelledby="colonia">
-                        <option class="dropdown-item" *ngFor="let item of co" (click)="cambio4(item.colonia1, item.idColonia)">{{ item.colonia1 }}</option>
-                    </div>
-                </div><br>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.usuario.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
+            </div>
+            <label for="idciudad">Ciudad: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.usuario.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.Ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
+            </div>
+            <label for="codigo">Código postal: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idcp.invalid && (idcp.dirty || idcp.touched) }" class="form-control" name="idcodigo" id="idcodigo" [(ngModel)]="this.usuario.idCP" (ngModelChange)="cambio3($event)" #idcp="ngModel" required>
+                    <option *ngFor="let item of cp" [ngValue]="item.idCP">{{ item.codigo }}</option>
+                </select>
+                <div *ngIf="idcp.errors?.required" class="invalid-feedback">Seleccione código postal</div>
+            </div>
+            <label for="idcolonia">Colonia: </label>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idcolonia.invalid && (idcolonia.dirty || idcolonia.touched) }" class="form-control" name="idcolonia" id="idcolonia" [ngModel]="this.usuario.idColonia" #idcolonia="ngModel" required>
+                    <option *ngFor="let item of co" [ngValue]="item.idColonia">{{ item.colonia1 }}</option>
+                </select>
+                <div *ngIf="idcolonia.errors?.required" class="invalid-feedback">Seleccione colonia</div>
             </div>
             <div class="form-group">
-                <label for="rol">Rol:</label><br>
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="rol" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ this.i5 }}
-                      </button>
-                    <div class="dropdown-menu" aria-labelledby="ciudad">
-                        <option class="dropdown-item" *ngFor="let item of r" (click)="cambio5(item.rol1, item.idRol)">{{ item.rol1 }}</option>
-                    </div>
-                </div><br>
+                <label for="rol">Rol:</label>
+                <select [ngClass]="{ 'is-invalid' : idrol.invalid && (idrol.dirty || idrol.touched) }" class="form-control" name="idrol" id="idrol" [(ngModel)]="this.usuario.idRol" #idrol="ngModel" required>
+                    <option *ngFor="let item of r" [ngValue]="item.idRol">{{ item.rol1 }}</option>
+                </select>
+                <div *ngIf="idrol.errors?.required" class="invalid-feedback">Seleccione rol</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" name="activo" id="customSwitch1" [(ngModel)]="this.usuario.activo">
@@ -177,14 +162,12 @@
     <!-- Ciudad -->
     <div *ngIf="this.id === 'Ciudad'">
         <form #log="ngForm" (ngSubmit)=alta(log)>
-            <label for="estado">Estado: </label><br>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="estado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i1 }}
-                  </button>
-                <div class="dropdown-menu" aria-labelledby="estado">
-                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio1(item.estado1, item.idEstado)">{{ item.estado1 }}</option>
-                </div>
+            <label for="idestado">Estado: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.ciudad.idEstado" #idestado="ngModel" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Ingrese un estado</div>
             </div>
             <div class="form-group">
                 <label for="ciudad">Ciudad: </label>
@@ -205,32 +188,27 @@
     <!-- Codigo Postal -->
     <div *ngIf="this.id === 'Código postal'">
         <form #log="ngForm" (ngSubmit)=alta(log)>
-            <label for="estado">Estado: </label><br>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="estado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i1 }}
-                  </button>
-                <div class="dropdown-menu" aria-labelledby="estado">
-                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio1(item.estado1, item.idEstado)">{{ item.estado1 }}</option>
-                </div>
+            <label for="idestado">Estado: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
             </div>
-            <br>
             <label for="ciudad">Ciudad: </label><br>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="ciudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i2 }}
-                  </button>
-                <div class="dropdown-menu" aria-labelledby="ciudad">
-                    <option class="dropdown-item" *ngFor="let item of c" (click)="cambio2(item.Ciudad1, item.idCiudad)">{{ item.Ciudad1 }}</option>
-                </div>
-            </div><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.codigoP.idCiudad" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.Ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccionar ciudad</div>
+            </div>
             <div class="form-group">
                 <label for="codigo">Código postal: </label>
-                <input [ngClass]="{ 'is-invalid' : codigo.invalid && (codigo.dirty || codigo.touched) }" class="form-control" type="text" id="codigo" name="codigo" placeholder="Ingresar código postal" [(ngModel)]="this.codigoP.codigo" #codigo="ngModel" required pattern="[0-9]"
+                <input [ngClass]="{ 'is-invalid' : codigo.invalid && (codigo.dirty || codigo.touched) }" class="form-control" type="text" id="codigo" name="codigo" placeholder="Ingresar código postal" [(ngModel)]="this.codigoP.codigo" #codigo="ngModel" required pattern="[0-9]{5}"
                     maxlength="5">
                 <div *ngIf="codigo.errors?.required" class="invalid-feedback">Ingrese código postal</div>
                 <div *ngIf="codigo.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
-                <div *ngIf="codigo.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
+                <div *ngIf="codigo.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch6" name="activo" [(ngModel)]="this.codigoP.activo">
@@ -280,7 +258,7 @@
                     maxlength="30">
                 <div *ngIf="equipo1.errors?.required" class="invalid-feedback">Ingrese equipo</div>
                 <div *ngIf="equipo1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
-                <div *ngIf="equipo1.errors.maxlength" class="invalid-feedback">No debes ingresar mas de 30 caracteres</div>
+                <div *ngIf="equipo1.errors?.maxlength" class="invalid-feedback">No debes ingresar mas de 30 caracteres</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch8" name="activo" [(ngModel)]="this.equipo.activo">
@@ -296,33 +274,26 @@
     <div *ngIf="this.id === 'Colonia'">
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="estado">Estado: </label><br>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="estado" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i1 }}
-                  </button>
-                <div class="dropdown-menu" aria-labelledby="estado">
-                    <option class="dropdown-item" *ngFor="let item of e" (click)="cambio1(item.estado1, item.idEstado)">{{ item.estado1 }}</option>
-                </div>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
             </div>
-            <br>
-            <label for="ciudad">Ciudad: </label><br>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="ciudad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i2 }}
-                  </button>
-                <div class="dropdown-menu" aria-labelledby="ciudad">
-                    <option class="dropdown-item" *ngFor="let item of c" (click)="cambio2(item.Ciudad1, item.idCiudad)">{{ item.Ciudad1 }}</option>
-                </div>
-            </div><br>
+            <label for="idciudad">Ciudad: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.codigoP.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.Ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
+            </div>
             <label for="codigo">Código postal: </label><br>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="codigo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ this.i3 }}
-                  </button>
-                <div class="dropdown-menu" aria-labelledby="ciudad">
-                    <option class="dropdown-item" *ngFor="let item of cp" (click)="cambio3(item.codigo, item.idCP)">{{ item.codigo }}</option>
-                </div>
-            </div><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idcp.invalid && (idcp.dirty || idcp.touched) }" class="form-control" name="idcodigo" id="idcodigo" [(ngModel)]="this.colonia.idCP" #idcp="ngModel" required>
+                    <option *ngFor="let item of cp" [ngValue]="item.idCP">{{ item.codigo }}</option>
+                </select>
+                <div *ngIf="idcp.errors?.required" class="invalid-feedback">Seleccione código postal</div>
+            </div>
             <div class="form-group">
                 <label for="colonia">Colonia: </label>
                 <input [ngClass]="{ 'is-invalid' :  colonia1.invalid && (colonia1.dirty || colonia1.touched)}" class="form-control" type="text" id="colonia" name="colonia" placeholder="Ingresar código postal" [(ngModel)]="this.colonia.colonia1" #colonia1="ngModel" required
@@ -354,8 +325,8 @@
             </div>
             <div class="form-group">
                 <label for="cliente">Paquete: </label>
-                <select class="form-control" name="cliente" id="cliente">
-                    <option *ngFor="let item of p" [value]="item.idPaquete" (change)="prueba($event)">{{ item.nombre }}</option>
+                <select class="form-control" name="cliente" id="cliente" [(ngModel)]="this.contrato.idPaquete">
+                    <option *ngFor="let item of p" [ngValue]="item.idPaquete">{{ item.nombre }}</option>
                 </select>
             </div>
             <br>

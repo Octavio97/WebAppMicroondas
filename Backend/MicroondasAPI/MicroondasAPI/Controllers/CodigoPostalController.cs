@@ -94,7 +94,7 @@ namespace MicroondasAPI.Controllers
                 {
                     idCP = s.idCP,
                     codigo = s.codigo,
-                    idCiudad = s.idCiudad,
+                    idCiudad = s.Ciudad.ciudad1,
                     activo = s.activo
                 });
 

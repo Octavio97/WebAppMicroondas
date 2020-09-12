@@ -10,8 +10,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             </ul>
-            <button href="#" class="my-2 my-lg-0 btn btn-outline-light" style="margin-right: 2%;"><i class="fa fa-user"></i> Perfil</button>
-            <button href="#" class="my-2 my-lg-0 btn btn-outline-light"><i class="fas fa-sign-out-alt"></i> Salir</button>
+            <button class="my-2 my-lg-0 btn btn-outline-light" style="margin-right: 2%;"><i class="fa fa-user"></i> Perfil</button>
+            <button class="my-2 my-lg-0 btn btn-outline-light" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir</button>
         </div>
     </nav>
 </header>
@@ -94,7 +94,7 @@
                 <td>{{ item.rol1 }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light" [routerLink]="['/inicio', seleccion, item.idRol]"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -116,7 +116,7 @@
                 <td>{{ item.estatus1 }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -138,7 +138,7 @@
                 <td>{{ item.estado1 }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -162,7 +162,7 @@
                 <td>{{ item.idEstado }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -186,7 +186,7 @@
                 <td>{{ item.idCiudad }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -212,7 +212,7 @@
                 <td>${{ item.precio }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -234,7 +234,7 @@
                 <td>{{ item.equipo1 }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -260,7 +260,7 @@
                 <td>{{ item.idCP }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -281,7 +281,7 @@
                 <td>{{ item.idPropiedad }}</td>
                 <td>{{ item.idUsuario }}</td>
                 <td>{{ item.idEquipo }}</td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -311,7 +311,7 @@
                 <td>{{ item.idEstatus }}</td>
                 <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                 <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button></td>
+                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>

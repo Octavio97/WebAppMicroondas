@@ -102,15 +102,18 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.id2 = this.route.snapshot.paramMap.get('id2');
+    if (!localStorage.getItem('accessToken')) {
+      this.router.navigate(['/']);
+    } else {
+      this.id = this.route.snapshot.paramMap.get('id');
+      this.id2 = this.route.snapshot.paramMap.get('id2');
 
-    if (this.id === 'Seleccione tabla...') {
-      this.router.navigate(['/inicio']);
-    }
-    else {
+      if (this.id === 'Seleccione tabla...') {
+        this.router.navigate(['/inicio']);
+      }
+      else {
       // Definimos la accion ya sea para agregar o modificar
-    if (this.id2 === 'new') { // si es nuevo (LO COMENTE)
+      if (this.id2 === 'new') { // si es nuo (LO COMENTE)
       // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
       this.rol.activo = false;
       this.estado.activo = false;
@@ -161,6 +164,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       }
     }
     }
+    }
   }
 
   // Metodo para dar altas y modificaciones
@@ -198,9 +202,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
           // Definimos que queremos modificar o agregar
           if (this.id === 'Ciudad') {
-            if ( this.i1 === 'Seleccionar estado...' ) {
-              return;
-            }
             if (this.ciudad.idCiudad) {
               this.ciudadS.modificarCiudad(this.ciudad).subscribe( resp => {
                 if (resp === true) {
@@ -241,10 +242,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             }
           }
           else if (this.id === 'Código postal') {
-            if ( this.i1 === 'Seleccionar estado...' ||
-            this.i2 === 'Seleccionar ciudad...') {
-              return;
-            }
             if (this.codigoP.idCP) {
               this.codigoS.modificarCodigo(this.codigoP).subscribe( resp => {
                 if (resp === true) {
@@ -647,44 +644,21 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   }
 
   // Metodos para cambiar valores del combobox
-  cambio1(y, id?) {
-    this.i1 = y;
-    this.usuario.idEstado = id;
+  cambio1(id?) {
     this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
       this.c = resp;
     });
   }
 
-  cambio2(y, id?) {
-    this.i2 = y;
-    this.codigoP.idCiudad = id;
-    this.usuario.idCiudad = id;
+  cambio2(id?) {
     this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
       this.cp = resp;
     });
   }
 
-  cambio3(y, id?) {
-    this.i3 = y;
-    this.colonia.idCP = id;
-    this.usuario.idCP = id;
+  cambio3(id?) {
     this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
       this.co = resp;
     });
-  }
-
-  cambio4(y, id?) {
-    this.i4 = y;
-    this.usuario.idColonia = id;
-  }
-
-  cambio5(y, id?) {
-    this.i5 = y;
-    this.usuario.idRol = id;
-  }
-
-  prueba(i: string) {
-    this.contrato.idPaquete = i;
-    console.log(this.contrato.idPaquete);
   }
 }
