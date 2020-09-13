@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             title: 'Bienvenido',
             text: 'Bienvenido al sistema ' + this.usuario.nombre + ' ' + this.usuario.apellido,
-            icon: 'error'
+            icon: 'success'
           });
           localStorage.setItem('currentUser', JSON.stringify(this.usuario)); // guardamos el usuario que inicio sesion
           localStorage.setItem('accessToken', this.usuario.idUsuario); // guardamos la id del usuario

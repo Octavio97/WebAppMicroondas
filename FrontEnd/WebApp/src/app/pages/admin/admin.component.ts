@@ -32,6 +32,7 @@ import { Router } from '@angular/router';
 })
 export class AdminComponent implements OnInit {
   seleccion = 'Seleccione tabla...';
+  in = false;
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad'];
   rol: Rol[] = [];
   estado: Estado[];

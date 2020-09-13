@@ -35,9 +35,9 @@
         </div>
 
         <div class="form-check float-right">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="in = !in">
             <label class="form-check-label" for="defaultCheck1">
-                Activos
+                Todos
             </label>
         </div>
     </div>
@@ -61,18 +61,20 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of usuario; let i=index">
-                <th scope="row">{{ i +1 }}</th>
-                <td>{{ item.idUsuario }}</td>
-                <td>{{ item.nombre }}</td>
-                <td>{{ item.apellido }}</td>
-                <td>{{ item.telefono }}</td>
-                <td>{{ item.correoE }}</td>
-                <td>{{ item.contrasena }}</td>
-                <td>{{ item.calle }} {{ item.numInt }} {{ item.numExt }}, CP: {{item.idCP}}, {{item.idColonia}}, {{ item.idCiudad }}, {{ item.idEstado }}</td>
-                <td>{{ item.idRol }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i +1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idUsuario }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.nombre }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.apellido }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.telefono }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.correoE }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.contrasena }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.calle }} {{ item.numInt }} {{ item.numExt }}, CP: {{item.idCP}}, {{item.idColonia}}, {{ item.idCiudad }}, {{ item.idEstado }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idRol }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -89,12 +91,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of rol; let i = index" class="animated fadeIn">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idRol }}</td>
-                <td>{{ item.rol1 }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idRol }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.rol1 }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -111,12 +115,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of estatus; let i=index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idEstatus }}</td>
-                <td>{{ item.estatus1 }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idEstatus }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.estatus1 }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -133,12 +139,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of estado; let i = index" class="animated fadeIn">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idEstado }}</td>
-                <td>{{ item.estado1 }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idEstado }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.estado1 }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -156,13 +164,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of ciudad; let i=index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idCiudad }}</td>
-                <td>{{ item.Ciudad1 }}</td>
-                <td>{{ item.idEstado }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idCiudad }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Ciudad1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idEstado }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -180,13 +190,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of codigo; let i=index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idCP }}</td>
-                <td>{{ item.codigo }}</td>
-                <td>{{ item.idCiudad }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idCP }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.codigo }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idCiudad }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -205,14 +217,16 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of paquete; let i=index;">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idPaquete }}</td>
-                <td>{{ item.nombre }}</td>
-                <td>{{ item.descripcion }}</td>
-                <td>${{ item.precio }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idPaquete }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.nombre }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.descripcion }}</td>
+                <td *ngIf="item.activo || this.in">${{ item.precio }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -229,12 +243,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of equipo; let i=index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idEquipo }}</td>
-                <td>{{ item.equipo1 }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idEquipo }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.equipo1 }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -254,13 +270,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of colonia; let i=index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idColonia }}</td>
-                <td>{{ item.colonia1 }}</td>
-                <td>{{ item.idCP }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idColonia }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.colonia1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idCP }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -302,16 +320,18 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of contrato; let i=index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idContrato }}</td>
-                <td>{{ item.idUsuario }}</td>
-                <td>{{ item.fechaInicio }}</td>
-                <td>{{ item.fechaFinal }}</td>
-                <td>{{ item.idPaquete }}</td>
-                <td>{{ item.idEstatus }}</td>
-                <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
-                <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
-                <td><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
+                <td *ngIf="item.activo || this.in">{{ item.idContrato }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idUsuario }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.fechaInicio }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.fechaFinal }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idPaquete }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idEstatus }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
