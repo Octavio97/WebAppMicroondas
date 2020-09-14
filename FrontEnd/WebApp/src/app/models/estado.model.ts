@@ -6,8 +6,8 @@ export class Estado {
     estado1: string;
     activo: boolean;
 
-    Ciudad: Ciudad[];
-    Usuario: Usuario[];
+    Ciudad: Ciudad;
+    Usuario: Usuario;
 
     constructor(){}
 }

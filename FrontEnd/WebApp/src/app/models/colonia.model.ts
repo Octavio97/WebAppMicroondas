@@ -7,8 +7,8 @@ export class Colonia {
     idCP: string;
     activo: boolean;
 
-    CP: CodigoPostal[];
-    Usuario: Usuario[];
+    CP: CodigoPostal;
+    Usuario: Usuario;
 
     constructor(){}
 }

@@ -8,7 +8,7 @@ export class Paquete {
     activo: boolean;
     descripcion: string;
 
-    Contrato: Contrato[];
-    PaqueteEquipo: PaqueteEquipo[];
+    Contrato: Contrato;
+    PaqueteEquipo: PaqueteEquipo;
     constructor(){}
 }

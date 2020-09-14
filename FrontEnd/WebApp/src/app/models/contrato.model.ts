@@ -13,9 +13,9 @@ export class Contrato {
     idUsuario: string;
     activo: boolean;
 
-    Estatus: Estatus[];
-    Paquete: Paquete[];
-    Usuario: Usuario[];
+    Estatus: Estatus;
+    Paquete: Paquete;
+    Usuario: Usuario;
 
     constructor(){}
 }

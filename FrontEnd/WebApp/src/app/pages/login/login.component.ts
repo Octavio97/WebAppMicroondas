@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
     if (localStorage.getItem('accessToken')) {
       this.router.navigate(['/inicio']);
     }
+    else {
+      localStorage.removeItem('currentUser');
+    }
   }
 
   login(data: NgForm) {
@@ -46,8 +49,15 @@ export class LoginComponent implements OnInit {
             text: 'Bienvenido al sistema ' + this.usuario.nombre + ' ' + this.usuario.apellido,
             icon: 'success'
           });
-          localStorage.setItem('currentUser', JSON.stringify(this.usuario)); // guardamos el usuario que inicio sesion
-          localStorage.setItem('accessToken', this.usuario.idUsuario); // guardamos la id del usuario
+          const element = document.getElementById('check') as HTMLInputElement;
+          console.log(element.checked);
+          if (!element.checked) {
+            localStorage.setItem('currentUser', JSON.stringify(this.usuario)); // guardamos el usuario que inicio sesion
+          }
+          else {
+            localStorage.setItem('accessToken', this.usuario.idUsuario); // guardamos la id del usuario
+            localStorage.setItem('currentUser', JSON.stringify(this.usuario)); // guardamos el usuario que inicio sesion
+          }
           // se envia a la pagina principal y el id del usuario para evitar el ingresar por la ruta en el navegador
           this.router.navigate(['/inicio']);
         }

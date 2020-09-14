@@ -23,13 +23,13 @@ export class Usuario {
     idRol: string;
     activo: boolean;
 
-    CP: CodigoPostal[];
-    Colonia: Colonia[];
-    Contrato: Contrato[];
-    Ciudad: Ciudad[];
-    Estado: Estado[];
-    Propiedad: Propiedad[];
-    Rol: Rol[];
+    CP: CodigoPostal;
+    Colonia: Colonia;
+    Contrato: Contrato;
+    Ciudad: Ciudad;
+    Estado: Estado;
+    Propiedad: Propiedad;
+    Rol: Rol;
 
     constructor() {}
 }

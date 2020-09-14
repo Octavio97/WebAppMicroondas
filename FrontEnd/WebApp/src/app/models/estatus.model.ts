@@ -5,7 +5,7 @@ export class Estatus {
     estatus1: string;
     activo: boolean;
 
-    Contrato: Contrato[];
+    Contrato: Contrato;
 
     constructor(){}
 }

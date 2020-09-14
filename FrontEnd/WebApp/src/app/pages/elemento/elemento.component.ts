@@ -102,7 +102,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('accessToken')) {
+    // si no esxiste alguna sesion iniciada
+    if (!localStorage.getItem('accessToken') && !localStorage.getItem('currentUser')) {
+      localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     } else {
       this.id = this.route.snapshot.paramMap.get('id');
@@ -215,7 +217,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'La ciudad ya existe',
                     icon: 'error'
                   });
                 }
@@ -234,7 +236,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'La ciudad ya existe',
                     icon: 'error'
                   });
                 }
@@ -255,7 +257,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El código postal ya existe',
                     icon: 'error'
                   });
                 }
@@ -274,7 +276,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El código postal ya existe',
                     icon: 'error'
                   });
                 }
@@ -296,7 +298,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                   else {
                     Swal.fire({
                       title: 'Error',
-                      text: 'Hubo un error corrige tus datos',
+                      text: 'La colonia ya existe',
                       icon: 'error'
                     });
                   }
@@ -316,7 +318,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'La colonia ya existe',
                     icon: 'error'
                   });
                 }
@@ -337,7 +339,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El contrato ya existe',
                     icon: 'error'
                   });
                 }
@@ -356,7 +358,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El contrato ya existe',
                     icon: 'error'
                   });
                 }
@@ -377,7 +379,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El equipo ya existe',
                     icon: 'error'
                   });
                 }
@@ -395,7 +397,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 } else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El equipo ya existe',
                     icon: 'error'
                   });
                 }
@@ -415,7 +417,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 } else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El estado ya existe',
                     icon: 'error'
                   });
                 }
@@ -434,7 +436,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El estado ya existe',
                     icon: 'error'
                   });
                 }
@@ -455,7 +457,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El estatus ya existe',
                     icon: 'error'
                   });
                 }
@@ -473,7 +475,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El estatus ya existe',
                     icon: 'error'
                   });
                 }
@@ -494,7 +496,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El paquete ya existe',
                     icon: 'error'
                   });
                 }
@@ -513,7 +515,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El paquete ya existe',
                     icon: 'error'
                   });
                 }
@@ -535,7 +537,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'La propiedad ya existe',
                     icon: 'error'
                   });
                 }
@@ -554,7 +556,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'La propiedad ya existe',
                     icon: 'error'
                   });
                 }
@@ -575,7 +577,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El rol ya existe',
                     icon: 'error'
                   });
                 }
@@ -594,7 +596,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El rol ya existe',
                     icon: 'error'
                   });
                 }
@@ -614,7 +616,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 } else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El usuario ya existe',
                     icon: 'error'
                   });
                 }
@@ -631,7 +633,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 } else {
                   Swal.fire({
                     title: 'Error',
-                    text: 'Hubo un error corrige tus datos',
+                    text: 'El usuario ya existe',
                     icon: 'error'
                   });
                 }

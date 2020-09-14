@@ -8,9 +8,9 @@ export class CodigoPostal {
     idCiudad: string;
     activo: boolean;
 
-    Colonia: Colonia[];
-    Usuario: Usuario[];
-    Ciudad: Ciudad[];
+    Colonia: Colonia;
+    Usuario: Usuario;
+    Ciudad: Ciudad;
 
     constructor(){}
 }

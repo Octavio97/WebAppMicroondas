@@ -39,19 +39,38 @@ namespace MicroondasAPI.Controllers
                     idCP = consulta.idCP,
                     idRol = consulta.idRol,
                     activo = consulta.activo,
-                    //CP = consulta.CodigoPostal,
-                    //Colonia = consulta.Colonia,    
-                    //Contrato = consulta.Contrato,
-                    //Ciudad = consulta.Ciudad,
-                    //Estado = consulta.Estado,
-                    //Propiedad = consulta.Propiedad,
-                    //Rol = consulta.Rol
+                    CP = new {
+                        idCP = consulta.CodigoPostal.idCP,
+                        codigo = consulta.CodigoPostal.codigo
+                    },
+                    Colonia = new {
+                        idColonia = consulta.Colonia.idColonia,
+                        colonia1 = consulta.Colonia.colonia1,
+                    },
+                    //Contrato = new {
+                    //    idContrato = consulta.Contrato
+                    //},
+                    Ciudad = new {
+                        idCiudad = consulta.Ciudad.idCiudad,
+                        ciudad1 = consulta.Ciudad.ciudad1
+                    },
+                    Estado = new {
+                        idEstado = consulta.idEstado,
+                        estado1 = consulta.Estado.estado1
+                    },
+                    //Propiedad = new {
+
+                    //},
+                    Rol = new {
+                        idRol = consulta.Rol.idRol,
+                        rol1 = consulta.Rol.rol1
+                    }
                 };
 
                 // regresamos el resultado
                 return Ok(resultado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }

@@ -5,7 +5,7 @@ export class Rol {
     rol1: string;
     activo: boolean;
 
-    Usuario: Usuario[];
+    Usuario: Usuario;
 
     constructor(){}
 }

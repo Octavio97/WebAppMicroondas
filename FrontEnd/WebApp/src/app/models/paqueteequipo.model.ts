@@ -6,8 +6,8 @@ export class PaqueteEquipo {
     idPaquete: string;
     idEquipo: string;
 
-    Paquete: Paquete[];
-    Equipo: Equipo[];
+    Paquete: Paquete;
+    Equipo: Equipo;
 
     constructor(){}
 }

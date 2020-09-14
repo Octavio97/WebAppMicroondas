@@ -31,9 +31,9 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html'
 })
 export class AdminComponent implements OnInit {
-  session = JSON.parse(localStorage.getItem('currentUser'));
+  session: Usuario = JSON.parse(localStorage.getItem('currentUser'));
   seleccion = 'Seleccione tabla...';
-  in = false;
+  in = false; // mostrar registros eliminados
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad'];
   rol: Rol[] = [];
   estado: Estado[];
@@ -64,7 +64,9 @@ export class AdminComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('accessToken')) {
+    // si no esxiste alguna sesion iniciada
+    if (!localStorage.getItem('accessToken') && !localStorage.getItem('currentUser')) {
+      localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     }
     else {

@@ -18,7 +18,12 @@ i = 'Login';
   lng = 7.809007;
 
   ngOnInit(): void {
-    if (localStorage.getItem('currentUser')) {
+    // si no esta el token de guardar sesion
+    if (!localStorage.getItem('accessToken')) {
+      localStorage.removeItem('currentUser'); // eliminar el usuario guardado
+    }
+    if (localStorage.getItem('currentUser')) { // si hay una sesion guardada
+      // muestra la sesion en la barra de tareas
       this.usuario = JSON.parse(localStorage.getItem('currentUser'));
       this.i = this.usuario.nombre;
     }

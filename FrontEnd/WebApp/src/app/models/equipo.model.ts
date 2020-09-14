@@ -6,8 +6,8 @@ export class Equipo {
     equipo1: string;
     activo: boolean;
 
-    PaqueteEquipo: PaqueteEquipo[];
-    Propiedad: Propiedad[];
+    PaqueteEquipo: PaqueteEquipo;
+    Propiedad: Propiedad;
 
     constructor(){}
 }

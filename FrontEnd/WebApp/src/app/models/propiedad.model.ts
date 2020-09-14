@@ -6,8 +6,8 @@ export class Propiedad {
     idUsuario: string;
     idEquipo: string;
 
-    Equipo: Equipo[];
-    Usuario: Usuario[];
+    Equipo: Equipo;
+    Usuario: Usuario;
 
     constructor(){}
 }
