@@ -31,6 +31,7 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html'
 })
 export class AdminComponent implements OnInit {
+  session = JSON.parse(localStorage.getItem('currentUser'));
   seleccion = 'Seleccione tabla...';
   in = false;
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad'];

@@ -6,7 +6,7 @@
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel" required maxlength="50"
-                    title="hola esta mal xd" pattern="[A-Za-z ]*">
+                    title="hola esta mal xd" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
                 <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
                 <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
                 <input [ngClass]="{ 'is-invalid' : apellido.invalid && (apellido.dirty || apellido.touched) }" type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required [(ngModel)]="this.usuario.apellido" #apellido="ngModel"
-                    maxlength="50" pattern="[A-Za-z ]*" title="hola esta mal xd">
+                    maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" title="hola esta mal xd">
                 <div *ngIf="apellido.errors?.required" class="invalid-feedback">Ingrese sus apellidos</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
                 <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label for="calle">Calle:</label>
-                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z ]*" [(ngModel)]="this.usuario.calle" #calle="ngModel">
+                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð.]*" [(ngModel)]="this.usuario.calle" #calle="ngModel">
                 <div *ngIf="calle.errors?.required" class="invalid-feedback">Solo ingresa tu calle</div>
                 <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
             </div>
@@ -62,7 +62,7 @@
             </div>
             <label for="estado">Estado: </label><br>
             <div class="form-group">
-                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.usuario.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [(ngModel)]="this.usuario.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
                     <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                 </select>
                 <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
@@ -83,17 +83,17 @@
             </div>
             <label for="idcolonia">Colonia: </label>
             <div class="form-group">
-                <select [ngClass]="{ 'is-invalid' : idcolonia.invalid && (idcolonia.dirty || idcolonia.touched) }" class="form-control" name="idcolonia" id="idcolonia" [ngModel]="this.usuario.idColonia" #idcolonia="ngModel" required>
+                <select [ngClass]="{ 'is-invalid' : idcolonia.invalid && (idcolonia.dirty || idcolonia.touched) }" class="form-control" name="idcolonia" id="idcolonia" [(ngModel)]="this.usuario.idColonia" #idcolonia="ngModel" required>
                     <option *ngFor="let item of co" [ngValue]="item.idColonia">{{ item.colonia1 }}</option>
                 </select>
                 <div *ngIf="idcolonia.errors?.required" class="invalid-feedback">Seleccione colonia</div>
             </div>
             <div class="form-group">
                 <label for="rol">Rol:</label>
-                <select [ngClass]="{ 'is-invalid' : idrol.invalid && (idrol.dirty || idrol.touched) }" class="form-control" name="idrol" id="idrol" [(ngModel)]="this.usuario.idRol" #idrol="ngModel" required>
+                <select [ngClass]="{ 'is-invalid' : idRol.invalid && (idRol.dirty || idRol.touched) }" class="form-control" name="idRol" id="idRol" [(ngModel)]="this.usuario.idRol" #idRol="ngModel" required>
                     <option *ngFor="let item of r" [ngValue]="item.idRol">{{ item.rol1 }}</option>
                 </select>
-                <div *ngIf="idrol.errors?.required" class="invalid-feedback">Seleccione rol</div>
+                <div *ngIf="idRol.errors?.required" class="invalid-feedback">Seleccione rol</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" name="activo" id="customSwitch1" [(ngModel)]="this.usuario.activo">
@@ -108,7 +108,7 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol1">Rol: </label>
-                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol1" name="rol1" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" #rol1="ngModel" required pattern="[A-Za-z ]*" maxlength="30">
+                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol1" name="rol1" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" #rol1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="30">
                 <div *ngIf="rol1.errors?.required" class="invalid-feedback">Ingrese rol</div>
                 <div *ngIf="rol1.errors?.pattern" class="invalid-feedback">No ingrese numeros</div>
                 <div *ngIf="rol1.errors?.maxlength" class="invalid-feedback">No debe pasar de 30 caracteres</div>
@@ -127,7 +127,7 @@
             <div class="form-group">
                 <label for="estatus1">Estatus: </label>
                 <input [ngClass]="{ 'is-invalid' : estatus1.invalid && (estatus1.dirty || estatus1.touched) }" #estatus1="ngModel" class="form-control" type="text" id="estatus" name="estatus1" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus1" required
-                    maxlength="30" pattern="[A-Za-z ]*">
+                    maxlength="30" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
                 <div *ngIf="estatus1.errors?.required" class="invalid-feedback">Ingrese estatus</div>
                 <div *ngIf="estatus1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
                 <div *ngIf="estatus1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
@@ -145,7 +145,7 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="estado">Estado: </label>
-                <input [ngClass]="{ 'is-invalid' : estado1.invalid && (estado1.dirty || estado1.touched) }" class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado1" #estado1="ngModel" required pattern="[A-Za-z ]*"
+                <input [ngClass]="{ 'is-invalid' : estado1.invalid && (estado1.dirty || estado1.touched) }" class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado1" #estado1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
                     maxlength="30">
                 <div *ngIf="estado1.errors?.required" class="invalid-feedback">Ingrese estado</div>
                 <div *ngIf="estado1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -171,7 +171,7 @@
             </div>
             <div class="form-group">
                 <label for="ciudad">Ciudad: </label>
-                <input [ngClass]="{ 'is-invalid' : ciudad1.invalid && (ciudad1.dirty || ciudad1.touched) }" class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.Ciudad1" #ciudad1="ngModel" required pattern="[A-Za-z ]*"
+                <input [ngClass]="{ 'is-invalid' : ciudad1.invalid && (ciudad1.dirty || ciudad1.touched) }" class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.Ciudad1" #ciudad1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
                     maxlength="50">
                 <div *ngIf="ciudad1.errors?.required" class="invalid-feedback">Ingrese ciudad</div>
                 <div *ngIf="ciudad1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -224,7 +224,7 @@
             <div class="form-group">
                 <label for="nombre">Nombre del paquete: </label>
                 <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched ) }" class="form-control" type="text" name="nombre" id="nombre" [(ngModel)]="this.paquete.nombre" #nombre="ngModel" placeholder="Ingrese nombre del paquete" required
-                    pattern="[A-Z a-z ]*" maxlength="30">
+                    pattern="[A-Z a-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="30">
                 <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese paquete</div>
                 <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
                 <div *ngIf="nombre.errors?.maxlength">No debes ingresar mas de 30 caracteres</div>
@@ -254,7 +254,7 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="equipo">Equipo: </label>
-                <input [ngClass]="{ 'is-invalid' : equipo1.invalid && (equipo1.dirty || equipo1.touched)}" class="form-control" type="text" name="equipo" id="equipo" [(ngModel)]="this.equipo.equipo1" #equipo1="ngModel" placeholder="Ingrese equipo" required pattern="[A-Za-z ]*"
+                <input [ngClass]="{ 'is-invalid' : equipo1.invalid && (equipo1.dirty || equipo1.touched)}" class="form-control" type="text" name="equipo" id="equipo" [(ngModel)]="this.equipo.equipo1" #equipo1="ngModel" placeholder="Ingrese equipo" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
                     maxlength="30">
                 <div *ngIf="equipo1.errors?.required" class="invalid-feedback">Ingrese equipo</div>
                 <div *ngIf="equipo1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -297,7 +297,7 @@
             <div class="form-group">
                 <label for="colonia">Colonia: </label>
                 <input [ngClass]="{ 'is-invalid' :  colonia1.invalid && (colonia1.dirty || colonia1.touched)}" class="form-control" type="text" id="colonia" name="colonia" placeholder="Ingresar código postal" [(ngModel)]="this.colonia.colonia1" #colonia1="ngModel" required
-                    pattern="[A-Za-z ]*" max="50">
+                    pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" max="50">
                 <div *ngIf="colonia1.errors?.required" class="invalid-feedback">Ingrese colonia</div>
                 <div *ngIf="colonia1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
                 <div *ngIf="colonia1.errors?.maxlenght" class="invalid-feedback">No debes de ingresar mas de 50 caracteres</div>
