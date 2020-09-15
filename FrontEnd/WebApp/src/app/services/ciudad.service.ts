@@ -24,7 +24,7 @@ export class CiudadService {
   }
 
   modificarCiudad(ciudad: Ciudad) {
-    return this.http.post( this.url + 'modificarCiudad', ciudad );
+    return this.http.put( this.url + 'modificarCiudad', ciudad );
   }
 
   consultaUnica(id: string) {
@@ -33,5 +33,9 @@ export class CiudadService {
 
   consultaCinicio(id: string) {
     return this.http.get( this.url + 'consultaCinicio', { params: { id } } );
+  }
+
+  verCiudad(id: string) {
+    return this.http.get( this.url + 'verCiudad', { params: { id } } );
   }
 }

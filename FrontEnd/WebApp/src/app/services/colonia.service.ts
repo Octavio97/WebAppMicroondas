@@ -30,4 +30,8 @@ export class ColoniaService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnicaCo', { params: { id } } );
   }
+
+  verColonia(id: string) {
+    return this.http.get( this.url + 'verColonia', { params: { id } } );
+  }
 }

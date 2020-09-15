@@ -82,6 +82,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
+    console.log(this.id);
     if (this.id === 'Ciudad' || this.id === 'Código postal' || this.id === 'Colonia' || this.id === 'Usuario') {
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
@@ -131,9 +132,19 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     else { // si no es nuevo
       if (this.id === 'Ciudad') {
         this.ciudad.idCiudad = this.id2;
+        this.ciudadS.verCiudad(this.id2).subscribe( (resp: Ciudad) => {
+          if (resp) {
+            this.ciudad = resp;
+          }
+        });
       }
       else if (this.id === 'Código postal') {
         this.codigoP.idCP = this.id2;
+        this.codigoS.verCP(this.id2).subscribe( (resp: CodigoPostal) => {
+          if (resp) {
+            this.codigoP = resp;
+          }
+        });
       }
       else if (this.id === 'Colonia') {
         this.colonia.idColonia = this.id2;

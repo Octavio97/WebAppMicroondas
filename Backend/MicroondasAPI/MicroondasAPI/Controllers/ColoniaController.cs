@@ -165,5 +165,29 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verColonia")]
+        public IHttpActionResult verColonia(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Colonia.Where(w => w.idColonia == i).FirstOrDefault();
+
+                var resultado = new {
+                    idColonia = consulta.idColonia,
+                    colonia1 = consulta.colonia1,
+                    idCP = consulta.idCP
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

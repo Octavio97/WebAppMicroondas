@@ -34,4 +34,8 @@ export class CodigopostalService {
   consultaCPinicio(id: string) {
     return this.http.get( this.url + 'consultaCPinicio', { params: { id } } );
   }
+
+  verCP(id: string) {
+    return this.http.get( this.url + 'verCP', { params: { id } } );
+  }
 }

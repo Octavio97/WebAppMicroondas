@@ -109,10 +109,10 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // hacemos consulta si ya existe esa ciudad
-                var accion = SessionController.getInstance().Ciudad.Where(w => w.ciudad1 == ciudad.ciudad1).FirstOrDefault();
+                var accion = SessionController.getInstance().Ciudad.Where(w => w.idCiudad == ciudad.idCiudad && w.ciudad1 == ciudad.ciudad1).FirstOrDefault();
 
                 // si no existe registro
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.ciudad1 = ciudad.ciudad1;
@@ -174,6 +174,31 @@ namespace MicroondasAPI.Controllers
                     Ciudad1 = s.ciudad1,
                     activo = s.activo
                 });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verCiudad")]
+        public IHttpActionResult verCiudad(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Ciudad.Where(w => w.idCiudad == i).FirstOrDefault();
+
+                var resultado = new {
+                    idCiudad = consulta.idCiudad,
+                    Ciudad1 = consulta.ciudad1,
+                    idEstado = consulta.idEstado,
+                    activo = consulta.activo
+                };
 
                 return Ok(resultado);
             }

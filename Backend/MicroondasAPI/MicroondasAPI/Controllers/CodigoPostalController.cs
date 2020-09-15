@@ -190,5 +190,30 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verCP")]
+        public IHttpActionResult verCP(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().CodigoPostal.Where(w => w.idCP == i).FirstOrDefault();
+
+                var resultado = new {
+                    idCP = consulta.idCP,
+                    codigo = consulta.codigo,
+                    idCiudad = consulta.idCiudad,
+                    activo = consulta.activo
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ import { Usuario } from './usuario.model';
 
 export class Ciudad {
     idCiudad: string;
-    Ciudad1: string;
+    ciudad1: string;
     idEstado: string;
     activo: boolean;
 
