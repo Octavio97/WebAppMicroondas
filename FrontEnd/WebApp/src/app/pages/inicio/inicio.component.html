@@ -117,21 +117,21 @@
                         <p class="lead">Ingrese los datos de tu ubicación</p>
                     </div>
                     <div class="form-group">
-                        <label for="state">Estado: &nbsp;</label>
-                        <select class="form-control" name="" id="">
-                            <option>Seleccione estado...</option>
+                        <label for="estado">Estado: &nbsp;</label>
+                        <select class="form-control" name="estado" id="estado" [(ngModel)]="this.usuario" (ngModelChange)="getCity($event)">
+                            <option *ngFor="let item of estado" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="city">Ciudad: &nbsp;</label>
-                        <select class="form-control" name="" id="">
-                            <option value="">Seleccione ciudad...</option>
+                        <label for="ciudad">Ciudad: &nbsp;</label>
+                        <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="this.codigo" (ngModelChange)="getCP($event)">
+                            <option *ngFor="let item of ciudad" [ngValue]="item.idCiudad">{{ item.Ciudad1 }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="name">Código postal: &nbsp;</label>
                         <select class="form-control" name="" id="">
-                            <option value="">Seleccionar código posta...</option>
+                            <option value="" *ngFor="let item of codigo">{{ item.codigo }}</option>
                         </select>
                     </div>
                     <div class="form-group">

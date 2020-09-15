@@ -139,5 +139,28 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaEInicio")]
+        public IHttpActionResult consultaEInicio()
+        {
+            try
+            {
+                var consulta = SessionController.getInstance().Estado.Where(w => w.activo == true).ToList();
+
+                var resultado = consulta.Select(s => new
+                {
+                    idEstado = s.idEstado,
+                    estado1 = s.estado1,
+                    activo = s.activo
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

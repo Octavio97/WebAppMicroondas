@@ -30,4 +30,8 @@ export class CiudadService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnicaCi', { params: { id } } );
   }
+
+  consultaCinicio(id: string) {
+    return this.http.get( this.url + 'consultaCinicio', { params: { id } } );
+  }
 }

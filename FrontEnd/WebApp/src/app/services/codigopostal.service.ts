@@ -30,4 +30,8 @@ export class CodigopostalService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnicaCP', { params: { id } } );
   }
+
+  consultaCPinicio(id: string) {
+    return this.http.get( this.url + 'consultaCPinicio', { params: { id } } );
+  }
 }

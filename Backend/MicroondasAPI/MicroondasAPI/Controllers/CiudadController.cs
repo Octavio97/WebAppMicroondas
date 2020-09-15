@@ -158,5 +158,29 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaCinicio")]
+        public IHttpActionResult consultaCinicio(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Ciudad.Where(w => w.activo == true && w.idEstado == i).ToList();
+
+                var resultado = consulta.Select(s => new {
+                    idCiudad = s.idCiudad,
+                    Ciudad1 = s.ciudad1,
+                    activo = s.activo
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

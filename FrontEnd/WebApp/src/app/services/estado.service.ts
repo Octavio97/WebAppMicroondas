@@ -26,4 +26,8 @@ export class EstadoService {
   modificarEstado(estado: Estado) {
     return this.http.post( this.url + 'modificarEstado', estado );
   }
+
+  consultaEInicio() {
+    return this.http.get( this.url + 'consultaEInicio' );
+  }
 }
