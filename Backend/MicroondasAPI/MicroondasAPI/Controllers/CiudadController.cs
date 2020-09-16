@@ -90,9 +90,14 @@ namespace MicroondasAPI.Controllers
             var resultado = accion.Select(s => new
             {
                 idCiudad = s.idCiudad,
-                Ciudad1 = s.ciudad1,
-                idEstado = s.Estado.estado1,
-                activo = s.activo
+                ciudad1 = s.ciudad1,
+                idEstado = s.idEstado,
+                activo = s.activo,
+                Estado = new {
+                    idEstado = s.Estado.idEstado,
+                    estado1 = s.Estado.estado1,
+                    activo = s.Estado.activo
+                }
             });
 
             // Devolvemos los datos
@@ -148,7 +153,15 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idCiudad = s.idCiudad,
-                    Ciudad1 = s.ciudad1
+                    ciudad1 = s.ciudad1,
+                    idEstado = s.idEstado,
+                    activo = s.activo,
+                    Estado = new
+                    {
+                        idEstado = s.Estado.idEstado,
+                        estado1 = s.Estado.estado1,
+                        activo = s.Estado.activo
+                    }
                 });
 
                 return Ok(resultado);
@@ -171,8 +184,15 @@ namespace MicroondasAPI.Controllers
 
                 var resultado = consulta.Select(s => new {
                     idCiudad = s.idCiudad,
-                    Ciudad1 = s.ciudad1,
-                    activo = s.activo
+                    ciudad1 = s.ciudad1,
+                    idEstado = s.idEstado,
+                    activo = s.activo,
+                    Estado = new
+                    {
+                        idEstado = s.Estado.idEstado,
+                        estado1 = s.Estado.estado1,
+                        activo = s.Estado.activo
+                    }
                 });
 
                 return Ok(resultado);
@@ -195,9 +215,15 @@ namespace MicroondasAPI.Controllers
 
                 var resultado = new {
                     idCiudad = consulta.idCiudad,
-                    Ciudad1 = consulta.ciudad1,
+                    ciudad1 = consulta.ciudad1,
                     idEstado = consulta.idEstado,
-                    activo = consulta.activo
+                    activo = consulta.activo,
+                    Estado = new
+                    {
+                        idEstado = consulta.Estado.idEstado,
+                        estado1 = consulta.Estado.estado1,
+                        activo = consulta.Estado.activo
+                    }
                 };
 
                 return Ok(resultado);

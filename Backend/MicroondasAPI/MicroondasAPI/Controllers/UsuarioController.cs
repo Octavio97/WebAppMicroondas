@@ -104,13 +104,44 @@ namespace MicroondasAPI.Controllers
                     calle = s.calle,
                     numInt = s.numInt,
                     numExt = s.numExt,
-                    idEstado= s.Estado.estado1,
-                    idCiudad = s.Ciudad.ciudad1,
-                    idCP = s.CodigoPostal.codigo,
-                    idColonia = s.Colonia.colonia1,
-                    idRol = s.Rol.rol1,
+                    idEstado= s.idEstado,
+                    idCiudad = s.idCiudad,
+                    idCP = s.idCP,
+                    idColonia = s.idColonia,
+                    idRol = s.idRol,
                     activo = s.activo,
-                    contrasena = s.contrasena
+                    contrasena = s.contrasena,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo
+                    },
+                    Colonia = new
+                    {
+                        idColonia = s.Colonia.idColonia,
+                        colonia1 = s.Colonia.colonia1,
+                    },
+                    //Contrato = new {
+                    //    idContrato = consulta.Contrato
+                    //},
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1
+                    },
+                    Estado = new
+                    {
+                        idEstado = s.idEstado,
+                        estado1 = s.Estado.estado1
+                    },
+                    //Propiedad = new {
+
+                    //},
+                    Rol = new
+                    {
+                        idRol = s.Rol.idRol,
+                        rol1 = s.Rol.rol1
+                    }
                 });
 
                 // manda resultados
@@ -164,6 +195,73 @@ namespace MicroondasAPI.Controllers
                 }
                 // devuelve el valor final
                 return Ok(i);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verUsuario")]
+        public IHttpActionResult verUsuario(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Usuario.Where(w => w.idUsuario == i).FirstOrDefault();
+
+                var resultado = new {
+                    idUsuario = consulta.idUsuario,
+                    nombre = consulta.nombre,
+                    apellido = consulta.apellido,
+                    telefono = consulta.telefono,
+                    correoE = consulta.correoE,
+                    calle = consulta.calle,
+                    numInt = consulta.numInt,
+                    numExt = consulta.numExt,
+                    idColonia = consulta.idColonia,
+                    idCP = consulta.idCP,
+                    idRol = consulta.idRol,
+                    activo = consulta.activo,
+                    contrasena = consulta.contrasena,
+                    idEstado = consulta.idEstado,
+                    idCiudad = consulta.idCiudad,
+                    CP = new
+                    {
+                        idCP = consulta.CodigoPostal.idCP,
+                        codigo = consulta.CodigoPostal.codigo
+                    },
+                    Colonia = new
+                    {
+                        idColonia = consulta.Colonia.idColonia,
+                        colonia1 = consulta.Colonia.colonia1,
+                    },
+                    Contrato = new {
+                        idContrato = consulta.Contrato
+                    },
+                    Ciudad = new
+                    {
+                        idCiudad = consulta.Ciudad.idCiudad,
+                        ciudad1 = consulta.Ciudad.ciudad1
+                    },
+                    Estado = new
+                    {
+                        idEstado = consulta.idEstado,
+                        estado1 = consulta.Estado.estado1
+                    },
+                    Propiedad = new {
+                        idPropiedad = consulta.Propiedad
+                    },
+                    Rol = new
+                    {
+                        idRol = consulta.Rol.idRol,
+                        rol1 = consulta.Rol.rol1
+                    }
+                };
+
+                return Ok(resultado);
             }
             catch (Exception)
             {

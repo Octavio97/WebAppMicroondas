@@ -139,5 +139,31 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verEstatus")]
+        public IHttpActionResult verEstatus(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Estatus.Where(w => w.idEstatus == i).FirstOrDefault();
+
+                var respuesta = new
+                {
+                    idEstatus = consulta.idEstatus,
+                    estatus1 = consulta.estatus1,
+                    activo = consulta.activo,
+                    Contrato = consulta.Contrato
+                };
+
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

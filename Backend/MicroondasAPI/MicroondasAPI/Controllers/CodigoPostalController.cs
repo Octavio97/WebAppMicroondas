@@ -94,8 +94,20 @@ namespace MicroondasAPI.Controllers
                 {
                     idCP = s.idCP,
                     codigo = s.codigo,
-                    idCiudad = s.Ciudad.ciudad1,
-                    activo = s.activo
+                    idCiudad = s.idCiudad,
+                    activo = s.activo,
+                    Ciudad = new {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1,
+                        idEstado = s.Ciudad.idEstado,
+                        activo = s.activo,
+                        Estado = new
+                        {
+                            idEstado = s.Ciudad.Estado.idEstado,
+                            estado1 = s.Ciudad.Estado.estado1,
+                            activo = s.Ciudad.Estado.activo
+                        }
+                    }
                 });
 
                 // Devolvemos los datos
@@ -156,7 +168,22 @@ namespace MicroondasAPI.Controllers
                 var resultado = accion.Select(s => new
                 {
                     idCP = s.idCP,
-                    codigo = s.codigo
+                    codigo = s.codigo,
+                    idCiudad = s.idCiudad,
+                    activo = s.activo,
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1,
+                        idEstado = s.Ciudad.idEstado,
+                        activo = s.activo,
+                        Estado = new
+                        {
+                            idEstado = s.Ciudad.Estado.idEstado,
+                            estado1 = s.Ciudad.Estado.estado1,
+                            activo = s.Ciudad.Estado.activo
+                        }
+                    }
                 });
 
                 return Ok(resultado);
@@ -180,7 +207,21 @@ namespace MicroondasAPI.Controllers
                 var resultado = consulta.Select(s => new {
                     idCP = s.idCP,
                     codigo = s.codigo,
-                    activo = s.activo
+                    idCiudad = s.idCiudad,
+                    activo = s.activo,
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1,
+                        idEstado = s.Ciudad.idEstado,
+                        activo = s.activo,
+                        Estado = new
+                        {
+                            idEstado = s.Ciudad.Estado.idEstado,
+                            estado1 = s.Ciudad.Estado.estado1,
+                            activo = s.Ciudad.Estado.activo
+                        }
+                    }
                 });
 
                 return Ok(resultado);
@@ -205,7 +246,20 @@ namespace MicroondasAPI.Controllers
                     idCP = consulta.idCP,
                     codigo = consulta.codigo,
                     idCiudad = consulta.idCiudad,
-                    activo = consulta.activo
+                    activo = consulta.activo,
+                    Ciudad = new
+                    {
+                        idCiudad = consulta.Ciudad.idCiudad,
+                        ciudad1 = consulta.Ciudad.ciudad1,
+                        idEstado = consulta.Ciudad.idEstado,
+                        activo = consulta.activo,
+                        Estado = new
+                        {
+                            idEstado = consulta.Ciudad.Estado.idEstado,
+                            estado1 = consulta.Ciudad.Estado.estado1,
+                            activo = consulta.Ciudad.Estado.activo
+                        }
+                    }
                 };
 
                 return Ok(resultado);

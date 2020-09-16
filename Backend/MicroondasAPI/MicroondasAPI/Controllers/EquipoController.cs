@@ -139,5 +139,31 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasaAPI/verEquipo")]
+        public IHttpActionResult verEquipo(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Equipo.Where(w => w.idEquipo == i).FirstOrDefault();
+
+                var resultado = new
+                {
+                    idEquipo = consulta.idEquipo,
+                    equipo1 = consulta.equipo1,
+                    activo = consulta.activo,
+                    Propiedad = consulta.Propiedad
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

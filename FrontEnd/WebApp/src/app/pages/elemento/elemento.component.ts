@@ -82,7 +82,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
-    console.log(this.id);
     if (this.id === 'Ciudad' || this.id === 'Código postal' || this.id === 'Colonia' || this.id === 'Usuario') {
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
@@ -148,32 +147,77 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       }
       else if (this.id === 'Colonia') {
         this.colonia.idColonia = this.id2;
+        this.coloniaS.verColonia(this.id2).subscribe( (resp: Colonia) => {
+          if (resp) {
+            this.colonia = resp;
+          }
+        });
       }
       else if (this.id === 'Contrato') {
         this.contrato.idContrato = this.id2;
+        this.contratoS.verContrato(this.id2).subscribe( (resp: Contrato) => {
+          if (resp) {
+            this.contrato = resp;
+          }
+        });
       }
       else if (this.id === 'Equipo') {
         this.equipo.idEquipo = this.id2;
+        this.equipoS.verEquipo(this.id2).subscribe( (resp: Equipo) => {
+          if (resp) {
+            this.equipo = resp;
+          }
+        });
       }
       else if (this.id === 'Estado') {
         this.estado.idEstado = this.id2;
+        this.equipoS.verEquipo(this.id2).subscribe( (resp: Equipo) => {
+          if (resp) {
+            this.equipo = resp;
+          }
+        });
       }
       else if (this.id === 'Estatus') {
         this.estatus.idEstatus = this.id2;
+        this.estatusS.verEstatus(this.id2).subscribe( (resp: Estatus) => {
+          if (resp) {
+            this.estatus = resp;
+          }
+        });
       }
       else if (this.id === 'Paquete') {
         this.paquete.idPaquete = this.id2;
+        this.paqueteS.verPaquete(this.id2).subscribe( (resp: Paquete) => {
+          if (resp) {
+            this.paquete = resp;
+          }
+        });
       }
       else if (this.id === 'PaqueteEquipo') {
       }
       else if (this.id === 'Propiedad') {
         this.propiedad.idEquipo = this.id2;
+        this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad) => {
+          if (resp) {
+            this.propiedad = resp;
+          }
+        });
       }
       else if (this.id === 'Rol') {
         this.rol.idRol = this.id2;
+        this.rolS.verRol(this.id2).subscribe( (resp: Rol) => {
+          if (resp) {
+            this.rol = resp;
+          }
+        });
       }
       else if (this.id === 'Usuario') {
         this.usuario.idUsuario = this.id2;
+        this.usuarioS.verUsuario(this.id2).subscribe( (resp: Usuario) => {
+          if (resp) {
+            this.usuario = resp;
+          }
+        });
       }
     }
     }

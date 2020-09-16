@@ -30,4 +30,8 @@ export class EquipoService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnica', { params: { id } } );
   }
+
+  verEquipo(id: string) {
+    return this.http.get( this.url + 'verEquipo', { params: { id } } );
+  }
 }

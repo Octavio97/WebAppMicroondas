@@ -170,5 +170,32 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verPaquete")]
+        public IHttpActionResult verPaquete(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Paquete.Where(w => w.idPaquete == i).FirstOrDefault();
+
+                var resultado = new {
+                    idPaquete = consulta.idPaquete,
+                    nombre = consulta.nombre,
+                    precio = consulta.precio,
+                    activo = consulta.activo,
+                    descripcion = consulta.descripcion,
+                    Contrato = consulta.Contrato,
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

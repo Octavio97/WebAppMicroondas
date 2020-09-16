@@ -139,5 +139,31 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasApi/verPropiedad")]
+        public IHttpActionResult verPropiedad(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Propiedad.Where(w => w.idPropiedad == i).FirstOrDefault();
+
+                var resultado = new {
+                    idPropiedad = consulta.idPropiedad,
+                    idUsuario = consulta.idUsuario,
+                    idEquipo = consulta.idEquipo,
+                    Equipo = consulta.Equipo,
+                    Usuario = consulta.Usuario
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

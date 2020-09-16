@@ -33,4 +33,8 @@ export class UsuarioService {
   login(correo: string, contra: string) {
     return this.http.get( this.url + 'login', { params: { correo, contra } } );
   }
+
+  verUsuario(id: string) {
+    return this.http.get( this.url + 'verUsuario', { params: { id } } );
+  }
 }

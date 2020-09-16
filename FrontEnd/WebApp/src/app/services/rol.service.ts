@@ -29,4 +29,8 @@ export class RolService {
  consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnica', { params: { id } } );
   }
+
+  verRol(id: string) {
+    return this.http.get( this.url + 'verRol', { params: { id } } );
+  }
 }

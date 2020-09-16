@@ -139,5 +139,30 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verRol")]
+        public IHttpActionResult verRol(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var consulta = SessionController.getInstance().Rol.Where(w => w.idRol == i).FirstOrDefault();
+
+                var resultado = new {
+                    idRol = consulta.idRol,
+                    rol1 = consulta.rol1,
+                    activo = consulta.activo,
+                    Usuario = consulta.Usuario
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

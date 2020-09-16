@@ -68,8 +68,8 @@
                 <td *ngIf="item.activo || this.in">{{ item.telefono }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.correoE }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.contrasena }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.calle }} {{ item.numInt }} {{ item.numExt }}, CP: {{item.idCP}}, {{item.idColonia}}, {{ item.idCiudad }}, {{ item.idEstado }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.idRol }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.calle }} {{ item.numInt }} {{ item.numExt }}, CP: {{item.CP.codigo}}, {{item.Colonia.colonia1}}, {{ item.Ciudad.ciudad1 }}, {{ item.Estado.estado1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Rol.rol1 }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
@@ -166,7 +166,7 @@
             <tr *ngFor="let item of ciudad; let i=index">
                 <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
                 <td *ngIf="item.activo || this.in">{{ item.idCiudad }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.Ciudad1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.ciudad1 }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.idEstado }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>

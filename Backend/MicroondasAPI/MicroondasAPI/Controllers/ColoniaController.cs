@@ -94,8 +94,27 @@ namespace MicroondasAPI.Controllers
                 {
                     idColonia = s.idColonia,
                     colonia1 = s.colonia1,
-                    idCP = s.CodigoPostal.codigo,
-                    activo = s.activo
+                    idCP = s.idCP,
+                    activo = s.activo,
+                    CP = new {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo,
+                        idCiudad = s.CodigoPostal.idCiudad,
+                        activo = s.CodigoPostal.activo,
+                        Ciudad = new
+                        {
+                            idCiudad = s.CodigoPostal.Ciudad.idCiudad,
+                            ciudad1 = s.CodigoPostal.Ciudad.ciudad1,
+                            idEstado = s.CodigoPostal.Ciudad.idEstado,
+                            activo = s.CodigoPostal.activo,
+                            Estado = new
+                            {
+                                idEstado = s.CodigoPostal.Ciudad.Estado.idEstado,
+                                estado1 = s.CodigoPostal.Ciudad.Estado.estado1,
+                                activo = s.CodigoPostal.Ciudad.Estado.activo
+                            }
+                        }
+                    }
                 });
 
                 // Devolvemos los datos
@@ -155,7 +174,29 @@ namespace MicroondasAPI.Controllers
 
                 var resultado = accion.Select(s => new {
                     idColonia = s.idColonia,
-                    colonia1 = s.colonia1
+                    colonia1 = s.colonia1,
+                    idCP = s.idCP,
+                    activo = s.activo,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo,
+                        idCiudad = s.CodigoPostal.idCiudad,
+                        activo = s.CodigoPostal.activo,
+                        Ciudad = new
+                        {
+                            idCiudad = s.CodigoPostal.Ciudad.idCiudad,
+                            ciudad1 = s.CodigoPostal.Ciudad.ciudad1,
+                            idEstado = s.CodigoPostal.Ciudad.idEstado,
+                            activo = s.CodigoPostal.activo,
+                            Estado = new
+                            {
+                                idEstado = s.CodigoPostal.Ciudad.Estado.idEstado,
+                                estado1 = s.CodigoPostal.Ciudad.Estado.estado1,
+                                activo = s.CodigoPostal.Ciudad.Estado.activo
+                            }
+                        }
+                    }
                 });
 
                 return Ok(resultado);
@@ -179,7 +220,28 @@ namespace MicroondasAPI.Controllers
                 var resultado = new {
                     idColonia = consulta.idColonia,
                     colonia1 = consulta.colonia1,
-                    idCP = consulta.idCP
+                    idCP = consulta.idCP,
+                    activo = consulta.activo,
+                    CP = new
+                    {
+                        idCP = consulta.CodigoPostal.idCP,
+                        codigo = consulta.CodigoPostal.codigo,
+                        idCiudad = consulta.CodigoPostal.idCiudad,
+                        activo = consulta.CodigoPostal.activo,
+                        Ciudad = new
+                        {
+                            idCiudad = consulta.CodigoPostal.Ciudad.idCiudad,
+                            ciudad1 = consulta.CodigoPostal.Ciudad.ciudad1,
+                            idEstado = consulta.CodigoPostal.Ciudad.idEstado,
+                            activo = consulta.CodigoPostal.activo,
+                            Estado = new
+                            {
+                                idEstado = consulta.CodigoPostal.Ciudad.Estado.idEstado,
+                                estado1 = consulta.CodigoPostal.Ciudad.Estado.estado1,
+                                activo = consulta.CodigoPostal.Ciudad.Estado.activo
+                            }
+                        }
+                    }
                 };
 
                 return Ok(resultado);

@@ -30,4 +30,8 @@ export class EstatusService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnica', { params: { id } } );
   }
+
+  verEstatus(id: string) {
+    return this.http.get( this.url + 'verEstatus', { params: { id } } );
+  }
 }

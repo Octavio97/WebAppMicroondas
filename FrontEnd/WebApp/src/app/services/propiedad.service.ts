@@ -30,4 +30,8 @@ export class PropiedadService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnica', { params: { id } } );
   }
+
+  verPropiedad(id: string) {
+    return this.http.get( this.url + 'verPropiedad', { params: { id } } );
+  }
 }

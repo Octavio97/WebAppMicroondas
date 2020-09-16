@@ -30,4 +30,8 @@ export class PaqueteService {
   consultaUnica() {
     return this.http.get( this.url + 'consultaUnicaPaq' );
   }
+
+  verPaquete(id: string) {
+    return this.http.get( this.url + 'verPaquete', { params: { id } } );
+  }
 }

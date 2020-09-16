@@ -30,4 +30,8 @@ export class ContratoService {
   consultaUnica(id: string) {
     return this.http.get( this.url + 'consultaUnica', { params: { id } } );
   }
+
+  verContrato(id: string) {
+    return this.http.get( this.url + 'verContrato', { params: { id } } );
+  }
 }

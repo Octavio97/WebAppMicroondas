@@ -30,4 +30,8 @@ export class EstadoService {
   consultaEInicio() {
     return this.http.get( this.url + 'consultaEInicio' );
   }
+
+  verEstado(id: string) {
+    return this.http.get( this.url + 'verEstado', { params: { id } } );
+  }
 }
