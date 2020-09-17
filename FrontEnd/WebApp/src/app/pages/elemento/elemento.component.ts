@@ -93,9 +93,28 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             this.c = resp;
             this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
               this.cp = resp;
-              this.coloniaS.consultaUnica(this.usuario.Colonia.idCP).subscribe( (resp: Colonia[]) => {
+              this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
                 this.co = resp;
               });
+            });
+          });
+        });
+      }
+      if (this.id === 'Código postal' && this.id2 !== 'new') {
+        this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+          this.e = resp;
+          this.ciudadS.consultaUnica(this.codigoP.Ciudad.Estado.idEstado).subscribe( (resp:Ciudad[]) => {
+            this.c = resp;
+          });
+        });
+      }
+      if (this.id === 'Colonia' && this.id !== 'new') {
+        this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+          this.e = resp;
+          this.ciudadS.consultaUnica(this.colonia.CP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+            this.c = resp;
+            this.codigoS.consultaUnica(this.colonia.CP.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+              this.cp = resp;
             });
           });
         });
@@ -185,9 +204,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       }
       else if (this.id === 'Estado') {
         this.estado.idEstado = this.id2;
-        this.equipoS.verEquipo(this.id2).subscribe( (resp: Equipo) => {
+        this.estadoS.verEstado(this.id2).subscribe( (resp: Estado) => {
           if (resp) {
-            this.equipo = resp;
+            this.estado = resp;
           }
         });
       }

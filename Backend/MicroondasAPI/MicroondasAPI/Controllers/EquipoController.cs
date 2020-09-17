@@ -141,7 +141,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/MicroondasaAPI/verEquipo")]
+        [Route("api/MicroondasAPI/verEquipo")]
         public IHttpActionResult verEquipo(string id)
         {
             try

@@ -42,7 +42,8 @@
             </div>
             <div class="form-group">
                 <label for="calle">Calle:</label>
-                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð.]*" [(ngModel)]="this.usuario.calle" #calle="ngModel">
+                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð.]*"
+                    [(ngModel)]="this.usuario.calle" #calle="ngModel">
                 <div *ngIf="calle.errors?.required" class="invalid-feedback">Solo ingresa tu calle</div>
                 <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
             </div>
@@ -108,7 +109,8 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol1">Rol: </label>
-                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol1" name="rol1" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" #rol1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="30">
+                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol1" name="rol1" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" #rol1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
+                    maxlength="30">
                 <div *ngIf="rol1.errors?.required" class="invalid-feedback">Ingrese rol</div>
                 <div *ngIf="rol1.errors?.pattern" class="invalid-feedback">No ingrese numeros</div>
                 <div *ngIf="rol1.errors?.maxlength" class="invalid-feedback">No debe pasar de 30 caracteres</div>
@@ -190,7 +192,8 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="idestado">Estado: </label><br>
             <div class="form-group">
-                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.codigoP.Ciudad.Estado.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)"
+                    required>
                     <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                 </select>
                 <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
@@ -275,14 +278,15 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="estado">Estado: </label><br>
             <div class="form-group">
-                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.colonia.CP.Ciudad.Estado.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)"
+                    required>
                     <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                 </select>
                 <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
             </div>
             <label for="idciudad">Ciudad: </label><br>
             <div class="form-group">
-                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.codigoP.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.colonia.CP.Ciudad.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
                     <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
                 </select>
                 <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
