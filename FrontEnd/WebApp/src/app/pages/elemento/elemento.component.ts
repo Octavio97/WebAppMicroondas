@@ -86,6 +86,20 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
       });
+      if (this.id === 'Usuario' && this.id2 !== 'new') {
+        this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+          this.e = resp;
+          this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+            this.c = resp;
+            this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+              this.cp = resp;
+              this.coloniaS.consultaUnica(this.usuario.Colonia.idCP).subscribe( (resp: Colonia[]) => {
+                this.co = resp;
+              });
+            });
+          });
+        });
+      }
     }
     if (this.id === 'Usuario') {
       this.rolS.consultaRol().subscribe( (resp: Rol[]) => {

@@ -27,7 +27,7 @@
 </header>
 <br><br>
 
-<!-- Slide de imagenes -->
+<!-- Slide de imagenes y formulario -->
 <div class="container">
     <!-- Slide de imagenes -->
     <div id="slide" class="animated fadeIn carousel slide carousel-fade" data-ride="carousel">
@@ -66,6 +66,37 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <br>
+    <!-- Formulario -->
+    <form class="container animated fadeIn rounded border border-primary">
+        <div class="form-group">
+            <div class="form-group">
+                <h1 class="display-4">Mayores informes</h1>
+                <h4>Ingrese sus datos para obtener mas informacion sobre nuestros servicios y cobertura</h4>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nombre">Nombre: &nbsp;</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese su nombre completo" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="20">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="codigo">Código postal: &nbsp;</label>
+                    <input type="number" id="codigo" name="codigo" class="form-control" placeholder="Ingrese su código postal">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo electrónico: &nbsp;</label>
+                <input type="email" id="correo" name="correo" class="form-control" placeholder="Ingrese su correo electronico">
+            </div>
+            <div class="form-group">
+
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary">Enviar</button>
+            </div>
+        </div>
+    </form>
 </div>
 <br><br>
 
@@ -125,7 +156,7 @@
                     <div class="form-group">
                         <label for="ciudad">Ciudad: &nbsp;</label>
                         <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="this.codigo" (ngModelChange)="getCP($event)">
-                            <option *ngFor="let item of ciudad" [ngValue]="item.idCiudad">{{ item.Ciudad1 }}</option>
+                            <option *ngFor="let item of ciudad" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -152,7 +183,7 @@
 </div>
 
 <!-- Informes y formulario de ac -->
-<footer style="background-color: cornflowerblue; color: white;" class="d-flex justify-content-center">
+<footer style="background-color: cornflowerblue; color: white;" class="align-self-baseline">
     <!-- Informes de la empresa -->
     <div class="animated fadeIn" style="margin-left: 2%;">
         <br>
@@ -164,35 +195,4 @@
             <h6>Teléfono: (664) 199-8146</h6>
         </div>
     </div>
-
-    <!-- Formulario -->
-    <form class="animated fadeIn">
-        <div class="form-group container">
-            <div class="form-group">
-                <h1 class="display-4">Mayores informes</h1>
-                <h4>Ingrese sus datos para obtener mas informacion sobre nuestros servicios y cobertura</h4>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="input1">Nombre: &nbsp;</label>
-                    <input type="text" id="input1" class="form-control" placeholder="Ingrese su nombre completo">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="input1">Código postal: &nbsp;</label>
-                    <input type="number" id="input3" class="form-control" placeholder="Ingrese su código postal">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="input1">Correo electrónico: &nbsp;</label>
-                <input type="email" id="input2" class="form-control" placeholder="Ingrese su correo electronico">
-            </div>
-            <div class="form-group">
-
-            </div>
-            <div class="form-group">
-                <button class="btn btn-secondary">Enviar</button>
-            </div>
-        </div>
-    </form>
 </footer>

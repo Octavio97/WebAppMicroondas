@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
             icon: 'success'
           });
           const element = document.getElementById('check') as HTMLInputElement;
-          console.log(element.checked);
           if (!element.checked) {
             localStorage.setItem('currentUser', JSON.stringify(this.usuario)); // guardamos el usuario que inicio sesion
           }

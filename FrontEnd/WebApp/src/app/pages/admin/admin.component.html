@@ -167,7 +167,7 @@
                 <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
                 <td *ngIf="item.activo || this.in">{{ item.idCiudad }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.ciudad1 }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.idEstado }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Estado.estado1 }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
@@ -184,6 +184,7 @@
                 <th scope="col">ID Código postal</th>
                 <th scope="col">Código postal</th>
                 <th scope="col">Ciudad</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Activo</th>
                 <th></th>
             </tr>
@@ -193,7 +194,8 @@
                 <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
                 <td *ngIf="item.activo || this.in">{{ item.idCP }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.codigo }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.idCiudad }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Ciudad.idCiudad }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Ciudad.Estado.estado1 }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
@@ -264,6 +266,8 @@
                 <th scope="col">ID Colonia</th>
                 <th scope="col">Colonia</th>
                 <th scope="col">Código postal</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Activo</th>
                 <th></th>
             </tr>
@@ -273,7 +277,9 @@
                 <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
                 <td *ngIf="item.activo || this.in">{{ item.idColonia }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.colonia1 }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.idCP }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.CP.codigo }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.CP.Ciudad.ciudad1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.CP.Ciudad.Estado.estado1 }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
@@ -297,8 +303,8 @@
             <tr *ngFor="let item of propiedad; let i=index">
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idPropiedad }}</td>
-                <td>{{ item.idUsuario }}</td>
-                <td>{{ item.idEquipo }}</td>
+                <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
+                <td>{{ item.Equipo.equipo1 }}</td>
                 <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
@@ -322,7 +328,7 @@
             <tr *ngFor="let item of contrato; let i=index">
                 <th *ngIf="item.activo || this.in" scope="row">{{ i + 1 }}</th>
                 <td *ngIf="item.activo || this.in">{{ item.idContrato }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.idUsuario }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.fechaInicio }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.fechaFinal }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.idPaquete }}</td>
