@@ -16,7 +16,7 @@ export class EquipoService {
   }
 
   bajaEquipo(id: string) {
-    return this.http.put( this.url + 'eliminarEquipo', id );
+    return this.http.put( this.url + 'eliminarEquipo', { params: { id } } );
   }
 
   consultaEquipo() {
@@ -24,7 +24,7 @@ export class EquipoService {
   }
 
   modificarEquipo(equipo: Equipo) {
-    return this.http.post( this.url + 'modificarEquipo', equipo );
+    return this.http.put( this.url + 'modificarEquipo', equipo );
   }
 
   consultaUnica(id: string) {

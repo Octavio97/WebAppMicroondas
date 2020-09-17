@@ -16,7 +16,7 @@ export class ContratoService {
   }
 
   bajaContrato(id: string) {
-    return this.http.put( this.url + 'eliminarContrato', id );
+    return this.http.put( this.url + 'eliminarContrato', { params: { id } } );
   }
 
   consultaContrato() {
@@ -24,7 +24,7 @@ export class ContratoService {
   }
 
   modificarContrato(contrato: Contrato) {
-    return this.http.post( this.url + 'modificarContrato', contrato );
+    return this.http.put( this.url + 'modificarContrato', contrato );
   }
 
   consultaUnica(id: string) {

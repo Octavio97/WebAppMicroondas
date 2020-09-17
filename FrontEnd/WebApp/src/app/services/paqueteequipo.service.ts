@@ -16,7 +16,7 @@ export class PaqueteequipoService {
   }
 
   bajaCiudad(id: string) {
-    return this.http.put( this.url + 'eliminarPaqueteEquipo', id );
+    return this.http.put( this.url + 'eliminarPaqueteEquipo', { params: { id } } );
   }
 
   consultaCiudad() {
@@ -24,7 +24,7 @@ export class PaqueteequipoService {
   }
 
   modificarCiudad(pq: PaqueteEquipo) {
-    return this.http.post( this.url + 'modificarPaqueteEquipo', pq );
+    return this.http.put( this.url + 'modificarPaqueteEquipo', pq );
   }
 
   consultaUnica(id: string) {

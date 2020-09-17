@@ -16,7 +16,7 @@ export class PaqueteService {
   }
 
   bajaPaquete(id: string) {
-    return this.http.put( this.url + 'eliminarPaquete', id );
+    return this.http.put( this.url + 'eliminarPaquete', { params: { id } } );
   }
 
   consultaPaquete() {
@@ -24,7 +24,7 @@ export class PaqueteService {
   }
 
   modificarPaquete(paquete: Paquete) {
-    return this.http.post( this.url + 'modificarPaquete', paquete );
+    return this.http.put( this.url + 'modificarPaquete', paquete );
   }
 
   consultaUnica() {

@@ -16,7 +16,7 @@ export class ColoniaService {
   }
 
   bajaColonia(id: string) {
-    return this.http.put( this.url + 'eliminarColonia', id );
+    return this.http.put( this.url + 'eliminarColonia', { params: { id } } );
   }
 
   consultaColonia() {
@@ -24,7 +24,7 @@ export class ColoniaService {
   }
 
   modificarColonia(colonia: Colonia) {
-    return this.http.post( this.url + 'modificarColonia', colonia );
+    return this.http.put( this.url + 'modificarColonia', colonia );
   }
 
   consultaUnica(id: string) {

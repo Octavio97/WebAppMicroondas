@@ -261,4 +261,151 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+
+  delete(id: string){
+    Swal.fire({
+      title: 'Confirmación',
+      text: 'Esta seguro de eliminar el registro',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      allowOutsideClick: false
+    }).then((result) => {
+      Swal.showLoading();
+      console.log(result.value);
+      if (result.value) {
+        // mensaje para cargar informacion
+      Swal.fire({
+        title: 'Espere',
+        text: 'Realizando proceso...',
+        icon: 'info',
+        allowOutsideClick: false,
+        });
+      if (this.seleccion === 'Ciudad') {
+          this.ciudadS.bajaCiudad(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'La ciudad fue eliminada con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Código postal') {
+          this.codigoS.bajaCodigo(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El código postal fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Colonia') {
+          this.coloniaS.bajaColonia(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'La colonia fue eliminada con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Contrato') {
+          this.contratoS.bajaContrato(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El contrato fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Equipo') {
+          this.equipoS.bajaEquipo(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El equipo fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Estado') {
+          this.estadoS.bajaEstado(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El estado fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Estatus') {
+          this.estatusS.bajaEstatus(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El estatus fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Paquete') {
+          this.paqueteS.bajaPaquete(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El paquete fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Propiedad') {
+          this.propiedadS.bajaPropiedad(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'La propiedad fue eliminada con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Rol') {
+          this.rolS.bajaRol(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El rol fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+        else if (this.seleccion === 'Usuario') {
+          this.usuarioS.bajaUsuario(id).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El estado fue eliminado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        }
+      }
+    });
+  }
 }

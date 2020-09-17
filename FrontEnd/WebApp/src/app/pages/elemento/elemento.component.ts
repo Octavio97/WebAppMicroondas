@@ -89,10 +89,13 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       if (this.id === 'Usuario' && this.id2 !== 'new') {
         this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
           this.e = resp;
+          // tslint:disable-next-line: no-shadowed-variable
           this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
             this.c = resp;
+            // tslint:disable-next-line: no-shadowed-variable
             this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
               this.cp = resp;
+              // tslint:disable-next-line: no-shadowed-variable
               this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
                 this.co = resp;
               });
@@ -103,7 +106,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       if (this.id === 'Código postal' && this.id2 !== 'new') {
         this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
           this.e = resp;
-          this.ciudadS.consultaUnica(this.codigoP.Ciudad.Estado.idEstado).subscribe( (resp:Ciudad[]) => {
+          // tslint:disable-next-line: no-shadowed-variable
+          this.ciudadS.consultaUnica(this.codigoP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
             this.c = resp;
           });
         });
@@ -111,8 +115,10 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       if (this.id === 'Colonia' && this.id !== 'new') {
         this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
           this.e = resp;
+          // tslint:disable-next-line: no-shadowed-variable
           this.ciudadS.consultaUnica(this.colonia.CP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
             this.c = resp;
+            // tslint:disable-next-line: no-shadowed-variable
             this.codigoS.consultaUnica(this.colonia.CP.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
               this.cp = resp;
             });
@@ -278,7 +284,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si',
-        cancelButtonText: 'No'
+        cancelButtonText: 'No',
+        allowOutsideClick: false
       }).then((result) => {
         if (result.value) {
           // mensaje para cargar informacion

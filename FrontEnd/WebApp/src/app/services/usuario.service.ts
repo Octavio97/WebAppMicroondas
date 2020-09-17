@@ -15,7 +15,7 @@ export class UsuarioService {
   }
 
   bajaUsuario(id: string) {
-    return this.http.put( this.url + 'eliminarUsuario', id );
+    return this.http.put( this.url + 'eliminarUsuario', {params: { id } } );
   }
 
   consultaUsuario() {

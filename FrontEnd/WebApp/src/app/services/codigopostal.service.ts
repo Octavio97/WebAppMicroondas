@@ -16,7 +16,7 @@ export class CodigopostalService {
   }
 
   bajaCodigo(id: string) {
-    return this.http.put( this.url + 'eliminarCP', id );
+    return this.http.put( this.url + 'eliminarCP', { params: { id } } );
   }
 
   consultaCodigo() {

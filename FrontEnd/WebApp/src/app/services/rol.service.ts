@@ -15,7 +15,7 @@ export class RolService {
   }
 
   bajaRol(id: string) {
-    return this.http.put( this.url + 'eliminarRol', id );
+    return this.http.put( this.url + 'eliminarRol', { params: { id } } );
   }
 
   consultaRol() {

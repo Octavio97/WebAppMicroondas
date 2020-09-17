@@ -107,7 +107,7 @@ namespace MicroondasAPI.Controllers
 
         [HttpPut]
         [Route("api/MicroondasAPI/modificarRol")]
-        public IHttpActionResult modificarColonia(Rol rol)
+        public IHttpActionResult modificarRol(Rol rol)
         {
             try
             {

@@ -16,7 +16,7 @@ export class EstadoService {
   }
 
   bajaEstado(id: string) {
-    return this.http.put( this.url + 'eliminarEstado', id );
+    return this.http.put( this.url + 'eliminarEstado', { params: { id } } );
   }
 
   consultaEstado() {
@@ -24,7 +24,7 @@ export class EstadoService {
   }
 
   modificarEstado(estado: Estado) {
-    return this.http.post( this.url + 'modificarEstado', estado );
+    return this.http.put( this.url + 'modificarEstado', estado );
   }
 
   consultaEInicio() {

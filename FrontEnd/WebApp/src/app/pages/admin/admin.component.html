@@ -74,7 +74,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idUsuario]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idUsuario]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idUsuario)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -98,7 +98,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idRol]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idRol]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idRol)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -122,7 +122,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstatus]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstatus]"><i class="fas fa-pen"></i></button><button class="delete(item.idEstatus)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -146,7 +146,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstado]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstado]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idEstado)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -172,7 +172,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCiudad]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCiudad]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idCiudad)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -200,7 +200,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCP]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCP]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idCP)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -228,7 +228,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPaquete]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPaquete]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idPaquete)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -252,7 +252,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEquipo]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEquipo]"><i class="fas fa-pen"></i></button><button class="delete(item.idEquipo)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -284,7 +284,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idColonia]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idColonia]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idColonia)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -305,7 +305,7 @@
                 <td>{{ item.idPropiedad }}</td>
                 <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
                 <td>{{ item.Equipo.equipo1 }}</td>
-                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button class="delete(item.idPropiedad)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -337,7 +337,7 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idContrato]"><i class="fas fa-pen"></i></button><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idContrato]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idContrato)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>

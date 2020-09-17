@@ -16,7 +16,7 @@ export class PropiedadService {
   }
 
   bajaPropiedad(id: string) {
-    return this.http.put( this.url + 'eliminarPropiedad', id );
+    return this.http.put( this.url + 'eliminarPropiedad', { params: { id } } );
   }
 
   consultaPropiedad() {
@@ -24,7 +24,7 @@ export class PropiedadService {
   }
 
   modificarPropiedad(propiedad: Propiedad) {
-    return this.http.post( this.url + 'modificarPropiedad', propiedad );
+    return this.http.put( this.url + 'modificarPropiedad', propiedad );
   }
 
   consultaUnica(id: string) {
