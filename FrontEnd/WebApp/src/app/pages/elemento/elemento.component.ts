@@ -87,41 +87,32 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         this.e = resp;
       });
       if (this.id === 'Usuario' && this.id2 !== 'new') {
-        this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-          this.e = resp;
+        // tslint:disable-next-line: no-shadowed-variable
+        this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+          this.c = resp;
           // tslint:disable-next-line: no-shadowed-variable
-          this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
-            this.c = resp;
+          this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+            this.cp = resp;
             // tslint:disable-next-line: no-shadowed-variable
-            this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
-              this.cp = resp;
-              // tslint:disable-next-line: no-shadowed-variable
-              this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
-                this.co = resp;
-              });
+            this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
+              this.co = resp;
             });
           });
         });
       }
       if (this.id === 'Código postal' && this.id2 !== 'new') {
-        this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-          this.e = resp;
-          // tslint:disable-next-line: no-shadowed-variable
-          this.ciudadS.consultaUnica(this.codigoP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
-            this.c = resp;
-          });
+        // tslint:disable-next-line: no-shadowed-variable
+        this.ciudadS.consultaUnica(this.codigoP.Ciudad.idEstado).subscribe( (resp: Ciudad[]) => {
+          this.c = resp;
         });
       }
       if (this.id === 'Colonia' && this.id !== 'new') {
-        this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-          this.e = resp;
+        // tslint:disable-next-line: no-shadowed-variable
+        this.ciudadS.consultaUnica(this.colonia.CP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+          this.c = resp;
           // tslint:disable-next-line: no-shadowed-variable
-          this.ciudadS.consultaUnica(this.colonia.CP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
-            this.c = resp;
-            // tslint:disable-next-line: no-shadowed-variable
-            this.codigoS.consultaUnica(this.colonia.CP.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
-              this.cp = resp;
-            });
+          this.codigoS.consultaUnica(this.colonia.CP.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+            this.cp = resp;
           });
         });
       }
@@ -154,20 +145,22 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       }
       else {
       // Definimos la accion ya sea para agregar o modificar
-      if (this.id2 === 'new') { // si es nuo (LO COMENTE)
+      if (this.id2 === 'new') { // si es nuevo
       // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
-      this.rol.activo = false;
-      this.estado.activo = false;
-      this.usuario.activo = false;
-      this.estatus.activo = false;
-      this.ciudad.activo = false;
-      this.codigoP.activo = false;
-      this.colonia.activo = false;
-      this.contrato.activo = false;
-      this.equipo.activo = false;
-      this.paquete.activo = false;
+      // this.rol.activo = false;
+      // this.estado.activo = false;
+      // this.usuario.activo = false;
+      // this.estatus.activo = false;
+      // this.ciudad.activo = false;
+      // this.codigoP.activo = false;
+      // this.colonia.activo = false;
+      // this.contrato.activo = false;
+      // this.equipo.activo = false;
+      // this.paquete.activo = false;
+      this.init();
     }
     else { // si no es nuevo
+      this.init();
       if (this.id === 'Ciudad') {
         this.ciudad.idCiudad = this.id2;
         this.ciudadS.verCiudad(this.id2).subscribe( (resp: Ciudad) => {
@@ -757,5 +750,146 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
       this.co = resp;
     });
+  }
+
+  // metodo para incializar arreglos
+  init() {
+    if (this.id === 'Ciudad') {
+      this.ciudad = {
+        idCiudad: null,
+        ciudad1: null,
+        idEstado: null,
+        activo: null,
+        Estado: new Estado(),
+        CP: new CodigoPostal(),
+        Usuario: new Usuario()
+      };
+    }
+    else if (this.id === 'Código postal') {
+      this.codigoP = {
+        idCP: null,
+        codigo: null,
+        idCiudad: null,
+        activo: null,
+        Colonia: new Colonia(),
+        Usuario: new Usuario(),
+        Ciudad: new Ciudad()
+      };
+    }
+    else if (this.id === 'Colonia') {
+      this.colonia = {
+        idColonia: null,
+        colonia1: null,
+        idCP: null,
+        activo: null,
+        CP: new CodigoPostal(),
+        Usuario: new Usuario()
+      };
+    }
+    else if (this.id === 'Contrato') {
+      this.contrato = {
+        idContrato: null,
+        pdf: null,
+        archivo: null,
+        fechaInicio: null,
+        fechaFinal: null,
+        idPaquete: null,
+        idEstatus: null,
+        idUsuario: null,
+        activo: null,
+        Estatus: new Estatus(),
+        Paquete: new Paquete(),
+        Usuario: new Usuario()
+      };
+    }
+    else if (this.id === 'Equipo') {
+      this.equipo = {
+        idEquipo: null,
+        equipo1: null,
+        activo: null,
+        PaqueteEquipo: new PaqueteEquipo(),
+        Propiedad: new Propiedad()
+      };
+    }
+    else if (this.id === 'Estado') {
+      this.estado = {
+        idEstado: null,
+        estado1: null,
+        activo: null,
+        Ciudad: new Ciudad(),
+        Usuario: new Usuario()
+      };
+    }
+    else if (this.id === 'Estatus') {
+      this.estatus = {
+        idEstatus: null,
+        estatus1: null,
+        activo: null,
+        Contrato: new Contrato()
+      };
+    }
+    else if (this.id === 'Paquete') {
+      this.paquete = {
+        idPaquete: null,
+        precio: null,
+        nombre: null,
+        activo: null,
+        descripcion: null,
+        Contrato: new Contrato(),
+        PaqueteEquipo: new PaqueteEquipo()
+      };
+    }
+    else if (this.id === 'PaqueteEquipo') {
+      this.paqueteEquipo = {
+        idPE: null,
+        idPaquete: null,
+        idEquipo: null,
+        Paquete: new Paquete(),
+        Equipo: new Equipo(),
+      };
+    }
+    else if (this.id === 'Propiedad') {
+      this.propiedad = {
+        idPropiedad: null,
+        idUsuario: null,
+        idEquipo: null,
+        Equipo: new Equipo(),
+        Usuario: new Usuario()
+      };
+    }
+    else if (this.id === 'Rol') {
+      this.rol = {
+      idRol: null,
+      rol1: null,
+      activo: null,
+      Usuario: new Usuario()
+    };
+    }
+    else if (this.id === 'Usuario') {
+      this.usuario = {
+      idUsuario: null,
+      nombre: null,
+      apellido: null,
+      telefono: null,
+      correoE: null,
+      contrasena: null,
+      calle: null,
+      numInt: null,
+      numExt: null,
+      idEstado: null,
+      idCiudad: null,
+      idColonia: null,
+      idCP: null,
+      idRol: null,
+      activo: null,
+      CP: new CodigoPostal(),
+      Colonia: new Colonia(),
+      Contrato: new Contrato(),
+      Ciudad: new Ciudad(),
+      Estado: new Estado(),
+      Propiedad: new Propiedad(),
+      Rol: new Rol ()
+    };
+    }
   }
 }

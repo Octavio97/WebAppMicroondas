@@ -192,8 +192,7 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="idestado">Estado: </label><br>
             <div class="form-group">
-                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.codigoP.Ciudad.Estado.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)"
-                    required>
+                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.codigoP.Ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
                     <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                 </select>
                 <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
@@ -278,8 +277,7 @@
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <label for="estado">Estado: </label><br>
             <div class="form-group">
-                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.colonia.CP.Ciudad.Estado.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)"
-                    required>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.colonia.CP.Ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
                     <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                 </select>
                 <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
