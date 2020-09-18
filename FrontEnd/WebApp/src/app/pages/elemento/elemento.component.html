@@ -284,7 +284,7 @@
             </div>
             <label for="idciudad">Ciudad: </label><br>
             <div class="form-group">
-                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.colonia.CP.Ciudad.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.colonia.CP.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
                     <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
                 </select>
                 <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>

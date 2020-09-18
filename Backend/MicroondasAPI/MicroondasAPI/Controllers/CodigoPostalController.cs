@@ -132,7 +132,7 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().CodigoPostal.Where(w => w.codigo == cp.codigo).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.codigo = cp.codigo;

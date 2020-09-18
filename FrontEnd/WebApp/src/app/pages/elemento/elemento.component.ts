@@ -82,51 +82,66 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
-    if (this.id === 'Ciudad' || this.id === 'Código postal' || this.id === 'Colonia' || this.id === 'Usuario') {
+    if ((this.id === 'Ciudad' || this.id === 'Código postal' || this.id === 'Colonia' || this.id === 'Usuario') && this.id2 === 'new') {
+      this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
+        this.r = resp;
+      });
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
       });
-      if (this.id === 'Usuario' && this.id2 !== 'new') {
+    }
+    else if (this.id === 'Usuario' && this.id2 !== 'new') {
+      this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
+        this.r = resp;
+      });
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
         // tslint:disable-next-line: no-shadowed-variable
         this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
-          this.c = resp;
+        this.c = resp;
+        // tslint:disable-next-line: no-shadowed-variable
+        this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+          this.cp = resp;
           // tslint:disable-next-line: no-shadowed-variable
-          this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
-            this.cp = resp;
-            // tslint:disable-next-line: no-shadowed-variable
-            this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
-              this.co = resp;
-            });
+          this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
+            this.co = resp;
           });
         });
-      }
-      if (this.id === 'Código postal' && this.id2 !== 'new') {
+      });
+      });
+    }
+    else if (this.id === 'Código postal' && this.id2 !== 'new') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
         // tslint:disable-next-line: no-shadowed-variable
         this.ciudadS.consultaUnica(this.codigoP.Ciudad.idEstado).subscribe( (resp: Ciudad[]) => {
           this.c = resp;
         });
-      }
-      if (this.id === 'Colonia' && this.id !== 'new') {
+      });
+    }
+    else if (this.id === 'Colonia' && this.id !== 'new') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
         // tslint:disable-next-line: no-shadowed-variable
-        this.ciudadS.consultaUnica(this.colonia.CP.Ciudad.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+        this.ciudadS.consultaUnica(this.colonia.CP.Ciudad.idEstado).subscribe( (resp: Ciudad[]) => {
           this.c = resp;
           // tslint:disable-next-line: no-shadowed-variable
           this.codigoS.consultaUnica(this.colonia.CP.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
             this.cp = resp;
           });
         });
-      }
-    }
-    if (this.id === 'Usuario') {
-      this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
-        this.r = resp;
       });
     }
-    if (this.id === 'Contrato') {
+    else if (this.id === 'Contrato') {
       this.paqueteS.consultaUnica().subscribe( (resp: Paquete[]) => {
         if (resp !== null) {
           this.p = resp;
         }
+      });
+    }
+    else if (this.id === 'Ciudad') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
       });
     }
   }
@@ -782,6 +797,24 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         colonia1: null,
         idCP: null,
         activo: null,
+        CP: new CodigoPostal(),
+        Usuario: new Usuario()
+      };
+      this.colonia.CP = {
+        idCP: null,
+        codigo: null,
+        idCiudad: null,
+        activo: null,
+        Colonia: new Colonia(),
+        Usuario: new Usuario(),
+        Ciudad: new Ciudad()
+      };
+      this.colonia.CP.Ciudad = {
+        idCiudad: null,
+        ciudad1: null,
+        idEstado: null,
+        activo: null,
+        Estado: new Estado(),
         CP: new CodigoPostal(),
         Usuario: new Usuario()
       };
