@@ -190,7 +190,7 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().Contrato.Where(w => w.idUsuario == contrato.idUsuario && w.idPaquete == contrato.idPaquete && w.fechaInicio == contrato.fechaInicio).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.idContrato = contrato.idContrato;

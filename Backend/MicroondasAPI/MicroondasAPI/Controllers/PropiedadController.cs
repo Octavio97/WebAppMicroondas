@@ -171,7 +171,7 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().Propiedad.Where(w => w.idPropiedad == propiedad.idPropiedad).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.idUsuario = propiedad.idUsuario;

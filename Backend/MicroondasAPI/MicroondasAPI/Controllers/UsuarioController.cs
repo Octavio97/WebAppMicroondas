@@ -153,7 +153,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("api/MicroondasAPI/modificarUsuario")]
         public IHttpActionResult modificarUsuario(Usuario usuario)
         {
@@ -166,10 +166,10 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().Usuario.Where(w => w.correoE == usuario.correoE || w.telefono == usuario.telefono).ToList();
 
                 // si no existe un registro previo
-                if (accion == null)
+                if (accion != null)
                 {
                     // buscamos al usuario a modificar
-                    var consulta = SessionController.getInstance().Usuario.Where(w => w.idUsuario == usuario.idUsuario).FirstOrDefault();
+                    var consulta = SessionController.getInstance().Usuario.Where(w => w.idUsuario == usuario.idUsuario && w.correoE == usuario.correoE).FirstOrDefault();
 
                     // aplicamos los cambios
                     consulta.nombre = usuario.nombre;

@@ -115,10 +115,10 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe el equipo a ingresar
-                var accion = SessionController.getInstance().Equipo.Where(w => w.idEquipo == equipo.idEquipo).FirstOrDefault();
+                var accion = SessionController.getInstance().Equipo.Where(w => w.idEquipo == equipo.idEquipo && w.equipo1 == equipo.equipo1).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.equipo1 = equipo.equipo1;

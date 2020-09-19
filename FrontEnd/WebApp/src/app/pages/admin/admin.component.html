@@ -43,7 +43,7 @@
     </div>
 
     <!-- Tabla Usuarios -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Usuario' || seleccion === 'Seleccione tabla...'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Usuario'">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -341,7 +341,13 @@
             </tr>
         </tbody>
     </table>
+    <br><br>
+    <div *ngIf="seleccion === 'Seleccione tabla...'" class="alert alert-warning text-center mt-3 animated fadeIn faster container">
+        <h4 class="alert-heading">No hay selección</h4>
+        <p><i class="fa fa-exclamation fa-2x"></i></p>
+    </div>
 </div>
+
 <!-- Tecnico -->
 <div class="container animated fadeIn" *ngIf="this.session.Rol.rol1 === 'tecnico'">
     <div>

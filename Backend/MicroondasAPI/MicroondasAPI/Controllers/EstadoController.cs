@@ -115,10 +115,10 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe el estado a ingresar
-                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1).FirstOrDefault();
+                var accion = SessionController.getInstance().Estado.Where(w => w.estado1 == estado.estado1 && w.idEstado == estado.idEstado).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.estado1 = estado.estado1;

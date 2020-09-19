@@ -119,10 +119,10 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe el rol a ingresar
-                var accion = SessionController.getInstance().Paquete.Where(w => w.nombre == paquete.nombre).FirstOrDefault();
+                var accion = SessionController.getInstance().Paquete.Where(w => w.nombre == paquete.nombre && w.idPaquete == paquete.idPaquete).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.nombre = paquete.nombre;

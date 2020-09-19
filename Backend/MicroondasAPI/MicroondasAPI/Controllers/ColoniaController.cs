@@ -136,10 +136,10 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe la colonia a ingresar
-                var accion = SessionController.getInstance().Colonia.Where(w => w.colonia1 == colonia.colonia1).FirstOrDefault();
+                var accion = SessionController.getInstance().Colonia.Where(w => w.colonia1 == colonia.colonia1 && w.idColonia == colonia.idColonia).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     // Hacemos los cambios
                     accion.colonia1 = colonia.colonia1;

@@ -151,7 +151,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     if (!localStorage.getItem('accessToken') && !localStorage.getItem('currentUser')) {
       localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
-    } else {
+    }
+    else {
       this.id = this.route.snapshot.paramMap.get('id');
       this.id2 = this.route.snapshot.paramMap.get('id2');
 

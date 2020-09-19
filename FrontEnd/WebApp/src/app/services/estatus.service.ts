@@ -24,7 +24,7 @@ export class EstatusService {
   }
 
   modificarEstatus(estatus: Estatus) {
-    return this.http.post( this.url + 'modificarEstatus', estatus );
+    return this.http.put( this.url + 'modificarEstatus', estatus );
   }
 
   consultaUnica(id: string) {

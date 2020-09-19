@@ -275,7 +275,6 @@ export class AdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((result) => {
       Swal.showLoading();
-      console.log(result.value);
       if (result.value) {
         // mensaje para cargar informacion
       Swal.fire({
