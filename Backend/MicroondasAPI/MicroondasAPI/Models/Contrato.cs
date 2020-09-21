@@ -15,17 +15,20 @@ namespace MicroondasAPI.Models
     public partial class Contrato
     {
         public System.Guid idContrato { get; set; }
-        public byte[] pdf { get; set; }
         public string archivo { get; set; }
+        public Nullable<System.DateTime> fechaInicio { get; set; }
+        public Nullable<System.DateTime> fechaFinal { get; set; }
+        public Nullable<System.Guid> idUsuario { get; set; }
         public Nullable<System.Guid> idPaquete { get; set; }
         public Nullable<System.Guid> idEstatus { get; set; }
         public Nullable<bool> activo { get; set; }
-        public Nullable<System.Guid> idUsuario { get; set; }
-        public Nullable<System.DateTime> fechaFinal { get; set; }
-        public Nullable<System.DateTime> fechaInicio { get; set; }
+        public Nullable<System.Guid> idTecnico { get; set; }
+        public string problema { get; set; }
+        public byte[] pdf { get; set; }
     
         public virtual Estatus Estatus { get; set; }
         public virtual Paquete Paquete { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

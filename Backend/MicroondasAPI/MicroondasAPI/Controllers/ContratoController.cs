@@ -36,6 +36,8 @@ namespace MicroondasAPI.Controllers
                         idPaquete = contrato.idPaquete,
                         idEstatus = contrato.idEstatus,
                         idUsuario = contrato.idUsuario,
+                        idTecnico = contrato.idTecnico,
+                        problema = contrato.problema,
                         activo = contrato.activo
                     };
 
@@ -105,6 +107,8 @@ namespace MicroondasAPI.Controllers
                     idPaquete = s.idPaquete,
                     idEstatus = s.idEstatus,
                     idUsuario = s.idUsuario,
+                    idTecnico = s.idTecnico,
+                    problema = s.problema,
                     activo = s.activo,
                     Estatus = new {
                         idEstatus = s.Estatus.idEstatus,
@@ -144,9 +148,6 @@ namespace MicroondasAPI.Controllers
                             idColonia = s.Usuario.Colonia.idColonia,
                             colonia1 = s.Usuario.Colonia.colonia1,
                         },
-                        //Contrato = new {
-                        //    idContrato = consulta.Contrato
-                        //},
                         Ciudad = new
                         {
                             idCiudad = s.Usuario.Ciudad.idCiudad,
@@ -157,9 +158,49 @@ namespace MicroondasAPI.Controllers
                             idEstado = s.Usuario.idEstado,
                             estado1 = s.Usuario.Estado.estado1
                         },
-                        //Propiedad = new {
-
-                        //},
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    },
+                    Tecnico = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
                         Rol = new
                         {
                             idRol = s.Usuario.Rol.idRol,
@@ -201,6 +242,8 @@ namespace MicroondasAPI.Controllers
                     accion.idPaquete = contrato.idPaquete;
                     accion.idEstatus = contrato.idEstatus;
                     accion.idUsuario = contrato.idUsuario;
+                    accion.idTecnico = contrato.idTecnico;
+                    accion.problema = contrato.problema;
                     accion.activo = contrato.activo;
 
                     // ejecutamos la accion
@@ -239,6 +282,8 @@ namespace MicroondasAPI.Controllers
                     idPaquete = consulta.idPaquete,
                     idEstatus = consulta.idEstatus,
                     idUsuario = consulta.idUsuario,
+                    idTecnico = consulta.idTecnico,
+                    problema = consulta.problema,
                     activo = consulta.activo,
                     Estatus = new
                     {
@@ -297,6 +342,49 @@ namespace MicroondasAPI.Controllers
                         //Propiedad = new {
 
                         //},
+                        Rol = new
+                        {
+                            idRol = consulta.Usuario.Rol.idRol,
+                            rol1 = consulta.Usuario.Rol.rol1
+                        }
+                    },
+                    Tecnico = new
+                    {
+                        idUsuario = consulta.Usuario.idUsuario,
+                        nombre = consulta.Usuario.nombre,
+                        apellido = consulta.Usuario.apellido,
+                        telefono = consulta.Usuario.telefono,
+                        correoE = consulta.Usuario.correoE,
+                        calle = consulta.Usuario.calle,
+                        numInt = consulta.Usuario.numInt,
+                        numExt = consulta.Usuario.numExt,
+                        idEstado = consulta.Usuario.idEstado,
+                        idCiudad = consulta.Usuario.idCiudad,
+                        idCP = consulta.Usuario.idCP,
+                        idColonia = consulta.Usuario.idColonia,
+                        idRol = consulta.Usuario.idRol,
+                        activo = consulta.Usuario.activo,
+                        contrasena = consulta.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = consulta.Usuario.CodigoPostal.idCP,
+                            codigo = consulta.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = consulta.Usuario.Colonia.idColonia,
+                            colonia1 = consulta.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = consulta.Usuario.Ciudad.idCiudad,
+                            ciudad1 = consulta.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = consulta.Usuario.idEstado,
+                            estado1 = consulta.Usuario.Estado.estado1
+                        },
                         Rol = new
                         {
                             idRol = consulta.Usuario.Rol.idRol,

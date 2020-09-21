@@ -10,8 +10,8 @@ import { CodigopostalService } from '../../services/codigopostal.service';
 import { CodigoPostal } from 'src/app/models/codigopostal.model';
 import { ColoniaService } from '../../services/colonia.service';
 import { Colonia } from 'src/app/models/colonia.model';
-import { CoordenadasE } from '../../coordenadas/mexicoHigh';
 import { BC } from '../../coordenadas/Municipios/02_BajaCalifornia';
+import { CoordenadasE } from '../../coordenadas/Estados/mexicoHigh';
 
 @Component({
   selector: 'app-inicio',
@@ -59,7 +59,7 @@ i = 'Login';
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
 
-    L.geoJson(this.point2.bc).addTo(this.mymap);
+    L.geoJson(this.point.estados).addTo(this.mymap);
 
     // Swal.fire({
     //   html:

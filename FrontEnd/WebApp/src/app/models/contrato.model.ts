@@ -11,11 +11,14 @@ export class Contrato {
     idPaquete: string;
     idEstatus: string;
     idUsuario: string;
+    idTecnico: string;
+    problema: string;
     activo: boolean;
 
     Estatus: Estatus;
     Paquete: Paquete;
     Usuario: Usuario;
+    Tecnico: Usuario;
 
     constructor(){}
 }

@@ -830,10 +830,13 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         idPaquete: null,
         idEstatus: null,
         idUsuario: null,
+        idTecnico: null,
+        problema: null,
         activo: null,
         Estatus: new Estatus(),
         Paquete: new Paquete(),
-        Usuario: new Usuario()
+        Usuario: new Usuario(),
+        Tecnico: new Usuario()
       };
     }
     else if (this.id === 'Equipo') {

@@ -157,7 +157,7 @@ namespace MicroondasAPI.Controllers
 
                 return Ok(resultado);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }

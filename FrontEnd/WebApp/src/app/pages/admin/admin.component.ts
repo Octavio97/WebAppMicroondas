@@ -69,20 +69,6 @@ export class AdminComponent implements OnInit {
       localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     }
-    else {
-      this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
-      if (resp === null) {
-        Swal.fire({
-          title: 'Error',
-          text: 'Hubo un error inesperado',
-          icon: 'error'
-        });
-      }
-      else {
-        this.usuario = resp;
-      }
-      });
-    }
   }
 
   // Metodo para cargar las tablas a elegir

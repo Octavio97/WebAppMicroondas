@@ -22,7 +22,7 @@ CREATE TABLE Estado (
 
 CREATE TABLE Ciudad (
     idCiudad UNIQUEIDENTIFIER PRIMARY KEY,
-    Ciudad VARCHAR(50),
+    ciudad VARCHAR(50),
     idEstado UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estado(idEstado),
     activo BIT
 );
@@ -76,7 +76,7 @@ CREATE TABLE Usuario (
     idColonia UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Colonia(idColonia),
     idCP UNIQUEIDENTIFIER FOREIGN KEY REFERENCES CodigoPostal(idCP),
     idRol UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Rol(idRol), 
-    Activo BIT
+    activo BIT
 );
 
 CREATE TABLE Propiedad (
@@ -87,12 +87,14 @@ CREATE TABLE Propiedad (
 
 CREATE TABLE Contrato (
     idContrato UNIQUEIDENTIFIER PRIMARY KEY,
-    Pdf BINARY,
+    pdf BINARY,
     archivo VARCHAR(20),
     fechaInicio DATE, 
     fechaFinal DATE,
     idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
     idPaquete UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paquete(idPaquete),
     idEstatus UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estatus(idEstatus),
+    idTecnico UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
+    problema VARCHAR(MAX),
     activo BIT
 );
