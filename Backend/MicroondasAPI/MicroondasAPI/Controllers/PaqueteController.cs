@@ -187,7 +187,7 @@ namespace MicroondasAPI.Controllers
                     precio = consulta.precio,
                     activo = consulta.activo,
                     descripcion = consulta.descripcion,
-                    Contrato = consulta.Contrato,
+                    // Contrato = consulta.Contrato,
                 };
 
                 return Ok(resultado);

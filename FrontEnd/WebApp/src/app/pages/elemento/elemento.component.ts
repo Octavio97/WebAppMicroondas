@@ -35,7 +35,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   id;
   id2;
 
-  // Objetos para los valores deldropbox a visualizar
+  // Objetos para los valores del dropbox a visualizar
   i1 = 'Seleccionar estado...';
   i2 = 'Seleccionar ciudad...';
   i3 = 'Seleccionar código postal...';

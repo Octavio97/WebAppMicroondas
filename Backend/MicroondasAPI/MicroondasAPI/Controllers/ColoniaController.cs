@@ -251,5 +251,50 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaCoInicio")]
+        public IHttpActionResult consultaCoInicio(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Colonia.Where(w => w.activo == true && w.idCP == i).ToList();
+
+                var resultado = accion.Select(s => new {
+                    idColonia = s.idColonia,
+                    colonia1 = s.colonia1,
+                    idCP = s.idCP,
+                    activo = s.activo,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo,
+                        idCiudad = s.CodigoPostal.idCiudad,
+                        activo = s.CodigoPostal.activo,
+                        Ciudad = new
+                        {
+                            idCiudad = s.CodigoPostal.Ciudad.idCiudad,
+                            ciudad1 = s.CodigoPostal.Ciudad.ciudad1,
+                            idEstado = s.CodigoPostal.Ciudad.idEstado,
+                            activo = s.CodigoPostal.activo,
+                            Estado = new
+                            {
+                                idEstado = s.CodigoPostal.Ciudad.Estado.idEstado,
+                                estado1 = s.CodigoPostal.Ciudad.Estado.estado1,
+                                activo = s.CodigoPostal.Ciudad.Estado.activo
+                            }
+                        }
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

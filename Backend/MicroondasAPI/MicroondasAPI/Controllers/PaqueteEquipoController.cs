@@ -106,7 +106,7 @@ namespace MicroondasAPI.Controllers
 
         [HttpPut]
         [Route("api/MicroondasAPI/modificarPaqueteEquipo")]
-        public IHttpActionResult modificarCPaqueteEquipo(PaqueteEquipo pe)
+        public IHttpActionResult modificarPaqueteEquipo(PaqueteEquipo pe)
         {
             try
             {

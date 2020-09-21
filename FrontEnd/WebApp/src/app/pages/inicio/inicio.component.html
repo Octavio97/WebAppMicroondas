@@ -149,26 +149,26 @@
                     </div>
                     <div class="form-group">
                         <label for="estado">Estado: &nbsp;</label>
-                        <select class="form-control" name="estado" id="estado" [(ngModel)]="this.usuario" (ngModelChange)="getCity($event)">
+                        <select class="form-control" name="estado" id="estado" [(ngModel)]="this.e.estado1" (ngModelChange)="getCity($event)">
                             <option *ngFor="let item of estado" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="ciudad">Ciudad: &nbsp;</label>
-                        <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="this.codigo" (ngModelChange)="getCP($event)">
+                        <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="this.c.ciudad1" (ngModelChange)="getCP($event)">
                             <option *ngFor="let item of ciudad" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="name">Código postal: &nbsp;</label>
-                        <select class="form-control" name="" id="">
-                            <option value="" *ngFor="let item of codigo">{{ item.codigo }}</option>
+                        <label for="codigo">Código postal: &nbsp;</label>
+                        <select class="form-control" name="codigo" id="codigo" [(ngModel)]="this.cp.codigo" (ngModelChange)="getColonia($event)">
+                            <option [ngValue]="item.idCP" *ngFor="let item of codigo">{{ item.codigo }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="name">Colonia: &nbsp;</label>
-                        <select class="form-control" name="" id="">
-                            <option value="">Seleccione colonia...</option>
+                        <label for="colonia">Colonia: &nbsp;</label>
+                        <select class="form-control" name="colonia" id="colonia" [(ngModel)]="this.co.colonia1" (ngModelChange)="getZone($event)">
+                            <option [ngValue]="item.idColonia" *ngFor="let item of colonia">{{ item.colonia1 }}</option>
                         </select>
                     </div>
                     <div class="form-group">

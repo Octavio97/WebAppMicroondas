@@ -8,6 +8,10 @@ import { CiudadService } from '../../services/ciudad.service';
 import { Ciudad } from '../../models/ciudad.model';
 import { CodigopostalService } from '../../services/codigopostal.service';
 import { CodigoPostal } from 'src/app/models/codigopostal.model';
+import { ColoniaService } from '../../services/colonia.service';
+import { Colonia } from 'src/app/models/colonia.model';
+import { CoordenadasE } from '../../coordenadas/mexicoHigh';
+import { BC } from '../../coordenadas/Municipios/02_BajaCalifornia';
 
 @Component({
   selector: 'app-inicio',
@@ -15,19 +19,24 @@ import { CodigoPostal } from 'src/app/models/codigopostal.model';
 })
 export class InicioComponent implements OnInit {
 private mymap: L.Maps;
+point = new CoordenadasE();
+point2 = new BC();
 usuario: Usuario;
+e = new Estado();
+c = new Ciudad();
+cp = new CodigoPostal();
+co = new Colonia();
 estado: Estado[];
 ciudad: Ciudad[];
 codigo: CodigoPostal[];
+colonia: Colonia[];
 i = 'Login';
 
   constructor(
     private estadoS: EstadoService,
     private ciudadS: CiudadService,
-    private codigoS: CodigopostalService) { }
-  title = 'My first AGM project';
-  lat = 51.678418;
-  lng = 7.809007;
+    private codigoS: CodigopostalService,
+    private coloniaS: ColoniaService) { }
 
   ngOnInit(): void {
     this.estadoS.consultaEInicio().subscribe( (resp: Estado[]) => {
@@ -48,9 +57,9 @@ i = 'Login';
     this.mymap = L.map('mapid', { minZoom: 5}).setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-     }).addTo(this.mymap);
-    const marker = L.marker([32.5010188, -116.9646629]).addTo(this.mymap);
-    marker.bindPopup('<b>Tijuana</b>').openPopup();
+    }).addTo(this.mymap);
+
+    L.geoJson(this.point2.bc).addTo(this.mymap);
 
     // Swal.fire({
     //   html:
@@ -88,5 +97,18 @@ i = 'Login';
         this.codigo = resp;
       }
     });
+  }
+
+  getColonia(id) {
+    this.coloniaS.consultaCoInicio(id).subscribe( (resp: Colonia[]) => {
+      this.colonia = [];
+      if (resp) {
+        this.colonia = resp;
+      }
+    });
+  }
+
+  getZone(id) {
+    
   }
 }

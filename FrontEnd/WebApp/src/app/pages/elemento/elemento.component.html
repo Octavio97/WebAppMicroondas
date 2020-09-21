@@ -238,9 +238,9 @@
                 <div *ngIf="precio.errors?.pattern" class="invalid-feedback">Ingrese solo numeros</div>
             </div>
             <div class="form-group">
-                <label for="desc">Descripción: </label>
-                <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="desc" name="desc" [(ngModel)]="this.paquete.descripcion" #descripcion="ngModel" placeholder="Ingresar descripción"
-                    required maxlength="50"></textarea>
+                <label for="descripcion">Descripción: </label>
+                <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="descripcion" name="descripcion" [(ngModel)]="this.paquete.descripcion" #descripcion="ngModel"
+                    placeholder="Ingresar descripción" required maxlength="50"></textarea>
                 <div *ngIf="descripcion.errors?.required" class="invalid-feedback">Ingrese descripción</div>
             </div>
             <div class="custom-control custom-switch">

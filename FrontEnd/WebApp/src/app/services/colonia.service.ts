@@ -34,4 +34,8 @@ export class ColoniaService {
   verColonia(id: string) {
     return this.http.get( this.url + 'verColonia', { params: { id } } );
   }
+
+  consultaCoInicio(id: string) {
+    return this.http.get( this.url + 'consultaCoInicio', { params: { id } } );
+  }
 }
