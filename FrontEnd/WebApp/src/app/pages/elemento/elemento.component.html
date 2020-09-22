@@ -321,9 +321,45 @@
                 <label for="fechaI">Fecha de inicio: </label>
                 <input class="form-control" type="date" id="fechaI" name="fechaI" [(ngModel)]="this.contrato.fechaInicio">
             </div>
-            <div>
+            <div class="form-group">
                 <label for="fechaF">Fecha Limite: </label>
                 <input class="form-control" type="date" name="fechaF" id="fechaF" [(ngModel)]="this.contrato.fechaFinal">
+            </div>
+            <div class="form-group">
+                <label for="idUsuario">Cliente:</label>
+                <table class="table table-sm">
+                    <thead>
+                        <th scope="col"></th>
+                        <th scope="col">Cliente</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of u">
+                            <th *ngIf="item.Rol.rol1 === 'cliente'" scope="row"><input type="radio" aria-label="Radio button for following text input"></th>
+                            <td *ngIf="item.Rol.rol1 === 'cliente'">{{ item.nombre }} {{ item.apellido }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="idTecnico">Técnico: </label>
+                <table class="table table-sm">
+                    <thead>
+                        <th scope="col"></th>
+                        <th scope="col">Técnico</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of u">
+                            <th *ngIf="item.Rol.rol1 === 'tecnico'" scope="row"><input type="radio" aria-label="Radio button for following text input"></th>
+                            <td *ngIf="item.Rol.rol1 === 'tecnico'">{{ item.nombre }} {{ item.apellido }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="estatus">Estatus: </label>
+                <select class="form-control" name="estatus" id="estatus" [(ngModel)]="this.contrato.idEstatus">
+                    <option *ngFor="let item of es" [ngValue]="item.idEstatus">{{ item.estatus1 }}</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="cliente">Paquete: </label>

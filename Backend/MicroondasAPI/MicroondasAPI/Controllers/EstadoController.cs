@@ -88,6 +88,11 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla estado
                 var accion = SessionController.getInstance().Estado.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
@@ -148,6 +153,11 @@ namespace MicroondasAPI.Controllers
             {
                 var consulta = SessionController.getInstance().Estado.Where(w => w.activo == true).ToList();
 
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = consulta.Select(s => new
                 {
                     idEstado = s.idEstado,
@@ -172,6 +182,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var consulta = SessionController.getInstance().Estado.Where(w => w.idEstado == i).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = new
                 {

@@ -89,6 +89,11 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla codigo postal
                 var accion = SessionController.getInstance().CodigoPostal.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
@@ -165,6 +170,11 @@ namespace MicroondasAPI.Controllers
 
                 var accion = SessionController.getInstance().CodigoPostal.Where(w => w.idCiudad == i).ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = accion.Select(s => new
                 {
                     idCP = s.idCP,
@@ -204,6 +214,11 @@ namespace MicroondasAPI.Controllers
 
                 var consulta = SessionController.getInstance().CodigoPostal.Where(w => w.activo == true && w.idCiudad == i).ToList();
 
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = consulta.Select(s => new {
                     idCP = s.idCP,
                     codigo = s.codigo,
@@ -241,6 +256,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var consulta = SessionController.getInstance().CodigoPostal.Where(w => w.idCP == i).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = new {
                     idCP = consulta.idCP,

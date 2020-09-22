@@ -93,6 +93,11 @@ namespace MicroondasAPI.Controllers
                 // Consultamos a todos los usuarios
                 var accion = SessionController.getInstance().Usuario.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // Ajustamos los datos para devolverlso
                 var resultado = accion.Select(s => new
                 {
@@ -121,9 +126,6 @@ namespace MicroondasAPI.Controllers
                         idColonia = s.Colonia.idColonia,
                         colonia1 = s.Colonia.colonia1,
                     },
-                    //Contrato = new {
-                    //    idContrato = consulta.Contrato
-                    //},
                     Ciudad = new
                     {
                         idCiudad = s.Ciudad.idCiudad,
@@ -134,9 +136,6 @@ namespace MicroondasAPI.Controllers
                         idEstado = s.idEstado,
                         estado1 = s.Estado.estado1
                     },
-                    //Propiedad = new {
-
-                    //},
                     Rol = new
                     {
                         idRol = s.Rol.idRol,
@@ -212,6 +211,11 @@ namespace MicroondasAPI.Controllers
 
                 var consulta = SessionController.getInstance().Usuario.Where(w => w.idUsuario == i).FirstOrDefault();
 
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = new {
                     idUsuario = consulta.idUsuario,
                     nombre = consulta.nombre,
@@ -237,9 +241,6 @@ namespace MicroondasAPI.Controllers
                     {
                         idColonia = consulta.Colonia.idColonia,
                         colonia1 = consulta.Colonia.colonia1,
-                    },
-                    Contrato = new {
-                        idContrato = consulta.Contrato
                     },
                     Ciudad = new
                     {

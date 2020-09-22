@@ -88,6 +88,11 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla equipo
                 var accion = SessionController.getInstance().Equipo.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
@@ -149,6 +154,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var consulta = SessionController.getInstance().Equipo.Where(w => w.idEquipo == i).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = new
                 {

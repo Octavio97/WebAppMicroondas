@@ -90,6 +90,11 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla paquete
                 var accion = SessionController.getInstance().Paquete.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
@@ -155,6 +160,11 @@ namespace MicroondasAPI.Controllers
                 // buscamos los paquetes activos
                 var accion = SessionController.getInstance().Paquete.Where(w => w.activo == true).ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos la informacion
                 var resultado = accion.Select(s => new
                 {
@@ -180,6 +190,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var consulta = SessionController.getInstance().Paquete.Where(w => w.idPaquete == i).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = new {
                     idPaquete = consulta.idPaquete,

@@ -86,6 +86,11 @@ namespace MicroondasAPI.Controllers
             // Consultamos la tabla Ciudad
             var accion = SessionController.getInstance().Ciudad.ToList();
 
+            if (accion == null)
+            {
+                return Ok(false);
+            }
+
             // Estructuramos los datos
             var resultado = accion.Select(s => new
             {
@@ -150,6 +155,11 @@ namespace MicroondasAPI.Controllers
 
                 var accion = SessionController.getInstance().Ciudad.Where(w => w.idEstado == i).ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = accion.Select(s => new
                 {
                     idCiudad = s.idCiudad,
@@ -182,6 +192,11 @@ namespace MicroondasAPI.Controllers
 
                 var consulta = SessionController.getInstance().Ciudad.Where(w => w.activo == true && w.idEstado == i).ToList();
 
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = consulta.Select(s => new {
                     idCiudad = s.idCiudad,
                     ciudad1 = s.ciudad1,
@@ -212,6 +227,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var consulta = SessionController.getInstance().Ciudad.Where(w => w.idCiudad == i).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = new {
                     idCiudad = consulta.idCiudad,

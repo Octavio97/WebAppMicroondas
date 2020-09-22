@@ -87,6 +87,11 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla PaqueteEquipo
                 var accion = SessionController.getInstance().PaqueteEquipo.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {

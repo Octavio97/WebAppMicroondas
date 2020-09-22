@@ -89,6 +89,11 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla colonia
                 var accion = SessionController.getInstance().Colonia.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
@@ -172,6 +177,11 @@ namespace MicroondasAPI.Controllers
 
                 var accion = SessionController.getInstance().Colonia.Where(w => w.idCP == i).ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = accion.Select(s => new {
                     idColonia = s.idColonia,
                     colonia1 = s.colonia1,
@@ -217,6 +227,11 @@ namespace MicroondasAPI.Controllers
 
                 var consulta = SessionController.getInstance().Colonia.Where(w => w.idColonia == i).FirstOrDefault();
 
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = new {
                     idColonia = consulta.idColonia,
                     colonia1 = consulta.colonia1,
@@ -261,6 +276,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var accion = SessionController.getInstance().Colonia.Where(w => w.activo == true && w.idCP == i).ToList();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = accion.Select(s => new {
                     idColonia = s.idColonia,

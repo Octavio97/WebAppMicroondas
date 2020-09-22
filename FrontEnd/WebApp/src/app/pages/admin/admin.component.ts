@@ -69,6 +69,14 @@ export class AdminComponent implements OnInit {
       localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     }
+
+    if (this.session.Rol.rol1 === 'tecnico') {
+      this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
+        if (resp) {
+          this.contrato = resp;
+        }
+      });
+    }
   }
 
   // Metodo para cargar las tablas a elegir

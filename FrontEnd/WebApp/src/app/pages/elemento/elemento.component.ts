@@ -58,6 +58,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
   // arreglos para los dropbox
   e: Estado[];
+  es: Estatus[];
   u: Usuario[];
   p: Paquete[];
   c: Ciudad[];
@@ -136,6 +137,16 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.paqueteS.consultaUnica().subscribe( (resp: Paquete[]) => {
         if (resp !== null) {
           this.p = resp;
+        }
+      });
+      this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
+        if (resp) {
+          this.es = resp;
+        }
+      });
+      this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
+        if (resp) {
+          this.u = resp;
         }
       });
     }

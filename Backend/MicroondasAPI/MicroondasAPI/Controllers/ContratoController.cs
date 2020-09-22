@@ -96,6 +96,10 @@ namespace MicroondasAPI.Controllers
                 // consultamos la tabla contrato
                 var accion = SessionController.getInstance().Contrato.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
                 // estructuramos los datos
                 var resultado = accion.Select(s => new
                 {
@@ -110,19 +114,22 @@ namespace MicroondasAPI.Controllers
                     idTecnico = s.idTecnico,
                     problema = s.problema,
                     activo = s.activo,
-                    Estatus = new {
+                    Estatus = new
+                    {
                         idEstatus = s.Estatus.idEstatus,
                         estatus1 = s.Estatus.estatus1,
                         activo = s.Estatus.activo
                     },
-                    Paquete = new {
+                    Paquete = new
+                    {
                         idPaquete = s.Paquete.idPaquete,
                         nombre = s.Paquete.nombre,
                         precio = s.Paquete.precio,
                         activo = s.Paquete.activo,
                         descripcion = s.Paquete.descripcion
                     },
-                    Usuario = new {
+                    Usuario = new
+                    {
                         idUsuario = s.Usuario.idUsuario,
                         nombre = s.Usuario.nombre,
                         apellido = s.Usuario.apellido,
@@ -208,7 +215,6 @@ namespace MicroondasAPI.Controllers
                         }
                     }
                 });
-
                 // Devolvemos los datos
                 return Ok(resultado);
             }
@@ -271,6 +277,11 @@ namespace MicroondasAPI.Controllers
                 Guid i = Guid.Parse(id.ToString());
 
                 var consulta = SessionController.getInstance().Contrato.Where(w => w.idContrato == i).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
 
                 var resultado = new
                 {
