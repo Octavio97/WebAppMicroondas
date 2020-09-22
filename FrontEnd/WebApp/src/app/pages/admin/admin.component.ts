@@ -77,6 +77,9 @@ export class AdminComponent implements OnInit {
         }
       });
     }
+    else if (this.session.Rol.rol1 === 'cliente') {
+      this.router.navigate(['perfil']);
+    }
   }
 
   // Metodo para cargar las tablas a elegir
