@@ -16,43 +16,44 @@
 
 <div class="animated fadeIn">
     <img src="../../../assets/img/screen.jpg" alt="screen" style="height: 300px; width: 100%;">
-    <h1 class="animeted fadeIn display-3 container-fluid" style="margin-top: -100px; color:white">{{ this.usuario.nombre }} {{ this.usuario.apellido }}</h1>
+    <h1 class="animeted fadeIn display-2 container-fluid" style="margin-top: -100px; color:white">{{ this.usuario.nombre }} {{ this.usuario.apellido }}</h1>
 </div>
 <br>
 <div class="container animated fadeIn">
     <div class="d-flex justify-content-end">
         <button *ngIf="mod === false" class="btn btn-info" (click)="modEvent()"><i class="fa fa-pen"></i> Modificar</button>
         <button *ngIf="mod === true" class="btn btn-danger" (click)="modEvent()"><i class="fa fa-ban"></i> Cancelar</button>
+        <button class="btn btn-warning" style="margin-left: 2px;"><i class="fa fa-plus"></i> Nuevo reporte</button>
     </div>
-    
+
     <form #log="ngForm" (submit)=alta(log) class="needs-validation">
         <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel" required maxlength="50"
-                title="hola esta mal xd" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
+            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel"
+                required maxlength="50" title="hola esta mal xd" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
             <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre</div>
             <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
             <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
         </div>
         <div class="form-group">
             <label for="apellido">Apellido:</label>
-            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : apellido.invalid && (apellido.dirty || apellido.touched) }" type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required [(ngModel)]="this.usuario.apellido" #apellido="ngModel"
-                maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" title="hola esta mal xd">
+            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : apellido.invalid && (apellido.dirty || apellido.touched) }" type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required [(ngModel)]="this.usuario.apellido"
+                #apellido="ngModel" maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" title="hola esta mal xd">
             <div *ngIf="apellido.errors?.required" class="invalid-feedback">Ingrese sus apellidos</div>
             <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
             <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
         </div>
         <div class="form-group">
             <label for="telefono">Teléfono:</label>
-            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingrese teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}" required [(ngModel)]="this.usuario.telefono"
-                #telefono="ngModel">
+            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingrese teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}"
+                required [(ngModel)]="this.usuario.telefono" #telefono="ngModel">
             <div *ngIf="telefono.errors?.required" class="invalid-feedback">Ingrese su teléfono</div>
             <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">Ingrese un numero valido con area y numero completo Ej.(123) 545-1234</div>
         </div>
         <div class="form-group">
             <label for="email">Correo electrónico:</label>
-            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : correo.invalid && (correo.dirty || correo.touched) }" type="email" class="form-control" id="email" name="email" placeholder="Ingrese correo electrónico" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="this.usuario.correoE"
-                #correo="ngModel">
+            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : correo.invalid && (correo.dirty || correo.touched) }" type="email" class="form-control" id="email" name="email" placeholder="Ingrese correo electrónico" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                [(ngModel)]="this.usuario.correoE" #correo="ngModel">
             <div *ngIf="correo.errors?.required" class="invalid-feedback">Ingrese su correo electrónico</div>
             <div *ngIf="correo.errors?.pattern" class="invalid-feedback">Ingrese un correo adecuado Ej. nombre@dominio.com</div>
         </div>
@@ -72,28 +73,30 @@
         </div>
         <div class="form-group">
             <label for="int">Num.Int:</label>
-            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : int.invalid && (int.dirty || int.touched ) }" type="text" class="form-control" id="int" name="int" placeholder="Ingrese Num.Int (Opcional)" pattern="[0-9A-Za-z]*" [(ngModel)]="this.usuario.numInt" #int="ngModel" minlength="2"
-                maxlength="5">
+            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : int.invalid && (int.dirty || int.touched ) }" type="text" class="form-control" id="int" name="int" placeholder="Ingrese Num.Int (Opcional)" pattern="[0-9A-Za-z]*" [(ngModel)]="this.usuario.numInt"
+                #int="ngModel" minlength="2" maxlength="5">
             <div *ngIf="int.errors?.minLength">Ingrese mas de un número</div>
             <div *ngIf="int.errors?.pattern" class="invalid-feedback">Debe ser numeros o letras entre 2 y 5 dígitos</div>
         </div>
         <div class="form-group">
             <label for="ext">Num.Ext:</label>
-            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : ext.invalid && (ext.dirty || ext.touched) }" type="number" class="form-control" id="ext" name="ext" placeholder="Ingrese Num.Ext" required pattern="[0-9]{2,5}" [(ngModel)]="this.usuario.numExt" minlength="2" maxlength="5"
-                #ext="ngModel">
+            <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : ext.invalid && (ext.dirty || ext.touched) }" type="number" class="form-control" id="ext" name="ext" placeholder="Ingrese Num.Ext" required pattern="[0-9]{2,5}" [(ngModel)]="this.usuario.numExt"
+                minlength="2" maxlength="5" #ext="ngModel">
             <div *ngIf="ext.errors?.required" class="invalid-feedback">Ingrese su número de casa exterior</div>
             <div *ngIf="ext.errors?.pattern" class="invalid-feedback">Debe ser un numero entre 2 y 5 dígitos</div>
         </div>
         <label for="estado">Estado: </label><br>
         <div class="form-group">
-            <select [disabled]="mod === false" class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [(ngModel)]="this.usuario.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+            <select [disabled]="mod === false" class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [(ngModel)]="this.usuario.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)"
+                required>
                 <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
             </select>
             <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
         </div>
         <label for="idciudad">Ciudad: </label><br>
         <div class="form-group">
-            <select [disabled]="mod === false" class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.usuario.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+            <select [disabled]="mod === false" class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.usuario.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel"
+                required>
                 <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
             </select>
             <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
@@ -127,4 +130,27 @@
         <button [hidden]="mod === false" type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
     </form>
 </div>
-
+<br>
+<div class="container animated fadeIn">
+    <h1 class="display-4">Historial de reportes</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Asunto</th>
+                <th scope="col">Técnico</th>
+                <th scope="col">Paquete</th>
+                <th scope="col">Estatus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of contrato; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <th>{{ item.problema }}</th>
+                <th>{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</th>
+                <th>{{ item.Paquete.nombre }}</th>
+                <th>{{ item.Estatus.estatus1 }}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>

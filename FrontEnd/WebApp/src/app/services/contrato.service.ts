@@ -27,8 +27,12 @@ export class ContratoService {
     return this.http.put( this.url + 'modificarContrato', contrato );
   }
 
-  consultaUnica(id: string) {
-    return this.http.get( this.url + 'consultaUnica', { params: { id } } );
+  consultaUnicaCli(id: string) {
+    return this.http.get( this.url + 'consultaUnicaCli', { params: { id } } );
+  }
+
+  consultaUnicaTec(id: string) {
+    return this.http.get( this.url + 'consultaUnicaTec', { params: { id } } );
   }
 
   verContrato(id: string) {

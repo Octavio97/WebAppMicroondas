@@ -411,5 +411,281 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaCon")]
+        public IHttpActionResult consultaUnicaCli(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Contrato.Where(w => w.idUsuario == i).ToList();
+
+                if(accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.Select(s => new
+                {
+                    idContrato = s.idContrato,
+                    pdf = s.pdf,
+                    archivo = s.archivo,
+                    fechaInicio = s.fechaInicio,
+                    fechaFinal = s.fechaFinal,
+                    idPaquete = s.idPaquete,
+                    idEstatus = s.idEstatus,
+                    idUsuario = s.idUsuario,
+                    idTecnico = s.idTecnico,
+                    problema = s.problema,
+                    activo = s.activo,
+                    Estatus = new
+                    {
+                        idEstatus = s.Estatus.idEstatus,
+                        estatus1 = s.Estatus.estatus1,
+                        activo = s.Estatus.activo
+                    },
+                    Paquete = new
+                    {
+                        idPaquete = s.Paquete.idPaquete,
+                        nombre = s.Paquete.nombre,
+                        precio = s.Paquete.precio,
+                        activo = s.Paquete.activo,
+                        descripcion = s.Paquete.descripcion
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    },
+                    Tecnico = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaCon")]
+        public IHttpActionResult consultaUnicaTec(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Contrato.Where(w => w.idTecnico == i).ToList();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.Select(s => new
+                {
+                    idContrato = s.idContrato,
+                    pdf = s.pdf,
+                    archivo = s.archivo,
+                    fechaInicio = s.fechaInicio,
+                    fechaFinal = s.fechaFinal,
+                    idPaquete = s.idPaquete,
+                    idEstatus = s.idEstatus,
+                    idUsuario = s.idUsuario,
+                    idTecnico = s.idTecnico,
+                    problema = s.problema,
+                    activo = s.activo,
+                    Estatus = new
+                    {
+                        idEstatus = s.Estatus.idEstatus,
+                        estatus1 = s.Estatus.estatus1,
+                        activo = s.Estatus.activo
+                    },
+                    Paquete = new
+                    {
+                        idPaquete = s.Paquete.idPaquete,
+                        nombre = s.Paquete.nombre,
+                        precio = s.Paquete.precio,
+                        activo = s.Paquete.activo,
+                        descripcion = s.Paquete.descripcion
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    },
+                    Tecnico = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -14,6 +14,8 @@ import { CiudadService } from '../../services/ciudad.service';
 import { ColoniaService } from '../../services/colonia.service';
 import { RolService } from '../../services/rol.service';
 import { UsuarioService } from '../../services/usuario.service';
+import { ContratoService } from '../../services/contrato.service';
+import { Contrato } from '../../models/contrato.model';
 
 @Component({
   selector: 'app-perfil',
@@ -26,6 +28,7 @@ export class PerfilComponent implements OnInit {
   cp: CodigoPostal[];
   co: Colonia[];
   r: Rol[];
+  contrato: Contrato[];
   mod = false;
 
   constructor(
@@ -35,7 +38,8 @@ export class PerfilComponent implements OnInit {
     private codigoS: CodigopostalService,
     private coloniaS: ColoniaService,
     private rolS: RolService,
-    private usuarioS: UsuarioService) { }
+    private usuarioS: UsuarioService,
+    private contratoS: ContratoService) { }
 
   ngOnInit(): void {
     // si no esxiste alguna sesion iniciada
@@ -47,6 +51,11 @@ export class PerfilComponent implements OnInit {
     this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
       if (resp) {
         this.r = resp;
+      }
+    });
+    this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato[]) => {
+      if (resp) {
+        this.contrato = resp;
       }
     });
     this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
