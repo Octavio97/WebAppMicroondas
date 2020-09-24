@@ -29,6 +29,7 @@ export class PerfilComponent implements OnInit {
   co: Colonia[];
   r: Rol[];
   contrato: Contrato[];
+  contr = new Contrato();
   mod = false;
 
   constructor(
@@ -171,5 +172,19 @@ export class PerfilComponent implements OnInit {
 
   modEvent(){
     this.mod = !this.mod;
+  }
+
+  async addReport() {
+    const { value: hint } = await Swal.fire({
+      title: 'Nuevo reporte',
+      html:
+        '<textarea name="" id="" cols="30" rows="10"{{ this.contr.problema }}></textarea>',
+        focusConfirm: false,
+        preConfirm: () => {
+        return [
+          this.contr.problema
+        ];
+  }
+    });
   }
 }
