@@ -23,14 +23,14 @@
     <div class="d-flex justify-content-end">
         <button *ngIf="mod === false" class="btn btn-info" (click)="modEvent()"><i class="fa fa-pen"></i> Modificar</button>
         <button *ngIf="mod === true" class="btn btn-danger" (click)="modEvent()"><i class="fa fa-ban"></i> Cancelar</button>
-        <button class="btn btn-warning" style="margin-left: 2px;"><i class="fa fa-plus" (click)="addReport()"></i> Nuevo reporte</button>
+        <button class="btn btn-warning" style="margin-left: 2px;" (click)="addReport()"><i class="fa fa-plus"></i> Nuevo reporte</button>
     </div>
 
     <form #log="ngForm" (submit)=alta(log) class="needs-validation">
         <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel"
-                required maxlength="50" title="hola esta mal xd" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
+                required maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
             <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre</div>
             <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
             <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -38,7 +38,7 @@
         <div class="form-group">
             <label for="apellido">Apellido:</label>
             <input [disabled]="mod === false" [ngClass]="{ 'is-invalid' : apellido.invalid && (apellido.dirty || apellido.touched) }" type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required [(ngModel)]="this.usuario.apellido"
-                #apellido="ngModel" maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" title="hola esta mal xd">
+                #apellido="ngModel" maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
             <div *ngIf="apellido.errors?.required" class="invalid-feedback">Ingrese sus apellidos</div>
             <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
             <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -140,6 +140,7 @@
                 <th scope="col">Asunto</th>
                 <th scope="col">Técnico</th>
                 <th scope="col">Paquete</th>
+                <th scope="col">Fecha de emisión</th>
                 <th scope="col">Estatus</th>
                 <th></th>
             </tr>
@@ -150,6 +151,7 @@
                 <th>{{ item.problema }}</th>
                 <th>{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</th>
                 <th>{{ item.Paquete.nombre }}</th>
+                <th>{{ item.fechaInicio }}</th>
                 <th>{{ item.Estatus.estatus1 }}</th>
                 <th><button class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button></th>
             </tr>

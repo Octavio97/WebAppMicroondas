@@ -16,43 +16,39 @@ namespace MicroondasAPI.Controllers
         {
             try
             {
-                // variable a devolver
-                bool i = false;
-
                 // buscamos si existe el contrato a ingresar
                 var accion = SessionController.getInstance().Contrato.Where(w => w.idUsuario == contrato.idUsuario).FirstOrDefault();
 
                 // si no existe
                 if (accion == null)
                 {
-                    // estructuramos los datos
-                    Contrato datos = new Contrato()
-                    {
-                        idContrato = Guid.NewGuid(),
-                        pdf = contrato.pdf,
-                        archivo = contrato.archivo,
-                        fechaInicio = contrato.fechaInicio,
-                        fechaFinal = contrato.fechaFinal,
-                        idPaquete = contrato.idPaquete,
-                        idEstatus = contrato.idEstatus,
-                        idUsuario = contrato.idUsuario,
-                        idTecnico = contrato.idTecnico,
-                        problema = contrato.problema,
-                        activo = contrato.activo
-                    };
-
-                    // guardamos los datos
-                    SessionController.getInstance().Contrato.Add(datos);
-
-                    // ejecutamos la accion
-                    SessionController.getInstance().SaveChanges();
-
-                    // estado exitoso
-                    i = true;
+                    return Ok(false);
                 }
 
+                // estructuramos los datos
+                Contrato datos = new Contrato()
+                {
+                    idContrato = Guid.NewGuid(),
+                    pdf = contrato.pdf,
+                    archivo = contrato.archivo,
+                    fechaInicio = contrato.fechaInicio,
+                    fechaFinal = contrato.fechaFinal,
+                    idPaquete = contrato.idPaquete,
+                    idEstatus = contrato.idEstatus,
+                    idUsuario = contrato.idUsuario,
+                    idTecnico = contrato.idTecnico,
+                    problema = contrato.problema,
+                    activo = contrato.activo
+                };
+
+                // guardamos los datos
+                SessionController.getInstance().Contrato.Add(datos);
+
+                // ejecutamos la accion
+                SessionController.getInstance().SaveChanges();
+
                 //devolvemos el valor
-                return Ok(i);
+                return Ok(true);
             }
             catch (Exception)
             {
@@ -413,7 +409,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/MicroondasAPI/consultaUnicaCon")]
+        [Route("api/MicroondasAPI/consultaUnicaCli")]
         public IHttpActionResult consultaUnicaCli(string id)
         {
             try
@@ -681,6 +677,49 @@ namespace MicroondasAPI.Controllers
                 });
 
                 return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("api/MicroondasAPI/altaContratoCli")]
+        public IHttpActionResult altaContratoCli(Contrato contrato)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Contrato.Where(w => w.fechaInicio == DateTime.Today && w.idUsuario == contrato.idUsuario).FirstOrDefault();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var accion2 = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "problema").FirstOrDefault();
+
+                // estructuramos los datos
+                Contrato datos = new Contrato()
+                {
+                    idContrato = Guid.NewGuid(),
+                    pdf = contrato.pdf,
+                    archivo = contrato.archivo,
+                    fechaInicio = DateTime.Today,
+                    fechaFinal = contrato.fechaFinal,
+                    idPaquete = contrato.idPaquete,
+                    idEstatus = accion2.idEstatus,
+                    idUsuario = contrato.idUsuario,
+                    idTecnico = contrato.idTecnico,
+                    problema = contrato.problema,
+                    activo = contrato.activo
+                };
+
+                SessionController.getInstance().Contrato.Add(datos);
+
+                SessionController.getInstance().SaveChanges();
+
+                return Ok(true);
             }
             catch (Exception)
             {

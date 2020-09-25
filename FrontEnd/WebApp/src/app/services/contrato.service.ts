@@ -38,4 +38,8 @@ export class ContratoService {
   verContrato(id: string) {
     return this.http.get( this.url + 'verContrato', { params: { id } } );
   }
+
+  altaContratoCli(contrato: Contrato) {
+    return this.http.post( this.url + 'altaContratoCli', { params: { contrato } } );
+  }
 }

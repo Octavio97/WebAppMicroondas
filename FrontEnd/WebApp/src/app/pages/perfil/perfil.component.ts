@@ -16,6 +16,8 @@ import { RolService } from '../../services/rol.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { ContratoService } from '../../services/contrato.service';
 import { Contrato } from '../../models/contrato.model';
+import { stringify } from 'querystring';
+import { title } from 'process';
 
 @Component({
   selector: 'app-perfil',
@@ -175,16 +177,29 @@ export class PerfilComponent implements OnInit {
   }
 
   async addReport() {
-    const { value: hint } = await Swal.fire({
-      title: 'Nuevo reporte',
-      html:
-        '<textarea name="" id="" cols="30" rows="10"{{ this.contr.problema }}></textarea>',
-        focusConfirm: false,
-        preConfirm: () => {
-        return [
-          this.contr.problema
-        ];
-  }
+    const { value: text } = await Swal.fire({
+      title: 'Problema:',
+      input: 'textarea',
+      inputPlaceholder: 'Ingrese su problema...',
+      inputAttributes: {
+        'aria-label': 'Ingrese su problema...'
+      },
+      showCancelButton: true
     });
+
+    if (text) {
+      this.contr.idUsuario = this.usuario.idUsuario;
+      this.contr.activo = true;
+      this.contr.problema = JSON.stringify(text);
+      this.contratoS.altaContratoCli(this.contr).subscribe((resp) => {
+        if (resp) {
+          Swal.fire({
+            title: 'Exito',
+            text: 'Se envió tu reporte con éxito',
+            icon: 'success'
+          });
+        }
+      });
+    }
   }
 }
