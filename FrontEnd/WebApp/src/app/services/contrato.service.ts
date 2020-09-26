@@ -31,10 +31,6 @@ export class ContratoService {
     return this.http.get( this.url + 'consultaUnicaCli', { params: { id } } );
   }
 
-  consultaUnicaTec(id: string) {
-    return this.http.get( this.url + 'consultaUnicaTec', { params: { id } } );
-  }
-
   verContrato(id: string) {
     return this.http.get( this.url + 'verContrato', { params: { id } } );
   }

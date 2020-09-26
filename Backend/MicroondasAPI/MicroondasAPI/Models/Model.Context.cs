@@ -36,6 +36,7 @@ namespace MicroondasAPI.Models
         public virtual DbSet<PaqueteEquipo> PaqueteEquipo { get; set; }
         public virtual DbSet<Propiedad> Propiedad { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<Soporte> Soporte { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

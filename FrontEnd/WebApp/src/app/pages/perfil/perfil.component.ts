@@ -18,6 +18,8 @@ import { ContratoService } from '../../services/contrato.service';
 import { Contrato } from '../../models/contrato.model';
 import { stringify } from 'querystring';
 import { title } from 'process';
+import { SoporteService } from '../../services/soporte.service';
+import { Soporte } from 'src/app/models/soporte.model';
 
 @Component({
   selector: 'app-perfil',
@@ -30,7 +32,9 @@ export class PerfilComponent implements OnInit {
   cp: CodigoPostal[];
   co: Colonia[];
   r: Rol[];
+  s: Soporte[];
   contrato: Contrato[];
+  soporte = new Soporte();
   contr = new Contrato();
   mod = false;
 
@@ -42,7 +46,8 @@ export class PerfilComponent implements OnInit {
     private coloniaS: ColoniaService,
     private rolS: RolService,
     private usuarioS: UsuarioService,
-    private contratoS: ContratoService) { }
+    private contratoS: ContratoService,
+    private soporteS: SoporteService) { }
 
   ngOnInit(): void {
     // si no esxiste alguna sesion iniciada
@@ -50,17 +55,21 @@ export class PerfilComponent implements OnInit {
       localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     }
+    // guardamos el usuario actual
     this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+    // consulta rol
     this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
       if (resp) {
         this.r = resp;
       }
     });
+    // consulta del contrato
     this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato[]) => {
       if (resp) {
         this.contrato = resp;
       }
     });
+    // consulta de ubicacion
     this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
       if (resp) {
         this.e = resp;
@@ -79,6 +88,12 @@ export class PerfilComponent implements OnInit {
             });
           }
         });
+      }
+    });
+    // Consulta de reportes
+    this.soporteS.consultaUnicaSopU(this.usuario.idUsuario).subscribe( (resp: Soporte[]) => {
+      if (resp) {
+        this.s = resp;
       }
     });
   }
@@ -188,14 +203,13 @@ export class PerfilComponent implements OnInit {
     });
 
     if (text) {
-      this.contr.idUsuario = this.usuario.idUsuario;
-      this.contr.activo = true;
-      this.contr.problema = JSON.stringify(text);
-      this.contratoS.altaContratoCli(this.contr).subscribe((resp) => {
+      this.soporte.problema = JSON.stringify(text);
+      this.soporte.idContrato = this.usuario.Contrato.idContrato;
+      this.soporteS.altaSoporte(this.soporte).subscribe( resp => {
         if (resp) {
           Swal.fire({
             title: 'Exito',
-            text: 'Se envió tu reporte con éxito',
+            text: 'Su reporte se ha agregado con exito',
             icon: 'success'
           });
         }

@@ -5,9 +5,9 @@
       <EntityTypeMapping TypeName="MicroondasModel.Ciudad">
         <MappingFragment StoreEntitySet="Ciudad">
           <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+          <ScalarProperty Name="ciudad1" ColumnName="ciudad" />
           <ScalarProperty Name="idEstado" ColumnName="idEstado" />
           <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="ciudad1" ColumnName="ciudad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -16,8 +16,8 @@
         <MappingFragment StoreEntitySet="CodigoPostal">
           <ScalarProperty Name="idCP" ColumnName="idCP" />
           <ScalarProperty Name="codigo" ColumnName="codigo" />
-          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -35,16 +35,14 @@
       <EntityTypeMapping TypeName="MicroondasModel.Contrato">
         <MappingFragment StoreEntitySet="Contrato">
           <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+          <ScalarProperty Name="pdf" ColumnName="pdf" />
           <ScalarProperty Name="archivo" ColumnName="archivo" />
-          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
-          <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
-          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
           <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
           <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="idTecnico" ColumnName="idTecnico" />
-          <ScalarProperty Name="problema" ColumnName="problema" />
-          <ScalarProperty Name="pdf" ColumnName="pdf" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
+          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -79,9 +77,9 @@
       <EntityTypeMapping TypeName="MicroondasModel.Paquete">
         <MappingFragment StoreEntitySet="Paquete">
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -113,6 +111,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Soporte">
+      <EntityTypeMapping TypeName="MicroondasModel.Soporte">
+        <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="idSoporte" ColumnName="idSoporte" />
+          <ScalarProperty Name="problema" ColumnName="problema" />
+          <ScalarProperty Name="idTecnico" ColumnName="idTecnico" />
+          <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+          <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+          <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="MicroondasModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
@@ -121,16 +132,16 @@
           <ScalarProperty Name="apellido" ColumnName="apellido" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="correoE" ColumnName="correoE" />
-          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
           <ScalarProperty Name="calle" ColumnName="calle" />
           <ScalarProperty Name="numInt" ColumnName="numInt" />
           <ScalarProperty Name="numExt" ColumnName="numExt" />
           <ScalarProperty Name="idColonia" ColumnName="idColonia" />
           <ScalarProperty Name="idCP" ColumnName="idCP" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
           <ScalarProperty Name="idEstado" ColumnName="idEstado" />
           <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
-          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

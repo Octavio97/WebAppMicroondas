@@ -94,7 +94,15 @@ CREATE TABLE Contrato (
     idUsuario UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
     idPaquete UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Paquete(idPaquete),
     idEstatus UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estatus(idEstatus),
-    idTecnico UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
-    problema VARCHAR(MAX),
     activo BIT
+);
+
+CREATE TABLE Soporte (
+    idSoporte UNIQUEIDENTIFIER PRIMARY KEY,
+    problema VARCHAR(MAX),
+    idTecnico UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Usuario(idUsuario),
+    idContrato UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Contrato(idContrato),
+    fechaInicio DATE,
+    fechaFinal DATE,
+    activo bit
 );

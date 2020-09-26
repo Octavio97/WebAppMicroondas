@@ -18,8 +18,8 @@ namespace MicroondasAPI.Models
         public Usuario()
         {
             this.Contrato = new HashSet<Contrato>();
-            this.Contrato1 = new HashSet<Contrato>();
             this.Propiedad = new HashSet<Propiedad>();
+            this.Soporte = new HashSet<Soporte>();
         }
     
         public System.Guid idUsuario { get; set; }
@@ -27,27 +27,27 @@ namespace MicroondasAPI.Models
         public string apellido { get; set; }
         public string telefono { get; set; }
         public string correoE { get; set; }
-        public string contrasena { get; set; }
         public string calle { get; set; }
         public string numInt { get; set; }
         public Nullable<int> numExt { get; set; }
         public Nullable<System.Guid> idColonia { get; set; }
         public Nullable<System.Guid> idCP { get; set; }
         public Nullable<System.Guid> idRol { get; set; }
+        public Nullable<bool> activo { get; set; }
+        public string contrasena { get; set; }
         public Nullable<System.Guid> idEstado { get; set; }
         public Nullable<System.Guid> idCiudad { get; set; }
-        public Nullable<bool> activo { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual CodigoPostal CodigoPostal { get; set; }
         public virtual Colonia Colonia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contrato> Contrato { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contrato> Contrato1 { get; set; }
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Propiedad> Propiedad { get; set; }
         public virtual Rol Rol { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Soporte> Soporte { get; set; }
     }
 }
