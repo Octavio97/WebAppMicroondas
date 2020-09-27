@@ -376,4 +376,36 @@
             <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
+    <!-- Soporte -->
+    <div *ngIf="this.id === 'Soporte'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="problema">Problema: </label>
+                <textarea class="form-control" name="problema" id="problema" [(ngModel)]="this.soporte.problema"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fechaInicio">Fecha del reporte: </label>
+                <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" [(ngModel)]="this.soporte.fechaInicio">
+            </div>
+            <div class="form-group">
+                <label for="fechaFinal">Fecha de atención: </label>
+                <input class="form-control" type="date" name="fechaFinal" id="fechaFinal" [(ngModel)]="this.soporte.fechaFinal">
+            </div>
+            <div class="form-group">
+                <label for="idTecnico"></label>
+                <input type="text">
+            </div>
+            <div class="form-group">
+                <label for="idContrato"></label>
+                <input type="text">
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch13" name="activo" [(ngModel)]="this.soporte.activo">
+                <label class="custom-control-label" for="customSwitch13">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
 </div>

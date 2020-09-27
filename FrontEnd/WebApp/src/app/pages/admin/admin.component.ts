@@ -25,6 +25,8 @@ import { Paquete } from 'src/app/models/paquete.model';
 import { PaqueteEquipo } from '../../models/paqueteequipo.model';
 import { Propiedad } from '../../models/propiedad.model';
 import { Router } from '@angular/router';
+import { SoporteService } from '../../services/soporte.service';
+import { Soporte } from 'src/app/models/soporte.model';
 
 @Component({
   selector: 'app-admin',
@@ -34,7 +36,7 @@ export class AdminComponent implements OnInit {
   session: Usuario = JSON.parse(localStorage.getItem('currentUser'));
   seleccion = 'Seleccione tabla...';
   in = false; // mostrar registros eliminados
-  tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad'];
+  tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte'];
   rol: Rol[] = [];
   estado: Estado[];
   estatus: Estatus[];
@@ -44,6 +46,7 @@ export class AdminComponent implements OnInit {
   colonia: Colonia[];
   contrato: Contrato[];
   equipo: Equipo[];
+  soporte: Soporte[];
   paquete: Paquete[];
   paqueteEquipo: PaqueteEquipo[];
   propiedad: Propiedad[];
@@ -61,6 +64,7 @@ export class AdminComponent implements OnInit {
     private paqueteS: PaqueteService,
     private paqueteEquipoS: PaqueteequipoService,
     private propiedadS: PropiedadService,
+    private soporteS: SoporteService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -239,6 +243,13 @@ export class AdminComponent implements OnInit {
         }
       });
     }
+    else if (i === 'Soporte') {
+      this.soporteS.consultaSoporte().subscribe( (resp: Soporte[]) => {
+        if (resp) {
+          this.soporte = resp;
+        }
+      });
+    }
   }
 
   logout() {
@@ -281,17 +292,17 @@ export class AdminComponent implements OnInit {
         allowOutsideClick: false,
         });
       if (this.seleccion === 'Ciudad') {
-          this.ciudadS.bajaCiudad(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-              title: 'Exito',
-              text: 'La ciudad fue eliminada con exito',
-              icon: 'success'
-              });
-            }
-          });
-        }
-        else if (this.seleccion === 'Código postal') {
+        this.ciudadS.bajaCiudad(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'La ciudad fue eliminada con exito',
+            icon: 'success'
+            });
+          }
+        });
+      }
+      else if (this.seleccion === 'Código postal') {
           this.codigoS.bajaCodigo(id).subscribe( resp => {
             if (resp) {
               Swal.fire({
@@ -301,8 +312,8 @@ export class AdminComponent implements OnInit {
               });
             }
           });
-        }
-        else if (this.seleccion === 'Colonia') {
+      }
+      else if (this.seleccion === 'Colonia') {
           this.coloniaS.bajaColonia(id).subscribe( resp => {
             if (resp) {
               Swal.fire({
@@ -312,8 +323,8 @@ export class AdminComponent implements OnInit {
               });
             }
           });
-        }
-        else if (this.seleccion === 'Contrato') {
+      }
+      else if (this.seleccion === 'Contrato') {
           this.contratoS.bajaContrato(id).subscribe( resp => {
             if (resp) {
               Swal.fire({
@@ -323,19 +334,19 @@ export class AdminComponent implements OnInit {
               });
             }
           });
-        }
-        else if (this.seleccion === 'Equipo') {
-          this.equipoS.bajaEquipo(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
+      }
+      else if (this.seleccion === 'Equipo') {
+        this.equipoS.bajaEquipo(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
               title: 'Exito',
               text: 'El equipo fue eliminado con exito',
               icon: 'success'
               });
             }
           });
-        }
-        else if (this.seleccion === 'Estado') {
+      }
+      else if (this.seleccion === 'Estado') {
           this.estadoS.bajaEstado(id).subscribe( resp => {
             if (resp) {
               Swal.fire({
@@ -345,63 +356,74 @@ export class AdminComponent implements OnInit {
               });
             }
           });
-        }
-        else if (this.seleccion === 'Estatus') {
-          this.estatusS.bajaEstatus(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-              title: 'Exito',
-              text: 'El estatus fue eliminado con exito',
-              icon: 'success'
-              });
-            }
-          });
-        }
-        else if (this.seleccion === 'Paquete') {
-          this.paqueteS.bajaPaquete(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-              title: 'Exito',
-              text: 'El paquete fue eliminado con exito',
-              icon: 'success'
-              });
-            }
-          });
-        }
-        else if (this.seleccion === 'Propiedad') {
-          this.propiedadS.bajaPropiedad(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-              title: 'Exito',
-              text: 'La propiedad fue eliminada con exito',
-              icon: 'success'
-              });
-            }
-          });
-        }
-        else if (this.seleccion === 'Rol') {
-          this.rolS.bajaRol(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-              title: 'Exito',
-              text: 'El rol fue eliminado con exito',
-              icon: 'success'
-              });
-            }
-          });
-        }
-        else if (this.seleccion === 'Usuario') {
-          this.usuarioS.bajaUsuario(id).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-              title: 'Exito',
-              text: 'El estado fue eliminado con exito',
-              icon: 'success'
-              });
-            }
-          });
-        }
       }
-    });
-  }
+      else if (this.seleccion === 'Estatus') {
+        this.estatusS.bajaEstatus(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El estatus fue eliminado con exito',
+            icon: 'success'
+            });
+          }
+        });
+      }
+      else if (this.seleccion === 'Paquete') {
+        this.paqueteS.bajaPaquete(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El paquete fue eliminado con exito',
+            icon: 'success'
+            });
+          }
+        });
+      }
+      else if (this.seleccion === 'Propiedad') {
+        this.propiedadS.bajaPropiedad(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'La propiedad fue eliminada con exito',
+            icon: 'success'
+            });
+          }
+        });
+      }
+      else if (this.seleccion === 'Rol') {
+        this.rolS.bajaRol(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El rol fue eliminado con exito',
+            icon: 'success'
+            });
+          }
+        });
+      }
+      else if (this.seleccion === 'Usuario') {
+        this.usuarioS.bajaUsuario(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El estado fue eliminado con exito',
+            icon: 'success'
+            });
+          }
+        });
+      }
+      else if (this.seleccion === 'Soporte') {
+        this.soporteS.bajaSoporte(id).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El reporte fue eliminado con exito',
+              icon: 'success'
+              });
+          }
+        });
+      }
+    }
+  });
+}
 }

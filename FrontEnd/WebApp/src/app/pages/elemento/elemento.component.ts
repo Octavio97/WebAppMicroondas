@@ -25,6 +25,8 @@ import { EquipoService } from '../../services/equipo.service';
 import { PaqueteService } from '../../services/paquete.service';
 import { PropiedadService } from '../../services/propiedad.service';
 import { EstatusService } from '../../services/estatus.service';
+import { Soporte } from 'src/app/models/soporte.model';
+import { SoporteService } from '../../services/soporte.service';
 
 @Component({
   selector: 'app-elemento',
@@ -55,6 +57,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   paquete = new Paquete();
   paqueteEquipo = new PaqueteEquipo();
   propiedad = new Propiedad();
+  soporte = new Soporte();
 
   // arreglos para los dropbox
   e: Estado[];
@@ -79,7 +82,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     private codigoS: CodigopostalService,
     private estatusS: EstatusService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private soporteS: SoporteService) { }
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
