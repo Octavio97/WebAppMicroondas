@@ -318,7 +318,6 @@
                 <th scope="col">Fecha de inicio</th>
                 <th scope="col">Fecha final</th>
                 <th scope="col">Paquete</th>
-                <th scope="col">Estatus</th>
                 <th scope="col">Activo</th>
                 <th></th>
             </tr>
@@ -331,7 +330,6 @@
                 <td *ngIf="item.activo || this.in">{{ item.fechaInicio }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.fechaFinal }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.Paquete.nombre }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.Estatus.estatus1 }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
@@ -360,7 +358,6 @@
                 <th *ngIf="item.activo || this.in">{{ item.problema }}</th>
                 <th *ngIf="item.activo || this.in">{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</th>
                 <th *ngIf="item.activo || this.in">{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</th>
-                <th *ngIf="item.activo || this.in">{{ item.Contrato.Estatus.estatus1 }}</th>
                 <th *ngIf="item.activo || this.in">{{ item.fechaInicio }}</th>
                 <th *ngIf="item.activo || this.in">{{ item.fechaFinal }}</th>
                 <div *ngIf="item.activo || this.in">
@@ -402,7 +399,7 @@
             <tr *ngFor="let item of soporte">
                 <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
                 <td>{{ item.problema }}</td>
-                <td>{{ item.Contrato.Estatus.estatus1 }}</td>
+                <td>{{ item.Estatus.estatus1 }}</td>
                 <td><button class="btn btn-danger"><i class="fas fa-exclamation"></i> Atender</button></td>
             </tr>
         </tbody>

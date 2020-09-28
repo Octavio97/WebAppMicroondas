@@ -319,53 +319,39 @@
         <form #log=ngForm (submit)="alta(log)">
             <div class="form-group">
                 <label for="fechaI">Fecha de inicio: </label>
-                <input class="form-control" type="date" id="fechaI" name="fechaI" [(ngModel)]="this.contrato.fechaInicio">
+                <input [ngClass]="{ 'is-invalid' : fechaInicio.invalid && (fechaInicio.dirty || fechaInicio.touched) }" class="form-control" type="date" id="fechaI" name="fechaI" [(ngModel)]="this.contrato.fechaInicio" #fechaInicio="ngModel" required>
+                <div class="invalid-feedback" *ngIf="fechaInicio.errors?.required">Ingrese fecha de inicio</div>
             </div>
             <div class="form-group">
-                <label for="fechaF">Fecha Limite: </label>
-                <input class="form-control" type="date" name="fechaF" id="fechaF" [(ngModel)]="this.contrato.fechaFinal">
+                <label for="fechaF">Fecha final: </label>
+                <input [ngClass]="{ 'is-invalid' : fechaFinal.invalid && (fechaFinal.dirty || fechaFinal.touched) }" class="form-control" type="date" name="fechaF" id="fechaF" [(ngModel)]="this.contrato.fechaFinal" #fechaFinal="ngModel" required>
+                <div class="invalid-feedback" *ngIf="fechaFinal.errors?.required">Ingrese fecha final</div>
             </div>
             <div class="form-group">
                 <label for="idUsuario">Cliente:</label>
                 <table class="table table-sm">
                     <thead>
-                        <th scope="col"></th>
-                        <th scope="col">Cliente</th>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of u">
-                            <th *ngIf="item.Rol.rol1 === 'cliente'" scope="row"><input type="radio" aria-label="Radio button for following text input"></th>
-                            <td *ngIf="item.Rol.rol1 === 'cliente'">{{ item.nombre }} {{ item.apellido }}</td>
+                            <td><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.contrato.idUsuario" [value]="item.idUsuario"></td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido }}</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="form-group">
-                <label for="idTecnico">Técnico: </label>
-                <table class="table table-sm">
-                    <thead>
-                        <th scope="col"></th>
-                        <th scope="col">Técnico</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of u">
-                            <th *ngIf="item.Rol.rol1 === 'tecnico'" scope="row"><input type="radio" aria-label="Radio button for following text input"></th>
-                            <td *ngIf="item.Rol.rol1 === 'tecnico'">{{ item.nombre }} {{ item.apellido }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="form-group">
-                <label for="estatus">Estatus: </label>
-                <select class="form-control" name="estatus" id="estatus" [(ngModel)]="this.contrato.idEstatus">
-                    <option *ngFor="let item of es" [ngValue]="item.idEstatus">{{ item.estatus1 }}</option>
-                </select>
             </div>
             <div class="form-group">
                 <label for="cliente">Paquete: </label>
-                <select class="form-control" name="cliente" id="cliente" [(ngModel)]="this.contrato.idPaquete">
+                <select [ngClass]="{ 'is-invalid' : idPaquete.invalid && ( idPaquete.dirty || idPaquete.touched ) }" class="form-control" name="cliente" id="cliente" [(ngModel)]="this.contrato.idPaquete" #idPaquete="ngModel" required>
                     <option *ngFor="let item of p" [ngValue]="item.idPaquete">{{ item.nombre }}</option>
                 </select>
+                <div class="invalid-feedback" *ngIf="idPaquete.errors?.required">Seleccione paquete</div>
             </div>
             <br>
             <div class="custom-control custom-switch">
@@ -392,12 +378,48 @@
                 <input class="form-control" type="date" name="fechaFinal" id="fechaFinal" [(ngModel)]="this.soporte.fechaFinal">
             </div>
             <div class="form-group">
-                <label for="idTecnico"></label>
-                <input type="text">
+                <label for="idTecnico">Técnico:</label>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of t">
+                            <th><input class="form-check-input" type="radio" name="idtecnico" id="idtecnico" [(ngModel)]="this.soporte.idTecnico" [value]="item.idUsuario"></th>
+                            <th>{{ item.nombre }}</th>
+                            <th>{{ item.apellido }}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="form-group">
-                <label for="idContrato"></label>
-                <input type="text">
+                <label for="idContrato">Cliente:</label>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of u">
+                            <th><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.soporte.idContrato" [value]="item.Contrato.idContrato"></th>
+                            <th>{{ item.nombre }}</th>
+                            <th>{{ item.apellido }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="estatus">Estatus: </label>
+                <select class="form-control" name="estatus" id="estatus" [(ngModel)]="this.soporte.idEstatus">
+                    <option *ngFor="let item of es" [ngValue]="item.idEstatus">{{ item.estatus1 }}</option>
+                </select>
             </div>
             <br>
             <div class="custom-control custom-switch">

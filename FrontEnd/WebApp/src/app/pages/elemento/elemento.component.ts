@@ -68,6 +68,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   cp: CodigoPostal[];
   co: Colonia[];
   r: Rol[];
+  t: Usuario[];
 
   constructor(
     private coloniaS: ColoniaService,
@@ -148,7 +149,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           this.es = resp;
         }
       });
-      this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
+      this.usuarioS.verCliente().subscribe( (resp: Usuario[]) => {
         if (resp) {
           this.u = resp;
         }
@@ -157,6 +158,18 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     else if (this.id === 'Ciudad') {
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
+      });
+    }
+    else if (this.id === 'Soporte') {
+      this.usuarioS.verCliente().subscribe( (resp: Usuario[]) => {
+        if (resp) {
+          this.u = resp;
+        }
+      });
+      this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
+        if (resp) {
+          this.t = resp;
+        }
       });
     }
   }
@@ -279,6 +292,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         this.usuarioS.verUsuario(this.id2).subscribe( (resp: Usuario) => {
           if (resp) {
             this.usuario = resp;
+          }
+        });
+      }
+      else if (this.id === 'Soporte') {
+        this.soporte.idSoporte = this.id2;
+        this.soporteS.verSoporte(this.id2).subscribe( (resp: Soporte) => {
+          if (resp) {
+            this.soporte = resp;
           }
         });
       }
@@ -843,10 +864,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         fechaInicio: null,
         fechaFinal: null,
         idPaquete: null,
-        idEstatus: null,
         idUsuario: null,
         activo: null,
-        Estatus: new Estatus(),
         Paquete: new Paquete(),
         Usuario: new Usuario()
       };
@@ -939,6 +958,21 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       Propiedad: new Propiedad(),
       Rol: new Rol ()
     };
+    }
+    else if (this.id === 'Soporte') {
+      this.soporte = {
+        idSoporte: null,
+        problema: null,
+        idTecnico: null,
+        idContrato: null,
+        fechaInicio: null,
+        fechaFinal: null,
+        idEstatus: null,
+        activo: null,
+        Contrato: new Contrato(),
+        Estatus: new Estatus(),
+        Usuario: new Usuario()
+      };
     }
   }
 }

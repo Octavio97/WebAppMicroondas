@@ -17,7 +17,7 @@ namespace MicroondasAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Estatus()
         {
-            this.Contrato = new HashSet<Contrato>();
+            this.Soporte = new HashSet<Soporte>();
         }
     
         public System.Guid idEstatus { get; set; }
@@ -25,6 +25,6 @@ namespace MicroondasAPI.Models
         public Nullable<bool> activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contrato> Contrato { get; set; }
+        public virtual ICollection<Soporte> Soporte { get; set; }
     }
 }

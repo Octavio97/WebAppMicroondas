@@ -76,9 +76,16 @@ namespace MicroondasAPI.Controllers
                     problema = s.problema,
                     idTecnico = s.idTecnico,
                     idContrato = s.idContrato,
+                    idEstatus = s.idEstatus,
                     fechaInicio = s.fechaInicio,
                     fechaFinal = s.fechaFinal,
                     activo = s.activo,
+                    Estatus = new
+                    {
+                        idEstatus = s.Estatus.idEstatus,
+                        estatus1 = s.Estatus.estatus1,
+                        activo = s.Estatus.activo,
+                    },
                     Contrato = new
                     {
                         idContrato = s.Contrato.idContrato,
@@ -87,15 +94,8 @@ namespace MicroondasAPI.Controllers
                         fechaInicio = s.Contrato.fechaInicio,
                         fechaFinal = s.Contrato.fechaFinal,
                         idPaquete = s.Contrato.idPaquete,
-                        idEstatus = s.Contrato.idEstatus,
                         idUsuario = s.Contrato.idUsuario,
                         activo = s.Contrato.activo,
-                        Estatus = new
-                        {
-                            idEstatus = s.Contrato.Estatus.idEstatus,
-                            estatus1 = s.Contrato.Estatus.estatus1,
-                            activo = s.Contrato.Estatus.activo
-                        },
                         Paquete = new
                         {
                             idPaquete = s.Contrato.Paquete.idPaquete,
@@ -221,6 +221,7 @@ namespace MicroondasAPI.Controllers
                 accion.idContrato = soporte.idContrato;
                 accion.fechaInicio = soporte.fechaInicio;
                 accion.fechaFinal = soporte.fechaFinal;
+                accion.idEstatus = soporte.idEstatus;
                 accion.activo = soporte.activo;
 
                 SessionController.getInstance().SaveChanges();
@@ -256,7 +257,14 @@ namespace MicroondasAPI.Controllers
                     idContrato = accion.idContrato,
                     fechaInicio = accion.fechaInicio,
                     fechaFinal = accion.fechaFinal,
+                    idEstatus = accion.idEstatus,
                     activo = accion.activo,
+                    Estatus = new
+                    {
+                        idEstatus = accion.Estatus.idEstatus,
+                        estatus1 = accion.Estatus.estatus1,
+                        activo = accion.Estatus.activo
+                    },
                     Contrato = new
                     {
                         idContrato = accion.Contrato.idContrato,
@@ -265,15 +273,8 @@ namespace MicroondasAPI.Controllers
                         fechaInicio = accion.Contrato.fechaInicio,
                         fechaFinal = accion.Contrato.fechaFinal,
                         idPaquete = accion.Contrato.idPaquete,
-                        idEstatus = accion.Contrato.idEstatus,
                         idUsuario = accion.Contrato.idUsuario,
                         activo = accion.Contrato.activo,
-                        Estatus = new
-                        {
-                            idEstatus = accion.Contrato.Estatus.idEstatus,
-                            estatus1 = accion.Contrato.Estatus.estatus1,
-                            activo = accion.Contrato.Estatus.activo
-                        },
                         Paquete = new
                         {
                             idPaquete = accion.Contrato.Paquete.idPaquete,
@@ -400,6 +401,152 @@ namespace MicroondasAPI.Controllers
                 SessionController.getInstance().SaveChanges();
 
                 return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verSoporte")]
+        public IHttpActionResult verSoporte(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idSoporte == i).FirstOrDefault();
+
+                if(accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = new
+                {
+                    idSoporte = accion.idSoporte,
+                    problema = accion.problema,
+                    idTecnico = accion.idTecnico,
+                    idContrato = accion.idContrato,
+                    fechaInicio = accion.fechaInicio,
+                    fechaFinal = accion.fechaFinal,
+                    idEstatus = accion.idEstatus,
+                    activo = accion.activo,
+                    Estatus = new
+                    {
+                        idEstatus = accion.Estatus.idEstatus,
+                        estatus1 = accion.Estatus.estatus1,
+                        activo = accion.Estatus.activo
+                    },
+                    Contrato = new
+                    {
+                        idContrato = accion.Contrato.idContrato,
+                        pdf = accion.Contrato.pdf,
+                        archivo = accion.Contrato.archivo,
+                        fechaInicio = accion.Contrato.fechaInicio,
+                        fechaFinal = accion.Contrato.fechaFinal,
+                        idPaquete = accion.Contrato.idPaquete,
+                        idUsuario = accion.Contrato.idUsuario,
+                        activo = accion.Contrato.activo,
+                        Paquete = new
+                        {
+                            idPaquete = accion.Contrato.Paquete.idPaquete,
+                            nombre = accion.Contrato.Paquete.nombre,
+                            precio = accion.Contrato.Paquete.precio,
+                            activo = accion.Contrato.Paquete.activo,
+                            descripcion = accion.Contrato.Paquete.descripcion
+                        },
+                        Usuario = new
+                        {
+                            idUsuario = accion.Contrato.Usuario.idUsuario,
+                            nombre = accion.Contrato.Usuario.nombre,
+                            apellido = accion.Contrato.Usuario.apellido,
+                            telefono = accion.Contrato.Usuario.telefono,
+                            correoE = accion.Contrato.Usuario.correoE,
+                            calle = accion.Contrato.Usuario.calle,
+                            numInt = accion.Contrato.Usuario.numInt,
+                            numExt = accion.Contrato.Usuario.numExt,
+                            idEstado = accion.Contrato.Usuario.idEstado,
+                            idCiudad = accion.Contrato.Usuario.idCiudad,
+                            idCP = accion.Contrato.Usuario.idCP,
+                            idColonia = accion.Contrato.Usuario.idColonia,
+                            idRol = accion.Contrato.Usuario.idRol,
+                            activo = accion.Contrato.Usuario.activo,
+                            contrasena = accion.Contrato.Usuario.contrasena,
+                            CP = new
+                            {
+                                idCP = accion.Contrato.Usuario.CodigoPostal.idCP,
+                                codigo = accion.Contrato.Usuario.CodigoPostal.codigo
+                            },
+                            Colonia = new
+                            {
+                                idColonia = accion.Contrato.Usuario.Colonia.idColonia,
+                                colonia1 = accion.Contrato.Usuario.Colonia.colonia1,
+                            },
+                            Ciudad = new
+                            {
+                                idCiudad = accion.Contrato.Usuario.Ciudad.idCiudad,
+                                ciudad1 = accion.Contrato.Usuario.Ciudad.ciudad1
+                            },
+                            Estado = new
+                            {
+                                idEstado = accion.Contrato.Usuario.idEstado,
+                                estado1 = accion.Contrato.Usuario.Estado.estado1
+                            },
+                            Rol = new
+                            {
+                                idRol = accion.Contrato.Usuario.Rol.idRol,
+                                rol1 = accion.Contrato.Usuario.Rol.rol1
+                            }
+                        }
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = accion.Usuario.idUsuario,
+                        nombre = accion.Usuario.nombre,
+                        apellido = accion.Usuario.apellido,
+                        telefono = accion.Usuario.telefono,
+                        correoE = accion.Usuario.correoE,
+                        calle = accion.Usuario.calle,
+                        numInt = accion.Usuario.numInt,
+                        numExt = accion.Usuario.numExt,
+                        idEstado = accion.Usuario.idEstado,
+                        idCiudad = accion.Usuario.idCiudad,
+                        idCP = accion.Usuario.idCP,
+                        idColonia = accion.Usuario.idColonia,
+                        idRol = accion.Usuario.idRol,
+                        activo = accion.Usuario.activo,
+                        contrasena = accion.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = accion.Usuario.CodigoPostal.idCP,
+                            codigo = accion.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = accion.Usuario.Colonia.idColonia,
+                            colonia1 = accion.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = accion.Usuario.Ciudad.idCiudad,
+                            ciudad1 = accion.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = accion.Usuario.idEstado,
+                            estado1 = accion.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = accion.Usuario.Rol.idRol,
+                            rol1 = accion.Usuario.Rol.rol1
+                        }
+                    }
+                };
+
+                return Ok(resultado);
             }
             catch (Exception)
             {

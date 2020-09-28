@@ -24,13 +24,11 @@ namespace MicroondasAPI.Models
         public byte[] pdf { get; set; }
         public string archivo { get; set; }
         public Nullable<System.Guid> idPaquete { get; set; }
-        public Nullable<System.Guid> idEstatus { get; set; }
         public Nullable<bool> activo { get; set; }
         public Nullable<System.Guid> idUsuario { get; set; }
         public Nullable<System.DateTime> fechaFinal { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
     
-        public virtual Estatus Estatus { get; set; }
         public virtual Paquete Paquete { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

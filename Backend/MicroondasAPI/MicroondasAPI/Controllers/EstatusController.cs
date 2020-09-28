@@ -165,7 +165,6 @@ namespace MicroondasAPI.Controllers
                     idEstatus = consulta.idEstatus,
                     estatus1 = consulta.estatus1,
                     activo = consulta.activo,
-                    Contrato = consulta.Contrato
                 };
 
                 return Ok(respuesta);

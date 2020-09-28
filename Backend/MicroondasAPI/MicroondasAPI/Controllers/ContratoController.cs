@@ -20,7 +20,7 @@ namespace MicroondasAPI.Controllers
                 var accion = SessionController.getInstance().Contrato.Where(w => w.idUsuario == contrato.idUsuario).FirstOrDefault();
 
                 // si no existe
-                if (accion == null)
+                if (accion != null)
                 {
                     return Ok(false);
                 }
@@ -34,7 +34,6 @@ namespace MicroondasAPI.Controllers
                     fechaInicio = contrato.fechaInicio,
                     fechaFinal = contrato.fechaFinal,
                     idPaquete = contrato.idPaquete,
-                    idEstatus = contrato.idEstatus,
                     idUsuario = contrato.idUsuario,
                     activo = contrato.activo
                 };
@@ -100,18 +99,11 @@ namespace MicroondasAPI.Controllers
                     idContrato = s.idContrato,
                     pdf = s.pdf,
                     archivo = s.archivo,
-                    fechaInicio = s.fechaInicio,
-                    fechaFinal = s.fechaFinal,
+                    fechaInicio = Convert.ToDateTime(s.fechaInicio).ToString("dd/MM/yyyy"),
+                    fechaFinal = Convert.ToDateTime(s.fechaFinal).ToString("dd/MM/yyyy"),
                     idPaquete = s.idPaquete,
-                    idEstatus = s.idEstatus,
                     idUsuario = s.idUsuario,
                     activo = s.activo,
-                    Estatus = new
-                    {
-                        idEstatus = s.Estatus.idEstatus,
-                        estatus1 = s.Estatus.estatus1,
-                        activo = s.Estatus.activo
-                    },
                     Paquete = new
                     {
                         idPaquete = s.Paquete.idPaquete,
@@ -195,7 +187,6 @@ namespace MicroondasAPI.Controllers
                     accion.fechaInicio = contrato.fechaInicio;
                     accion.fechaFinal = contrato.fechaFinal;
                     accion.idPaquete = contrato.idPaquete;
-                    accion.idEstatus = contrato.idEstatus;
                     accion.idUsuario = contrato.idUsuario;
                     accion.activo = contrato.activo;
 
@@ -235,18 +226,11 @@ namespace MicroondasAPI.Controllers
                     idContrato = consulta.idContrato,
                     pdf = consulta.pdf,
                     archivo = consulta.archivo,
-                    fechaInicio = consulta.fechaInicio,
-                    fechaFinal = consulta.fechaFinal,
+                    fechaInicio = Convert.ToDateTime(consulta.fechaInicio).ToString("yyyy/MM/dd"),
+                    fechaFinal = Convert.ToDateTime(consulta.fechaFinal).ToString("yyyy/MM/dd"),
                     idPaquete = consulta.idPaquete,
-                    idEstatus = consulta.idEstatus,
                     idUsuario = consulta.idUsuario,
                     activo = consulta.activo,
-                    Estatus = new
-                    {
-                        idEstatus = consulta.Estatus.idEstatus,
-                        estatus1 = consulta.Estatus.estatus1,
-                        activo = consulta.Estatus.activo
-                    },
                     Paquete = new
                     {
                         idPaquete = consulta.Paquete.idPaquete,
@@ -334,18 +318,11 @@ namespace MicroondasAPI.Controllers
                     idContrato = s.idContrato,
                     pdf = s.pdf,
                     archivo = s.archivo,
-                    fechaInicio = s.fechaInicio,
-                    fechaFinal = s.fechaFinal,
+                    fechaInicio = Convert.ToDateTime(s.fechaInicio).ToString("dd/MM/yyyy"),
+                    fechaFinal = Convert.ToDateTime(s.fechaFinal).ToString("dd/MM/yyyy"),
                     idPaquete = s.idPaquete,
-                    idEstatus = s.idEstatus,
                     idUsuario = s.idUsuario,
                     activo = s.activo,
-                    Estatus = new
-                    {
-                        idEstatus = s.Estatus.idEstatus,
-                        estatus1 = s.Estatus.estatus1,
-                        activo = s.Estatus.activo
-                    },
                     Paquete = new
                     {
                         idPaquete = s.Paquete.idPaquete,
@@ -431,7 +408,6 @@ namespace MicroondasAPI.Controllers
                     fechaInicio = DateTime.Today,
                     fechaFinal = contrato.fechaFinal,
                     idPaquete = contrato.idPaquete,
-                    idEstatus = accion2.idEstatus,
                     idUsuario = contrato.idUsuario,
                     activo = contrato.activo
                 };

@@ -269,5 +269,135 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verCliente")]
+        public IHttpActionResult verCliente()
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Usuario.Where(w => w.activo == true && w.Rol.rol1 == "cliente").ToList();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.Select(s => new
+                {
+                    idUsuario = s.idUsuario,
+                    nombre = s.nombre,
+                    apellido = s.apellido,
+                    telefono = s.telefono,
+                    correoE = s.correoE,
+                    calle = s.calle,
+                    numInt = s.numInt,
+                    numExt = s.numExt,
+                    idEstado = s.idEstado,
+                    idCiudad = s.idCiudad,
+                    idCP = s.idCP,
+                    idColonia = s.idColonia,
+                    idRol = s.idRol,
+                    activo = s.activo,
+                    contrasena = s.contrasena,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo
+                    },
+                    Colonia = new
+                    {
+                        idColonia = s.Colonia.idColonia,
+                        colonia1 = s.Colonia.colonia1,
+                    },
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1
+                    },
+                    Estado = new
+                    {
+                        idEstado = s.idEstado,
+                        estado1 = s.Estado.estado1
+                    },
+                    Rol = new
+                    {
+                        idRol = s.Rol.idRol,
+                        rol1 = s.Rol.rol1
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verTecnico")]
+        public IHttpActionResult verTecnico()
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Usuario.Where(w => w.activo == true && w.Rol.rol1 == "tecnico").ToList();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.Select(s => new
+                {
+                    idUsuario = s.idUsuario,
+                    nombre = s.nombre,
+                    apellido = s.apellido,
+                    telefono = s.telefono,
+                    correoE = s.correoE,
+                    calle = s.calle,
+                    numInt = s.numInt,
+                    numExt = s.numExt,
+                    idEstado = s.idEstado,
+                    idCiudad = s.idCiudad,
+                    idCP = s.idCP,
+                    idColonia = s.idColonia,
+                    idRol = s.idRol,
+                    activo = s.activo,
+                    contrasena = s.contrasena,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo
+                    },
+                    Colonia = new
+                    {
+                        idColonia = s.Colonia.idColonia,
+                        colonia1 = s.Colonia.colonia1,
+                    },
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1
+                    },
+                    Estado = new
+                    {
+                        idEstado = s.idEstado,
+                        estado1 = s.Estado.estado1
+                    },
+                    Rol = new
+                    {
+                        idRol = s.Rol.idRol,
+                        rol1 = s.Rol.rol1
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

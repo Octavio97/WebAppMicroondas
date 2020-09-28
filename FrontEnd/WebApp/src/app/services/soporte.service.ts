@@ -29,4 +29,8 @@ export class SoporteService {
   consultaUnicaSopU(id: string){
     return this.http.get( this.url + 'consultaUnicaSopU', { params: { id } } );
   }
+
+  verSoporte(id: string) {
+    return this.http.get( this.url + 'verSoporte', { params: { id } } );
+  }
 }

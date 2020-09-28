@@ -37,4 +37,12 @@ export class UsuarioService {
   verUsuario(id: string) {
     return this.http.get( this.url + 'verUsuario', { params: { id } } );
   }
+
+  verCliente() {
+    return this.http.get( this.url + 'verCliente' );
+  }
+
+  verTecnico() {
+    return this.http.get( this.url + 'verTecnico' );
+  }
 }

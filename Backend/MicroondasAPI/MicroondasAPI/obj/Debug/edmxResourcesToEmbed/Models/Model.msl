@@ -38,7 +38,6 @@
           <ScalarProperty Name="pdf" ColumnName="pdf" />
           <ScalarProperty Name="archivo" ColumnName="archivo" />
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
-          <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
@@ -121,6 +120,7 @@
           <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
           <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

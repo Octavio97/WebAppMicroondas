@@ -43,12 +43,10 @@
     <Property Name="pdf" Type="Binary" MaxLength="1" FixedLength="true" />
     <Property Name="archivo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="idPaquete" Type="Guid" />
-    <Property Name="idEstatus" Type="Guid" />
     <Property Name="activo" Type="Boolean" />
     <Property Name="idUsuario" Type="Guid" />
     <Property Name="fechaFinal" Type="DateTime" Precision="0" />
     <Property Name="fechaInicio" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Estatus" Relationship="Self.FK__Contrato__idEsta__4BAC3F29" FromRole="Contrato" ToRole="Estatus" />
     <NavigationProperty Name="Paquete" Relationship="Self.FK__Contrato__idPaqu__4AB81AF0" FromRole="Contrato" ToRole="Paquete" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Contrato__idUsua__6E01572D" FromRole="Contrato" ToRole="Usuario" />
     <NavigationProperty Name="Soporte" Relationship="Self.FK__Soporte__idContr__18EBB532" FromRole="Contrato" ToRole="Soporte" />
@@ -80,7 +78,7 @@
     <Property Name="idEstatus" Type="Guid" Nullable="false" />
     <Property Name="estatus1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="activo" Type="Boolean" />
-    <NavigationProperty Name="Contrato" Relationship="Self.FK__Contrato__idEsta__4BAC3F29" FromRole="Estatus" ToRole="Contrato" />
+    <NavigationProperty Name="Soporte" Relationship="Self.FK__Soporte__idEstat__282DF8C2" FromRole="Estatus" ToRole="Soporte" />
   </EntityType>
   <EntityType Name="Paquete">
     <Key>
@@ -134,7 +132,9 @@
     <Property Name="fechaInicio" Type="DateTime" Precision="0" />
     <Property Name="fechaFinal" Type="DateTime" Precision="0" />
     <Property Name="activo" Type="Boolean" />
+    <Property Name="idEstatus" Type="Guid" />
     <NavigationProperty Name="Contrato" Relationship="Self.FK__Soporte__idContr__18EBB532" FromRole="Soporte" ToRole="Contrato" />
+    <NavigationProperty Name="Estatus" Relationship="Self.FK__Soporte__idEstat__282DF8C2" FromRole="Soporte" ToRole="Estatus" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Soporte__idTecni__17F790F9" FromRole="Soporte" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Usuario">
@@ -237,18 +237,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Contrato__idEsta__4BAC3F29">
-    <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
-    <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Estatus">
-        <PropertyRef Name="idEstatus" />
-      </Principal>
-      <Dependent Role="Contrato">
-        <PropertyRef Name="idEstatus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Contrato__idPaqu__4AB81AF0">
     <End Role="Paquete" Type="Self.Paquete" Multiplicity="0..1" />
     <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
@@ -318,6 +306,18 @@
       </Principal>
       <Dependent Role="Usuario">
         <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Soporte__idEstat__282DF8C2">
+    <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
+    <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estatus">
+        <PropertyRef Name="idEstatus" />
+      </Principal>
+      <Dependent Role="Soporte">
+        <PropertyRef Name="idEstatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -407,10 +407,6 @@
       <End Role="Colonia" EntitySet="Colonia" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Contrato__idEsta__4BAC3F29" Association="Self.FK__Contrato__idEsta__4BAC3F29">
-      <End Role="Estatus" EntitySet="Estatus" />
-      <End Role="Contrato" EntitySet="Contrato" />
-    </AssociationSet>
     <AssociationSet Name="FK__Contrato__idPaqu__4AB81AF0" Association="Self.FK__Contrato__idPaqu__4AB81AF0">
       <End Role="Paquete" EntitySet="Paquete" />
       <End Role="Contrato" EntitySet="Contrato" />
@@ -434,6 +430,10 @@
     <AssociationSet Name="FK__Usuario__idEstad__02084FDA" Association="Self.FK__Usuario__idEstad__02084FDA">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Soporte__idEstat__282DF8C2" Association="Self.FK__Soporte__idEstat__282DF8C2">
+      <End Role="Estatus" EntitySet="Estatus" />
+      <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
     <AssociationSet Name="FK__PaqueteEq__idPaq__440B1D61" Association="Self.FK__PaqueteEq__idPaq__440B1D61">
       <End Role="Paquete" EntitySet="Paquete" />
