@@ -12,12 +12,13 @@
         </div>
     </nav>
 </header>
-
+<!-- fondo de perfil -->
 <div class="animated fadeIn">
     <img src="../../../assets/img/screen.jpg" alt="screen" style="height: 300px; width: 100%;">
     <h1 class="animeted fadeIn display-2 container-fluid" style="margin-top: -100px; color:white">{{ this.usuario.nombre }} {{ this.usuario.apellido }}</h1>
 </div>
 <br>
+<!-- datos del perfil -->
 <div class="container animated fadeIn">
     <div class="d-flex justify-content-end">
         <button *ngIf="mod === false" class="btn btn-info" (click)="modEvent()"><i class="fa fa-pen"></i> Modificar</button>
@@ -130,6 +131,7 @@
     </form>
 </div>
 <br>
+<!-- tabla de historial de reportes -->
 <div class="container animated fadeIn">
     <h1 class="display-4">Historial de reportes</h1>
     <table class="table">
@@ -148,11 +150,9 @@
             <tr *ngFor="let item of s; let i = index">
                 <th scope="row">{{ i + 1 }}</th>
                 <th>{{ item.problema }}</th>
-                <th>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</th>
-                <th>{{ item.Contrato.Paquete.nombre }}</th>
-                <th>{{ item.fechaInicio }}</th>
-                <th>{{ item.Contrato.Estatus.estatus1 }}</th>
-                <th><button class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button></th>
+                <th>{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</th>
+                <th>{{ item.Paquete.nombre }}</th>
+                <th>{{ item.Estatus.estatus1 }}</th>
             </tr>
         </tbody>
     </table>
