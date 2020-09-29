@@ -14,7 +14,7 @@ export class Usuario {
     correoE: string;
     contrasena: string;
     calle: string;
-    numInt: number;
+    numInt: string;
     numExt: number;
     idEstado: string;
     idCiudad: string;
@@ -23,11 +23,11 @@ export class Usuario {
     idRol: string;
     activo: boolean;
 
-    CP: CodigoPostal;
-    Colonia: Colonia;
-    Ciudad: Ciudad;
-    Estado: Estado;
-    Rol: Rol;
+    CP?: CodigoPostal;
+    Colonia?: Colonia;
+    Ciudad?: Ciudad;
+    Estado?: Estado;
+    Rol?: Rol;
 
     constructor() {}
 }

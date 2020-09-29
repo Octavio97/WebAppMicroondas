@@ -11,7 +11,7 @@ export class SoporteService {
   public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
 
   altaSoporte(soporte: Soporte) {
-    return this.http.post( this.url + 'agregarSoporte', { params: { soporte } } );
+    return this.http.post( this.url + 'agregarSoporte', soporte );
   }
 
   bajaSoporte(id: string) {
@@ -19,7 +19,7 @@ export class SoporteService {
   }
 
   modificarSoporte(soporte: Soporte){
-    return this.http.put( this.url + 'modificarSoporte', { params: { soporte } } );
+    return this.http.put( this.url + 'modificarSoporte', soporte );
   }
 
   consultaSoporte(){
@@ -35,6 +35,6 @@ export class SoporteService {
   }
 
   agregarSoporteCli(soporte: Soporte) {
-    return this.http.post( this.url + 'agregarSoporteCli', { params: { soporte } } );
+    return this.http.post( this.url + 'agregarSoporteCli', soporte );
   }
 }

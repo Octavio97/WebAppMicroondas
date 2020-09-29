@@ -389,9 +389,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of t">
-                            <th><input class="form-check-input" type="radio" name="idtecnico" id="idtecnico" [(ngModel)]="this.soporte.idTecnico" [value]="item.idUsuario"></th>
-                            <th>{{ item.nombre }}</th>
-                            <th>{{ item.apellido }}</th>
+                            <td><input class="form-check-input" type="radio" name="idtecnico" id="idtecnico" [(ngModel)]="this.soporte.idTecnico" [value]="item.idUsuario"></td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -408,9 +408,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of u">
-                            <th><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.soporte.idContrato" [value]="item.Contrato.idContrato"></th>
-                            <th>{{ item.nombre }}</th>
-                            <th>{{ item.apellido }}</th>
+                            <td><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.soporte.idContrato" [value]="item.idUsuario"></td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido }}</td>
                         </tr>
                     </tbody>
                 </table>

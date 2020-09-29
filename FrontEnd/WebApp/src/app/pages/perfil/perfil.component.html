@@ -23,7 +23,7 @@
     <div class="d-flex justify-content-end">
         <button *ngIf="mod === false" class="btn btn-info" (click)="modEvent()"><i class="fa fa-pen"></i> Modificar</button>
         <button *ngIf="mod === true" class="btn btn-danger" (click)="modEvent()"><i class="fa fa-ban"></i> Cancelar</button>
-        <button class="btn btn-warning" style="margin-left: 2px;" (click)="addReport()"><i class="fa fa-plus"></i> Nuevo reporte</button>
+        <button *ngIf="this.usuario.Rol.rol1 === 'cliente'" class="btn btn-warning" style="margin-left: 2px;" (click)="addReport()"><i class="fa fa-plus"></i> Nuevo reporte</button>
     </div>
 
     <form #log="ngForm" (submit)=alta(log) class="needs-validation">

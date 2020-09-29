@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
@@ -18,7 +18,8 @@ import { ContratoService } from '../../services/contrato.service';
 import { Contrato } from '../../models/contrato.model';
 import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
-import { Propiedad } from 'src/app/models/propiedad.model';
+import { Paquete } from 'src/app/models/paquete.model';
+import { Estatus } from 'src/app/models/estatus.model';
 
 @Component({
   selector: 'app-perfil',
@@ -34,7 +35,6 @@ export class PerfilComponent implements OnInit {
   s: Soporte[];
   contrato = new Contrato();
   soporte = new Soporte();
-  contr = new Contrato();
   mod = false;
 
   constructor(
@@ -55,6 +55,7 @@ export class PerfilComponent implements OnInit {
       this.router.navigate(['/']);
     }
     // guardamos el usuario actual
+    this.init();
     this.usuario = JSON.parse(localStorage.getItem('currentUser'));
 
     // consulta rol
@@ -63,10 +64,16 @@ export class PerfilComponent implements OnInit {
         this.r = resp;
       }
     });
-    // consulta del contrato
+    // consulta del contrato y reportes
     this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {
       if (resp) {
         this.contrato = resp;
+        this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
+          if (resp) {
+            this.s = resp;
+            console.log(this.s);
+          }
+        });
       }
     });
     // consulta de ubicacion
@@ -88,12 +95,6 @@ export class PerfilComponent implements OnInit {
             });
           }
         });
-      }
-    });
-    // Consulta de reportes
-    this.soporteS.consultaUnicaSopU(this.usuario.idUsuario).subscribe( (resp: Soporte[]) => {
-      if (resp) {
-        this.s = resp;
       }
     });
   }
@@ -201,11 +202,17 @@ export class PerfilComponent implements OnInit {
       },
       showCancelButton: true
     });
-
     if (text) {
-      this.soporte.problema = JSON.stringify(text);
+      // mensaje para cargar informacion
+      Swal.fire({
+        title: 'Espere',
+        text: 'Guardando información',
+        icon: 'info',
+        allowOutsideClick: false
+        });
+      Swal.showLoading();
+      this.soporte.problema = text.toString();
       this.soporte.idContrato = this.contrato.idContrato;
-      console.log(this.soporte);
       this.soporteS.agregarSoporteCli(this.soporte).subscribe( resp => {
         if (resp) {
           Swal.fire({
@@ -216,5 +223,57 @@ export class PerfilComponent implements OnInit {
         }
       });
     }
+  }
+
+  init(){
+    this.soporte = {
+      idSoporte: null,
+      problema: null,
+      idTecnico: null,
+      idContrato: null,
+      fechaInicio: null,
+      fechaFinal: null,
+      idEstatus: null,
+      activo: null,
+      Contrato: new Contrato(),
+      Estatus: new Estatus(),
+      Usuario: new Usuario()
+    };
+
+    this.contrato = {
+      idContrato: null,
+      pdf: null,
+      archivo: null,
+      fechaInicio: null,
+      fechaFinal: null,
+      idPaquete: null,
+      idUsuario: null,
+      activo: null,
+      Paquete: new Paquete(),
+      Usuario: new Usuario()
+    };
+
+    this.usuario = {
+      idUsuario: null,
+      nombre: null,
+      apellido: null,
+      telefono: null,
+      correoE: null,
+      contrasena: null,
+      calle: null,
+      numInt: null,
+      numExt: null,
+      idEstado: null,
+      idCiudad: null,
+      idColonia: null,
+      idCP: null,
+      idRol: null,
+      activo: null,
+      CP: new CodigoPostal(),
+      Colonia: new Colonia(),
+      Ciudad: new Ciudad(),
+      Estado: new Estado(),
+      Rol: new Rol ()
+    };
   }
 }

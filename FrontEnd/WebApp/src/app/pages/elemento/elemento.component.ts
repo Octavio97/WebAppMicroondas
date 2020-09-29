@@ -171,6 +171,11 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           this.t = resp;
         }
       });
+      this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
+        if (resp) {
+          this.es = resp;
+        }
+      });
     }
   }
 
@@ -766,7 +771,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 if (resp === true) {
                   Swal.fire({
                     title: 'Exito',
-                    text: 'El usuario fue guardada con exito',
+                    text: 'El usuario fue guardado con exito',
                     icon: 'success'
                   });
                   this.router.navigate(['/inicio']);
@@ -774,6 +779,46 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                   Swal.fire({
                     title: 'Error',
                     text: 'El usuario ya existe',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+          }
+          else if (this.id === 'Soporte') {
+            if (this.soporte.idSoporte) {
+              this.soporteS.modificarSoporte(this.soporte).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El reporte fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'El reporte ya existe',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+            else {
+              this.soporteS.altaSoporte(this.soporte).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El reporte fue guardado con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'El reporte ya existe',
                     icon: 'error'
                   });
                 }
