@@ -25,10 +25,8 @@ export class Usuario {
 
     CP: CodigoPostal;
     Colonia: Colonia;
-    Contrato: Contrato;
     Ciudad: Ciudad;
     Estado: Estado;
-    Propiedad: Propiedad;
     Rol: Rol;
 
     constructor() {}

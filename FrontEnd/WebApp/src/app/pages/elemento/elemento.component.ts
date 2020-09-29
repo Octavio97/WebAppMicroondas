@@ -952,10 +952,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       activo: null,
       CP: new CodigoPostal(),
       Colonia: new Colonia(),
-      Contrato: new Contrato(),
       Ciudad: new Ciudad(),
       Estado: new Estado(),
-      Propiedad: new Propiedad(),
       Rol: new Rol ()
     };
     }

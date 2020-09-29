@@ -1,7 +1,7 @@
 <br><br>
 <div class="d-flex justify-content-center animated fadeInDown">
     <form class="shadow-lg p-3 mb-5 bg-white rounded border border-primary" #log="ngForm" (submit)="login(log)">
-        <img src="https://scontent.ftij3-1.fna.fbcdn.net/v/t1.0-9/12036389_1631592240448437_2106511549091188732_n.png?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=NqdiDEh9Jw8AX-m-Jm_&_nc_ht=scontent.ftij3-1.fna&oh=4090c7ffd77539009e9e84a3d3090ef8&oe=5F6C439D" alt="logo">
+        <img src="../../../assets/img/logo2.png" alt="logo">
         <div class="form-group">
             <label for="correoE">Correo electrónico</label>
             <input [ngClass]="{ 'is-invalid' : correoE.invalid && (correoE.dirty || correoE.touched) }" type="email" class="form-control" id="correoE" name="correoE" aria-describedby="emailHelp" [(ngModel)]="this.usuario.correoE" #correoE="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">

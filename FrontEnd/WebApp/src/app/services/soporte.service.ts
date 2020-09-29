@@ -33,4 +33,8 @@ export class SoporteService {
   verSoporte(id: string) {
     return this.http.get( this.url + 'verSoporte', { params: { id } } );
   }
+
+  agregarSoporteCli(soporte: Soporte) {
+    return this.http.post( this.url + 'agregarSoporteCli', { params: { soporte } } );
+  }
 }

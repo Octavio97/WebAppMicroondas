@@ -16,10 +16,9 @@ import { RolService } from '../../services/rol.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { ContratoService } from '../../services/contrato.service';
 import { Contrato } from '../../models/contrato.model';
-import { stringify } from 'querystring';
-import { title } from 'process';
 import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
+import { Propiedad } from 'src/app/models/propiedad.model';
 
 @Component({
   selector: 'app-perfil',
@@ -33,7 +32,7 @@ export class PerfilComponent implements OnInit {
   co: Colonia[];
   r: Rol[];
   s: Soporte[];
-  contrato: Contrato[];
+  contrato = new Contrato();
   soporte = new Soporte();
   contr = new Contrato();
   mod = false;
@@ -57,6 +56,7 @@ export class PerfilComponent implements OnInit {
     }
     // guardamos el usuario actual
     this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+
     // consulta rol
     this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
       if (resp) {
@@ -64,7 +64,7 @@ export class PerfilComponent implements OnInit {
       }
     });
     // consulta del contrato
-    this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato[]) => {
+    this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {
       if (resp) {
         this.contrato = resp;
       }
@@ -204,8 +204,9 @@ export class PerfilComponent implements OnInit {
 
     if (text) {
       this.soporte.problema = JSON.stringify(text);
-      this.soporte.idContrato = this.usuario.Contrato.idContrato;
-      this.soporteS.altaSoporte(this.soporte).subscribe( resp => {
+      this.soporte.idContrato = this.contrato.idContrato;
+      console.log(this.soporte);
+      this.soporteS.agregarSoporteCli(this.soporte).subscribe( resp => {
         if (resp) {
           Swal.fire({
             title: 'Exito',
