@@ -407,10 +407,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of u">
-                            <td><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.soporte.idContrato" [value]="item.idUsuario"></td>
-                            <td>{{ item.nombre }}</td>
-                            <td>{{ item.apellido }}</td>
+                        <tr *ngFor="let item of con">
+                            <td><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.soporte.idContrato" [value]="item.idContrato"></td>
+                            <td>{{ item.Usuario.nombre }}</td>
+                            <td>{{ item.Usuario.apellido }}</td>
                         </tr>
                     </tbody>
                 </table>

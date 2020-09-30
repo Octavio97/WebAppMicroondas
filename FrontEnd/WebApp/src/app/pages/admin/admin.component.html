@@ -354,12 +354,18 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of soporte; let i = index">
-                <th *ngIf="item.activo || this.in">{{ i + 1 }}</th>
-                <th *ngIf="item.activo || this.in">{{ item.problema }}</th>
-                <th *ngIf="item.activo || this.in">{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</th>
-                <th *ngIf="item.activo || this.in">{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</th>
-                <th *ngIf="item.activo || this.in">{{ item.fechaInicio }}</th>
-                <th *ngIf="item.activo || this.in">{{ item.fechaFinal }}</th>
+                <td *ngIf="item.activo || this.in">{{ i + 1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idSoporte }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.problema }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
+                <div *ngIf="item.activo || this.in">
+                    <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
+                    <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en progreso'">{{ item.Estatus.estatus1 }}</td>
+                    <td class="text-success" *ngIf="item.Estatus.estatus1 === 'resuelto'">{{ item.Estatus.estatus1 }}</td>
+                </div>
+                <td *ngIf="item.activo || this.in">{{ item.fechaInicio }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.fechaFinal }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
@@ -369,6 +375,7 @@
         </tbody>
     </table>
     <br><br>
+    <!-- Banner de carga -->
     <div *ngIf="seleccion === 'Seleccione tabla...'" class="alert alert-warning text-center mt-3 animated fadeIn faster container">
         <h4 class="alert-heading">No hay selección</h4>
         <p><i class="fa fa-exclamation fa-2x"></i></p>

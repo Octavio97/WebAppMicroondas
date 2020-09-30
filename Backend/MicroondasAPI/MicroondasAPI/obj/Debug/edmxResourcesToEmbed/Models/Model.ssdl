@@ -15,8 +15,8 @@
     </Key>
     <Property Name="idCP" Type="uniqueidentifier" Nullable="false" />
     <Property Name="codigo" Type="int" />
-    <Property Name="activo" Type="bit" />
     <Property Name="idCiudad" Type="uniqueidentifier" />
+    <Property Name="activo" Type="bit" />
   </EntityType>
   <EntityType Name="Colonia">
     <Key>
@@ -34,11 +34,11 @@
     <Property Name="idContrato" Type="uniqueidentifier" Nullable="false" />
     <Property Name="pdf" Type="binary" MaxLength="1" />
     <Property Name="archivo" Type="varchar" MaxLength="20" />
+    <Property Name="fechaInicio" Type="date" />
+    <Property Name="fechaFinal" Type="date" />
+    <Property Name="idUsuario" Type="uniqueidentifier" />
     <Property Name="idPaquete" Type="uniqueidentifier" />
     <Property Name="activo" Type="bit" />
-    <Property Name="idUsuario" Type="uniqueidentifier" />
-    <Property Name="fechaFinal" Type="date" />
-    <Property Name="fechaInicio" Type="date" />
   </EntityType>
   <EntityType Name="Equipo">
     <Key>
@@ -71,8 +71,8 @@
     <Property Name="idPaquete" Type="uniqueidentifier" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="30" />
     <Property Name="precio" Type="money" />
+    <Property Name="descripcion" Type="varchar(max)" />
     <Property Name="activo" Type="bit" />
-    <Property Name="descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="PaqueteEquipo">
     <Key>
@@ -106,10 +106,10 @@
     <Property Name="problema" Type="varchar(max)" />
     <Property Name="idTecnico" Type="uniqueidentifier" />
     <Property Name="idContrato" Type="uniqueidentifier" />
+    <Property Name="idEstatus" Type="uniqueidentifier" />
     <Property Name="fechaInicio" Type="date" />
     <Property Name="fechaFinal" Type="date" />
     <Property Name="activo" Type="bit" />
-    <Property Name="idEstatus" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -120,18 +120,18 @@
     <Property Name="apellido" Type="varchar" MaxLength="50" />
     <Property Name="telefono" Type="varchar" MaxLength="50" />
     <Property Name="correoE" Type="varchar" MaxLength="50" />
+    <Property Name="contrasena" Type="varchar" MaxLength="16" />
     <Property Name="calle" Type="varchar" MaxLength="50" />
     <Property Name="numInt" Type="nchar" MaxLength="1" />
     <Property Name="numExt" Type="int" />
+    <Property Name="idEstado" Type="uniqueidentifier" />
+    <Property Name="idCiudad" Type="uniqueidentifier" />
     <Property Name="idColonia" Type="uniqueidentifier" />
     <Property Name="idCP" Type="uniqueidentifier" />
     <Property Name="idRol" Type="uniqueidentifier" />
     <Property Name="activo" Type="bit" />
-    <Property Name="contrasena" Type="varchar" MaxLength="16" />
-    <Property Name="idEstado" Type="uniqueidentifier" />
-    <Property Name="idCiudad" Type="uniqueidentifier" />
   </EntityType>
-  <Association Name="FK__Ciudad__idEstado__59063A47">
+  <Association Name="FK__Ciudad__idEstado__3C69FB99">
     <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
     <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -143,7 +143,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CodigoPos__idCiu__59FA5E80">
+  <Association Name="FK__CodigoPos__idCiu__3F466844">
     <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
     <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="*" />
     <ReferentialConstraint>
@@ -155,7 +155,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Colonia__idCP__47DBAE45">
+  <Association Name="FK__Colonia__idCP__49C3F6B7">
     <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="0..1" />
     <End Role="Colonia" Type="Self.Colonia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -167,7 +167,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Contrato__idPaqu__4AB81AF0">
+  <Association Name="FK__Contrato__idPaqu__5812160E">
     <End Role="Paquete" Type="Self.Paquete" Multiplicity="0..1" />
     <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
     <ReferentialConstraint>
@@ -179,7 +179,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Contrato__idUsua__6E01572D">
+  <Association Name="FK__Contrato__idUsua__571DF1D5">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
     <ReferentialConstraint>
@@ -191,7 +191,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PaqueteEq__idEqu__44FF419A">
+  <Association Name="FK__PaqueteEq__idEqu__46E78A0C">
     <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
     <End Role="PaqueteEquipo" Type="Self.PaqueteEquipo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -203,7 +203,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PaqueteEq__idPaq__440B1D61">
+  <Association Name="FK__PaqueteEq__idPaq__45F365D3">
     <End Role="Paquete" Type="Self.Paquete" Multiplicity="0..1" />
     <End Role="PaqueteEquipo" Type="Self.PaqueteEquipo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -215,7 +215,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Propiedad__idEqu__70DDC3D8">
+  <Association Name="FK__Propiedad__idEqu__5441852A">
     <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
     <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -227,7 +227,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Propiedad__idUsu__6FE99F9F">
+  <Association Name="FK__Propiedad__idUsu__534D60F1">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Propiedad" Type="Self.Propiedad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -239,7 +239,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__idContr__18EBB532">
+  <Association Name="FK__Soporte__idContr__5BE2A6F2">
     <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -251,7 +251,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__idEstat__282DF8C2">
+  <Association Name="FK__Soporte__idEstat__5CD6CB2B">
     <End Role="Estatus" Type="Self.Estatus" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -263,7 +263,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__idTecni__17F790F9">
+  <Association Name="FK__Soporte__idTecni__5AEE82B9">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -275,7 +275,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__idCiuda__02FC7413">
+  <Association Name="FK__Usuario__idCiuda__4D94879B">
     <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -287,7 +287,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__idColon__5070F446">
+  <Association Name="FK__Usuario__idColon__4E88ABD4">
     <End Role="Colonia" Type="Self.Colonia" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -299,7 +299,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__idCP__5165187F">
+  <Association Name="FK__Usuario__idCP__4F7CD00D">
     <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -311,7 +311,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__idEstad__02084FDA">
+  <Association Name="FK__Usuario__idEstad__4CA06362">
     <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -323,7 +323,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__idRol__52593CB8">
+  <Association Name="FK__Usuario__idRol__5070F446">
     <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -349,71 +349,71 @@
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Ciudad__idEstado__59063A47" Association="Self.FK__Ciudad__idEstado__59063A47">
+    <AssociationSet Name="FK__Ciudad__idEstado__3C69FB99" Association="Self.FK__Ciudad__idEstado__3C69FB99">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="Ciudad" EntitySet="Ciudad" />
     </AssociationSet>
-    <AssociationSet Name="FK__CodigoPos__idCiu__59FA5E80" Association="Self.FK__CodigoPos__idCiu__59FA5E80">
+    <AssociationSet Name="FK__CodigoPos__idCiu__3F466844" Association="Self.FK__CodigoPos__idCiu__3F466844">
       <End Role="Ciudad" EntitySet="Ciudad" />
       <End Role="CodigoPostal" EntitySet="CodigoPostal" />
     </AssociationSet>
-    <AssociationSet Name="FK__Colonia__idCP__47DBAE45" Association="Self.FK__Colonia__idCP__47DBAE45">
+    <AssociationSet Name="FK__Colonia__idCP__49C3F6B7" Association="Self.FK__Colonia__idCP__49C3F6B7">
       <End Role="CodigoPostal" EntitySet="CodigoPostal" />
       <End Role="Colonia" EntitySet="Colonia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Contrato__idPaqu__4AB81AF0" Association="Self.FK__Contrato__idPaqu__4AB81AF0">
+    <AssociationSet Name="FK__Contrato__idPaqu__5812160E" Association="Self.FK__Contrato__idPaqu__5812160E">
       <End Role="Paquete" EntitySet="Paquete" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
-    <AssociationSet Name="FK__Contrato__idUsua__6E01572D" Association="Self.FK__Contrato__idUsua__6E01572D">
+    <AssociationSet Name="FK__Contrato__idUsua__571DF1D5" Association="Self.FK__Contrato__idUsua__571DF1D5">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Contrato" EntitySet="Contrato" />
     </AssociationSet>
-    <AssociationSet Name="FK__PaqueteEq__idEqu__44FF419A" Association="Self.FK__PaqueteEq__idEqu__44FF419A">
+    <AssociationSet Name="FK__PaqueteEq__idEqu__46E78A0C" Association="Self.FK__PaqueteEq__idEqu__46E78A0C">
       <End Role="Equipo" EntitySet="Equipo" />
       <End Role="PaqueteEquipo" EntitySet="PaqueteEquipo" />
     </AssociationSet>
-    <AssociationSet Name="FK__PaqueteEq__idPaq__440B1D61" Association="Self.FK__PaqueteEq__idPaq__440B1D61">
+    <AssociationSet Name="FK__PaqueteEq__idPaq__45F365D3" Association="Self.FK__PaqueteEq__idPaq__45F365D3">
       <End Role="Paquete" EntitySet="Paquete" />
       <End Role="PaqueteEquipo" EntitySet="PaqueteEquipo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Propiedad__idEqu__70DDC3D8" Association="Self.FK__Propiedad__idEqu__70DDC3D8">
+    <AssociationSet Name="FK__Propiedad__idEqu__5441852A" Association="Self.FK__Propiedad__idEqu__5441852A">
       <End Role="Equipo" EntitySet="Equipo" />
       <End Role="Propiedad" EntitySet="Propiedad" />
     </AssociationSet>
-    <AssociationSet Name="FK__Propiedad__idUsu__6FE99F9F" Association="Self.FK__Propiedad__idUsu__6FE99F9F">
+    <AssociationSet Name="FK__Propiedad__idUsu__534D60F1" Association="Self.FK__Propiedad__idUsu__534D60F1">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Propiedad" EntitySet="Propiedad" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__idContr__18EBB532" Association="Self.FK__Soporte__idContr__18EBB532">
+    <AssociationSet Name="FK__Soporte__idContr__5BE2A6F2" Association="Self.FK__Soporte__idContr__5BE2A6F2">
       <End Role="Contrato" EntitySet="Contrato" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__idEstat__282DF8C2" Association="Self.FK__Soporte__idEstat__282DF8C2">
+    <AssociationSet Name="FK__Soporte__idEstat__5CD6CB2B" Association="Self.FK__Soporte__idEstat__5CD6CB2B">
       <End Role="Estatus" EntitySet="Estatus" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__idTecni__17F790F9" Association="Self.FK__Soporte__idTecni__17F790F9">
+    <AssociationSet Name="FK__Soporte__idTecni__5AEE82B9" Association="Self.FK__Soporte__idTecni__5AEE82B9">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__idCiuda__02FC7413" Association="Self.FK__Usuario__idCiuda__02FC7413">
+    <AssociationSet Name="FK__Usuario__idCiuda__4D94879B" Association="Self.FK__Usuario__idCiuda__4D94879B">
       <End Role="Ciudad" EntitySet="Ciudad" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__idColon__5070F446" Association="Self.FK__Usuario__idColon__5070F446">
+    <AssociationSet Name="FK__Usuario__idColon__4E88ABD4" Association="Self.FK__Usuario__idColon__4E88ABD4">
       <End Role="Colonia" EntitySet="Colonia" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__idCP__5165187F" Association="Self.FK__Usuario__idCP__5165187F">
+    <AssociationSet Name="FK__Usuario__idCP__4F7CD00D" Association="Self.FK__Usuario__idCP__4F7CD00D">
       <End Role="CodigoPostal" EntitySet="CodigoPostal" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__idEstad__02084FDA" Association="Self.FK__Usuario__idEstad__02084FDA">
+    <AssociationSet Name="FK__Usuario__idEstad__4CA06362" Association="Self.FK__Usuario__idEstad__4CA06362">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__idRol__52593CB8" Association="Self.FK__Usuario__idRol__52593CB8">
+    <AssociationSet Name="FK__Usuario__idRol__5070F446" Association="Self.FK__Usuario__idRol__5070F446">
       <End Role="Rol" EntitySet="Rol" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>

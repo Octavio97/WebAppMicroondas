@@ -18,10 +18,10 @@ namespace MicroondasAPI.Models
         public string problema { get; set; }
         public Nullable<System.Guid> idTecnico { get; set; }
         public Nullable<System.Guid> idContrato { get; set; }
+        public Nullable<System.Guid> idEstatus { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
         public Nullable<System.DateTime> fechaFinal { get; set; }
         public Nullable<bool> activo { get; set; }
-        public Nullable<System.Guid> idEstatus { get; set; }
     
         public virtual Contrato Contrato { get; set; }
         public virtual Estatus Estatus { get; set; }

@@ -27,16 +27,16 @@ namespace MicroondasAPI.Models
         public string apellido { get; set; }
         public string telefono { get; set; }
         public string correoE { get; set; }
+        public string contrasena { get; set; }
         public string calle { get; set; }
         public string numInt { get; set; }
         public Nullable<int> numExt { get; set; }
+        public Nullable<System.Guid> idEstado { get; set; }
+        public Nullable<System.Guid> idCiudad { get; set; }
         public Nullable<System.Guid> idColonia { get; set; }
         public Nullable<System.Guid> idCP { get; set; }
         public Nullable<System.Guid> idRol { get; set; }
         public Nullable<bool> activo { get; set; }
-        public string contrasena { get; set; }
-        public Nullable<System.Guid> idEstado { get; set; }
-        public Nullable<System.Guid> idCiudad { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual CodigoPostal CodigoPostal { get; set; }

@@ -388,8 +388,8 @@ namespace MicroondasAPI.Controllers
                     problema = accion.problema,
                     idTecnico = accion.idTecnico,
                     idContrato = accion.idContrato,
-                    fechaInicio = accion.fechaInicio,
-                    fechaFinal = accion.fechaFinal,
+                    fechaInicio = Convert.ToDateTime(accion.fechaInicio).ToString("yyyy-MM-dd"),
+                    fechaFinal = Convert.ToDateTime(accion.fechaFinal).ToString("yyyy-MM-dd"),
                     idEstatus = accion.idEstatus,
                     activo = accion.activo,
                     Estatus = new

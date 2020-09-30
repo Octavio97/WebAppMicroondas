@@ -69,6 +69,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   co: Colonia[];
   r: Rol[];
   t: Usuario[];
+  con: Contrato[];
 
   constructor(
     private coloniaS: ColoniaService,
@@ -161,9 +162,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Soporte') {
-      this.usuarioS.verCliente().subscribe( (resp: Usuario[]) => {
+      this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
         if (resp) {
-          this.u = resp;
+          this.con = resp;
         }
       });
       this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
@@ -207,8 +208,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       // this.equipo.activo = false;
       // this.paquete.activo = false;
       this.init();
-    }
-    else { // si no es nuevo
+      }
+      else { // si no es nuevo
       this.init();
       if (this.id === 'Ciudad') {
         this.ciudad.idCiudad = this.id2;
