@@ -132,7 +132,7 @@
 </div>
 <br>
 <!-- tabla de historial de reportes -->
-<div class="container animated fadeIn">
+<div *ngIf="this.usuario.Rol.rol1 === 'cliente'" class="container animated fadeIn">
     <h1 class="display-4">Historial de reportes</h1>
     <table class="table">
         <thead>

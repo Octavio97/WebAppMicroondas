@@ -245,7 +245,7 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
-
+            
         [HttpGet]
         [Route("api/MicroondasAPI/consultaUnicaSopU")]
         public IHttpActionResult consultaUnicaSopU(string id)
@@ -278,24 +278,6 @@ namespace MicroondasAPI.Controllers
                             idEstatus = accion.Estatus.idEstatus,
                             estatus1 = accion.Estatus.estatus1,
                             activo = accion.Estatus.activo
-                        },
-                        Usuario = new
-                        {
-                            idUsuario = "",
-                            nombre = "Ninguno",
-                            apellido = "",
-                            telefono = "",
-                            correoE = "",
-                            calle = "",
-                            numInt = "",
-                            numExt = 0,
-                            idEstado = "",
-                            idCiudad = "",
-                            idCP = "",
-                            idColonia = "",
-                            idRol = "",
-                            activo = true,
-                            contrasena = ""
                         }
                     };
                     return Ok(resultado);
