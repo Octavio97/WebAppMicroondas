@@ -37,4 +37,8 @@ export class SoporteService {
   agregarSoporteCli(soporte: Soporte) {
     return this.http.post( this.url + 'agregarSoporteCli', soporte );
   }
+
+  consultaUnicaSopT(){
+    return this.http.get( this.url + 'consultaUnicaSopT' );
+  }
 }

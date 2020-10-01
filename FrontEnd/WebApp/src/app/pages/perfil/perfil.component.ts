@@ -71,7 +71,6 @@ export class PerfilComponent implements OnInit {
         this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
           if (resp) {
             this.s = resp;
-            console.log(this.s);
           }
         });
       }

@@ -74,10 +74,11 @@ export class AdminComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
-    if (this.session.Rol.rol1 === 'tecnico') {
-      this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
+    if (this.session.Rol.rol1 === 'técnico') {
+      this.soporte = [];
+      this.soporteS.consultaUnicaSopT().subscribe( (resp: Soporte[]) => {
         if (resp) {
-          this.contrato = resp;
+          this.soporte = resp;
         }
       });
     }
@@ -425,5 +426,23 @@ export class AdminComponent implements OnInit {
       }
     }
   });
-}
+  }
+
+  antenderReporte(x?, y?){
+    Swal.fire({
+      title: 'Confirmación',
+      text: 'Deseas atender al cliente ' + x + ' ' + y,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      allowOutsideClick: false
+    }).then( (resp) => {
+      if (resp) {
+        
+      }
+    });
+  }
 }
