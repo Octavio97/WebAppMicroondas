@@ -402,7 +402,7 @@
                 <td>{{ item.problema }}</td>
                 <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
                     <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }} </td>
-                <td><button class="btn btn-danger" (click)="antenderReporte(item.Contrato.Usuario.nombre, item.Contrato.Usuario.apellido)"><i class="fas fa-exclamation"></i> Atender</button></td>
+                <td><button class="btn btn-danger" (click)="antenderReporte(item.Contrato.Usuario.nombre, item.Contrato.Usuario.apellido, item.idSoporte)"><i class="fas fa-exclamation"></i> Atender</button></td>
             </tr>
         </tbody>
     </table>

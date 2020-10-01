@@ -41,4 +41,9 @@ export class SoporteService {
   consultaUnicaSopT(){
     return this.http.get( this.url + 'consultaUnicaSopT' );
   }
+
+  antenderSoporte(id: string) {
+    console.log(id);
+    return this.http.put( this.url + 'antenderSoporte', { params: { id } } );
+  }
 }

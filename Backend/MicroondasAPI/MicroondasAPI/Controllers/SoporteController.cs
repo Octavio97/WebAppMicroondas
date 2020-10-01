@@ -717,5 +717,35 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPut]
+        [Route("api/MicroondasAPI/antenderSoporte")]
+        public IHttpActionResult antenderSoporte(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var estatus = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "en progreso").FirstOrDefault();
+
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idSoporte == i && w.Estatus.estatus1 == "problema").FirstOrDefault();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                accion.idTecnico = i;
+                accion.idEstatus = estatus.idEstatus;
+
+                SessionController.getInstance().SaveChanges();
+
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

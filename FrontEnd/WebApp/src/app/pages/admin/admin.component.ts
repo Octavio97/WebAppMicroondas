@@ -68,6 +68,7 @@ export class AdminComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.session.idRol);
     // si no esxiste alguna sesion iniciada
     if (!localStorage.getItem('accessToken') && !localStorage.getItem('currentUser')) {
       localStorage.removeItem('currentUser');
@@ -428,7 +429,7 @@ export class AdminComponent implements OnInit {
   });
   }
 
-  antenderReporte(x?, y?){
+  antenderReporte(x?, y?, z?){
     Swal.fire({
       title: 'Confirmación',
       text: 'Deseas atender al cliente ' + x + ' ' + y,
@@ -441,7 +442,22 @@ export class AdminComponent implements OnInit {
       allowOutsideClick: false
     }).then( (resp) => {
       if (resp) {
-        
+        this.soporteS.antenderSoporte(z).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Éxito',
+              text: 'Has aceptado al solicitud',
+              icon: 'success'
+            });
+          }
+          else {
+            Swal.fire({
+              title: 'Error',
+              text: 'Recarga la página',
+              icon: 'error'
+            });
+          }
+        });
       }
     });
   }
