@@ -361,7 +361,7 @@
                 <td *ngIf="item.activo || this.in">{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
-                    <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en progreso'">{{ item.Estatus.estatus1 }}</td>
+                    <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en proceso'">{{ item.Estatus.estatus1 }}</td>
                     <td class="text-success" *ngIf="item.Estatus.estatus1 === 'resuelto'">{{ item.Estatus.estatus1 }}</td>
                 </div>
                 <td *ngIf="item.activo || this.in">{{ item.fechaInicio }}</td>
@@ -401,7 +401,7 @@
                 <td>{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
                 <td>{{ item.problema }}</td>
                 <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
-                    <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }} </td>
+                    <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}</td>
                 <td><button class="btn btn-danger" (click)="antenderReporte(item.Contrato.Usuario.nombre, item.Contrato.Usuario.apellido, item.idSoporte)"><i class="fas fa-exclamation"></i> Atender</button></td>
             </tr>
         </tbody>

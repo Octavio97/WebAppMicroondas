@@ -23,7 +23,10 @@ export class EquipoService {
     return this.http.get( this.url + 'consultaEquipo' );
   }
 
-  modificarEquipo(equipo: Equipo) {
+  modificarEquipo(equipo: Equipo, i?) {
+    if (i === true) {
+      equipo.activo = false;
+    }
     return this.http.put( this.url + 'modificarEquipo', equipo );
   }
 

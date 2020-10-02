@@ -23,7 +23,10 @@ export class EstatusService {
     return this.http.get( this.url + 'consultaEstatus' );
   }
 
-  modificarEstatus(estatus: Estatus) {
+  modificarEstatus(estatus: Estatus, i?) {
+    if (i === true) {
+      estatus.activo = false;
+    }
     return this.http.put( this.url + 'modificarEstatus', estatus );
   }
 
@@ -33,5 +36,9 @@ export class EstatusService {
 
   verEstatus(id: string) {
     return this.http.get( this.url + 'verEstatus', { params: { id } } );
+  }
+
+  consultaUnicaEstatus(estatus: string) {
+    return this.http.get( this.url + 'consultaUnicaEstatus', { params: { estatus } } );
   }
 }

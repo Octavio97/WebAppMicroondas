@@ -23,7 +23,10 @@ export class CiudadService {
     return this.http.get( this.url + 'consultaCiudad' );
   }
 
-  modificarCiudad(ciudad: Ciudad) {
+  modificarCiudad(ciudad: Ciudad, i?) {
+    if (i === true) {
+      ciudad.activo = false;
+    }
     return this.http.put( this.url + 'modificarCiudad', ciudad );
   }
 

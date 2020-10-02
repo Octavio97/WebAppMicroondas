@@ -23,7 +23,10 @@ export class CodigopostalService {
     return this.http.get( this.url + 'consultaCP' );
   }
 
-  modificarCodigo(codigo: CodigoPostal) {
+  modificarCodigo(codigo: CodigoPostal, i?) {
+    if (i === true) {
+      codigo.activo = false;
+    }
     return this.http.put( this.url + 'modificarCP', codigo );
   }
 

@@ -68,7 +68,6 @@ export class AdminComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.session.idRol);
     // si no esxiste alguna sesion iniciada
     if (!localStorage.getItem('accessToken') && !localStorage.getItem('currentUser')) {
       localStorage.removeItem('currentUser');
@@ -77,7 +76,7 @@ export class AdminComponent implements OnInit {
 
     if (this.session.Rol.rol1 === 'técnico') {
       this.soporte = [];
-      this.soporteS.consultaUnicaSopT().subscribe( (resp: Soporte[]) => {
+      this.soporteS.consultaSopT().subscribe( (resp: Soporte[]) => {
         if (resp) {
           this.soporte = resp;
         }
@@ -272,7 +271,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  delete(id: string){
+  delete(id, i){
     Swal.fire({
       title: 'Confirmación',
       text: 'Esta seguro de eliminar el registro',
@@ -294,7 +293,7 @@ export class AdminComponent implements OnInit {
         allowOutsideClick: false,
         });
       if (this.seleccion === 'Ciudad') {
-        this.ciudadS.bajaCiudad(id).subscribe( resp => {
+        this.ciudadS.modificarCiudad(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',
@@ -305,7 +304,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Código postal') {
-          this.codigoS.bajaCodigo(id).subscribe( resp => {
+          this.codigoS.modificarCodigo(id, i).subscribe( resp => {
             if (resp) {
               Swal.fire({
               title: 'Exito',
@@ -316,7 +315,7 @@ export class AdminComponent implements OnInit {
           });
       }
       else if (this.seleccion === 'Colonia') {
-          this.coloniaS.bajaColonia(id).subscribe( resp => {
+          this.coloniaS.modificarColonia(id, i).subscribe( resp => {
             if (resp) {
               Swal.fire({
               title: 'Exito',
@@ -327,7 +326,7 @@ export class AdminComponent implements OnInit {
           });
       }
       else if (this.seleccion === 'Contrato') {
-          this.contratoS.bajaContrato(id).subscribe( resp => {
+          this.contratoS.modificarContrato(id, i).subscribe( resp => {
             if (resp) {
               Swal.fire({
               title: 'Exito',
@@ -338,7 +337,7 @@ export class AdminComponent implements OnInit {
           });
       }
       else if (this.seleccion === 'Equipo') {
-        this.equipoS.bajaEquipo(id).subscribe( resp => {
+        this.equipoS.modificarEquipo(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
               title: 'Exito',
@@ -349,7 +348,7 @@ export class AdminComponent implements OnInit {
           });
       }
       else if (this.seleccion === 'Estado') {
-          this.estadoS.bajaEstado(id).subscribe( resp => {
+          this.estadoS.modificarEstado(id, i).subscribe( resp => {
             if (resp) {
               Swal.fire({
               title: 'Exito',
@@ -360,7 +359,7 @@ export class AdminComponent implements OnInit {
           });
       }
       else if (this.seleccion === 'Estatus') {
-        this.estatusS.bajaEstatus(id).subscribe( resp => {
+        this.estatusS.modificarEstatus(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',
@@ -371,7 +370,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Paquete') {
-        this.paqueteS.bajaPaquete(id).subscribe( resp => {
+        this.paqueteS.modificarPaquete(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',
@@ -382,7 +381,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Propiedad') {
-        this.propiedadS.bajaPropiedad(id).subscribe( resp => {
+        this.propiedadS.modificarPropiedad(id).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',
@@ -393,7 +392,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Rol') {
-        this.rolS.bajaRol(id).subscribe( resp => {
+        this.rolS.modificarRol(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',
@@ -404,7 +403,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Usuario') {
-        this.usuarioS.bajaUsuario(id).subscribe( resp => {
+        this.usuarioS.modificarUsuario(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',
@@ -415,7 +414,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Soporte') {
-        this.soporteS.bajaSoporte(id).subscribe( resp => {
+        this.soporteS.modificarSoporte(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
               title: 'Exito',
@@ -442,19 +441,29 @@ export class AdminComponent implements OnInit {
       allowOutsideClick: false
     }).then( (resp) => {
       if (resp) {
-        this.soporteS.antenderSoporte(z).subscribe( resp => {
+        this.soporteS.verSoporte(z).subscribe( (resp: Soporte) => {
           if (resp) {
-            Swal.fire({
-              title: 'Éxito',
-              text: 'Has aceptado al solicitud',
-              icon: 'success'
-            });
-          }
-          else {
-            Swal.fire({
-              title: 'Error',
-              text: 'Recarga la página',
-              icon: 'error'
+            resp.idTecnico = this.session.idUsuario;
+            this.estatusS.consultaUnicaEstatus('en proceso').subscribe( (e: Estatus) => {
+              if (e) {
+                resp.idEstatus = e.idEstatus;
+                this.soporteS.atenderSoporte(resp).subscribe( resp => {
+                  if (resp) {
+                    Swal.fire({
+                      title: 'Éxito',
+                      text: 'Has aceptado al solicitud',
+                      icon: 'success'
+                    });
+                  }
+                  else {
+                    Swal.fire({
+                      title: 'Error',
+                      text: 'No disponible, recarga la página',
+                      icon: 'error'
+                    });
+                  }
+                });
+              }
             });
           }
         });

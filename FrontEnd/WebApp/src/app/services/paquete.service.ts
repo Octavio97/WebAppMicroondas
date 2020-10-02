@@ -23,7 +23,10 @@ export class PaqueteService {
     return this.http.get( this.url + 'consultaPaquete' );
   }
 
-  modificarPaquete(paquete: Paquete) {
+  modificarPaquete(paquete: Paquete, i?) {
+    if (i === true) {
+      paquete.activo = false;
+    }
     return this.http.put( this.url + 'modificarPaquete', paquete );
   }
 

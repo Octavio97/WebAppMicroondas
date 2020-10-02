@@ -23,7 +23,10 @@ export class ContratoService {
     return this.http.get( this.url + 'consultaContrato' );
   }
 
-  modificarContrato(contrato: Contrato) {
+  modificarContrato(contrato: Contrato, i?) {
+    if (i === true) {
+      contrato.activo = false;
+    }
     return this.http.put( this.url + 'modificarContrato', contrato );
   }
 

@@ -23,7 +23,10 @@ export class ColoniaService {
     return this.http.get( this.url + 'consultaColonia' );
   }
 
-  modificarColonia(colonia: Colonia) {
+  modificarColonia(colonia: Colonia, i?) {
+    if (i === true) {
+      colonia.activo = false;
+    }
     return this.http.put( this.url + 'modificarColonia', colonia );
   }
 

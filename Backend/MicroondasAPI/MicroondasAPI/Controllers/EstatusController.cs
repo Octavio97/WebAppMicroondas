@@ -174,5 +174,33 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaEstatus")]
+        public IHttpActionResult consultaUnicaEstatus (string estatus)
+        {
+            try
+            {
+                var consulta = SessionController.getInstance().Estatus.Where(w => w.estatus1 == estatus).FirstOrDefault();
+
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
+                var respuesta = new
+                {
+                    idEstatus = consulta.idEstatus,
+                    estatus1 = consulta.estatus1,
+                    activo = consulta.activo,
+                };
+
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

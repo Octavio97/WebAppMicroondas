@@ -18,7 +18,10 @@ export class SoporteService {
     return this.http.put( this.url + 'eliminarSoporte', { params: { id } } );
   }
 
-  modificarSoporte(soporte: Soporte){
+  modificarSoporte(soporte: Soporte, i?){
+    if (i === true) {
+      soporte.activo = false;
+    }
     return this.http.put( this.url + 'modificarSoporte', soporte );
   }
 
@@ -38,12 +41,15 @@ export class SoporteService {
     return this.http.post( this.url + 'agregarSoporteCli', soporte );
   }
 
-  consultaUnicaSopT(){
+  consultaSopT(){
     return this.http.get( this.url + 'consultaUnicaSopT' );
   }
 
-  antenderSoporte(id: string) {
-    console.log(id);
-    return this.http.put( this.url + 'antenderSoporte', { params: { id } } );
+  atenderSoporte(id: Soporte) {
+    return this.http.put( this.url + 'atenderSoporte', id );
+  }
+
+  consultaUnicaSoporteT(id: string){
+    return this.http.get( this.url + 'consultaUnicaSoporteT', { params: { id } } );
   }
 }

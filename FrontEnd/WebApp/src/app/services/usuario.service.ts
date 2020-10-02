@@ -22,7 +22,10 @@ export class UsuarioService {
     return this.http.get( this.url + 'consultaUsuario' );
   }
 
-  modificarUsuario(usuario: Usuario) {
+  modificarUsuario(usuario: Usuario, i?) {
+    if (i === true) {
+      usuario.activo = false;
+    }
     return this.http.put( this.url + 'modificarUsuario', usuario );
   }
 

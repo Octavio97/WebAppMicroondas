@@ -20,6 +20,7 @@ import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
 import { Paquete } from 'src/app/models/paquete.model';
 import { Estatus } from 'src/app/models/estatus.model';
+import { EstatusService } from '../../services/estatus.service';
 
 @Component({
   selector: 'app-perfil',
@@ -39,6 +40,7 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private estatusS: EstatusService,
     private estadoS: EstadoService,
     private ciudadS: CiudadService,
     private codigoS: CodigopostalService,
@@ -64,17 +66,7 @@ export class PerfilComponent implements OnInit {
         this.r = resp;
       }
     });
-    // consulta del contrato y reportes
-    this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {
-      if (resp) {
-        this.contrato = resp;
-        this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
-          if (resp) {
-            this.s = resp;
-          }
-        });
-      }
-    });
+
     // consulta de ubicacion
     this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
       if (resp) {
@@ -96,6 +88,27 @@ export class PerfilComponent implements OnInit {
         });
       }
     });
+
+    if (this.usuario.Rol.rol1 === 'cliente') {
+      // consulta del contrato y reportes
+      this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {
+      if (resp) {
+        this.contrato = resp;
+        this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
+          if (resp) {
+            this.s = resp;
+          }
+        });
+      }
+      });
+    }
+    else if (this.usuario.Rol.rol1 === 'técnico') {
+      this.soporteS.consultaUnicaSoporteT(this.usuario.idUsuario).subscribe( (resp: Soporte[]) => {
+        if (resp) {
+          this.s = resp;
+        }
+      });
+    }
   }
 
   logout() {
@@ -274,5 +287,86 @@ export class PerfilComponent implements OnInit {
       Estado: new Estado(),
       Rol: new Rol ()
     };
+  }
+
+  cancelarReporte(id: Soporte){
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Esta seguro de cancelar el reporte?',
+      icon: 'question',
+      showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        allowOutsideClick: false
+    }).then((resp) => {
+      if (resp) {
+        // mensaje para cargar informacion
+        Swal.fire({
+          title: 'Espere',
+          text: 'Guardando información',
+          icon: 'info',
+          allowOutsideClick: false
+          });
+        Swal.showLoading();
+
+        this.estatusS.consultaUnicaEstatus('problema').subscribe( (resp: Estatus) => {
+          if (resp) {
+            id.idEstatus = resp.idEstatus;
+            id.idTecnico = '00000000-0000-0000-0000-000000000000';
+            this.soporteS.modificarSoporte(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Éxito',
+                  text: 'Se ha cancelado el reporte',
+                  icon: 'success'
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
+  reporteResuelto(id: Soporte){
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Esta seguro de resolver el reporte?',
+      icon: 'question',
+      showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        allowOutsideClick: false
+    }).then((resp) => {
+      if (resp) {
+        // mensaje para cargar informacion
+        Swal.fire({
+          title: 'Espere',
+          text: 'Guardando información',
+          icon: 'info',
+          allowOutsideClick: false
+          });
+        Swal.showLoading();
+
+        this.estatusS.consultaUnicaEstatus('resuelto').subscribe( (resp: Estatus) => {
+          if (resp) {
+            id.idEstatus = resp.idEstatus;
+            this.soporteS.modificarSoporte(id).subscribe(resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Éxito',
+                  text: 'Se ha resuelto el reporte',
+                  icon: 'success'
+                });
+              }
+            });
+          }
+        });
+      }
+    });
   }
 }

@@ -391,8 +391,8 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/MicroondasAPI/consultaUnicaSopT")]
-        public IHttpActionResult consultaUnicaSopT()
+        [Route("api/MicroondasAPI/consultaSopT")]
+        public IHttpActionResult consultaSopT()
         {
             try
             {
@@ -719,28 +719,173 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/MicroondasAPI/antenderSoporte")]
-        public IHttpActionResult antenderSoporte(string id)
+        [Route("api/MicroondasAPI/atenderSoporte")]
+        public IHttpActionResult atenderSoporte(Soporte id)
         {
             try
             {
-                Guid i = Guid.Parse(id.ToString());
+                var estatus = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "en proceso").FirstOrDefault();
 
-                var estatus = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "en progreso").FirstOrDefault();
-
-                var accion = SessionController.getInstance().Soporte.Where(w => w.idSoporte == i && w.Estatus.estatus1 == "problema").FirstOrDefault();
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idSoporte == id.idSoporte && w.Estatus.estatus1 == "problema").FirstOrDefault();
 
                 if (accion == null)
                 {
                     return Ok(false);
                 }
 
-                accion.idTecnico = i;
+                accion.idTecnico = id.idTecnico;
                 accion.idEstatus = estatus.idEstatus;
 
                 SessionController.getInstance().SaveChanges();
 
                 return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/consultaUnicaSoporteT")]
+        public IHttpActionResult consultaUnicaSoporteT(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var estatus = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "en proceso").FirstOrDefault();
+
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idTecnico == i && w.idEstatus == estatus.idEstatus).ToList();
+
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.Select(s => new {
+                    idSoporte = s.idSoporte,
+                    problema = s.problema,
+                    idTecnico = s.idTecnico,
+                    idContrato = s.idContrato,
+                    idEstatus = s.idEstatus,
+                    fechaInicio = Convert.ToDateTime(s.fechaInicio).ToString("dd/MM/yyyy"),
+                    fechaFinal = Convert.ToDateTime(s.fechaFinal).ToString("dd/MM/yyyy"),
+                    activo = s.activo,
+                    Estatus = new
+                    {
+                        idEstatus = s.Estatus.idEstatus,
+                        estatus1 = s.Estatus.estatus1,
+                        activo = s.Estatus.activo,
+                    },
+                    Contrato = new
+                    {
+                        idContrato = s.Contrato.idContrato,
+                        pdf = s.Contrato.pdf,
+                        archivo = s.Contrato.archivo,
+                        fechaInicio = s.Contrato.fechaInicio,
+                        fechaFinal = s.Contrato.fechaFinal,
+                        idPaquete = s.Contrato.idPaquete,
+                        idUsuario = s.Contrato.idUsuario,
+                        activo = s.Contrato.activo,
+                        Paquete = new
+                        {
+                            idPaquete = s.Contrato.Paquete.idPaquete,
+                            nombre = s.Contrato.Paquete.nombre,
+                            precio = s.Contrato.Paquete.precio,
+                            activo = s.Contrato.Paquete.activo,
+                            descripcion = s.Contrato.Paquete.descripcion
+                        },
+                        Usuario = new
+                        {
+                            idUsuario = s.Contrato.Usuario.idUsuario,
+                            nombre = s.Contrato.Usuario.nombre,
+                            apellido = s.Contrato.Usuario.apellido,
+                            telefono = s.Contrato.Usuario.telefono,
+                            correoE = s.Contrato.Usuario.correoE,
+                            calle = s.Contrato.Usuario.calle,
+                            numInt = s.Contrato.Usuario.numInt,
+                            numExt = s.Contrato.Usuario.numExt,
+                            idEstado = s.Contrato.Usuario.idEstado,
+                            idCiudad = s.Contrato.Usuario.idCiudad,
+                            idCP = s.Contrato.Usuario.idCP,
+                            idColonia = s.Contrato.Usuario.idColonia,
+                            idRol = s.Contrato.Usuario.idRol,
+                            activo = s.Contrato.Usuario.activo,
+                            contrasena = s.Contrato.Usuario.contrasena,
+                            CP = new
+                            {
+                                idCP = s.Contrato.Usuario.CodigoPostal.idCP,
+                                codigo = s.Contrato.Usuario.CodigoPostal.codigo
+                            },
+                            Colonia = new
+                            {
+                                idColonia = s.Contrato.Usuario.Colonia.idColonia,
+                                colonia1 = s.Contrato.Usuario.Colonia.colonia1,
+                            },
+                            Ciudad = new
+                            {
+                                idCiudad = s.Contrato.Usuario.Ciudad.idCiudad,
+                                ciudad1 = s.Contrato.Usuario.Ciudad.ciudad1
+                            },
+                            Estado = new
+                            {
+                                idEstado = s.Contrato.Usuario.idEstado,
+                                estado1 = s.Contrato.Usuario.Estado.estado1
+                            },
+                            Rol = new
+                            {
+                                idRol = s.Contrato.Usuario.Rol.idRol,
+                                rol1 = s.Contrato.Usuario.Rol.rol1
+                            }
+                        }
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    }
+                });
+
+                return Ok(resultado);
             }
             catch (Exception)
             {

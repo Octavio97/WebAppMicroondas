@@ -23,7 +23,10 @@ export class EstadoService {
     return this.http.get( this.url + 'consultaEstado' );
   }
 
-  modificarEstado(estado: Estado) {
+  modificarEstado(estado: Estado, i?) {
+    if (i === true) {
+      estado.activo = false;
+    }
     return this.http.put( this.url + 'modificarEstado', estado );
   }
 
