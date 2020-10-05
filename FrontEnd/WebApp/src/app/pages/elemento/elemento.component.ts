@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ɵConsole } from '@angular/core';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { RolService } from '../../services/rol.service';
 import Swal from 'sweetalert2';
@@ -59,9 +59,11 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   propiedad = new Propiedad();
   soporte = new Soporte();
 
-  // arreglos para los dropbox
+  // arreglos para los dropbox y/o tablas
   e: Estado[];
   es: Estatus[];
+  eq: Equipo[] = new Array<Equipo>();
+  equipos: Equipo[] = []; // arreglo para guardar los equipos a agregar o eliminar
   u: Usuario[];
   p: Paquete[];
   c: Ciudad[];
@@ -175,6 +177,18 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
         if (resp) {
           this.es = resp;
+        }
+      });
+    }
+    else if (this.id === 'Propiedad') {
+      this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
+        if (resp) {
+          this.t = resp;
+        }
+      });
+      this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
+        if (resp) {
+          this.eq = resp;
         }
       });
     }
@@ -832,24 +846,40 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   }
 
   // Metodos para cambiar valores del combobox
+    // Obtener ciudades del estado seleccionado
   cambio1(id?) {
     this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
       this.c = resp;
     });
   }
-
+    // Obtener codigo postal de la ciudad seleccionada
   cambio2(id?) {
     this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
       this.cp = resp;
     });
   }
-
+    // Obtener colonias del codigo postal seleccionado
   cambio3(id?) {
     this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
       this.co = resp;
     });
   }
 
+  cambio4(value, array) {
+    // si se va a agregar un equipo
+    if (value.currentTarget.checked) {
+      for (let index = 0; index <= this.equipos.length; index++) {
+        this.equipos[index] = array;
+        console.log(this.equipos);
+        return;
+      }
+    }
+    // si se va a eliminar un equipo
+    else {
+      for (let index = 0; index <= this.equipos.length; index++) {
+      }
+    }
+  }
   // metodo para incializar arreglos
   init() {
     if (this.id === 'Ciudad') {
@@ -920,9 +950,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.equipo = {
         idEquipo: null,
         equipo1: null,
-        activo: null,
-        PaqueteEquipo: new PaqueteEquipo(),
-        Propiedad: new Propiedad()
+        activo: null
       };
     }
     else if (this.id === 'Estado') {

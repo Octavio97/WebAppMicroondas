@@ -29,7 +29,7 @@ namespace MicroondasAPI.Controllers
                     Propiedad datos = new Propiedad()
                     {
                         idPropiedad = Guid.NewGuid(),
-                        idEquipo = propiedad.idPropiedad,
+                        Equipo = propiedad.Equipo,
                         idUsuario = propiedad.idUsuario
                     };
 

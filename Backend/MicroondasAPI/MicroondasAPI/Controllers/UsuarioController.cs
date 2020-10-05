@@ -341,7 +341,7 @@ namespace MicroondasAPI.Controllers
         {
             try
             {
-                var accion = SessionController.getInstance().Usuario.Where(w => w.activo == true && w.Rol.rol1 == "tecnico").ToList();
+                var accion = SessionController.getInstance().Usuario.Where(w => w.activo == true && w.Rol.rol1 == "técnico").ToList();
 
                 if (accion == null)
                 {
