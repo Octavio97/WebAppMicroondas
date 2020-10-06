@@ -16,7 +16,7 @@ export class PropiedadService {
   }
 
   bajaPropiedad(id: string) {
-    return this.http.put( this.url + 'eliminarPropiedad', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarPropiedad', { params: { id } } );
   }
 
   consultaPropiedad() {

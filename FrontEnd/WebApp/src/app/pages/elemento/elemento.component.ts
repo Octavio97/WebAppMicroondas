@@ -765,23 +765,30 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-              this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
-                if (resp === true) {
-                  Swal.fire({
-                    title: 'Exito',
-                    text: 'La propiedad fue guardada con exito',
-                    icon: 'success'
-                  });
-                  this.router.navigate(['/inicio']);
-                }
-                else {
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'La propiedad ya existe',
-                    icon: 'error'
-                  });
-                }
-              });
+              let i;
+              for (let index = 0; index < this.equipos.length; index++) {
+                i = false;
+                this.propiedad.idEquipo = this.equipos[index].idEquipo;
+                this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
+                  if (resp !== true) {
+                    Swal.fire({
+                      title: 'Error',
+                      text: 'Hubo un error',
+                      icon: 'error'
+                    });
+                    return;
+                  }
+                  else { i = true; }
+                });
+              }
+              if (i === true) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'La propiedad fue agregada con exito',
+                  icon: 'success'
+                });
+                this.router.navigate(['/inicio']);
+              }
             }
           }
           else if (this.id === 'Rol') {
@@ -925,19 +932,19 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.co = resp;
     });
   }
-
-  cambio4(value, array) {
+    // guardamos los quipos que un tecnico tiene en su poder
+  cambio4(value, array: Equipo) {
     // si se va a agregar un equipo
     if (value.currentTarget.checked) {
-      for (let index = 0; index  <= this.equipos.length; index++) {
-        this.equipos[index] = array;
-        console.log('¿se agrego?');
-      }
+      this.equipos.push(array);
     }
     // si se va a eliminar un equipo
     else {
-      console.log('nel prro pa la otra');
+      for (let index = 0; index < this.equipos.length; index++) {
+        if (this.equipos[index].idEquipo === array.idEquipo) {
+          this.equipos.splice(index, 1);
+        }
+      }
     }
-    console.log(this.equipo);
   }
 }

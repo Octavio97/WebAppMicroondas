@@ -304,7 +304,7 @@
                 <td>{{ item.idPropiedad }}</td>
                 <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
                 <td>{{ item.Equipo.equipo1 }}</td>
-                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button class="delete(item.idPropiedad, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idPropiedad)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>

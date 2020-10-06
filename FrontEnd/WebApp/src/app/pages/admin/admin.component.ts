@@ -284,7 +284,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  delete(id, i){
+  delete(id, i?){
     Swal.fire({
       title: 'Confirmación',
       text: 'Esta seguro de eliminar el registro',
@@ -394,7 +394,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Propiedad') {
-        this.propiedadS.modificarPropiedad(id).subscribe( resp => {
+        this.propiedadS.bajaPropiedad(id).subscribe( resp => {
           if (resp) {
             Swal.fire({
             title: 'Exito',

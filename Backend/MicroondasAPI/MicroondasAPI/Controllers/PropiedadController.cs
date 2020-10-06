@@ -29,7 +29,7 @@ namespace MicroondasAPI.Controllers
                     Propiedad datos = new Propiedad()
                     {
                         idPropiedad = Guid.NewGuid(),
-                        Equipo = propiedad.Equipo,
+                        idEquipo = propiedad.idEquipo,
                         idUsuario = propiedad.idUsuario
                     };
 
@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarPropiedad")]
         public IHttpActionResult eliminarPropiedad(string id)
         {
