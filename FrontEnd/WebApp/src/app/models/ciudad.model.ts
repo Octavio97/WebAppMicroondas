@@ -9,8 +9,12 @@ export class Ciudad {
     activo: boolean;
 
     Estado: Estado;
-    CP: CodigoPostal;
-    Usuario: Usuario;
 
-    constructor(){}
+    constructor(){
+        this.idCiudad = null;
+        this.ciudad1 = null;
+        this.idEstado = null;
+        this.activo = null;
+        this.Estado = new Estado();
+    }
 }

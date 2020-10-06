@@ -6,8 +6,9 @@ export class Estado {
     estado1: string;
     activo: boolean;
 
-    Ciudad: Ciudad;
-    Usuario: Usuario;
-
-    constructor(){}
+    constructor(){
+        this.idEstado = null;
+        this.estado1 = null;
+        this.activo = null;
+    }
 }

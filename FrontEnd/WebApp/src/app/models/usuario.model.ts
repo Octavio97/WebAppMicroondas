@@ -29,5 +29,26 @@ export class Usuario {
     Estado: Estado;
     Rol: Rol;
 
-    constructor() {}
+    constructor() {
+        this.idUsuario = null;
+        this.nombre = null;
+        this.apellido = null;
+        this.telefono = null;
+        this.correoE = null;
+        this.contrasena = null;
+        this.calle = null;
+        this.numInt = null;
+        this.numExt = null;
+        this.idEstado = null;
+        this.idCiudad = null;
+        this.idColonia = null;
+        this.idCP = null;
+        this.idRol = null;
+        this.activo = null;
+        this.CP = new CodigoPostal();
+        this.Colonia = new Colonia();
+        this.Ciudad = new Ciudad();
+        this.Estado = new Estado();
+        this.Rol = new Rol();
+    }
 }

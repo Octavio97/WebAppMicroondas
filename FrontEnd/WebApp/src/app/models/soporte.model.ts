@@ -16,5 +16,17 @@ export class Soporte {
     Usuario: Usuario;
     Estatus: Estatus;
 
-    constructor(){}
+    constructor(){
+        this.idSoporte = null;
+        this.problema = null;
+        this.idTecnico = null;
+        this.idContrato = null;
+        this.fechaInicio = null;
+        this.fechaFinal = null;
+        this.idEstatus = null;
+        this.activo = null;
+        this.Contrato = new Contrato();
+        this.Usuario = new Usuario();
+        this.Estatus = new Estatus();
+    }
 }

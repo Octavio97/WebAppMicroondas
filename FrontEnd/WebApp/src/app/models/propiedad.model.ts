@@ -9,5 +9,11 @@ export class Propiedad {
     Equipo: Equipo;
     Usuario: Usuario;
 
-    constructor(){}
+    constructor(){
+        this.idPropiedad = null;
+        this.idUsuario = null;
+        this.idEquipo = null;
+        this.Equipo = new Equipo();
+        this.Usuario = new Usuario();
+    }
 }

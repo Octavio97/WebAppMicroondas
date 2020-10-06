@@ -33,11 +33,11 @@ import { Soporte } from 'src/app/models/soporte.model';
   templateUrl: './admin.component.html'
 })
 export class AdminComponent implements OnInit {
-  session: Usuario = JSON.parse(localStorage.getItem('currentUser'));
+  session: Usuario;
   seleccion = 'Seleccione tabla...';
   in = false; // mostrar registros eliminados
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte'];
-  rol: Rol[] = [];
+  rol: Rol[];
   estado: Estado[];
   estatus: Estatus[];
   usuario: Usuario[];
@@ -73,9 +73,10 @@ export class AdminComponent implements OnInit {
       localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     }
-
+    this.session = new Usuario();
+    this.session = JSON.parse(localStorage.getItem('currentUser'));
     if (this.session.Rol.rol1 === 'técnico') {
-      this.soporte = [];
+      this.soporte = new Array<Soporte>();
       this.soporteS.consultaSopT().subscribe( (resp: Soporte[]) => {
         if (resp) {
           this.soporte = resp;
@@ -91,6 +92,7 @@ export class AdminComponent implements OnInit {
   change(i: string) {
     this.seleccion = i;
     if (i === 'Rol') {
+      this.rol = new Array<Rol>();
       this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
         if (resp === null) {
           Swal.fire({
@@ -105,6 +107,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Estado') {
+      this.estado = new Array<Estado>();
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         if (resp === null) {
           Swal.fire({
@@ -119,6 +122,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Ciudad') {
+      this.ciudad = new Array<Ciudad>();
       this.ciudadS.consultaCiudad().subscribe( (resp: Ciudad[]) => {
         if (resp === null) {
           Swal.fire({
@@ -133,6 +137,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Colonia') {
+      this.colonia = new Array<Colonia>();
       this.coloniaS.consultaColonia().subscribe( (resp: Colonia[]) => {
         if (resp === null) {
           Swal.fire({
@@ -147,6 +152,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Código postal') {
+      this.codigo = new Array<CodigoPostal>();
       this.codigoS.consultaCodigo().subscribe( (resp: CodigoPostal[]) => {
         if (resp === null) {
           Swal.fire({
@@ -161,6 +167,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Paquete') {
+      this.paquete = new Array<Paquete>();
       this.paqueteS.consultaPaquete().subscribe( (resp: Paquete[]) => {
         if (resp === null) {
           Swal.fire({
@@ -175,6 +182,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Usuario') {
+      this.usuario = new Array<Usuario>();
       this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
         if (resp === null) {
           Swal.fire({
@@ -189,6 +197,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Estatus') {
+      this.estatus = new Array<Estatus>();
       this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
         if (resp === null) {
           Swal.fire({
@@ -203,6 +212,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Contrato') {
+      this.contrato = new Array<Contrato>();
       this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
         if (resp === null) {
           Swal.fire({
@@ -217,6 +227,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Equipo') {
+      this.equipo = new Array<Equipo>();
       this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
         if (resp === null) {
           Swal.fire({
@@ -231,6 +242,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Propiedad') {
+      this.propiedad = new Array<Propiedad>();
       this.propiedadS.consultaPropiedad().subscribe( (resp: Propiedad[]) => {
         if (resp === null) {
           Swal.fire({
@@ -245,6 +257,7 @@ export class AdminComponent implements OnInit {
       });
     }
     else if (i === 'Soporte') {
+      this.soporte = new Array<Soporte>();
       this.soporteS.consultaSoporte().subscribe( (resp: Soporte[]) => {
         if (resp) {
           this.soporte = resp;

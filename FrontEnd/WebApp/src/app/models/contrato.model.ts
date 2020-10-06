@@ -15,5 +15,16 @@ export class Contrato {
     Paquete: Paquete;
     Usuario: Usuario;
 
-    constructor(){}
+    constructor(){
+        this.idContrato = null;
+        this.pdf = null;
+        this.archivo = null;
+        this.fechaInicio = null;
+        this.fechaFinal = null;
+        this.idPaquete = null;
+        this.idUsuario = null;
+        this.activo = null;
+        this.Paquete = new Paquete();
+        this.Usuario = new Usuario();
+    }
 }

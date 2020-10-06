@@ -5,7 +5,9 @@ export class Rol {
     rol1: string;
     activo: boolean;
 
-    Usuario: Usuario;
-
-    constructor(){}
+    constructor(){
+        this.idRol = null;
+        this.rol1 = null;
+        this.activo = null;
+    }
 }

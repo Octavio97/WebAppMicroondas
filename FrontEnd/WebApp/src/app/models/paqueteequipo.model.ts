@@ -9,5 +9,11 @@ export class PaqueteEquipo {
     Paquete: Paquete;
     Equipo: Equipo;
 
-    constructor(){}
+    constructor(){
+        this.idPE = null;
+        this.idPaquete = null;
+        this.idEquipo = null;
+        this.Paquete = new Paquete();
+        this.Equipo = new Equipo();
+    }
 }

@@ -45,25 +45,25 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   i5 = 'Seleccionar rol...';
 
   // Arreglos para CRUD
-  rol = new Rol();
-  usuario = new Usuario();
-  estatus = new Estatus();
-  estado = new Estado();
-  ciudad = new Ciudad();
-  codigoP = new CodigoPostal();
-  colonia = new Colonia();
-  contrato = new Contrato();
-  equipo = new Equipo();
-  paquete = new Paquete();
-  paqueteEquipo = new PaqueteEquipo();
-  propiedad = new Propiedad();
-  soporte = new Soporte();
+  rol: Rol;
+  usuario: Usuario;
+  estatus: Estatus;
+  estado: Estado;
+  ciudad: Ciudad;
+  codigoP: CodigoPostal;
+  colonia: Colonia;
+  contrato: Contrato;
+  equipo: Equipo;
+  paquete: Paquete;
+  paqueteEquipo: PaqueteEquipo;
+  propiedad: Propiedad;
+  soporte: Soporte;
 
   // arreglos para los dropbox y/o tablas
   e: Estado[];
   es: Estatus[];
-  eq: Equipo[] = new Array<Equipo>();
-  equipos: Equipo[] = []; // arreglo para guardar los equipos a agregar o eliminar
+  eq: Equipo[];
+  equipos: Equipo[]; // arreglo para guardar los equipos a agregar o eliminar
   u: Usuario[];
   p: Paquete[];
   c: Ciudad[];
@@ -92,6 +92,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
     if ((this.id === 'Ciudad' || this.id === 'Código postal' || this.id === 'Colonia' || this.id === 'Usuario') && this.id2 === 'new') {
+      this.r = new Array<Rol>();
+      this.e = new Array<Estado>();
       this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
         this.r = resp;
       });
@@ -100,6 +102,11 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Usuario' && this.id2 !== 'new') {
+      this.r = new Array<Rol>();
+      this.e = new Array<Estado>();
+      this.c = new Array<Ciudad>();
+      this.cp = new Array<CodigoPostal>();
+      this.co = new Array<Colonia>();
       this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
         this.r = resp;
       });
@@ -120,6 +127,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Código postal' && this.id2 !== 'new') {
+      this.e = new Array<Estado>();
+      this.c = new Array<Ciudad>();
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
         // tslint:disable-next-line: no-shadowed-variable
@@ -129,6 +138,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Colonia' && this.id !== 'new') {
+      this.e = new Array<Estado>();
+      this.c = new Array<Ciudad>();
+      this.cp = new Array<CodigoPostal>();
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
         // tslint:disable-next-line: no-shadowed-variable
@@ -142,6 +154,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Contrato') {
+      this.p = new Array<Paquete>();
+      this.es = new Array<Estatus>();
+      this.u = new Array<Usuario>();
       this.paqueteS.consultaUnica().subscribe( (resp: Paquete[]) => {
         if (resp !== null) {
           this.p = resp;
@@ -159,11 +174,15 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Ciudad') {
+      this.e = new Array<Estado>();
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
       });
     }
     else if (this.id === 'Soporte') {
+      this.con = new Array<Contrato>();
+      this.t = new Array<Usuario>();
+      this.es = new Array<Estatus>();
       this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
         if (resp) {
           this.con = resp;
@@ -181,6 +200,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Propiedad') {
+      this.t = new Array<Usuario>();
+      this.eq = new Array<Equipo>();
+      this.equipos = new Array<Equipo>();
       this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
         if (resp) {
           this.t = resp;
@@ -200,130 +222,169 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       localStorage.removeItem('currentUser');
       this.router.navigate(['/']);
     }
-    else {
+    else { // si existe...
       this.id = this.route.snapshot.paramMap.get('id');
       this.id2 = this.route.snapshot.paramMap.get('id2');
 
+      // si no se envia una tabla valida
       if (this.id === 'Seleccione tabla...') {
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/inicio']); // redirecciona al inicio
       }
       else {
-      // Definimos la accion ya sea para agregar o modificar
-      if (this.id2 === 'new') { // si es nuevo
-      // definimos los valores de los checkbox en la platilla ya que es nulo y evitamos errores
-      // this.rol.activo = false;
-      // this.estado.activo = false;
-      // this.usuario.activo = false;
-      // this.estatus.activo = false;
-      // this.ciudad.activo = false;
-      // this.codigoP.activo = false;
-      // this.colonia.activo = false;
-      // this.contrato.activo = false;
-      // this.equipo.activo = false;
-      // this.paquete.activo = false;
-      this.init();
-      }
-      else { // si no es nuevo
-      this.init();
-      if (this.id === 'Ciudad') {
-        this.ciudad.idCiudad = this.id2;
-        this.ciudadS.verCiudad(this.id2).subscribe( (resp: Ciudad) => {
+      // Instanciamos la accion ya sea para agregar o modificar
+      if (this.id2 !== 'new') { // si no es nuevo
+        if (this.id === 'Ciudad') {
+          this.ciudad = new Ciudad();
+          this.ciudad.idCiudad = this.id2;
+          this.ciudadS.verCiudad(this.id2).subscribe( (resp: Ciudad) => {
           if (resp) {
             this.ciudad = resp;
           }
         });
-      }
-      else if (this.id === 'Código postal') {
-        this.codigoP.idCP = this.id2;
-        this.codigoS.verCP(this.id2).subscribe( (resp: CodigoPostal) => {
+        }
+        else if (this.id === 'Código postal') {
+          this.codigoP = new CodigoPostal();
+          this.codigoP.idCP = this.id2;
+          this.codigoS.verCP(this.id2).subscribe( (resp: CodigoPostal) => {
           if (resp) {
             this.codigoP = resp;
           }
-        });
-      }
-      else if (this.id === 'Colonia') {
-        this.colonia.idColonia = this.id2;
-        this.coloniaS.verColonia(this.id2).subscribe( (resp: Colonia) => {
+          });
+        }
+        else if (this.id === 'Colonia') {
+          this.colonia = new Colonia();
+          this.colonia.idColonia = this.id2;
+          this.coloniaS.verColonia(this.id2).subscribe( (resp: Colonia) => {
           if (resp) {
             this.colonia = resp;
           }
-        });
-      }
-      else if (this.id === 'Contrato') {
-        this.contrato.idContrato = this.id2;
-        this.contratoS.verContrato(this.id2).subscribe( (resp: Contrato) => {
+          });
+        }
+        else if (this.id === 'Contrato') {
+          this.contrato = new Contrato();
+          this.contrato.idContrato = this.id2;
+          this.contratoS.verContrato(this.id2).subscribe( (resp: Contrato) => {
           if (resp) {
             this.contrato = resp;
           }
         });
-      }
-      else if (this.id === 'Equipo') {
-        this.equipo.idEquipo = this.id2;
-        this.equipoS.verEquipo(this.id2).subscribe( (resp: Equipo) => {
+        }
+        else if (this.id === 'Equipo') {
+          this.equipo = new Equipo();
+          this.equipo.idEquipo = this.id2;
+          this.equipoS.verEquipo(this.id2).subscribe( (resp: Equipo) => {
           if (resp) {
             this.equipo = resp;
           }
         });
-      }
-      else if (this.id === 'Estado') {
-        this.estado.idEstado = this.id2;
-        this.estadoS.verEstado(this.id2).subscribe( (resp: Estado) => {
+        }
+        else if (this.id === 'Estado') {
+          this.estado = new Estado();
+          this.estado.idEstado = this.id2;
+          this.estadoS.verEstado(this.id2).subscribe( (resp: Estado) => {
           if (resp) {
             this.estado = resp;
           }
         });
-      }
-      else if (this.id === 'Estatus') {
-        this.estatus.idEstatus = this.id2;
-        this.estatusS.verEstatus(this.id2).subscribe( (resp: Estatus) => {
+        }
+        else if (this.id === 'Estatus') {
+          this.estatus = new Estatus();
+          this.estatus.idEstatus = this.id2;
+          this.estatusS.verEstatus(this.id2).subscribe( (resp: Estatus) => {
           if (resp) {
             this.estatus = resp;
           }
         });
-      }
-      else if (this.id === 'Paquete') {
-        this.paquete.idPaquete = this.id2;
-        this.paqueteS.verPaquete(this.id2).subscribe( (resp: Paquete) => {
+        }
+        else if (this.id === 'Paquete') {
+          this.paquete = new Paquete();
+          this.paquete.idPaquete = this.id2;
+          this.paqueteS.verPaquete(this.id2).subscribe( (resp: Paquete) => {
           if (resp) {
             this.paquete = resp;
           }
         });
-      }
-      else if (this.id === 'PaqueteEquipo') {
-      }
-      else if (this.id === 'Propiedad') {
-        this.propiedad.idEquipo = this.id2;
-        this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad) => {
+        }
+        else if (this.id === 'PaqueteEquipo') {
+        }
+        else if (this.id === 'Propiedad') {
+          this.propiedad = new Propiedad();
+          this.propiedad.idEquipo = this.id2;
+          this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad) => {
           if (resp) {
             this.propiedad = resp;
           }
         });
-      }
-      else if (this.id === 'Rol') {
-        this.rol.idRol = this.id2;
-        this.rolS.verRol(this.id2).subscribe( (resp: Rol) => {
+        }
+        else if (this.id === 'Rol') {
+          this.rol = new Rol();
+          this.rol.idRol = this.id2;
+          this.rolS.verRol(this.id2).subscribe( (resp: Rol) => {
           if (resp) {
             this.rol = resp;
           }
         });
-      }
-      else if (this.id === 'Usuario') {
-        this.usuario.idUsuario = this.id2;
-        this.usuarioS.verUsuario(this.id2).subscribe( (resp: Usuario) => {
+        }
+        else if (this.id === 'Usuario') {
+          this.usuario = new Usuario();
+          this.usuario.idUsuario = this.id2;
+          this.usuarioS.verUsuario(this.id2).subscribe( (resp: Usuario) => {
           if (resp) {
             this.usuario = resp;
           }
         });
-      }
-      else if (this.id === 'Soporte') {
-        this.soporte.idSoporte = this.id2;
-        this.soporteS.verSoporte(this.id2).subscribe( (resp: Soporte) => {
+        }
+        else if (this.id === 'Soporte') {
+          this.soporte = new Soporte();
+          this.soporte.idSoporte = this.id2;
+          this.soporteS.verSoporte(this.id2).subscribe( (resp: Soporte) => {
           if (resp) {
             this.soporte = resp;
           }
         });
+        }
       }
-    }
+      else { // si es nuevo...
+        if (this.id === 'Ciudad') {
+          this.ciudad = new Ciudad();
+        }
+        else if (this.id === 'Código postal') {
+          this.codigoP = new CodigoPostal();
+        }
+        else if (this.id === 'Colonia') {
+          this.colonia = new Colonia();
+        }
+        else if (this.id === 'Contrato') {
+          this.contrato = new Contrato();
+        }
+        else if (this.id === 'Equipo') {
+          this.equipo = new Equipo();
+        }
+        else if (this.id === 'Estado') {
+          this.estado = new Estado();
+        }
+        else if (this.id === 'Estatus') {
+          this.estatus = new Estatus();
+        }
+        else if (this.id === 'Paquete') {
+          this.paquete = new Paquete();
+        }
+        else if (this.id === 'PaqueteEquipo') {
+        }
+        else if (this.id === 'Propiedad') {
+          this.propiedad = new Propiedad();
+
+        }
+        else if (this.id === 'Rol') {
+          this.rol = new Rol();
+        }
+        else if (this.id === 'Usuario') {
+          this.usuario = new Usuario();
+        }
+        else if (this.id === 'Soporte') {
+          this.soporte = new Soporte();
+        }
+      }
     }
     }
   }
@@ -868,183 +929,15 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   cambio4(value, array) {
     // si se va a agregar un equipo
     if (value.currentTarget.checked) {
-      for (let index = 0; index <= this.equipos.length; index++) {
+      for (let index = 0; index  <= this.equipos.length; index++) {
         this.equipos[index] = array;
-        console.log(this.equipos);
-        return;
+        console.log('¿se agrego?');
       }
     }
     // si se va a eliminar un equipo
     else {
-      for (let index = 0; index <= this.equipos.length; index++) {
-      }
+      console.log('nel prro pa la otra');
     }
-  }
-  // metodo para incializar arreglos
-  init() {
-    if (this.id === 'Ciudad') {
-      this.ciudad = {
-        idCiudad: null,
-        ciudad1: null,
-        idEstado: null,
-        activo: null,
-        Estado: new Estado(),
-        CP: new CodigoPostal(),
-        Usuario: new Usuario()
-      };
-    }
-    else if (this.id === 'Código postal') {
-      this.codigoP = {
-        idCP: null,
-        codigo: null,
-        idCiudad: null,
-        activo: null,
-        Colonia: new Colonia(),
-        Usuario: new Usuario(),
-        Ciudad: new Ciudad()
-      };
-    }
-    else if (this.id === 'Colonia') {
-      this.colonia = {
-        idColonia: null,
-        colonia1: null,
-        idCP: null,
-        activo: null,
-        CP: new CodigoPostal(),
-        Usuario: new Usuario()
-      };
-      this.colonia.CP = {
-        idCP: null,
-        codigo: null,
-        idCiudad: null,
-        activo: null,
-        Colonia: new Colonia(),
-        Usuario: new Usuario(),
-        Ciudad: new Ciudad()
-      };
-      this.colonia.CP.Ciudad = {
-        idCiudad: null,
-        ciudad1: null,
-        idEstado: null,
-        activo: null,
-        Estado: new Estado(),
-        CP: new CodigoPostal(),
-        Usuario: new Usuario()
-      };
-    }
-    else if (this.id === 'Contrato') {
-      this.contrato = {
-        idContrato: null,
-        pdf: null,
-        archivo: null,
-        fechaInicio: null,
-        fechaFinal: null,
-        idPaquete: null,
-        idUsuario: null,
-        activo: null,
-        Paquete: new Paquete(),
-        Usuario: new Usuario()
-      };
-    }
-    else if (this.id === 'Equipo') {
-      this.equipo = {
-        idEquipo: null,
-        equipo1: null,
-        activo: null
-      };
-    }
-    else if (this.id === 'Estado') {
-      this.estado = {
-        idEstado: null,
-        estado1: null,
-        activo: null,
-        Ciudad: new Ciudad(),
-        Usuario: new Usuario()
-      };
-    }
-    else if (this.id === 'Estatus') {
-      this.estatus = {
-        idEstatus: null,
-        estatus1: null,
-        activo: null,
-        Contrato: new Contrato()
-      };
-    }
-    else if (this.id === 'Paquete') {
-      this.paquete = {
-        idPaquete: null,
-        precio: null,
-        nombre: null,
-        activo: null,
-        descripcion: null,
-        Contrato: new Contrato(),
-        PaqueteEquipo: new PaqueteEquipo()
-      };
-    }
-    else if (this.id === 'PaqueteEquipo') {
-      this.paqueteEquipo = {
-        idPE: null,
-        idPaquete: null,
-        idEquipo: null,
-        Paquete: new Paquete(),
-        Equipo: new Equipo(),
-      };
-    }
-    else if (this.id === 'Propiedad') {
-      this.propiedad = {
-        idPropiedad: null,
-        idUsuario: null,
-        idEquipo: null,
-        Equipo: new Equipo(),
-        Usuario: new Usuario()
-      };
-    }
-    else if (this.id === 'Rol') {
-      this.rol = {
-      idRol: null,
-      rol1: null,
-      activo: null,
-      Usuario: new Usuario()
-    };
-    }
-    else if (this.id === 'Usuario') {
-      this.usuario = {
-      idUsuario: null,
-      nombre: null,
-      apellido: null,
-      telefono: null,
-      correoE: null,
-      contrasena: null,
-      calle: null,
-      numInt: null,
-      numExt: null,
-      idEstado: null,
-      idCiudad: null,
-      idColonia: null,
-      idCP: null,
-      idRol: null,
-      activo: null,
-      CP: new CodigoPostal(),
-      Colonia: new Colonia(),
-      Ciudad: new Ciudad(),
-      Estado: new Estado(),
-      Rol: new Rol ()
-    };
-    }
-    else if (this.id === 'Soporte') {
-      this.soporte = {
-        idSoporte: null,
-        problema: null,
-        idTecnico: null,
-        idContrato: null,
-        fechaInicio: null,
-        fechaFinal: null,
-        idEstatus: null,
-        activo: null,
-        Contrato: new Contrato(),
-        Estatus: new Estatus(),
-        Usuario: new Usuario()
-      };
-    }
+    console.log(this.equipo);
   }
 }

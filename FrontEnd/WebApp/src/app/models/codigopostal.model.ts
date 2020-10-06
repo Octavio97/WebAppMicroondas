@@ -8,9 +8,13 @@ export class CodigoPostal {
     idCiudad: string;
     activo: boolean;
 
-    Colonia: Colonia;
-    Usuario: Usuario;
     Ciudad: Ciudad;
 
-    constructor(){}
+    constructor(){
+        this.idCP = null;
+        this.codigo = null;
+        this.idCiudad = null;
+        this.activo = null;
+        this.Ciudad = new Ciudad();
+    }
 }

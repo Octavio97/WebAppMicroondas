@@ -5,7 +5,9 @@ export class Estatus {
     estatus1: string;
     activo: boolean;
 
-    Contrato: Contrato;
-
-    constructor(){}
+    constructor(){
+        this.idEstatus = null;
+        this.estatus1 = null;
+        this.activo = null;
+    }
 }

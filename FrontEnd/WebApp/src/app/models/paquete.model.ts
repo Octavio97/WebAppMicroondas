@@ -8,7 +8,11 @@ export class Paquete {
     activo: boolean;
     descripcion: string;
 
-    Contrato: Contrato;
-    PaqueteEquipo: PaqueteEquipo;
-    constructor(){}
+    constructor(){
+        this.idPaquete = null;
+        this.precio = null;
+        this.nombre = null;
+        this.activo = null;
+        this.descripcion = null;
+    }
 }

@@ -8,7 +8,12 @@ export class Colonia {
     activo: boolean;
 
     CP: CodigoPostal;
-    Usuario: Usuario;
 
-    constructor(){}
+    constructor(){
+        this.idColonia = null;
+        this.colonia1 = null;
+        this.idCP = null;
+        this.activo = null;
+        this.CP = new CodigoPostal();
+    }
 }
