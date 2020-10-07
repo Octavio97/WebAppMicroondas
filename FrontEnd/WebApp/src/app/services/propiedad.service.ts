@@ -12,8 +12,8 @@ export class PropiedadService {
 
   public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
 
-  altaPropiedad(propiedad: Propiedad, equipo: Equipo[]) {
-    return this.http.post( this.url + 'agregarPropiedad', { params: { propiedad, equipo } } );
+  altaPropiedad(propiedad: Propiedad) {
+    return this.http.post( this.url + 'agregarPropiedad', propiedad );
   }
 
   bajaPropiedad(id: string) {

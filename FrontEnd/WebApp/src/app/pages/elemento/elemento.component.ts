@@ -765,15 +765,19 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-              this.propiedadS.altaPropiedad(this.propiedad, this.equipos).subscribe(resp => {
-                if (resp === false) {
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un error',
-                    icon: 'error'
-                  });
-                }
-              });
+              const i = 0;
+              while (i < this.equipos.length){
+                this.propiedad.idEquipo = this.equipos[i].idEquipo;
+                this.propiedadS.altaPropiedad(this.propiedad).subscribe(resp => {
+                  if (resp === false) {
+                    Swal.fire({
+                      title: 'Error',
+                      text: 'Hubo un error',
+                      icon: 'error'
+                    });
+                  }
+                });
+              }
             }
           }
           else if (this.id === 'Rol') {
