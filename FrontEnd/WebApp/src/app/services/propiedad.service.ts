@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Propiedad } from '../models/propiedad.model';
 import { HttpClient } from '@angular/common/http';
+import { Equipo } from '../models/equipo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class PropiedadService {
 
   public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
 
-  altaPropiedad(propiedad: Propiedad) {
-    return this.http.post( this.url + 'agregarPropiedad', propiedad );
+  altaPropiedad(propiedad: Propiedad, equipo: Equipo[]) {
+    return this.http.post( this.url + 'agregarPropiedad', { params: { propiedad, equipo } } );
   }
 
   bajaPropiedad(id: string) {

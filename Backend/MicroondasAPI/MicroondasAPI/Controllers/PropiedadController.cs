@@ -12,7 +12,7 @@ namespace MicroondasAPI.Controllers
     {
         [HttpPost]
         [Route("api/MicroondasAPI/agregarPropiedad")]
-        public IHttpActionResult agregarPropiedad(Propiedad propiedad)
+        public IHttpActionResult agregarPropiedad(Propiedad propiedad, Equipo[] equipos)
         {
             try
             {

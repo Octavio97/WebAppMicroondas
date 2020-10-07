@@ -765,30 +765,15 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-              let i;
-              for (let index = 0; index < this.equipos.length; index++) {
-                i = false;
-                this.propiedad.idEquipo = this.equipos[index].idEquipo;
-                this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
-                  if (resp !== true) {
-                    Swal.fire({
-                      title: 'Error',
-                      text: 'Hubo un error',
-                      icon: 'error'
-                    });
-                    return;
-                  }
-                  else { i = true; }
-                });
-              }
-              if (i === true) {
-                Swal.fire({
-                  title: 'Exito',
-                  text: 'La propiedad fue agregada con exito',
-                  icon: 'success'
-                });
-                this.router.navigate(['/inicio']);
-              }
+              this.propiedadS.altaPropiedad(this.propiedad, this.equipos).subscribe(resp => {
+                if (resp === false) {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error',
+                    icon: 'error'
+                  });
+                }
+              });
             }
           }
           else if (this.id === 'Rol') {
