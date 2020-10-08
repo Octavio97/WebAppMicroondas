@@ -765,42 +765,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-              let i;
-              this.propiedadS.altaPropiedad(this.propiedad).subscribe(resp => {
-                if (resp === false) {
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un error',
-                    icon: 'error'
-                  });
-                }
-                else {
-                  i = true;
-                }
-              });
-              // tslint:disable-next-line: forin
-              // for (const key in this.equipos) {
-              //   this.propiedadS.altaPropiedad(this.propiedad.idUsuario, this.equipos[key].idEquipo).subscribe(resp => {
-              //     if (resp === false) {
-              //       Swal.fire({
-              //         title: 'Error',
-              //         text: 'Hubo un error',
-              //         icon: 'error'
-              //       });
-              //     }
-              //     else {
-              //       i = true;
-              //     }
-              //   });
-              // }
-
-              if (i === true) {
-                Swal.fire({
-                  title: 'Exito',
-                  text: 'La propiedad fue agregada con exito',
-                  icon: 'success'
-                });
-              }
+              this.addPropiedad(0);
             }
           }
           else if (this.id === 'Rol') {
@@ -923,6 +888,31 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         }
       });
     }
+  }
+
+  addPropiedad(id: number) {
+    this.propiedad.idEquipo = this.equipos[id].idEquipo;
+    this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
+      if (resp) {
+        if (id < this.equipos.length) {
+          this.addPropiedad(id++);
+        }
+        else {
+          Swal.fire({
+            title: 'Exito',
+            text: 'La propiedad fue agregada con exito',
+            icon: 'success'
+          });
+        }
+      }
+      else {
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error inesperado',
+          icon: 'success'
+        });
+      }
+    });
   }
 
   // Metodos para cambiar valores del combobox
