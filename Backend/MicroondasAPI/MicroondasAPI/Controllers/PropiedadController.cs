@@ -12,7 +12,7 @@ namespace MicroondasAPI.Controllers
     {
         [HttpPost]
         [Route("api/MicroondasAPI/agregarPropiedad")]
-        public IHttpActionResult agregarPropiedad(Propiedad propiedad, Equipo[] equipos)
+        public IHttpActionResult agregarPropiedad(Propiedad propiedad)
         {
             try
             {
@@ -29,8 +29,8 @@ namespace MicroondasAPI.Controllers
                     Propiedad datos = new Propiedad()
                     {
                         idPropiedad = Guid.NewGuid(),
-                        idEquipo = propiedad.idEquipo,
-                        idUsuario = propiedad.idUsuario
+                        idEquipo = propiedad.idUsuario,
+                        idUsuario = propiedad.idEquipo
                     };
 
                     // guardamos los datos

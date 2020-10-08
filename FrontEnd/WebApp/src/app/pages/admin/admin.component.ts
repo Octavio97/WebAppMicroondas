@@ -313,6 +313,7 @@ export class AdminComponent implements OnInit {
             text: 'La ciudad fue eliminada con exito',
             icon: 'success'
             });
+            this.router.navigate(['/inicio']);
           }
         });
       }
@@ -326,6 +327,7 @@ export class AdminComponent implements OnInit {
               });
             }
           });
+          this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Colonia') {
           this.coloniaS.modificarColonia(id, i).subscribe( resp => {
@@ -337,6 +339,7 @@ export class AdminComponent implements OnInit {
               });
             }
           });
+          this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Contrato') {
           this.contratoS.modificarContrato(id, i).subscribe( resp => {
@@ -348,6 +351,7 @@ export class AdminComponent implements OnInit {
               });
             }
           });
+          this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Equipo') {
         this.equipoS.modificarEquipo(id, i).subscribe( resp => {
@@ -359,6 +363,7 @@ export class AdminComponent implements OnInit {
               });
             }
           });
+        this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Estado') {
           this.estadoS.modificarEstado(id, i).subscribe( resp => {
@@ -370,6 +375,7 @@ export class AdminComponent implements OnInit {
               });
             }
           });
+          this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Estatus') {
         this.estatusS.modificarEstatus(id, i).subscribe( resp => {
@@ -381,6 +387,7 @@ export class AdminComponent implements OnInit {
             });
           }
         });
+        this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Paquete') {
         this.paqueteS.modificarPaquete(id, i).subscribe( resp => {
@@ -392,6 +399,7 @@ export class AdminComponent implements OnInit {
             });
           }
         });
+        this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Propiedad') {
         this.propiedadS.bajaPropiedad(id).subscribe( resp => {
@@ -403,6 +411,7 @@ export class AdminComponent implements OnInit {
             });
           }
         });
+        this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Rol') {
         this.rolS.modificarRol(id, i).subscribe( resp => {
@@ -414,6 +423,7 @@ export class AdminComponent implements OnInit {
             });
           }
         });
+        this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Usuario') {
         this.usuarioS.modificarUsuario(id, i).subscribe( resp => {
@@ -425,6 +435,7 @@ export class AdminComponent implements OnInit {
             });
           }
         });
+        this.router.navigate(['/inicio']);
       }
       else if (this.seleccion === 'Soporte') {
         this.soporteS.modificarSoporte(id, i).subscribe( resp => {
@@ -436,6 +447,7 @@ export class AdminComponent implements OnInit {
               });
           }
         });
+        this.router.navigate(['/inicio']);
       }
     }
   });

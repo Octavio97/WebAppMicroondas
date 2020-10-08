@@ -765,17 +765,40 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
             else {
-              const i = 0;
-              while (i < this.equipos.length){
-                this.propiedad.idEquipo = this.equipos[i].idEquipo;
-                this.propiedadS.altaPropiedad(this.propiedad).subscribe(resp => {
-                  if (resp === false) {
-                    Swal.fire({
-                      title: 'Error',
-                      text: 'Hubo un error',
-                      icon: 'error'
-                    });
-                  }
+              let i;
+              this.propiedadS.altaPropiedad(this.propiedad).subscribe(resp => {
+                if (resp === false) {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error',
+                    icon: 'error'
+                  });
+                }
+                else {
+                  i = true;
+                }
+              });
+              // tslint:disable-next-line: forin
+              // for (const key in this.equipos) {
+              //   this.propiedadS.altaPropiedad(this.propiedad.idUsuario, this.equipos[key].idEquipo).subscribe(resp => {
+              //     if (resp === false) {
+              //       Swal.fire({
+              //         title: 'Error',
+              //         text: 'Hubo un error',
+              //         icon: 'error'
+              //       });
+              //     }
+              //     else {
+              //       i = true;
+              //     }
+              //   });
+              // }
+
+              if (i === true) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'La propiedad fue agregada con exito',
+                  icon: 'success'
                 });
               }
             }
