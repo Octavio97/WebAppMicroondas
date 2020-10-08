@@ -894,8 +894,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     this.propiedad.idEquipo = this.equipos[id].idEquipo;
     this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
       if (resp) {
+        id++;
         if (id < this.equipos.length) {
-          this.addPropiedad(id++);
+          this.addPropiedad(id);
         }
         else {
           Swal.fire({
@@ -903,6 +904,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             text: 'La propiedad fue agregada con exito',
             icon: 'success'
           });
+          this.router.navigate(['/inicio']);
         }
       }
       else {

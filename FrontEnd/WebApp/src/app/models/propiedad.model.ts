@@ -5,6 +5,7 @@ export class Propiedad {
     idPropiedad: number;
     idUsuario: string;
     idEquipo: string;
+    count?: number;
 
     Equipo: Equipo;
     Usuario: Usuario;

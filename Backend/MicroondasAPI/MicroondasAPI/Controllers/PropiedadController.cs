@@ -29,8 +29,8 @@ namespace MicroondasAPI.Controllers
                     Propiedad datos = new Propiedad()
                     {
                         idPropiedad = Guid.NewGuid(),
-                        idEquipo = propiedad.idUsuario,
-                        idUsuario = propiedad.idEquipo
+                        idEquipo = propiedad.idEquipo,
+                        idUsuario = propiedad.idUsuario
                     };
 
                     // guardamos los datos
@@ -94,65 +94,61 @@ namespace MicroondasAPI.Controllers
                 }
 
                 // estructuramos los datos
-                var resultado = accion.Select(s => new
-                {
-                    idPropiedad = s.idPropiedad,
-                    idEquipo = s.idEquipo,
-                    idUsuario = s.idUsuario,
-                    Equipo = new {
-                        idEquipo = s.Equipo.idEquipo,
-                        equipo1 = s.Equipo.equipo1,
-                        activo = s.Equipo.activo
-                    },
-                    Usuario = new {
-                        idUsuario = s.Usuario.idUsuario,
-                        nombre = s.Usuario.nombre,
-                        apellido = s.Usuario.apellido,
-                        telefono = s.Usuario.telefono,
-                        correoE = s.Usuario.correoE,
-                        calle = s.Usuario.calle,
-                        numInt = s.Usuario.numInt,
-                        numExt = s.Usuario.numExt,
-                        idEstado = s.Usuario.idEstado,
-                        idCiudad = s.Usuario.idCiudad,
-                        idCP = s.Usuario.idCP,
-                        idColonia = s.Usuario.idColonia,
-                        idRol = s.Usuario.idRol,
-                        activo = s.Usuario.activo,
-                        contrasena = s.Usuario.contrasena,
-                        CP = new
-                        {
-                            idCP = s.Usuario.CodigoPostal.idCP,
-                            codigo = s.Usuario.CodigoPostal.codigo
-                        },
-                        Colonia = new
-                        {
-                            idColonia = s.Usuario.Colonia.idColonia,
-                            colonia1 = s.Usuario.Colonia.colonia1,
-                        },
-                        //Contrato = new {
-                        //    idContrato = consulta.Contrato
-                        //},
-                        Ciudad = new
-                        {
-                            idCiudad = s.Usuario.Ciudad.idCiudad,
-                            ciudad1 = s.Usuario.Ciudad.ciudad1
-                        },
-                        Estado = new
-                        {
-                            idEstado = s.Usuario.idEstado,
-                            estado1 = s.Usuario.Estado.estado1
-                        },
-                        //Propiedad = new {
-
-                        //},
-                        Rol = new
-                        {
-                            idRol = s.Usuario.Rol.idRol,
-                            rol1 = s.Usuario.Rol.rol1
-                        }
-                    }
-                });
+                //var resultado = accion.GroupBy(g => g.idUsuario).Select(s => new
+                //{
+                //    idPropiedad = s.idPropiedad,
+                //    idEquipo = s.idEquipo,
+                //    idUsuario = s.idUsuario,
+                //    count = s.Count(),
+                //    Equipo = new {
+                //        idEquipo = s.Equipo.idEquipo,
+                //        equipo1 = s.Equipo.equipo1,
+                //        activo = s.Equipo.activo
+                //    },
+                //    Usuario = new
+                //    {
+                //        idUsuario = s.Usuario.idUsuario,
+                //        nombre = s.Usuario.nombre,
+                //        apellido = s.Usuario.apellido,
+                //        telefono = s.Usuario.telefono,
+                //        correoE = s.Usuario.correoE,
+                //        calle = s.Usuario.calle,
+                //        numInt = s.Usuario.numInt,
+                //        numExt = s.Usuario.numExt,
+                //        idEstado = s.Usuario.idEstado,
+                //        idCiudad = s.Usuario.idCiudad,
+                //        idCP = s.Usuario.idCP,
+                //        idColonia = s.Usuario.idColonia,
+                //        idRol = s.Usuario.idRol,
+                //        activo = s.Usuario.activo,
+                //        contrasena = s.Usuario.contrasena,
+                //        CP = new
+                //        {
+                //            idCP = s.Usuario.CodigoPostal.idCP,
+                //            codigo = s.Usuario.CodigoPostal.codigo
+                //        },
+                //        Colonia = new
+                //        {
+                //            idColonia = s.Usuario.Colonia.idColonia,
+                //            colonia1 = s.Usuario.Colonia.colonia1,
+                //        },
+                //        Ciudad = new
+                //        {
+                //            idCiudad = s.Usuario.Ciudad.idCiudad,
+                //            ciudad1 = s.Usuario.Ciudad.ciudad1
+                //        },
+                //        Estado = new
+                //        {
+                //            idEstado = s.Usuario.idEstado,
+                //            estado1 = s.Usuario.Estado.estado1
+                //        },
+                //        Rol = new
+                //        {
+                //            idRol = s.Usuario.Rol.idRol,
+                //            rol1 = s.Usuario.Rol.rol1
+                //        }
+                //    }
+                //});
 
                 // Devolvemos los datos
                 return Ok(resultado);

@@ -294,7 +294,7 @@
                 <th scope="col">#</th>
                 <th scope="col">ID Propiedad</th>
                 <th scope="col">Técnico</th>
-                <th scope="col">Equipo</th>
+                <th scope="col">No. Equipos</th>
                 <th></th>
             </tr>
         </thead>
@@ -303,7 +303,7 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.idPropiedad }}</td>
                 <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
-                <td>{{ item.Equipo.equipo1 }}</td>
+                <td>{{ item.count }}</td>
                 <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idPropiedad)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
