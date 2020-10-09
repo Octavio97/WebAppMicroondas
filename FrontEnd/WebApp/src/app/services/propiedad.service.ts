@@ -35,4 +35,8 @@ export class PropiedadService {
   verPropiedad(id: string) {
     return this.http.get( this.url + 'verPropiedad', { params: { id } } );
   }
+
+  verEquipos(id: string) {
+    return this.http.get( this.url + 'verEquipos', { params: { id } } );
+  }
 }

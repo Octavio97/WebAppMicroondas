@@ -64,6 +64,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   es: Estatus[];
   eq: Equipo[];
   equipos: Equipo[]; // arreglo para guardar los equipos a agregar o eliminar
+  actualE: Propiedad[]; // arreglo de los equipos que tiene
   u: Usuario[];
   p: Paquete[];
   c: Ciudad[];
@@ -202,6 +203,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     else if (this.id === 'Propiedad') {
       this.t = new Array<Usuario>();
       this.eq = new Array<Equipo>();
+      this.actualE = new Array<Propiedad>();
       this.equipos = new Array<Equipo>();
       this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
         if (resp) {
@@ -314,7 +316,12 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.propiedad = resp;
           }
-        });
+          });
+          this.propiedadS.verEquipos(this.id2).subscribe( (resp: Propiedad[]) => {
+            if (resp) {
+              this.actualE = resp;
+            }
+          });
         }
         else if (this.id === 'Rol') {
           this.rol = new Rol();
@@ -373,7 +380,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         }
         else if (this.id === 'Propiedad') {
           this.propiedad = new Propiedad();
-
         }
         else if (this.id === 'Rol') {
           this.rol = new Rol();

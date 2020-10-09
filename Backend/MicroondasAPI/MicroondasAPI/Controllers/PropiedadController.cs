@@ -126,22 +126,25 @@ namespace MicroondasAPI.Controllers
 
         [HttpPut]
         [Route("api/MicroondasAPI/modificarPropiedad")]
-        public IHttpActionResult modificarPropiedad(Propiedad propiedad)
+        public IHttpActionResult modificarPropiedad(string id)
         {
             try
             {
                 // variable para devolver
                 bool i = false;
 
+                Guid guid = Guid.Parse(id.ToString());
+
                 // buscamos si existe la propiedad a ingresar
-                var accion = SessionController.getInstance().Propiedad.Where(w => w.idPropiedad == propiedad.idPropiedad).FirstOrDefault();
+                var accion = SessionController.getInstance().Propiedad.Where(w => w.idUsuario == guid).ToList();
 
                 // si no existe
                 if (accion != null)
                 {
-                    // Hacemos los cambios
-                    accion.idUsuario = propiedad.idUsuario;
-                    accion.idPropiedad = propiedad.idPropiedad;
+                    for (int io = 0; io < accion.Count; io++)
+                    {
+                        SessionController.getInstance().Propiedad.Remove(accion[io]);
+                    }
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();
@@ -200,6 +203,80 @@ namespace MicroondasAPI.Controllers
                 return Ok(resultado);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verEquipos")]
+        public IHttpActionResult verEquipos(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Propiedad.Where(w => w.idUsuario == i).ToList();
+
+                var resultado = accion.Select(s => new
+                {
+                    idPropiedad = s.idPropiedad,
+                    idUsuario = s.idUsuario,
+                    idEquipo = s.idEquipo,
+                    Equipo = new
+                    {
+                        idEquipo = s.Equipo.idEquipo,
+                        equipo1 = s.Equipo.equipo1,
+                        activo = s.Equipo.activo
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch(Exception)
             {
                 return BadRequest();
             }
