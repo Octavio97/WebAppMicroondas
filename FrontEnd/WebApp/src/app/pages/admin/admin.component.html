@@ -292,7 +292,7 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">ID Propiedad</th>
+                <th scope="col">ID Usuario</th>
                 <th scope="col">Técnico</th>
                 <th scope="col">No. Equipos</th>
                 <th></th>
@@ -301,10 +301,10 @@
         <tbody>
             <tr *ngFor="let item of propiedad; let i=index">
                 <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.idPropiedad }}</td>
+                <td>{{ item.idUsuario }}</td>
                 <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
                 <td>{{ item.count }}</td>
-                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPropiedad]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idPropiedad)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idUsuario]"><i class="fas fa-pen"></i></button><button (click)="delete(item.idPropiedad)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>

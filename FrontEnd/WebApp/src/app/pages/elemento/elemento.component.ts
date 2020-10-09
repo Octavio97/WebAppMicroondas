@@ -309,7 +309,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         }
         else if (this.id === 'Propiedad') {
           this.propiedad = new Propiedad();
-          this.propiedad.idEquipo = this.id2;
+          this.propiedad.idUsuario = this.id2;
           this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad) => {
           if (resp) {
             this.propiedad = resp;

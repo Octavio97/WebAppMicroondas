@@ -86,69 +86,34 @@ namespace MicroondasAPI.Controllers
             try
             {
                 // consultamos la tabla propiedad
-                var accion = SessionController.getInstance().Propiedad.ToList();
+                var accion = SessionController.getInstance().Propiedad.
+                    Join(
+                        SessionController.getInstance().Usuario,
+                        propiedad => propiedad.idUsuario,
+                        usuario => usuario.idUsuario,
+                        (propiedad, usuario) => new
+                        {
+                            propiedad, usuario
+                        }
+                    ).ToList();
 
                 if (accion == null)
                 {
                     return Ok(false);
                 }
 
-                // estructuramos los datos
-                //var resultado = accion.GroupBy(g => g.idUsuario).Select(s => new
-                //{
-                //    idPropiedad = s.idPropiedad,
-                //    idEquipo = s.idEquipo,
-                //    idUsuario = s.idUsuario,
-                //    count = s.Count(),
-                //    Equipo = new {
-                //        idEquipo = s.Equipo.idEquipo,
-                //        equipo1 = s.Equipo.equipo1,
-                //        activo = s.Equipo.activo
-                //    },
-                //    Usuario = new
-                //    {
-                //        idUsuario = s.Usuario.idUsuario,
-                //        nombre = s.Usuario.nombre,
-                //        apellido = s.Usuario.apellido,
-                //        telefono = s.Usuario.telefono,
-                //        correoE = s.Usuario.correoE,
-                //        calle = s.Usuario.calle,
-                //        numInt = s.Usuario.numInt,
-                //        numExt = s.Usuario.numExt,
-                //        idEstado = s.Usuario.idEstado,
-                //        idCiudad = s.Usuario.idCiudad,
-                //        idCP = s.Usuario.idCP,
-                //        idColonia = s.Usuario.idColonia,
-                //        idRol = s.Usuario.idRol,
-                //        activo = s.Usuario.activo,
-                //        contrasena = s.Usuario.contrasena,
-                //        CP = new
-                //        {
-                //            idCP = s.Usuario.CodigoPostal.idCP,
-                //            codigo = s.Usuario.CodigoPostal.codigo
-                //        },
-                //        Colonia = new
-                //        {
-                //            idColonia = s.Usuario.Colonia.idColonia,
-                //            colonia1 = s.Usuario.Colonia.colonia1,
-                //        },
-                //        Ciudad = new
-                //        {
-                //            idCiudad = s.Usuario.Ciudad.idCiudad,
-                //            ciudad1 = s.Usuario.Ciudad.ciudad1
-                //        },
-                //        Estado = new
-                //        {
-                //            idEstado = s.Usuario.idEstado,
-                //            estado1 = s.Usuario.Estado.estado1
-                //        },
-                //        Rol = new
-                //        {
-                //            idRol = s.Usuario.Rol.idRol,
-                //            rol1 = s.Usuario.Rol.rol1
-                //        }
-                //    }
-                //});
+                var resultado = accion.GroupBy(g => new { g.usuario.idUsuario, g.usuario.nombre, g.usuario.apellido }).
+                    Select(s => new
+                    {
+                        idUsuario = s.Key.idUsuario,
+                        count = s.Count(),
+                        Usuario = new
+                        {
+                            idUsuario = s.Key.idUsuario,
+                            nombre = s.Key.nombre,
+                            apellido = s.Key.apellido
+                        }
+                    });
 
                 // Devolvemos los datos
                 return Ok(resultado);
@@ -202,73 +167,35 @@ namespace MicroondasAPI.Controllers
             {
                 Guid i = Guid.Parse(id.ToString());
 
-                var consulta = SessionController.getInstance().Propiedad.Where(w => w.idPropiedad == i).FirstOrDefault();
+                var accion = SessionController.getInstance().Propiedad.
+                    Join(
+                        SessionController.getInstance().Usuario,
+                        propiedad => propiedad.idUsuario,
+                        usuario => usuario.idUsuario,
+                        (propiedad, usuario) => new
+                        {
+                            propiedad,
+                            usuario
+                        }
+                    ).Where(w => w.propiedad.idUsuario == i).ToList();
 
-                if (consulta == null)
+                if (accion == null)
                 {
                     return Ok(false);
                 }
 
-                var resultado = new {
-                    idPropiedad = consulta.idPropiedad,
-                    idEquipo = consulta.idEquipo,
-                    idUsuario = consulta.idUsuario,
-                    Equipo = new
+                var resultado = accion.GroupBy(g => new { g.usuario.idUsuario, g.usuario.nombre, g.usuario.apellido }).
+                    Select(s => new
                     {
-                        idEquipo = consulta.Equipo.idEquipo,
-                        equipo1 = consulta.Equipo.equipo1,
-                        activo = consulta.Equipo.activo
-                    },
-                    Usuario = new
-                    {
-                        idUsuario = consulta.Usuario.idUsuario,
-                        nombre = consulta.Usuario.nombre,
-                        apellido = consulta.Usuario.apellido,
-                        telefono = consulta.Usuario.telefono,
-                        correoE = consulta.Usuario.correoE,
-                        calle = consulta.Usuario.calle,
-                        numInt = consulta.Usuario.numInt,
-                        numExt = consulta.Usuario.numExt,
-                        idEstado = consulta.Usuario.idEstado,
-                        idCiudad = consulta.Usuario.idCiudad,
-                        idCP = consulta.Usuario.idCP,
-                        idColonia = consulta.Usuario.idColonia,
-                        idRol = consulta.Usuario.idRol,
-                        activo = consulta.Usuario.activo,
-                        contrasena = consulta.Usuario.contrasena,
-                        CP = new
+                        idUsuario = s.Key.idUsuario,
+                        count = s.Count(),
+                        Usuario = new
                         {
-                            idCP = consulta.Usuario.CodigoPostal.idCP,
-                            codigo = consulta.Usuario.CodigoPostal.codigo
-                        },
-                        Colonia = new
-                        {
-                            idColonia = consulta.Usuario.Colonia.idColonia,
-                            colonia1 = consulta.Usuario.Colonia.colonia1,
-                        },
-                        //Contrato = new {
-                        //    idContrato = consulta.Contrato
-                        //},
-                        Ciudad = new
-                        {
-                            idCiudad = consulta.Usuario.Ciudad.idCiudad,
-                            ciudad1 = consulta.Usuario.Ciudad.ciudad1
-                        },
-                        Estado = new
-                        {
-                            idEstado = consulta.Usuario.idEstado,
-                            estado1 = consulta.Usuario.Estado.estado1
-                        },
-                        //Propiedad = new {
-
-                        //},
-                        Rol = new
-                        {
-                            idRol = consulta.Usuario.Rol.idRol,
-                            rol1 = consulta.Usuario.Rol.rol1
+                            idUsuario = s.Key.idUsuario,
+                            nombre = s.Key.nombre,
+                            apellido = s.Key.apellido
                         }
-                    }
-                };
+                    });
 
                 return Ok(resultado);
             }
