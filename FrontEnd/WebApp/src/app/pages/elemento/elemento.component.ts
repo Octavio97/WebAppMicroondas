@@ -64,7 +64,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   es: Estatus[];
   eq: Equipo[];
   equipos: Equipo[]; // arreglo para guardar los equipos a agregar o eliminar
-  actualE: Propiedad[]; // arreglo de los equipos que tiene
   u: Usuario[];
   p: Paquete[];
   c: Ciudad[];
@@ -203,7 +202,6 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     else if (this.id === 'Propiedad') {
       this.t = new Array<Usuario>();
       this.eq = new Array<Equipo>();
-      this.actualE = new Array<Propiedad>();
       this.equipos = new Array<Equipo>();
       this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
         if (resp) {
@@ -317,11 +315,35 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             this.propiedad = resp;
           }
           });
-          this.propiedadS.verEquipos(this.id2).subscribe( (resp: Propiedad[]) => {
-            if (resp) {
-              this.actualE = resp;
-            }
-          });
+          // this.equipoS.consultaEquipo().subscribe( (equ: Equipo[]) => {
+          //   if (equ) {
+          //     this.eq = equ;
+          //     this.propiedadS.verEquipos(this.id2).subscribe( (equP: Equipo[]) => {
+          //       if (equP) {
+          //         // tslint:disable-next-line: prefer-for-of
+          //         for (let i = 0; i < equP.length; i++) {
+          //           // tslint:disable-next-line: prefer-for-of
+          //           for (let y = 0; y < this.eq.length; y++) {
+          //             if (this.eq[i].idEquipo === equ[y].idEquipo) {
+          //               this.eq.splice(this.eq.indexOf(this.eq[i]), 1);
+          //             }
+          //             else {
+          //               this.eq[i].activo = false;
+          //             }
+          //           }
+          //         }
+          //         // tslint:disable-next-line: prefer-for-of
+          //         for (let index = 0; index < equP.length; index++) {
+          //           this.eq.push({
+          //             idEquipo: equP[index].idEquipo,
+          //             equipo1:  equP[index].equipo1,
+          //             activo: equP[index].activo
+          //           });
+          //         }
+          //       }
+          //     });
+          //   }
+          // });
         }
         else if (this.id === 'Rol') {
           this.rol = new Rol();

@@ -314,52 +314,72 @@
     </div>
     <!-- Propiedad -->
     <div *ngIf="this.id === 'Propiedad'">
-        <form #log="ngForm" (submit)="alta(log)">
-            <div class="form-group">
-                <label for="idTecnico">Técnico:</label>
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of t">
-                            <td><input class="form-check-input" type="radio" name="idUsuario" id="idUsuario" [(ngModel)]="this.propiedad.idUsuario" [value]="item.idUsuario"></td>
-                            <td>{{ item.nombre }}</td>
-                            <td>{{ item.apellido }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div *ngIf="this.id2 !== 'new'">
-                <label for="equipo"><b>Lista de equipos actual:</b></label>
-                <ul *ngFor="let item of actualE">
-                    <li>{{ item.Equipo.equipo1 }}</li>
-                </ul>
-            </div>
-            <div class="form-group">
-                <label for="idEquipo">Equipo:</label>
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Equipo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of eq; let i = index">
-                            <td><input class="form-check-input" type="checkbox" [checked] (change)="cambio4($event, item)"></td>
-                            <td>{{ item.equipo1 }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
-        </form>
+        <div *ngIf="this.id2 === 'new'">
+            <form #log="ngForm" (submit)="alta(log)">
+                <div class="form-group">
+                    <label for="idTecnico">Técnico:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of t">
+                                <td><input class="form-check-input" type="radio" name="idUsuario" id="idUsuario" [(ngModel)]="this.propiedad.idUsuario" [value]="item.idUsuario"></td>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.apellido }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <label for="idEquipo">Equipos:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Equipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eq; let i = index">
+                                <td><input class="form-check-input" type="checkbox" [checked] (change)="cambio4($event, item)"></td>
+                                <td>{{ item.equipo1 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+            </form>
+        </div>
+        <div *ngIf="this.id2 !== 'new'">
+            <form #log="ngForm" (submit)="alta(log)">
+                <div class="form-group">
+                    <h4>Técnico: {{ this.propiedad.Usuario.nombre }} {{ this.propiedad.Usuario.apellido }}</h4>
+                </div>
+                <div class="form-group">
+                    <label for="idEquipo">Equipos:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Equipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eq; let i = index">
+                                <td><input class="form-check-input" type="checkbox" [checked] (change)="cambio4($event, item)"></td>
+                                <td>{{ item.equipo1 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
     </div>
     <!-- Contrato -->
     <div *ngIf="this.id === 'Contrato'">

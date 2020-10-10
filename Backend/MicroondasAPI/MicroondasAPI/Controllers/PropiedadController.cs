@@ -170,28 +170,17 @@ namespace MicroondasAPI.Controllers
             {
                 Guid i = Guid.Parse(id.ToString());
 
-                var accion = SessionController.getInstance().Propiedad.
-                    Join(
-                        SessionController.getInstance().Usuario,
-                        propiedad => propiedad.idUsuario,
-                        usuario => usuario.idUsuario,
-                        (propiedad, usuario) => new
-                        {
-                            propiedad,
-                            usuario
-                        }
-                    ).Where(w => w.propiedad.idUsuario == i).ToList();
+                var accion = SessionController.getInstance().Propiedad.Where(w => w.idUsuario == i).ToList();
 
                 if (accion == null)
                 {
                     return Ok(false);
                 }
 
-                var resultado = accion.GroupBy(g => new { g.usuario.idUsuario, g.usuario.nombre, g.usuario.apellido }).
+                var resultado = accion.GroupBy(g => new { g.idUsuario, g.Usuario.nombre, g.Usuario.apellido }).
                     Select(s => new
                     {
                         idUsuario = s.Key.idUsuario,
-                        count = s.Count(),
                         Usuario = new
                         {
                             idUsuario = s.Key.idUsuario,
@@ -220,58 +209,9 @@ namespace MicroondasAPI.Controllers
 
                 var resultado = accion.Select(s => new
                 {
-                    idPropiedad = s.idPropiedad,
-                    idUsuario = s.idUsuario,
-                    idEquipo = s.idEquipo,
-                    Equipo = new
-                    {
-                        idEquipo = s.Equipo.idEquipo,
-                        equipo1 = s.Equipo.equipo1,
-                        activo = s.Equipo.activo
-                    },
-                    Usuario = new
-                    {
-                        idUsuario = s.Usuario.idUsuario,
-                        nombre = s.Usuario.nombre,
-                        apellido = s.Usuario.apellido,
-                        telefono = s.Usuario.telefono,
-                        correoE = s.Usuario.correoE,
-                        calle = s.Usuario.calle,
-                        numInt = s.Usuario.numInt,
-                        numExt = s.Usuario.numExt,
-                        idEstado = s.Usuario.idEstado,
-                        idCiudad = s.Usuario.idCiudad,
-                        idCP = s.Usuario.idCP,
-                        idColonia = s.Usuario.idColonia,
-                        idRol = s.Usuario.idRol,
-                        activo = s.Usuario.activo,
-                        contrasena = s.Usuario.contrasena,
-                        CP = new
-                        {
-                            idCP = s.Usuario.CodigoPostal.idCP,
-                            codigo = s.Usuario.CodigoPostal.codigo
-                        },
-                        Colonia = new
-                        {
-                            idColonia = s.Usuario.Colonia.idColonia,
-                            colonia1 = s.Usuario.Colonia.colonia1,
-                        },
-                        Ciudad = new
-                        {
-                            idCiudad = s.Usuario.Ciudad.idCiudad,
-                            ciudad1 = s.Usuario.Ciudad.ciudad1
-                        },
-                        Estado = new
-                        {
-                            idEstado = s.Usuario.idEstado,
-                            estado1 = s.Usuario.Estado.estado1
-                        },
-                        Rol = new
-                        {
-                            idRol = s.Usuario.Rol.idRol,
-                            rol1 = s.Usuario.Rol.rol1
-                        }
-                    }
+                    idEquipo = s.Equipo.idEquipo,
+                    equipo1 = s.Equipo.equipo1,
+                    activo = s.Equipo.activo
                 });
 
                 return Ok(resultado);
