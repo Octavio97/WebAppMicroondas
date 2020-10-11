@@ -57,12 +57,13 @@ export class PerfilComponent implements OnInit {
       this.router.navigate(['/']);
     }
     // guardamos el usuario actual
-    this.init();
+    this.usuario = new Usuario();
     this.usuario = JSON.parse(localStorage.getItem('currentUser'));
 
     // consulta rol
     this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
       if (resp) {
+        this.r = new Array<Rol>();
         this.r = resp;
       }
     });
@@ -70,15 +71,19 @@ export class PerfilComponent implements OnInit {
     // consulta de ubicacion
     this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
       if (resp) {
+        this.e = new Array<Estado>();
         this.e = resp;
         this.ciudadS.consultaUnica(this.usuario.idEstado).subscribe( (resp: Ciudad[]) => {
           if (resp) {
+            this.c = new Array<Ciudad>();
             this.c = resp;
             this.codigoS.consultaUnica(this.usuario.idCiudad).subscribe( (resp: CodigoPostal[]) => {
               if (resp) {
+                this.cp = new Array<CodigoPostal>();
                 this.cp = resp;
                 this.coloniaS.consultaUnica(this.usuario.idCP).subscribe( (resp: Colonia[]) => {
                   if (resp) {
+                    this.co = new Array<Colonia>();
                     this.co = resp;
                   }
                 });
@@ -93,9 +98,11 @@ export class PerfilComponent implements OnInit {
       // consulta del contrato y reportes
       this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {
       if (resp) {
+        this.contrato = new Contrato();
         this.contrato = resp;
         this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
           if (resp) {
+            this.s = new Array<Soporte>();
             this.s = resp;
           }
         });
@@ -105,6 +112,7 @@ export class PerfilComponent implements OnInit {
     else if (this.usuario.Rol.rol1 === 'técnico') {
       this.soporteS.consultaUnicaSoporteT(this.usuario.idUsuario).subscribe( (resp: Soporte[]) => {
         if (resp) {
+          this.s = new Array<Soporte>();
           this.s = resp;
         }
       });
@@ -235,58 +243,6 @@ export class PerfilComponent implements OnInit {
         }
       });
     }
-  }
-
-  init(){
-    this.soporte = {
-      idSoporte: null,
-      problema: null,
-      idTecnico: null,
-      idContrato: null,
-      fechaInicio: null,
-      fechaFinal: null,
-      idEstatus: null,
-      activo: null,
-      Contrato: new Contrato(),
-      Estatus: new Estatus(),
-      Usuario: new Usuario()
-    };
-
-    this.contrato = {
-      idContrato: null,
-      pdf: null,
-      archivo: null,
-      fechaInicio: null,
-      fechaFinal: null,
-      idPaquete: null,
-      idUsuario: null,
-      activo: null,
-      Paquete: new Paquete(),
-      Usuario: new Usuario()
-    };
-
-    this.usuario = {
-      idUsuario: null,
-      nombre: null,
-      apellido: null,
-      telefono: null,
-      correoE: null,
-      contrasena: null,
-      calle: null,
-      numInt: null,
-      numExt: null,
-      idEstado: null,
-      idCiudad: null,
-      idColonia: null,
-      idCP: null,
-      idRol: null,
-      activo: null,
-      CP: new CodigoPostal(),
-      Colonia: new Colonia(),
-      Ciudad: new Ciudad(),
-      Estado: new Estado(),
-      Rol: new Rol ()
-    };
   }
 
   cancelarReporte(id: Soporte){

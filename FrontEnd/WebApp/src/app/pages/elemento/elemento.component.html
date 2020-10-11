@@ -359,7 +359,7 @@
         <div *ngIf="this.id2 !== 'new'">
             <form #log="ngForm" (submit)="alta(log)">
                 <div class="form-group">
-                    <h4>Técnico: {{ this.propiedad.Usuario.nombre }} {{ this.propiedad.Usuario.apellido }}</h4>
+                    <h4>Técnico: {{ this.propiedad.Usuario.nombre}} {{ this.propiedad.Usuario.apellido }}</h4>
                 </div>
                 <div class="form-group">
                     <label for="idEquipo">Equipos:</label>
@@ -371,10 +371,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of eq; let i = index">
+                            <!-- <tr *ngFor="let item of eq; let i = index">
                                 <td><input class="form-check-input" type="checkbox" [checked] (change)="cambio4($event, item)"></td>
                                 <td>{{ item.equipo1 }}</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

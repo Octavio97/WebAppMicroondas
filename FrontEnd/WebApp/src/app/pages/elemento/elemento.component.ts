@@ -73,6 +73,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   t: Usuario[];
   con: Contrato[];
 
+  propi: Propiedad[];
+
   constructor(
     private coloniaS: ColoniaService,
     private contratoS: ContratoService,
@@ -200,19 +202,34 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       });
     }
     else if (this.id === 'Propiedad') {
-      this.t = new Array<Usuario>();
-      this.eq = new Array<Equipo>();
-      this.equipos = new Array<Equipo>();
-      this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
-        if (resp) {
-          this.t = resp;
-        }
-      });
       this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
         if (resp) {
+          this.eq = new Array<Equipo>();
           this.eq = resp;
         }
       });
+      if (this.id2 === 'new') {
+        this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
+          if (resp) {
+            this.t = new Array<Usuario>();
+            this.t = resp;
+          }
+        });
+      }
+      else {
+        // tslint:disable-next-line: prefer-for-of
+        for (let x = 0; x < this.equipos.length; x++) {
+          // tslint:disable-next-line: prefer-for-of
+          for (let y = 0; y < this.eq.length; y++) {
+            if (this.equipos[x].idEquipo === this.eq[y].idEquipo) {
+              this.equipos.splice(this.equipos.indexOf(this.equipos[x]), 1);
+            }
+            else {
+              this.eq[y].activo = false;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -310,40 +327,17 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         else if (this.id === 'Propiedad') {
           this.propiedad = new Propiedad();
           this.propiedad.idUsuario = this.id2;
-          this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad) => {
-          if (resp) {
-            this.propiedad = resp;
-          }
+
+          this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad[]) => {
+            if (resp) {
+              this.propi = resp;
+              this.propiedad.Usuario = this.propi[0].Usuario;
+              this.equipos = new Array<Equipo>();
+              for (let index = 0; index < this.propi.length; index++) {
+                this.equipos[index] = this.propi[index].Equipo;
+              }
+            }
           });
-          // this.equipoS.consultaEquipo().subscribe( (equ: Equipo[]) => {
-          //   if (equ) {
-          //     this.eq = equ;
-          //     this.propiedadS.verEquipos(this.id2).subscribe( (equP: Equipo[]) => {
-          //       if (equP) {
-          //         // tslint:disable-next-line: prefer-for-of
-          //         for (let i = 0; i < equP.length; i++) {
-          //           // tslint:disable-next-line: prefer-for-of
-          //           for (let y = 0; y < this.eq.length; y++) {
-          //             if (this.eq[i].idEquipo === equ[y].idEquipo) {
-          //               this.eq.splice(this.eq.indexOf(this.eq[i]), 1);
-          //             }
-          //             else {
-          //               this.eq[i].activo = false;
-          //             }
-          //           }
-          //         }
-          //         // tslint:disable-next-line: prefer-for-of
-          //         for (let index = 0; index < equP.length; index++) {
-          //           this.eq.push({
-          //             idEquipo: equP[index].idEquipo,
-          //             equipo1:  equP[index].equipo1,
-          //             activo: equP[index].activo
-          //           });
-          //         }
-          //       }
-          //     });
-          //   }
-          // });
         }
         else if (this.id === 'Rol') {
           this.rol = new Rol();

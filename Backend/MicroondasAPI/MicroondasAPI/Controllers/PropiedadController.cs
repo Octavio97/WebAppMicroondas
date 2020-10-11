@@ -93,7 +93,8 @@ namespace MicroondasAPI.Controllers
                         usuario => usuario.idUsuario,
                         (propiedad, usuario) => new
                         {
-                            propiedad, usuario
+                            propiedad,
+                            usuario
                         }
                     ).ToList();
 
@@ -170,53 +171,47 @@ namespace MicroondasAPI.Controllers
             {
                 Guid i = Guid.Parse(id.ToString());
 
-                var accion = SessionController.getInstance().Propiedad.Where(w => w.idUsuario == i).ToList();
+                var consulta = SessionController.getInstance().Propiedad.Where(w => w.idUsuario == i).ToList();
 
-                if (accion == null)
+                if (consulta == null)
                 {
                     return Ok(false);
                 }
 
-                var resultado = accion.GroupBy(g => new { g.idUsuario, g.Usuario.nombre, g.Usuario.apellido }).
-                    Select(s => new
-                    {
-                        idUsuario = s.Key.idUsuario,
-                        Usuario = new
-                        {
-                            idUsuario = s.Key.idUsuario,
-                            nombre = s.Key.nombre,
-                            apellido = s.Key.apellido
-                        }
-                    });
-
-                return Ok(resultado);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
-
-        [HttpGet]
-        [Route("api/MicroondasAPI/verEquipos")]
-        public IHttpActionResult verEquipos(string id)
-        {
-            try
-            {
-                Guid i = Guid.Parse(id.ToString());
-
-                var accion = SessionController.getInstance().Propiedad.Where(w => w.idUsuario == i).ToList();
-
-                var resultado = accion.Select(s => new
+                var resultado = consulta.Select(s => new
                 {
-                    idEquipo = s.Equipo.idEquipo,
-                    equipo1 = s.Equipo.equipo1,
-                    activo = s.Equipo.activo
+                    //idPropiedad = s.idPropiedad,
+                    //idEquipo = s.idEquipo,
+                    //idUsuario = s.idUsuario,
+                    Equipo = new
+                    {
+                        idEquipo = s.Equipo.idEquipo,
+                        equipo1 = s.Equipo.equipo1,
+                        activo = s.Equipo.activo
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idColonia = s.Usuario.idColonia,
+                        idCP = s.Usuario.idCP,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad
+                    }
                 });
 
                 return Ok(resultado);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return BadRequest();
             }
