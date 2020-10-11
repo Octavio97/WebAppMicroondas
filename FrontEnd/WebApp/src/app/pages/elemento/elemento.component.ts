@@ -201,35 +201,19 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         }
       });
     }
-    else if (this.id === 'Propiedad') {
+    else if (this.id === 'Propiedad' && this.id2 === 'new') {
       this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
         if (resp) {
           this.eq = new Array<Equipo>();
           this.eq = resp;
         }
       });
-      if (this.id2 === 'new') {
-        this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
-          if (resp) {
-            this.t = new Array<Usuario>();
-            this.t = resp;
-          }
-        });
-      }
-      else {
-        // tslint:disable-next-line: prefer-for-of
-        for (let x = 0; x < this.equipos.length; x++) {
-          // tslint:disable-next-line: prefer-for-of
-          for (let y = 0; y < this.eq.length; y++) {
-            if (this.equipos[x].idEquipo === this.eq[y].idEquipo) {
-              this.equipos.splice(this.equipos.indexOf(this.equipos[x]), 1);
-            }
-            else {
-              this.eq[y].activo = false;
-            }
-          }
+      this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
+        if (resp) {
+          this.t = new Array<Usuario>();
+          this.t = resp;
         }
-      }
+      });
     }
   }
 
@@ -328,14 +312,36 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           this.propiedad = new Propiedad();
           this.propiedad.idUsuario = this.id2;
 
+          this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
+            if (resp) {
+              this.eq = resp;
+            }
+          });
+
           this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad[]) => {
             if (resp) {
               this.propi = resp;
               this.propiedad.Usuario = this.propi[0].Usuario;
               this.equipos = new Array<Equipo>();
+              // traer los equipos que tiene en su poder
               for (let index = 0; index < this.propi.length; index++) {
                 this.equipos[index] = this.propi[index].Equipo;
               }
+              // eliminar los equipos que tiene en su poder de todos los disponibles
+              for (let index = 0; index < this.equipos.length; index++) {
+                const array = this.eq.find((m) => m.idEquipo === this.equipos[index].idEquipo);
+                if (array) {
+                  this.eq.splice(this.eq.indexOf(array), 1);
+                }
+              }
+              // // cambiar de valor como inactivo(false)
+              // for (let index = 0; index < this.eq.length; index++) {
+              //   this.eq[index].activo = false;
+              // }
+              // // unir los dos arreglos
+              // for (let index = 0; index < this.equipos.length; index++) {
+              //   this.eq.push(this.equipos[index]);
+              // }
             }
           });
         }
