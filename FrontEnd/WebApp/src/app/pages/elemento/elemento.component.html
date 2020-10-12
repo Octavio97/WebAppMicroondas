@@ -7,7 +7,7 @@
                 <label for="nombre">Nombre:</label>
                 <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel" required maxlength="50"
                     title="hola esta mal xd" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
-                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre</div>
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre con la primera letra en mayúscula</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
                 <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
             </div>
@@ -371,13 +371,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <tr *ngFor="let item of eq; let i = index">
-                                <td><input class="form-check-input" type="checkbox" [checked] (change)="cambio4($event, item)"></td>
+                            <tr *ngFor="let item of eq; let i = index">
+                                <td><input class="form-check-input" type="checkbox" [checked]="item.activo" (change)="cambio4($event, item)"></td>
                                 <td>{{ item.equipo1 }}</td>
-                            </tr> -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+                <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
             </form>
         </div>
     </div>

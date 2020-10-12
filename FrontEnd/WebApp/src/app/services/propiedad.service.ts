@@ -24,8 +24,8 @@ export class PropiedadService {
     return this.http.get( this.url + 'consultaPropiedad' );
   }
 
-  modificarPropiedad(propiedad: Propiedad) {
-    return this.http.put( this.url + 'modificarPropiedad', propiedad );
+  modificarPropiedad(id: string) {
+    return this.http.delete( this.url + 'modificarPropiedad', { params: { id } } );
   }
 
   consultaUnica(id: string) {

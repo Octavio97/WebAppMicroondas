@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ɵConsole } from '@angular/core';
-import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { RolService } from '../../services/rol.service';
 import Swal from 'sweetalert2';
 import { Rol } from 'src/app/models/rol.model';
@@ -327,21 +327,13 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               for (let index = 0; index < this.propi.length; index++) {
                 this.equipos[index] = this.propi[index].Equipo;
               }
-              // eliminar los equipos que tiene en su poder de todos los disponibles
-              for (let index = 0; index < this.equipos.length; index++) {
-                const array = this.eq.find((m) => m.idEquipo === this.equipos[index].idEquipo);
-                if (array) {
-                  this.eq.splice(this.eq.indexOf(array), 1);
+              // modificar los equipos que tiene en su poder de todos los disponibles
+              for (let index = 0; index < this.eq.length; index++) {
+                const array = this.equipos.find((m) => m.idEquipo === this.eq[index].idEquipo);
+                if (!array) {
+                  this.eq[index].activo = false;
                 }
               }
-              // // cambiar de valor como inactivo(false)
-              // for (let index = 0; index < this.eq.length; index++) {
-              //   this.eq[index].activo = false;
-              // }
-              // // unir los dos arreglos
-              // for (let index = 0; index < this.equipos.length; index++) {
-              //   this.eq.push(this.equipos[index]);
-              // }
             }
           });
         }
@@ -453,6 +445,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
 
           // Definimos que queremos modificar o agregar
           if (this.id === 'Ciudad') {
+            this.ciudad.ciudad1 = this.ciudad.ciudad1.replace(/\b\w/g, l => l.toUpperCase());
             if (this.ciudad.idCiudad) {
               this.ciudadS.modificarCiudad(this.ciudad).subscribe( resp => {
                 if (resp === true) {
@@ -533,6 +526,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             }
           }
           else if (this.id === 'Colonia') {
+            this.colonia.colonia1 = this.colonia.colonia1.replace(/\b\w/g, l => l.toUpperCase());
             if (this.colonia.idColonia) {
               this.coloniaS.modificarColonia(this.colonia).subscribe( resp => {
                 if (resp === true) {
@@ -773,27 +767,24 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           }
           else if (this.id === 'PaqueteEquipo') {}
           else if (this.id === 'Propiedad') {
-            if (this.propiedad.idPropiedad) {
-              this.propiedadS.modificarPropiedad(this.propiedad).subscribe( resp => {
-                if (resp === true) {
-                  Swal.fire({
-                    title: 'Exito',
-                    text: 'La propiedad fue actualizada con exito',
-                    icon: 'success'
-                  });
-                  this.router.navigate(['/inicio']);
-                }
-                else {
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'La propiedad ya existe',
-                    icon: 'error'
-                  });
-                }
+            if (this.equipos.length === 0) {
+              Swal.fire({
+                title: 'Error',
+                text: 'Debes seleccionar al menos un equipo para poder continuar',
+                icon: 'error'
               });
             }
             else {
-              this.addPropiedad(0);
+              if (this.propiedad.idUsuario) {
+                this.propiedadS.modificarPropiedad(this.propiedad.idUsuario).subscribe( resp => {
+                  if (resp === true) {
+                    this.addPropiedad(0);
+                  }
+                });
+              }
+              else {
+                this.addPropiedad(0);
+              }
             }
           }
           else if (this.id === 'Rol') {
@@ -939,7 +930,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         Swal.fire({
           title: 'Error',
           text: 'Hubo un error inesperado',
-          icon: 'success'
+          icon: 'error'
         });
       }
     });

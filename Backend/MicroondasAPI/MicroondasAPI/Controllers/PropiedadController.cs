@@ -125,7 +125,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/modificarPropiedad")]
         public IHttpActionResult modificarPropiedad(string id)
         {
