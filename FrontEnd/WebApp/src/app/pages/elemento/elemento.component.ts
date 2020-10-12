@@ -610,6 +610,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           }
           else if (this.id === 'Equipo') {
             if (this.equipo.idEquipo) {
+              this.equipo.equipo1 = this.equipo.equipo1.replace(/\b\w/g, l => l.toUpperCase());
               this.equipoS.modificarEquipo(this.equipo).subscribe( resp => {
                 if (resp === true) {
                   Swal.fire({
@@ -648,6 +649,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             }
           }
           else if (this.id === 'Estado') {
+            this.estado.estado1 = this.estado.estado1.replace(/\b\w/g, l => l.toUpperCase());
             if (this.estado.idEstado) {
               this.estadoS.modificarEstado(this.estado).subscribe( resp => {
                 if (resp === true) {
@@ -726,6 +728,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             }
           }
           else if (this.id === 'Paquete') {
+            this.paquete.descripcion = this.paquete.descripcion.replace(/\b\w/g, l => l.toUpperCase());
+            this.paquete.nombre = this.paquete.nombre.replace(/\b\w/g, l => l.toUpperCase());
             if (this.paquete.idPaquete) {
               this.paqueteS.modificarPaquete(this.paquete).subscribe( resp => {
                 if (resp === true) {
@@ -828,6 +832,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             }
           }
           else if (this.id === 'Usuario') {
+            this.usuario.nombre = this.usuario.nombre.replace(/\b\w/g, l => l.toUpperCase());
+            this.usuario.apellido = this.usuario.apellido.replace(/\b\w/g, l => l.toUpperCase());
+            this.usuario.calle = this.usuario.calle.replace(/\b\w/g, l => l.toUpperCase());
             if (this.usuario.idUsuario) {
               this.usuarioS.modificarUsuario(this.usuario).subscribe( resp => {
                 if (resp === true) {
@@ -865,6 +872,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             }
           }
           else if (this.id === 'Soporte') {
+            this.soporte.problema = this.soporte.problema.replace(/\b\w/g, l => l.toUpperCase());
             if (this.soporte.idSoporte) {
               this.soporteS.modificarSoporte(this.soporte).subscribe( resp => {
                 if (resp) {
