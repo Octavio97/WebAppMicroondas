@@ -384,26 +384,58 @@
 
 <!-- Tecnico -->
 <div class="container animated fadeIn" *ngIf="this.session.Rol.rol1 === 'técnico'">
-    <div>
-        <h1 class="display-4">Reportes</h1>
+    <div *ngIf="!asignarRep">
+        <div>
+            <h1 class="display-4">Reportes</h1>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Problema</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of soporte">
+                    <td>{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
+                    <td>{{ item.problema }}</td>
+                    <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
+                        <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}</td>
+                    <td><button class="btn btn-light" (click)="verReporte(item.idSoporte)"><i class="fas fa-pen"></i> Asignar</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Cliente</th>
-                <th scope="col">Problema</th>
-                <th scope="col">Dirección</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of soporte">
-                <td>{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
-                <td>{{ item.problema }}</td>
-                <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
-                    <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}</td>
-                <td><button class="btn btn-danger" (click)="antenderReporte(item.Contrato.Usuario.nombre, item.Contrato.Usuario.apellido, item.idSoporte)"><i class="fas fa-exclamation"></i> Asignar</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <div *ngIf="asignarRep">
+        <button style="margin-top: 2%;" class="btn btn-danger" (click)="verReportes()"><i class="fas fa-long-arrow-alt-left"></i> Regresar</button>
+        <form #log="ngForm" (submit)="asignarReporte(log)">
+            <div class="form-group">
+                <h1 class="display-4">Asignación de reporte:</h1>
+                <h3>Cliente: </h3>
+                <h6>{{ this.reporte.Usuario.nombre }} {{ this.reporte.Usuario.apellido }}</h6>
+                <h3>Problema: </h3>
+                <h6>{{ this.reporte.problema }}</h6>
+                <h3>Técnicos:</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of usuario">
+                            <th><input type="radio"></th>
+                            <th>{{ item.nombre }}</th>
+                            <th>{{ item.apellido }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-success w-100" type="submit"><i class="fa fa-save"></i> Aceptar</button>
+            </div>
+        </form>
+    </div>
 </div>

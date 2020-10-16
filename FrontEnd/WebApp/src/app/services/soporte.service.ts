@@ -41,8 +41,8 @@ export class SoporteService {
     return this.http.post( this.url + 'agregarSoporteCli', soporte );
   }
 
-  consultaSopT(){
-    return this.http.get( this.url + 'consultaUnicaSopT' );
+  consultaSopT() {
+    return this.http.get( this.url + 'consultaSopT' );
   }
 
   atenderSoporte(id: Soporte) {

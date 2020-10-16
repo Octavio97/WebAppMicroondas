@@ -27,6 +27,7 @@ import { Propiedad } from '../../models/propiedad.model';
 import { Router } from '@angular/router';
 import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -34,6 +35,8 @@ import { Soporte } from 'src/app/models/soporte.model';
 })
 export class AdminComponent implements OnInit {
   session: Usuario;
+  reporte: Soporte;
+  asignarRep = false;
   seleccion = 'Seleccione tabla...';
   in = false; // mostrar registros eliminados
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte'];
@@ -76,12 +79,9 @@ export class AdminComponent implements OnInit {
     this.session = new Usuario();
     this.session = JSON.parse(localStorage.getItem('currentUser'));
     if (this.session.Rol.rol1 === 'técnico') {
+      this.reporte = new Soporte();
       this.soporte = new Array<Soporte>();
-      this.soporteS.consultaSopT().subscribe( (resp: Soporte[]) => {
-        if (resp) {
-          this.soporte = resp;
-        }
-      });
+      this.verReportes();
     }
     else if (this.session.Rol.rol1 === 'cliente') {
       this.router.navigate(['perfil']);
@@ -453,45 +453,89 @@ export class AdminComponent implements OnInit {
   });
   }
 
-  antenderReporte(x?, y?, z?){
-    Swal.fire({
-      title: 'Confirmación',
-      text: 'Deseas atender al cliente ' + x + ' ' + y,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText: 'No',
-      allowOutsideClick: false
-    }).then( (resp) => {
+  // antenderReporte(x?, y?, z?){
+  //   Swal.fire({
+  //     title: 'Confirmación',
+  //     text: 'Deseas atender al cliente ' + x + ' ' + y,
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Si',
+  //     cancelButtonText: 'No',
+  //     allowOutsideClick: false
+  //   }).then( (resp) => {
+  //     if (resp) {
+  //       this.soporteS.verSoporte(z).subscribe( (resp: Soporte) => {
+  //         if (resp) {
+  //           resp.idTecnico = this.session.idUsuario;
+  //           this.estatusS.consultaUnicaEstatus('en proceso').subscribe( (e: Estatus) => {
+  //             if (e) {
+  //               resp.idEstatus = e.idEstatus;
+  //               this.soporteS.atenderSoporte(resp).subscribe( resp => {
+  //                 if (resp) {
+  //                   Swal.fire({
+  //                     title: 'Éxito',
+  //                     text: 'Has aceptado al solicitud',
+  //                     icon: 'success'
+  //                   });
+  //                 }
+  //                 else {
+  //                   Swal.fire({
+  //                     title: 'Error',
+  //                     text: 'No disponible, recarga la página',
+  //                     icon: 'error'
+  //                   });
+  //                 }
+  //               });
+  //             }
+  //           });
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+
+  asignarReporte(data: NgForm) {
+    if (data.invalid) {
+      Swal.fire({
+        title: 'Parce que te falta algo 😢',
+        icon: 'error',
+        text: 'Verifique sus datos'
+      });
+    }
+    else {
+      this.soporteS.modificarSoporte(this.reporte).subscribe( resp => {
+        if (resp) {
+          Swal.fire({
+            title: 'Exito',
+            text: 'Se le ha asignado un técnico a este reporte',
+            icon: 'success'
+          });
+        }
+      });
+    }
+  }
+
+  verReporte(id){
+    this.asignarRep = true;
+    this.soporteS.verSoporte(id).subscribe( (resp: Soporte) => {
       if (resp) {
-        this.soporteS.verSoporte(z).subscribe( (resp: Soporte) => {
-          if (resp) {
-            resp.idTecnico = this.session.idUsuario;
-            this.estatusS.consultaUnicaEstatus('en proceso').subscribe( (e: Estatus) => {
-              if (e) {
-                resp.idEstatus = e.idEstatus;
-                this.soporteS.atenderSoporte(resp).subscribe( resp => {
-                  if (resp) {
-                    Swal.fire({
-                      title: 'Éxito',
-                      text: 'Has aceptado al solicitud',
-                      icon: 'success'
-                    });
-                  }
-                  else {
-                    Swal.fire({
-                      title: 'Error',
-                      text: 'No disponible, recarga la página',
-                      icon: 'error'
-                    });
-                  }
-                });
-              }
-            });
-          }
-        });
+        this.reporte = resp;
+      }
+    });
+    this.usuarioS.verTecnico().subscribe((resp: Usuario[]) => {
+      if (resp) {
+        this.usuario = resp;
+      }
+    });
+  }
+
+  verReportes(){
+    this.asignarRep = false;
+    this.soporteS.consultaSopT().subscribe( (resp: Soporte[]) => {
+      if (resp) {
+        this.soporte = resp;
       }
     });
   }
