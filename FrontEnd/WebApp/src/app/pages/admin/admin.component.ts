@@ -296,7 +296,6 @@ export class AdminComponent implements OnInit {
       cancelButtonText: 'No',
       allowOutsideClick: false
     }).then((result) => {
-      Swal.showLoading();
       if (result.value) {
         // mensaje para cargar informacion
       Swal.fire({
@@ -305,6 +304,7 @@ export class AdminComponent implements OnInit {
         icon: 'info',
         allowOutsideClick: false,
         });
+      Swal.showLoading();
       if (this.seleccion === 'Ciudad') {
         this.ciudadS.modificarCiudad(id, i).subscribe( resp => {
           if (resp) {
