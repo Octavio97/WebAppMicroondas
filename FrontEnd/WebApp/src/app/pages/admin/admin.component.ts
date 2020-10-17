@@ -36,7 +36,9 @@ import { NgForm } from '@angular/forms';
 export class AdminComponent implements OnInit {
   session: Usuario;
   reporte: Soporte;
-  asignarRep = false;
+  asignarRep = false; // variable para definir mostrar el reporte
+  cargando = false; // variable para mostrar card de carga
+  length = false; // dimension del arreglo
   seleccion = 'Seleccione tabla...';
   in = false; // mostrar registros eliminados
   tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte'];
@@ -91,9 +93,11 @@ export class AdminComponent implements OnInit {
   // Metodo para cargar las tablas a elegir
   change(i: string) {
     this.seleccion = i;
+    this.cargando = true;
     if (i === 'Rol') {
       this.rol = new Array<Rol>();
       this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -103,12 +107,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.rol = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Estado') {
       this.estado = new Array<Estado>();
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -118,12 +124,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.estado = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Ciudad') {
       this.ciudad = new Array<Ciudad>();
       this.ciudadS.consultaCiudad().subscribe( (resp: Ciudad[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -133,12 +141,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.ciudad = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Colonia') {
       this.colonia = new Array<Colonia>();
       this.coloniaS.consultaColonia().subscribe( (resp: Colonia[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -148,12 +158,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.colonia = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Código postal') {
       this.codigo = new Array<CodigoPostal>();
       this.codigoS.consultaCodigo().subscribe( (resp: CodigoPostal[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -163,12 +175,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.codigo = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Paquete') {
       this.paquete = new Array<Paquete>();
       this.paqueteS.consultaPaquete().subscribe( (resp: Paquete[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -178,12 +192,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.paquete = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Usuario') {
       this.usuario = new Array<Usuario>();
       this.usuarioS.consultaUsuario().subscribe( (resp: Usuario[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -193,12 +209,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.usuario = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Estatus') {
       this.estatus = new Array<Estatus>();
       this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -208,12 +226,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.estatus = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Contrato') {
       this.contrato = new Array<Contrato>();
       this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -223,12 +243,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.contrato = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Equipo') {
       this.equipo = new Array<Equipo>();
       this.equipoS.consultaEquipo().subscribe( (resp: Equipo[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -238,12 +260,14 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.equipo = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Propiedad') {
       this.propiedad = new Array<Propiedad>();
       this.propiedadS.consultaPropiedad().subscribe( (resp: Propiedad[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp === null) {
           Swal.fire({
             title: 'Error',
@@ -253,14 +277,24 @@ export class AdminComponent implements OnInit {
         }
         else {
           this.propiedad = resp;
+          this.cargando = false;
         }
       });
     }
     else if (i === 'Soporte') {
       this.soporte = new Array<Soporte>();
       this.soporteS.consultaSoporte().subscribe( (resp: Soporte[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
         if (resp) {
           this.soporte = resp;
+          this.cargando = false;
+        }
+        else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
         }
       });
     }
@@ -453,6 +487,162 @@ export class AdminComponent implements OnInit {
   });
   }
 
+  restoreRegistro(id, i?) {
+    Swal.fire({
+      title: 'Confirmación',
+      text: 'Esta seguro de restaurar el registro',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.value) {
+        // mensaje para cargar informacion
+      Swal.fire({
+        title: 'Espere',
+        text: 'Realizando proceso...',
+        icon: 'info',
+        allowOutsideClick: false,
+        });
+      Swal.showLoading();
+      if (this.seleccion === 'Ciudad') {
+        this.ciudadS.modificarCiudad(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'La ciudad fue restaurada con exito',
+            icon: 'success'
+            });
+            this.router.navigate(['/inicio']);
+          }
+        });
+      }
+      else if (this.seleccion === 'Código postal') {
+          this.codigoS.modificarCodigo(id, i).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El código postal fue restaurado con exito',
+              icon: 'success'
+              });
+            }
+          });
+          this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Colonia') {
+          this.coloniaS.modificarColonia(id, i).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'La colonia fue restaurado con exito',
+              icon: 'success'
+              });
+            }
+          });
+          this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Contrato') {
+          this.contratoS.modificarContrato(id, i).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El contrato fue restaurado con exito',
+              icon: 'success'
+              });
+            }
+          });
+          this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Equipo') {
+        this.equipoS.modificarEquipo(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El equipo fue restaurado con exito',
+              icon: 'success'
+              });
+            }
+          });
+        this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Estado') {
+          this.estadoS.modificarEstado(id, i).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+              title: 'Exito',
+              text: 'El estado fue restaurado con exito',
+              icon: 'success'
+              });
+            }
+          });
+          this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Estatus') {
+        this.estatusS.modificarEstatus(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El estatus fue restaurado con exito',
+            icon: 'success'
+            });
+          }
+        });
+        this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Paquete') {
+        this.paqueteS.modificarPaquete(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El paquete fue restaurado con exito',
+            icon: 'success'
+            });
+          }
+        });
+        this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Rol') {
+        this.rolS.modificarRol(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El rol fue restaurado con exito',
+            icon: 'success'
+            });
+          }
+        });
+        this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Usuario') {
+        this.usuarioS.modificarUsuario(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+            title: 'Exito',
+            text: 'El estado fue restaurado con exito',
+            icon: 'success'
+            });
+          }
+        });
+        this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Soporte') {
+        this.soporteS.modificarSoporte(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El reporte fue restaurado con exito',
+              icon: 'success'
+              });
+          }
+        });
+        this.router.navigate(['/inicio']);
+      }
+    }
+  });
+  }
   // antenderReporte(x?, y?, z?){
   //   Swal.fire({
   //     title: 'Confirmación',

@@ -42,7 +42,7 @@
     </div>
 
     <!-- Tabla Usuarios -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Usuario'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Usuario' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -73,12 +73,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idUsuario]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo===true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idUsuario]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo===true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Rol -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Rol'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Rol' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -97,12 +99,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idRol]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idRol]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Estatus -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Estatus'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Estatus' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -121,12 +125,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstatus]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" class="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstatus]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" class="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Estado -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Estado'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Estado' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -145,12 +151,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstado]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEstado]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Ciudad -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Ciudad'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Ciudad' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -171,12 +179,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCiudad]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCiudad]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Codigo Postal -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Código postal'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Código postal' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -199,12 +209,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCP]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idCP]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Paquete -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Paquete'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Paquete' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -227,12 +239,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPaquete]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idPaquete]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Equipo -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Equipo'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Equipo' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -251,14 +265,16 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEquipo]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" class="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idEquipo]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" class="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla PaqueteEquipo -->
     <table class="table animated fadeIn" *ngIf="seleccion === 'PaqueteEquipo'"></table>
     <!-- Tabla Colonia -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Colonia'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Colonia' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -283,12 +299,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idColonia]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idColonia]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Propiedad -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Propiedad'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Propiedad' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -309,7 +327,7 @@
         </tbody>
     </table>
     <!-- Tabla Contrato -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Contrato'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Contrato' && !cargando && !length">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -334,12 +352,14 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idContrato]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idContrato]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <!-- Tabla Soporte -->
-    <table class="table animated fadeIn" *ngIf="seleccion === 'Soporte'">
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Soporte' && !cargando && !length">
         <thead class="thead-dark">
             <th scope="col">#</th>
             <th scope="col">Id Soporte</th>
@@ -370,15 +390,34 @@
                     <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
                     <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
                 </div>
-                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idSoporte]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button><button *ngIf="item.activo === false" class="btn btn-success"><i class="fas fa-trash-restore"></i></button></td>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idSoporte]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
     <br><br>
-    <!-- Banner de carga -->
+    <!-- Banner de selección -->
     <div *ngIf="seleccion === 'Seleccione tabla...'" class="alert alert-warning text-center mt-3 animated fadeIn faster container">
         <h4 class="alert-heading">No hay selección</h4>
         <p><i class="fa fa-exclamation fa-2x"></i></p>
+    </div>
+    <!-- Banner de carga -->
+    <div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster container">
+        <h4 class="alert-heading">Cargando</h4>
+        <p>
+            <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+        </p>
+        <p class="mb-0">
+            Espere por favor
+        </p>
+    </div>
+    <!-- Banner de sin registros -->
+    <div *ngIf="!cargando && length" class="alert alert-danger text-center mt-3 animated fadeIn faster container">
+        <h4 class="alert-heading">No hay registros</h4>
+        <p>
+            <i class="fa fa-times-circle fa-3x"></i>
+        </p>
     </div>
 </div>
 
