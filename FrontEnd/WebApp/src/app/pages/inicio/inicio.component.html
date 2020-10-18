@@ -170,7 +170,7 @@
                     </div>
                     <div class="form-group">
                         <label for="colonia">Colonia: &nbsp;</label>
-                        <select class="form-control" name="colonia" id="colonia" [(ngModel)]="this.co.colonia1" (ngModelChange)="getZone($event)">
+                        <select class="form-control" name="colonia" id="colonia" [(ngModel)]="this.co.colonia1">
                             <option [ngValue]="item.idColonia" *ngFor="let item of colonia">{{ item.colonia1 }}</option>
                         </select>
                     </div>

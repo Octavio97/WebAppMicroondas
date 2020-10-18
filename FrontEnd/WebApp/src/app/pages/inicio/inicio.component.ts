@@ -12,6 +12,7 @@ import { ColoniaService } from '../../services/colonia.service';
 import { Colonia } from 'src/app/models/colonia.model';
 import { BC } from '../../coordenadas/Municipios/02_BajaCalifornia';
 import { CoordenadasE } from '../../coordenadas/Estados/mexicoHigh';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-inicio',
@@ -20,7 +21,6 @@ import { CoordenadasE } from '../../coordenadas/Estados/mexicoHigh';
 export class InicioComponent implements OnInit {
 private mymap: L.Maps;
 point = new CoordenadasE();
-point2 = new BC();
 usuario: Usuario;
 e = new Estado();
 c = new Ciudad();
@@ -59,26 +59,10 @@ i = 'Login';
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
 
-    L.geoJson(this.point.estados).addTo(this.mymap);
-
-    // Swal.fire({
-    //   html:
-    //   '<img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="logoxd" style="width:100px; heigth:100px;">' +
-    //   '<h2>Bienvenido</h2>' +
-    //   '<h4>Ingrese su ciudad en donde desea contratar:</h4>' +
-    //   '<div class="dropdown">' +
-    //       '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-    //         'Seleccione uno...' +
-    //       '</button>' +
-    //       '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">' +
-    //         '<a class="dropdown-item" href="#">Action</a>' +
-    //         '<a class="dropdown-item" href="#">Another action</a>' +
-    //         '<a class="dropdown-item" href="#">Something else here</a>' +
-    //       '</div>' +
-    //     '</div>',
-    //     allowOutsideClick: false,
-    //     showConfirmButton: false
-    // });
+    L.geoJson(this.point.estados, {
+      style: this.style,
+      onEachFeature: this.onEachFeature
+    }).addTo(this.mymap);
   }
 
   getCity(id) {
@@ -108,7 +92,24 @@ i = 'Login';
     });
   }
 
-  getZone(id) {
-    
+  // METODOS PARA EL MAPA
+  onEachFeature(feature, layer) {
+    layer.on('click', (e) => {
+      this.mymap.fitBounds(e.target.getBounds());
+    });
+  }
+
+  style(feature) {
+    return {
+        fillColor: '#209DFF',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+  }
+
+  funcionPrueba() {
   }
 }

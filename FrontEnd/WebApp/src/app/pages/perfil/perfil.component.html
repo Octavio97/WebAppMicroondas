@@ -134,7 +134,7 @@
 <!-- tabla de historial de reportes -->
 <div *ngIf="this.usuario.Rol.rol1 === 'cliente'" class="container animated fadeIn">
     <h1 class="display-4">Historial de reportes</h1>
-    <table class="table">
+    <table class="table" *ngIf="!this.length">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -161,7 +161,7 @@
 <!-- Tabla reportes de tecnico activos -->
 <div *ngIf="this.usuario.Rol.rol1 === 'técnico'" class="container animated fadeIn">
     <h1 class="display-4">Reportes activos</h1>
-    <table class="table">
+    <table class="table" *ngIf="!this.length">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -182,4 +182,11 @@
             </tr>
         </tbody>
     </table>
+</div>
+<!-- Banner de sin registros -->
+<div *ngIf="length" class="alert alert-danger text-center mt-3 animated fadeIn faster container">
+    <h4 class="alert-heading">No hay registros</h4>
+    <p>
+        <i class="fa fa-times-circle fa-3x"></i>
+    </p>
 </div>

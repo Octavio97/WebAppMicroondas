@@ -27,6 +27,7 @@ import { EstatusService } from '../../services/estatus.service';
   templateUrl: './perfil.component.html'
 })
 export class PerfilComponent implements OnInit {
+  length = false;
   usuario = new Usuario();
   e: Estado[];
   c: Ciudad[];
@@ -101,6 +102,7 @@ export class PerfilComponent implements OnInit {
         this.contrato = new Contrato();
         this.contrato = resp;
         this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
           if (resp) {
             this.s = new Array<Soporte>();
             this.s = resp;
@@ -112,6 +114,7 @@ export class PerfilComponent implements OnInit {
     else if (this.usuario.Rol.rol1 === 'técnico') {
       this.soporteS.consultaUnicaSoporteT(this.usuario.idUsuario).subscribe( (resp: Soporte[]) => {
         if (resp) {
+          resp.length === 0 ? this.length = true : this.length = false;
           this.s = new Array<Soporte>();
           this.s = resp;
         }
