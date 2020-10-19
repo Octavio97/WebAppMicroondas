@@ -13,7 +13,7 @@ export class Soporte {
     activo: boolean;
 
     Contrato: Contrato;
-    Usuario: Usuario;
+    Tecnico: Usuario;
     Estatus: Estatus;
 
     constructor(){
@@ -26,7 +26,7 @@ export class Soporte {
         this.idEstatus = null;
         this.activo = null;
         this.Contrato = new Contrato();
-        this.Usuario = new Usuario();
+        this.Tecnico = new Usuario();
         this.Estatus = new Estatus();
     }
 }

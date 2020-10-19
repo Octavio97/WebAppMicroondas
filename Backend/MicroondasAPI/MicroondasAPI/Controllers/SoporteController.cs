@@ -160,7 +160,7 @@ namespace MicroondasAPI.Controllers
                             }
                         }
                     },
-                    Usuario = new
+                    Tecnico = new
                     {
                         idUsuario = s.Usuario.idUsuario,
                         nombre = s.Usuario.nombre,
@@ -338,7 +338,7 @@ namespace MicroondasAPI.Controllers
                             }
                         }
                     },
-                    Usuario = new
+                    Tecnico = new
                     {
                         idUsuario = s.Usuario.idUsuario,
                         nombre = s.Usuario.nombre,
@@ -396,7 +396,7 @@ namespace MicroondasAPI.Controllers
         {
             try
             {
-                var accion = SessionController.getInstance().Soporte.Where(w => w.Estatus.estatus1 == "problema").ToList();
+                var accion = SessionController.getInstance().Soporte.Where(w => w.Estatus.estatus1 == "problema" && w.Usuario.idUsuario == new Guid("00000000-0000-0000-0000-000000000000")).ToList();
 
                 if (accion == null)
                 {
@@ -480,7 +480,7 @@ namespace MicroondasAPI.Controllers
                             }
                         }
                     },
-                    Usuario = new
+                    Tecnico = new
                     {
                         idUsuario = s.Usuario.idUsuario,
                         nombre = s.Usuario.nombre,
@@ -665,7 +665,7 @@ namespace MicroondasAPI.Controllers
                             }
                         }
                     },
-                    Usuario = new
+                    Tecnico = new
                     {
                         idUsuario = accion.Usuario.idUsuario,
                         nombre = accion.Usuario.nombre,

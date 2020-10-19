@@ -54,7 +54,7 @@ i = 'Login';
       this.usuario = JSON.parse(localStorage.getItem('currentUser'));
       this.i = this.usuario.nombre;
     }
-    this.mymap = L.map('mapid', { minZoom: 5}).setView([22.021667, -102.356389], 5);
+    this.mymap = L.map('mapid', { minZoom: 5, maxZoom: 5}).setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);

@@ -149,10 +149,10 @@
             <tr *ngFor="let item of s; let i = index">
                 <td scope="row">{{ i + 1 }}</td>
                 <td>{{ item.problema }}</td>
-                <td>{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
+                <td>{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</td>
                 <td>{{ item.fechaInicio }}</td>
                 <td>{{ item.Estatus.estatus1 }}</td>
-                <td><button><i class="fa fa-ban"></i> Cancelar</button></td>
+                <td *ngIf="item.Estatus.estatus1 !== 'resuelto'"><button class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button></td>
             </tr>
         </tbody>
     </table>

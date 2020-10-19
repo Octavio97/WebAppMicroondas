@@ -377,7 +377,7 @@
                 <td *ngIf="item.activo || this.in">{{ i + 1 }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.idSoporte }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.problema }}</td>
-                <td *ngIf="item.activo || this.in">{{ item.Usuario.nombre }} {{ item.Usuario.apellido }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</td>
                 <td *ngIf="item.activo || this.in">{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
                 <div *ngIf="item.activo || this.in">
                     <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
@@ -423,6 +423,7 @@
 
 <!-- Tecnico -->
 <div class="container animated fadeIn" *ngIf="this.session.Rol.rol1 === 'técnico'">
+    <!-- Tabla de reportes sin asignar -->
     <div *ngIf="!asignarRep">
         <div>
             <h1 class="display-4">Reportes</h1>
@@ -447,13 +448,14 @@
             </tbody>
         </table>
     </div>
+    <!-- Formulario para asignar reporte a un tecnico -->
     <div *ngIf="asignarRep">
         <button style="margin-top: 2%;" class="btn btn-danger" (click)="verReportes()"><i class="fas fa-long-arrow-alt-left"></i> Regresar</button>
         <form #log="ngForm" (submit)="asignarReporte(log)">
             <div class="form-group">
                 <h1 class="display-4">Asignación de reporte:</h1>
                 <h3>Cliente: </h3>
-                <h6>{{ this.reporte.Usuario.nombre }} {{ this.reporte.Usuario.apellido }}</h6>
+                <h6>{{ this.reporte.Contrato.Usuario.nombre }} {{ this.reporte.Contrato.Usuario.apellido }}</h6>
                 <h3>Problema: </h3>
                 <h6>{{ this.reporte.problema }}</h6>
                 <h3>Técnicos:</h3>
