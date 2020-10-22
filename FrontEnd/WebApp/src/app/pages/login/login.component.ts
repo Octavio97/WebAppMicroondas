@@ -47,7 +47,9 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             title: 'Bienvenido',
             text: 'Bienvenido al sistema ' + this.usuario.nombre + ' ' + this.usuario.apellido,
-            icon: 'success'
+            icon: 'success',
+            timer: 2500,
+            showConfirmButton: false
           });
           const element = document.getElementById('check') as HTMLInputElement;
           if (!element.checked) {

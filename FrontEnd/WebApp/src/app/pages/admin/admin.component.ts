@@ -695,12 +695,34 @@ export class AdminComponent implements OnInit {
       });
     }
     else {
-      this.soporteS.modificarSoporte(this.reporte).subscribe( resp => {
+      Swal.fire({
+        title: 'Confirmación',
+        text: 'Esta seguro de eliminar el registro',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+        allowOutsideClick: false
+      }).then((resp) => {
         if (resp) {
           Swal.fire({
-            title: 'Exito',
-            text: 'Se le ha asignado un técnico a este reporte',
-            icon: 'success'
+            title: 'Espere',
+            text: 'Realizando proceso...',
+            icon: 'info',
+            allowOutsideClick: false,
+            });
+          Swal.showLoading();
+          this.soporteS.modificarSoporte(this.reporte).subscribe( resp => {
+            if (resp) {
+              Swal.fire({
+                title: 'Exito',
+                text: 'Se le ha asignado un técnico a este reporte',
+                icon: 'success'
+              });
+              this.asignarRep = false;
+            }
           });
         }
       });

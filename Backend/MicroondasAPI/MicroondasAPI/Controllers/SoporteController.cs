@@ -892,5 +892,32 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpDelete]
+        [Route("api/MicroondasAPI/cancelarSoporte")]
+        public IHttpActionResult cancelarSoporte(string id)
+        {
+            try
+            {
+                Guid i = Guid.Parse(id.ToString());
+
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idSoporte == i).FirstOrDefault();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Soporte.Remove(accion);
+
+                SessionController.getInstance().SaveChanges();
+
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

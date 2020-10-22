@@ -149,10 +149,13 @@
             <tr *ngFor="let item of s; let i = index">
                 <td scope="row">{{ i + 1 }}</td>
                 <td>{{ item.problema }}</td>
-                <td>{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</td>
+                <td *ngIf="item.Tecnico.nombre !== 'prueba'">{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</td>
+                <td *ngIf="item.Tecnico.nombre === 'prueba'">N/A</td>
                 <td>{{ item.fechaInicio }}</td>
-                <td>{{ item.Estatus.estatus1 }}</td>
-                <td *ngIf="item.Estatus.estatus1 !== 'resuelto'"><button class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button></td>
+                <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
+                <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en proceso'">{{ item.Estatus.estatus1 }}</td>
+                <td class="text-success" *ngIf="item.Estatus.estatus1 === 'resuelto'">{{ item.Estatus.estatus1 }}</td>
+                <td *ngIf="item.Estatus.estatus1 !== 'resuelto'"><button class="btn btn-danger" (click)="cancelarReporte(item.idSoporte)"><i class="fa fa-ban"></i> Cancelar</button></td>
             </tr>
         </tbody>
     </table>

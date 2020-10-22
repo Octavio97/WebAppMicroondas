@@ -52,4 +52,8 @@ export class SoporteService {
   consultaUnicaSoporteT(id: string){
     return this.http.get( this.url + 'consultaUnicaSoporteT', { params: { id } } );
   }
+
+  cancelarSoporte(id: string) {
+    return this.http.delete( this.url + 'cancelarSoporte', { params: { id } } );
+  }
 }

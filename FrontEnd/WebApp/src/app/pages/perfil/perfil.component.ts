@@ -248,7 +248,7 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  cancelarReporte(id: Soporte){
+  cancelarReporte(id: string){
     Swal.fire({
       title: 'Confirmación',
       text: '¿Esta seguro de cancelar el reporte?',
@@ -270,18 +270,20 @@ export class PerfilComponent implements OnInit {
           });
         Swal.showLoading();
 
-        this.estatusS.consultaUnicaEstatus('problema').subscribe( (resp: Estatus) => {
+        this.soporteS.cancelarSoporte(id).subscribe( resp => {
           if (resp) {
-            id.idEstatus = resp.idEstatus;
-            id.idTecnico = '00000000-0000-0000-0000-000000000000';
-            this.soporteS.modificarSoporte(id).subscribe( resp => {
-              if (resp) {
-                Swal.fire({
-                  title: 'Éxito',
-                  text: 'Se ha cancelado el reporte',
-                  icon: 'success'
-                });
-              }
+            Swal.fire({
+              title: 'Exito',
+              text: 'El reporte fue eliminado con exito',
+              icon: 'success'
+            });
+            this.router.navigate(['/perfil']);
+          }
+          else {
+            Swal.fire({
+              title: 'Error',
+              text: 'No se pudo eliminar el reporte',
+              icon: 'error'
             });
           }
         });
