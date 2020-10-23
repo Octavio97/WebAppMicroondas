@@ -20,6 +20,8 @@ import { style } from '@angular/animations';
 })
 export class InicioComponent implements OnInit {
 private mymap: L.Maps;
+private geoJson;
+private info = L.control();
 point = new CoordenadasE();
 usuario: Usuario;
 e = new Estado();
@@ -54,15 +56,23 @@ i = 'Login';
       this.usuario = JSON.parse(localStorage.getItem('currentUser'));
       this.i = this.usuario.nombre;
     }
-    this.mymap = L.map('mapid', { minZoom: 5, maxZoom: 5}).setView([22.021667, -102.356389], 5);
+    this.mymap = L.map('mapid', { zoomControl: false }).setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
 
-    L.geoJson(this.point.estados, {
+    this.geoJson = L.geoJson(this.point.estados, {
       style: this.style,
       onEachFeature: this.onEachFeature
     }).addTo(this.mymap);
+
+    // PRUEBA
+
+    // method that we will use to update the control based on feature properties passed
+    this.info.update = (props) => {
+      console.log(props.name);
+      console.log(this.point.estados.features[0].properties.name);
+    };
   }
 
   getCity(id) {
@@ -93,13 +103,38 @@ i = 'Login';
   }
 
   // METODOS PARA EL MAPA
-  onEachFeature(feature, layer) {
-    layer.on('click', (e) => {
-      this.mymap.fitBounds(e.target.getBounds());
-    });
+  onEachFeature = (feature, layer) => {
+    layer.on('click', this.zoomToFeature);
+    layer.on('mouseover', this.highlightFeature);
+    layer.on('mouseout', this.resetHighlight);
   }
 
-  style(feature) {
+  highlightFeature = (e) => {
+    const layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+  }
+
+  resetHighlight = (e) => {
+    this.geoJson.resetStyle(e.target);
+  }
+
+  zoomToFeature = (e) => {
+    const layer = e.target;
+    this.mymap.fitBounds(e.target.getBounds());
+    this.info.update(layer.feature.properties);
+  }
+
+  style = (feature) => {
     return {
         fillColor: '#209DFF',
         weight: 2,
@@ -110,6 +145,7 @@ i = 'Login';
     };
   }
 
-  funcionPrueba() {
+  verConsola(e) {
+    // console.log(e);
   }
 }
