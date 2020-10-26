@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 import * as L from 'leaflet';
 import { Usuario } from '../../models/usuario.model';
 import { EstadoService } from '../../services/estado.service';
@@ -10,19 +9,21 @@ import { CodigopostalService } from '../../services/codigopostal.service';
 import { CodigoPostal } from 'src/app/models/codigopostal.model';
 import { ColoniaService } from '../../services/colonia.service';
 import { Colonia } from 'src/app/models/colonia.model';
-import { BC } from '../../coordenadas/Municipios/02_BajaCalifornia';
-import { CoordenadasE } from '../../coordenadas/Estados/mexicoHigh';
-import { style } from '@angular/animations';
+import estados from '../../../assets/coordenadas/estados/mexicoHigh.json';
+import municipios from '../../../assets/coordenadas/municipios/MunicipiosMexico.json'
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html'
 })
 export class InicioComponent implements OnInit {
-private mymap: L.Maps;
-private geoJson;
-private info = L.control();
-point = new CoordenadasE();
+private mymap: L.Maps; // variable para el mapa
+private geoJson; // variable para mapeo de regiones
+private arrayRegion =  {
+  type: 'FeatureCollection',
+  features: []
+}; // arreglo para guardar las regiones activas(estados, ciudades o cp)
+private info = L.control(); // variable para modificar valores de region
 usuario: Usuario;
 e = new Estado();
 c = new Ciudad();
@@ -45,6 +46,20 @@ i = 'Login';
       this.estado = [];
       if  (resp){
         this.estado = resp;
+        // agregar estados disponibles a nuestro arreglo virtual
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < estados.features.length; i++) {
+          // tslint:disable-next-line: prefer-for-of
+          for (let y = 0; y < this.estado.length; y++) {
+            if (estados.features[i].properties.name === this.estado[y].estado1){
+            this.arrayRegion.features.push(estados.features[i]);
+            }
+          }
+        }
+        this.geoJson = L.geoJson(this.arrayRegion, {
+          style: this.style,
+          onEachFeature: this.onEachFeature
+        }).addTo(this.mymap);
       }
     });
     // si no esta el token de guardar sesion
@@ -56,36 +71,66 @@ i = 'Login';
       this.usuario = JSON.parse(localStorage.getItem('currentUser'));
       this.i = this.usuario.nombre;
     }
-    this.mymap = L.map('mapid', { zoomControl: false }).setView([22.021667, -102.356389], 5);
+
+    // asignamos caracteristicas que va a tener nuestro mapa
+    this.mymap = L.map('mapid', { zoomControl: false, scrollWheelZoom: false }).setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
-
-    this.geoJson = L.geoJson(this.point.estados, {
-      style: this.style,
-      onEachFeature: this.onEachFeature
-    }).addTo(this.mymap);
+    this.mymap.dragging.disable(); // deshabilatar mover mapa con el cursor
 
     // PRUEBA
-
     // method that we will use to update the control based on feature properties passed
     this.info.update = (props) => {
-      console.log(props.name);
-      console.log(this.point.estados.features[0].properties.name);
+      this.mymap.removeLayer(this.geoJson);
+      // cambiar arreglo para ciudades
+      if (props.TYPE === 'State'){
+        // tslint:disable-next-line: prefer-for-of
+        for (let index = 0; index < this.estado.length; index++) {
+          if (this.estado[index].estado1 === props.name) {
+            this.getCity(this.estado[index]);
+          }
+        }
+      }
+      // cambiar arreglo para CP
+      else if (props.NAME_2) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let index = 0; index < this.codigo.length; index++) {
+        }
+      }
+      else if (props.name) {
+
+      }
     };
   }
 
-  getCity(id) {
-    this.ciudadS.consultaCinicio(id).subscribe( (resp: Ciudad[]) => {
+  getCity(id: Estado) {
+    this.ciudadS.consultaCinicio(id.idEstado).subscribe( (resp: Ciudad[]) => {
       this.ciudad = [];
       if (resp) {
         this.ciudad = resp;
+        this.arrayRegion.features = [];
+
+        // FUNCION PARA EL MAPA
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < municipios.features.length; i++) {
+          // tslint:disable-next-line: prefer-for-of
+          for (let y = 0; y < this.ciudad.length; y++) {
+            if (municipios.features[i].properties.NAME_2 === this.ciudad[y].ciudad1) {
+              this.arrayRegion.features.push(municipios.features[i]);
+            }
+          }
+        }
+        this.geoJson = L.geoJson(this.arrayRegion, {
+          style: this.style,
+          onEachFeature: this.onEachFeature
+        }).addTo(this.mymap);
       }
     });
   }
 
-  getCP(id) {
-    this.codigoS.consultaCPinicio(id).subscribe( (resp: CodigoPostal[]) => {
+  getCP(id: Ciudad) {
+    this.codigoS.consultaCPinicio(id.idCiudad).subscribe( (resp: CodigoPostal[]) => {
       this.codigo = [];
       if (resp) {
         this.codigo = resp;
@@ -143,9 +188,5 @@ i = 'Login';
         dashArray: '3',
         fillOpacity: 0.7
     };
-  }
-
-  verConsola(e) {
-    // console.log(e);
   }
 }
