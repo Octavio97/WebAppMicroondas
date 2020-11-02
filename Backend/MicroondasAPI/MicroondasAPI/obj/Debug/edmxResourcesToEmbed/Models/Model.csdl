@@ -80,6 +80,17 @@
     <Property Name="activo" Type="Boolean" />
     <NavigationProperty Name="Soporte" Relationship="Self.FK__Soporte__idEstat__5CD6CB2B" FromRole="Estatus" ToRole="Soporte" />
   </EntityType>
+  <EntityType Name="Informes">
+    <Key>
+      <PropertyRef Name="idInformes" />
+    </Key>
+    <Property Name="idInformes" Type="Guid" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cp" Type="Int32" />
+    <Property Name="telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="visto" Type="Boolean" />
+    <Property Name="activo" Type="Boolean" />
+  </EntityType>
   <EntityType Name="Paquete">
     <Key>
       <PropertyRef Name="idPaquete" />
@@ -91,6 +102,7 @@
     <Property Name="activo" Type="Boolean" />
     <NavigationProperty Name="Contrato" Relationship="Self.FK__Contrato__idPaqu__5812160E" FromRole="Paquete" ToRole="Contrato" />
     <NavigationProperty Name="PaqueteEquipo" Relationship="Self.FK__PaqueteEq__idPaq__45F365D3" FromRole="Paquete" ToRole="PaqueteEquipo" />
+    <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="PaqueteEquipo">
     <Key>
@@ -377,6 +389,7 @@
     <EntitySet Name="Equipo" EntityType="Self.Equipo" />
     <EntitySet Name="Estado" EntityType="Self.Estado" />
     <EntitySet Name="Estatus" EntityType="Self.Estatus" />
+    <EntitySet Name="Informes" EntityType="Self.Informes" />
     <EntitySet Name="Paquete" EntityType="Self.Paquete" />
     <EntitySet Name="PaqueteEquipo" EntityType="Self.PaqueteEquipo" />
     <EntitySet Name="Propiedad" EntityType="Self.Propiedad" />
@@ -451,5 +464,15 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
+    <EntitySet Name="SlideImg" EntityType="MicroondasModel.SlideImg" />
   </EntityContainer>
+  <EntityType Name="SlideImg">
+    <Key>
+      <PropertyRef Name="idSlide" />
+    </Key>
+    <Property Name="idSlide" Type="Guid" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

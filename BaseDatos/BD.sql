@@ -39,6 +39,7 @@ CREATE TABLE Paquete (
     nombre VARCHAR(30),
     precio MONEY,
     descripcion VARCHAR(max),
+    imagen IMAGE,
     activo BIT
 );
 
@@ -105,4 +106,20 @@ CREATE TABLE Soporte (
     fechaInicio DATE,
     fechaFinal DATE,
     activo bit
+);
+
+CREATE TABLE Informes(
+    idInformes UNIQUEIDENTIFIER PRIMARY KEY,
+    nombre VARCHAR(50),
+    cp int,
+    telefono VARCHAR(30),
+    visto BIT,
+    activo BIT
+);
+
+CREATE TABLE SlideImg (
+    idSlide UNIQUEIDENTIFIER PRIMARY KEY,
+    nombre VARCHAR(30),
+    imagen IMAGE,
+    descripcion VARCHAR(MAX)
 );

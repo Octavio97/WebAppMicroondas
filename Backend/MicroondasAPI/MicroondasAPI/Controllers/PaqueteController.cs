@@ -32,7 +32,8 @@ namespace MicroondasAPI.Controllers
                         nombre = paquete.nombre,
                         precio = paquete.precio,
                         activo = paquete.activo,
-                        descripcion = paquete.descripcion
+                        descripcion = paquete.descripcion,
+                        imagen = paquete.imagen
                     };
 
                     // guardamos los datos
@@ -102,7 +103,8 @@ namespace MicroondasAPI.Controllers
                     nombre = s.nombre,
                     precio = s.precio,
                     activo = s.activo,
-                    descripcion = s.descripcion
+                    descripcion = s.descripcion,
+                    imagen = s.imagen
                 });
 
                 // Devolvemos los datos
@@ -134,6 +136,7 @@ namespace MicroondasAPI.Controllers
                     accion.precio = paquete.precio;
                     accion.activo = paquete.activo;
                     accion.descripcion = paquete.descripcion;
+                    accion.imagen = paquete.imagen;
 
                     // ejecutamos la accion
                     SessionController.getInstance().SaveChanges();
@@ -202,7 +205,7 @@ namespace MicroondasAPI.Controllers
                     precio = consulta.precio,
                     activo = consulta.activo,
                     descripcion = consulta.descripcion,
-                    // Contrato = consulta.Contrato,
+                    imagen = consulta.imagen
                 };
 
                 return Ok(resultado);

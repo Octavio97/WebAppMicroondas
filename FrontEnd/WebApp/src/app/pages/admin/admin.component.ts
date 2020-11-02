@@ -28,6 +28,10 @@ import { Router } from '@angular/router';
 import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
 import { NgForm } from '@angular/forms';
+import { Informes } from 'src/app/models/informes.model';
+import { InformesService } from '../../services/informes.service';
+import { SlideImgService } from '../../services/slide-img.service';
+import { SlideImg } from 'src/app/models/slideImg.model';
 
 @Component({
   selector: 'app-admin',
@@ -41,8 +45,9 @@ export class AdminComponent implements OnInit {
   length = false; // dimension del arreglo
   seleccion = 'Seleccione tabla...';
   in = false; // mostrar registros eliminados
-  tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte'];
+  tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte', 'Informes', 'Imágenes promocionales'];
   rol: Rol[];
+  slides: SlideImg[];
   estado: Estado[];
   estatus: Estatus[];
   usuario: Usuario[];
@@ -55,6 +60,7 @@ export class AdminComponent implements OnInit {
   paquete: Paquete[];
   paqueteEquipo: PaqueteEquipo[];
   propiedad: Propiedad[];
+  informes: Informes[];
 
   constructor(
     private rolS: RolService,
@@ -70,6 +76,8 @@ export class AdminComponent implements OnInit {
     private paqueteEquipoS: PaqueteequipoService,
     private propiedadS: PropiedadService,
     private soporteS: SoporteService,
+    private informesS: InformesService,
+    private slideImgService: SlideImgService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -298,6 +306,40 @@ export class AdminComponent implements OnInit {
         }
       });
     }
+    else if (i === 'Informes') {
+      this.informes = new Array<Informes>();
+      this.informesS.consultaInformes().subscribe( (resp: Informes[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
+        if (resp) {
+          this.informes = resp;
+          this.cargando = false;
+        }
+        else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+      });
+    }
+    else if (i === 'Imágenes promocionales') {
+      this.slides = new Array<SlideImg>();
+      this.slideImgService.consultaSlideImg().subscribe( (resp: SlideImg[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
+        if (resp) {
+          this.slides = resp;
+          this.cargando = false;
+        }
+        else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+      });
+    }
   }
 
   logout() {
@@ -483,6 +525,28 @@ export class AdminComponent implements OnInit {
         });
         this.router.navigate(['/inicio']);
       }
+      else if (this.seleccion === 'Informes') {
+        this.soporteS.modificarSoporte(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El informe fue eliminado con exito',
+              icon: 'success'
+              });
+          }
+        });
+      }
+      else if (this.seleccion === 'Imágenes promocionales') {
+        this.slideImgService.bajaSlideImg(id.idSlide).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El slide fue eliminado con exito',
+              icon: 'success'
+              });
+          }
+        });
+      }
     }
   });
   }
@@ -639,6 +703,17 @@ export class AdminComponent implements OnInit {
           }
         });
         this.router.navigate(['/inicio']);
+      }
+      else if (this.seleccion === 'Informes') {
+        this.informesS.modificarInformes(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El informe fue restaurado con exito',
+              icon: 'success'
+            });
+          }
+        });
       }
     }
   });

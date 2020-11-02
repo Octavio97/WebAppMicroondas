@@ -72,9 +72,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Informes">
+      <EntityTypeMapping TypeName="MicroondasModel.Informes">
+        <MappingFragment StoreEntitySet="Informes">
+          <ScalarProperty Name="idInformes" ColumnName="idInformes" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="cp" ColumnName="cp" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="visto" ColumnName="visto" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Paquete">
       <EntityTypeMapping TypeName="MicroondasModel.Paquete">
         <MappingFragment StoreEntitySet="Paquete">
+          <ScalarProperty Name="imagen" ColumnName="imagen" />
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="precio" ColumnName="precio" />
@@ -142,6 +155,16 @@
           <ScalarProperty Name="idCP" ColumnName="idCP" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SlideImg">
+      <EntityTypeMapping TypeName="MicroondasModel.SlideImg">
+        <MappingFragment StoreEntitySet="SlideImg">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="imagen" ColumnName="imagen" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idSlide" ColumnName="idSlide" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

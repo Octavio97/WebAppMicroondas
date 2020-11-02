@@ -106,6 +106,7 @@
     </div>
     <!-- Rol -->
     <div *ngIf="this.id === 'Rol'">
+        <small *ngIf="this.rol.rol1 === 'administrador' || this.rol.rol1 === 'técnico' || this.rol.rol1 === 'cliente'" class="text-danger">Este registro es importante para el funcionamiento de sistema</small>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol1">Rol: </label>
@@ -233,7 +234,7 @@
             </div>
             <div class="form-group">
                 <label for="precio">Precio: </label>
-                <input [ngClass]="{ 'is-invalid' : precio.invalid && (precio.dirty || precio.touched) }" class="form-control" type="number" name="precio" id="precio" [(ngModel)]="this.paquete.precio" #precio="ngModel" placeholder="Ingrese precio" require>
+                <input [ngClass]="{ 'is-invalid' : precio.invalid && (precio.dirty || precio.touched) }" class="form-control" type="number" name="precio" id="precio" [(ngModel)]="this.paquete.precio" #precio="ngModel" placeholder="Ingrese precio" required>
                 <div *ngIf="precio.errors?.required" class="invalid-feedback">Ingrese precio</div>
                 <div *ngIf="precio.errors?.pattern" class="invalid-feedback">Ingrese solo numeros</div>
             </div>
@@ -242,6 +243,13 @@
                 <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="descripcion" name="descripcion" [(ngModel)]="this.paquete.descripcion" #descripcion="ngModel"
                     placeholder="Ingresar descripción" required maxlength="50"></textarea>
                 <div *ngIf="descripcion.errors?.required" class="invalid-feedback">Ingrese descripción</div>
+            </div>
+            <div class="form-group">
+                <label for="">Imagen para página web:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png" (change)="verArchivo($event)" required>
+                    <label class="custom-file-label" for="imagen">{{ imagenL }}</label>
+                </div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch7" name="activo" [(ngModel)]="this.paquete.activo">
@@ -495,6 +503,67 @@
                 <label class="custom-control-label" for="customSwitch13">Activo</label>
             </div>
             <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Informes -->
+    <div *ngIf="this.id === 'Informes'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="nombre">Nombre: &nbsp;</label>
+                <input [ngClass]="'is-invalid : nombre.invalid && (nombre.dirty || nombre.touched)}'" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.informes.nombre" placeholder="Ingrese su nombre y apellido" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="50">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese nombre con la primera letra en mayúscula</div>
+                <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="codigo">Código postal: &nbsp;</label>
+                <input [ngClass]="{ 'is-invalid' : cp.invalid && (cp.dirty || cp.touched) }" type="number" id="codigo" name="codigo" class="form-control" #cp="ngModel" [(ngModel)]="this.informes.cp" placeholder="Ingrese su código postal" required pattern="[0-9]{5}">
+                <div *ngIf="cp.errors?.required" class="invalid-feedback">Ingrese código postal</div>
+                <div *ngIf="cp.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
+                <div *ngIf="cp.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" id="telefono" name="telefono" class="form-control" #telefono="ngModel" [(ngModel)]="this.informes.telefono" placeholder="Ingrese su teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}" required>
+                <div *ngIf="telefono.errors?.required" class="invalid-feedback">Ingrese teléfono</div>
+                <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">Ingrese un numero valido con area y numero completo Ej.(123) 545-1234</div>        
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch14" name="visto" [(ngModel)]="this.informes.visto">
+                <label class="custom-control-label" for="customSwitch14">Visto</label>
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch15" name="activo" [(ngModel)]="this.informes.activo">
+                <label class="custom-control-label" for="customSwitch15">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Imágenes promocionales -->
+    <div *ngIf="this.id === 'Imágenes promocionales'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="nombre">Encabezado:</label>
+                <input [ngClass]="'is-invalid : nombre.invalid && (nombre.dirty || nombre.touched)}'" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.slides.nombre" placeholder="Ingrese el encabezado del slide" required maxlength="30">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese nombre con la primera letra en mayúscula</div>
+                <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 30 caracteres</div>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="descripcion" name="descripcion" [(ngModel)]="this.slides.descripcion" #descripcion="ngModel" placeholder="Ingresar descripción" required maxlength="300"></textarea>
+                <div *ngIf="descripcion.errors?.required" class="invalid-feedback">Ingrese descripción</div>
+            </div>
+            <div class="form-group">
+                <label for="imagen">Imágen:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png" (change)="verArchivo($event)" required>
+                    <label class="custom-file-label" for="imagen">{{ imagenL }}</label>
+                </div>
+            </div>
             <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>

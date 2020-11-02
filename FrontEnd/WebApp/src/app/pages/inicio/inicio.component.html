@@ -1,58 +1,40 @@
 <!-- Barra de navegacio -->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top" style="top:0;">
+    <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#nosotros">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#paquetes">Paquetes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#cobertura">Cobertura</a>
-                </li>
-            </ul>
-            <button class="btn btn-outline-light my-2 my-sm-0" [routerLink]="['/login']">
-                <i class="far fa-user"></i> {{ i }}
-            </button>
-        </div>
-    </nav>
-</header>
-<br><br>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#nosotros">Nosotros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#paquetes">Paquetes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#cobertura">Cobertura</a>
+            </li>
+        </ul>
+        <button class="btn btn-outline-light my-2 my-sm-0" [routerLink]="['/login']">
+            <i class="far fa-user"></i> {{ i }}
+        </button>
+    </div>
+</nav>
+<br>
 
-<!-- Slide de imagenes y formulario -->
-<div class="container">
+<div class="container animated fadeIn">
+    <!-- Slide de imagenes y formulario -->
+    <div>
     <!-- Slide de imagenes -->
-    <div id="slide" class="animated fadeIn carousel slide carousel-fade" data-ride="carousel">
+    <div id="slide" class="carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" data-interval="3000">
-                <img src="/assets/img/img1.jpg" class="d-block w-100" alt="...">
+            <div *ngFor="let item of slides; let i = index" [ngClass]="{ 'active': i == 0 }" class="carousel-item" data-interval="3000">
+                <img [src]="item.imagen" class="d-block w-100" [alt]="item.nombre">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Primer slide</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus asperiores, non deserunt aperiam provident qui perferendis laboriosam voluptate quidem repellendus dolores iusto? Recusandae nemo dolorem molestiae molestias veritatis
-                        dignissimos omnis.</p>
-                </div>
-            </div>
-            <div class="carousel-item" data-interval="3000">
-                <img src="/assets/img/img2.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Segundo slide</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus asperiores, non deserunt aperiam provident qui perferendis laboriosam voluptate quidem repellendus dolores iusto? Recusandae nemo dolorem molestiae molestias veritatis
-                        dignissimos omnis.</p>
-                </div>
-            </div>
-            <div class="carousel-item" data-interval="3000">
-                <img src="/assets/img/img3.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Tercer slide</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus asperiores, non deserunt aperiam provident qui perferendis laboriosam voluptate quidem repellendus dolores iusto? Recusandae nemo dolorem molestiae molestias veritatis
-                        dignissimos omnis.</p>
+                    <h5>{{ item.nombre }}</h5>
+                    <p>{{ item.descripcion }}</p>
                 </div>
             </div>
         </div>
@@ -69,7 +51,7 @@
     <!-- Formulario -->
     <div class="container animated fadeIn rounded border border-primary d-inline-flex p-2 bd-highlight">
         <img src="../../../assets/img/antena.png" alt="logo" class="rounded float-left img-fluid" style="width: 400px; height: 400px;"><br>
-        <form style="padding-left: 2%;">
+        <form style="padding-left: 2%;" #log="ngForm" (submit)="enviarDatos(log)">
             <div class="form-group">
                 <div class="form-group">
                     <h1 class="display-4">Mayores informes</h1>
@@ -77,34 +59,37 @@
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre: &nbsp;</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese su nombre completo" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="20">
+                    <input [ngClass]="'is-invalid : nombre.invalid && (nombre.dirty || nombre.touched)}'" type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="this.informes.nombre" #nombre="ngModel" placeholder="Ingrese su nombre y apellido" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="50">
+                    <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre con la primera letra en mayúscula</div>
+                    <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
+                    <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="codigo">Código postal: &nbsp;</label>
-                        <input type="number" id="codigo" name="codigo" class="form-control" placeholder="Ingrese su código postal">
+                        <input [ngClass]="{ 'is-invalid' : cp.invalid && (cp.dirty || cp.touched) }" type="number" id="codigo" name="codigo" class="form-control" [(ngModel)]="this.informes.cp" #cp="ngModel" placeholder="Ingrese su código postal" required pattern="[0-9]{5}">
+                        <div *ngIf="cp.errors?.required" class="invalid-feedback">Ingrese código postal</div>
+                        <div *ngIf="cp.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
+                        <div *ngIf="cp.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="teelfono" class="form-control" placeholder="Ingrese su teléfono">
+                        <input [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" id="telefono" name="telefono" class="form-control" [(ngModel)]="this.informes.telefono" #telefono="ngModel" placeholder="Ingrese su teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}" required>
+                        <div *ngIf="telefono.errors?.required" class="invalid-feedback">Ingrese su teléfono</div>
+                        <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">Ingrese un numero valido con area y numero completo Ej.(123) 545-1234</div>        
                     </div>
                 </div>
                 <div class="form-group">
-
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-secondary">Enviar</button>
-                </div>
+                <button type="submit" class="btn btn-secondary">Enviar</button>
             </div>
         </form>
     </div>
+    </div>
+    <br><br>
 
-</div>
-<br><br>
-
-<!-- Paquetes, Cobertura, Acerca de -->
-<div class="animated fadeIn container">
+    <!-- Paquetes, Cobertura, Acerca de -->
+    <div class="animated fadeIn">
     <!-- Acerca de -->
     <section id="nosotros">
         <h1 class="display-2">Nosotros</h1>
@@ -125,12 +110,9 @@
     <!-- Paquetes -->
     <section id="paquetes">
         <h1 class="display-2">Nuestros Paquetes</h1>
-        <div class="d-flex justify-content-between align-content-start flex-wrap">
-            <img src="/assets/img/paquete1.png" alt="p1" class="rounded float-left">
-            <img src="/assets/img/paquete2.png" alt="p2" class="rounded">
-            <img src="/assets/img/paquete3.png" alt="p3" class="rounded float-right">
+        <div class="d-flex justify-content-between align-content-start flex-wrap" *ngFor="let item of paquetes">
+            <img [src]="item.imagen" [alt]="item.nombre" class="rounded float-left">
         </div>
-
     </section>
 
     <!-- Cobertura -->
@@ -138,6 +120,7 @@
         <!-- Titulo -->
         <div>
             <h1 class="display-2 d-inline-flex p-2 bd-highlight">Nuestra Cobertura</h1>
+            <p class="lead">Revisa nuestras zonas de cobertura</p>
         </div>
 
         <!-- Mapa y formulario -->
@@ -145,7 +128,7 @@
             <!-- Mapa -->
             <div id="mapid" class="p-2 flex-grow-1 bd-highlight rounded border border-primary animated fadeIn"></div>
             <!-- Formulario -->
-            <form class="p-2 bd-highlight">
+            <!-- <form class="p-2 bd-highlight">
                 <div class="form-group">
                     <div class="form-group">
                         <p class="lead">Ingrese los datos de tu ubicación</p>
@@ -179,22 +162,19 @@
                         <input type="text" class="form-control" placeholder="Ingrese calle y número">
                     </div>
                 </div>
-            </form>
+            </form> -->
         </div>
     </section>
     <br>
+    </div>
 </div>
-
 <!-- Informes y formulario de ac -->
 <footer style="background-color: cornflowerblue; color: white;" class="align-self-baseline">
     <!-- Informes de la empresa -->
-    <div class="animated fadeIn" style="margin-left: 2%;">
-        <br>
-        <div>
-            <img src="../../../assets/img/logo2.png" alt="logo" style="height: 90px; width: 341;">
-            <h6>Desarrollo de sistemas TJ S.A de C.V</h6>
-            <h6>Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, México</h6>
-            <h6>Teléfono: (664) 199-8146</h6>
-        </div>
+    <div class="animated fadeIn container" style="padding: 2%;">
+        <img src="../../../assets/img/logo2.png" alt="logo" style="height: 90px; width: 341;">
+        <h6>Desarrollo de sistemas TJ S.A de C.V</h6>
+        <h6>Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, México</h6>
+        <h6>Teléfono: (664) 199-8146</h6>
     </div>
 </footer>

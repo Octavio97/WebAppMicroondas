@@ -1,12 +1,10 @@
-import { Contrato } from './contrato.model';
-import { PaqueteEquipo } from './paqueteequipo.model';
-
 export class Paquete {
     idPaquete: string;
     precio: number;
     nombre: string;
     activo: boolean;
     descripcion: string;
+    imagen: any;
 
     constructor(){
         this.idPaquete = null;
@@ -14,5 +12,6 @@ export class Paquete {
         this.nombre = null;
         this.activo = null;
         this.descripcion = null;
+        this.imagen = null;
     }
 }

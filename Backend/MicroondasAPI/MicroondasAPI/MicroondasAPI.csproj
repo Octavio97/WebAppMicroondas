@@ -238,11 +238,13 @@
     <Compile Include="Controllers\EquipoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\EstatusController.cs" />
+    <Compile Include="Controllers\InformesController.cs" />
     <Compile Include="Controllers\PaqueteController.cs" />
     <Compile Include="Controllers\PaqueteEquipoController.cs" />
     <Compile Include="Controllers\PropiedadController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
+    <Compile Include="Controllers\SlideImgController.cs" />
     <Compile Include="Controllers\SoporteController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -267,6 +269,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estatus.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Informes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model.Context.cs">
@@ -294,6 +299,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rol.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SlideImg.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Soporte.cs">

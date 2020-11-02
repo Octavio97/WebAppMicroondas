@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="54f7c908746d481a95d5d1d272a03e4c" Name="Diagram1">
+      <Diagram DiagramId="73d8a29d9c2c4f4186d8e1752f8b8277" Name="Diagram1">
         <EntityTypeShape EntityType="MicroondasModel.Ciudad" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.CodigoPostal" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.Colonia" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="MicroondasModel.Equipo" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.Estado" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.Estatus" Width="1.5" PointX="15" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MicroondasModel.Informes" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.Paquete" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.PaqueteEquipo" Width="1.5" PointX="15" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MicroondasModel.Propiedad" Width="1.5" PointX="15" PointY="4.75" IsExpanded="true" />
@@ -35,6 +36,7 @@
         <AssociationConnector Association="MicroondasModel.FK__Propiedad__idUsu__534D60F1" ManuallyRouted="false" />
         <AssociationConnector Association="MicroondasModel.FK__Usuario__idRol__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="MicroondasModel.FK__Soporte__idTecni__5AEE82B9" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MicroondasModel.SlideImg" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

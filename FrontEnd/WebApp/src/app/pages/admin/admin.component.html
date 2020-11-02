@@ -1,19 +1,17 @@
 <!-- Barra de navegacion -->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-            <button class="my-2 my-lg-0 btn btn-outline-light" style="margin-right: 2%;" [routerLink]="['/perfil']"><i class="fa fa-user"></i> Perfil</button>
-            <button class="my-2 my-lg-0 btn btn-outline-light" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir</button>
-        </div>
-    </nav>
-</header>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <button class="my-2 my-lg-0 btn btn-outline-light" style="margin-right: 2%;" [routerLink]="['/perfil']"><i class="fa fa-user"></i> Perfil</button>
+        <button class="my-2 my-lg-0 btn btn-outline-light" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir</button>
+    </div>
+</nav>
 
 <!-- Administrador -->
 <div class="container animated fadeIn" *ngIf="this.session.Rol.rol1 === 'administrador'">
@@ -394,6 +392,54 @@
                 <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idSoporte]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                     <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
                 </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Tabla Informes -->
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Informes' && !cargando && !length">
+        <thead class="thead-dark">
+            <th scope="col">#</th>
+            <th scope="col">ID Informes</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Codigo Postal</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Visto</th>
+            <th scope="col">Activo</th>
+            <th scope="col"></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of informes; let i = index">
+                <td *ngIf="item.activo || this.in">{{ i + 1 }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.idInformes }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.nombre }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.cp }}</td>
+                <td *ngIf="item.activo || this.in">{{ item.telefono }}</td>
+                <td *ngIf="item.visto === true && (item.activo || this.in)"><i class="fas fa-check"></i></td>
+                <td *ngIf="item.visto === false && (item.activo || this.in)"><i class="fas fa-times"></i></td>
+                <div *ngIf="item.activo || this.in">
+                    <td *ngIf="item.activo"><span class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span></td>
+                    <td *ngIf="!item.activo"><span class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span></td>
+                </div>
+                <td *ngIf="item.activo || this.in"><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idInformes]"><i class="fas fa-pen"></i></button><button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Tabla SlideImg -->
+    <table class="table animated fadeIn" *ngIf="seleccion === 'Imágenes promocionales' && !cargando && !length">
+        <thead class="thead-dark">
+            <th scope="col">ID Slide</th>
+            <th scope="col">Nombre imágen</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col"></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of slides; let i = index">
+                <td>{{ item.idSlide }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idSlide]"><i class="fas fa-pen"></i></button><button (click)="delete(item)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
             </tr>
         </tbody>
     </table>

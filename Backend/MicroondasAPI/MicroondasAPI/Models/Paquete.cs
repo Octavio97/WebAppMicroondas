@@ -26,6 +26,7 @@ namespace MicroondasAPI.Models
         public Nullable<decimal> precio { get; set; }
         public string descripcion { get; set; }
         public Nullable<bool> activo { get; set; }
+        public byte[] imagen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contrato> Contrato { get; set; }

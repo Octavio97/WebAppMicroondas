@@ -27,6 +27,10 @@ import { PropiedadService } from '../../services/propiedad.service';
 import { EstatusService } from '../../services/estatus.service';
 import { Soporte } from 'src/app/models/soporte.model';
 import { SoporteService } from '../../services/soporte.service';
+import { Informes } from 'src/app/models/informes.model';
+import { InformesService } from '../../services/informes.service';
+import { SlideImg } from 'src/app/models/slideImg.model';
+import { SlideImgService } from '../../services/slide-img.service';
 
 @Component({
   selector: 'app-elemento',
@@ -37,6 +41,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   id;
   id2;
 
+  imagenL = 'Seleccionar imágen (Solo .PNG)';
   // Objetos para los valores del dropbox a visualizar
   i1 = 'Seleccionar estado...';
   i2 = 'Seleccionar ciudad...';
@@ -58,6 +63,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   paqueteEquipo: PaqueteEquipo;
   propiedad: Propiedad;
   soporte: Soporte;
+  informes: Informes;
+  slides: SlideImg;
 
   // arreglos para los dropbox y/o tablas
   e: Estado[];
@@ -89,7 +96,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     private estatusS: EstatusService,
     private router: Router,
     private route: ActivatedRoute,
-    private soporteS: SoporteService) { }
+    private soporteS: SoporteService,
+    private informesS: InformesService,
+    private slideImgS: SlideImgService) { }
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
@@ -303,6 +312,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           this.paqueteS.verPaquete(this.id2).subscribe( (resp: Paquete) => {
           if (resp) {
             this.paquete = resp;
+            this.imagenL = this.paquete.nombre + '.png';
           }
         });
         }
@@ -328,6 +338,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                 this.equipos[index] = this.propi[index].Equipo;
               }
               // modificar los equipos que tiene en su poder de todos los disponibles
+              // tslint:disable-next-line: prefer-for-of
               for (let index = 0; index < this.eq.length; index++) {
                 const array = this.equipos.find((m) => m.idEquipo === this.eq[index].idEquipo);
                 if (!array) {
@@ -363,6 +374,25 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             this.soporte = resp;
           }
         });
+        }
+        else if (this.id === 'Informes') {
+          this.informes = new Informes();
+          this.informes.idInformes = this.id2;
+          this.informesS.verInformes(this.id2).subscribe( (resp: Informes) => {
+            if (resp) {
+              this.informes = resp;
+            }
+          });
+        }
+        else if (this.id === 'Imágenes promocionales') {
+          this.slides = new SlideImg();
+          this.slides.idSlide = this.id2;
+          this.slideImgS.verSlideImg(this.id2).subscribe( (resp: SlideImg) => {
+            if (resp) {
+              this.slides = resp;
+              this.imagenL = this.slides.nombre + '.png';
+            }
+          });
         }
       }
       else { // si es nuevo...
@@ -403,6 +433,12 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         }
         else if (this.id === 'Soporte') {
           this.soporte = new Soporte();
+        }
+        else if (this.id === 'Informes') {
+          this.informes = new Informes();
+        }
+        else if (this.id === 'Imágenes promocionales') {
+          this.slides = new SlideImg();
         }
       }
     }
@@ -912,6 +948,87 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               });
             }
           }
+          else if (this.id === 'Informes') {
+            this.informes.nombre = this.informes.nombre.replace(/\b\w/g, l => l.toUpperCase());
+            if (this.informes.idInformes) {
+              this.informesS.modificarInformes(this.informes).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El informe fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'El informe ya existe',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+            else {
+              this.informesS.altaInformes(this.informes).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El informe fue guardado con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'El informe ya existe',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+          }
+          else if (this.id === 'Imágenes promocionales') {
+            if (this.slides.idSlide) {
+              this.slideImgS.modificarSlideImg(this.slides).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El slide fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'El slide ya existe',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+            else {
+              this.slideImgS.altaSlideImg(this.slides).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'El slide fue guardado con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'El slide ya existe',
+                    icon: 'error'
+                  });
+                }
+              });
+            }
+          }
         }
       });
     }
@@ -942,6 +1059,24 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  verArchivo(e) {
+    const image = e.target.files[0];
+    this.imagenL = image.name;
+    const reader = new FileReader();
+    reader.onload = this.handleFile.bind(this);
+    reader.readAsBinaryString(image);
+  }
+
+  handleFile(event) {
+    const binaryString = event.target.result;
+    if (this.id === 'Paquete') {
+      this.paquete.imagen = btoa(binaryString);
+    }
+    else if (this.id === 'Imágenes promocionales') {
+      this.slides.imagen = btoa(binaryString);
+    }
   }
 
   // Metodos para cambiar valores del combobox

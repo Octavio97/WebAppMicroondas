@@ -64,6 +64,17 @@
     <Property Name="estatus" Type="varchar" MaxLength="30" />
     <Property Name="activo" Type="bit" />
   </EntityType>
+  <EntityType Name="Informes">
+    <Key>
+      <PropertyRef Name="idInformes" />
+    </Key>
+    <Property Name="idInformes" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="cp" Type="int" />
+    <Property Name="telefono" Type="varchar" MaxLength="30" />
+    <Property Name="visto" Type="bit" />
+    <Property Name="activo" Type="bit" />
+  </EntityType>
   <EntityType Name="Paquete">
     <Key>
       <PropertyRef Name="idPaquete" />
@@ -73,6 +84,7 @@
     <Property Name="precio" Type="money" />
     <Property Name="descripcion" Type="varchar(max)" />
     <Property Name="activo" Type="bit" />
+    <Property Name="imagen" Type="image" />
   </EntityType>
   <EntityType Name="PaqueteEquipo">
     <Key>
@@ -97,6 +109,15 @@
     <Property Name="idRol" Type="uniqueidentifier" Nullable="false" />
     <Property Name="rol" Type="varchar" MaxLength="30" />
     <Property Name="activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="SlideImg">
+    <Key>
+      <PropertyRef Name="idSlide" />
+    </Key>
+    <Property Name="idSlide" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="30" />
+    <Property Name="imagen" Type="image" />
+    <Property Name="descripcion" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Soporte">
     <Key>
@@ -343,10 +364,12 @@
     <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Informes" EntityType="Self.Informes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paquete" EntityType="Self.Paquete" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PaqueteEquipo" EntityType="Self.PaqueteEquipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Propiedad" EntityType="Self.Propiedad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlideImg" EntityType="Self.SlideImg" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Ciudad__idEstado__3C69FB99" Association="Self.FK__Ciudad__idEstado__3C69FB99">
