@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -149,8 +149,8 @@
             <tr *ngFor="let item of s; let i = index">
                 <td scope="row">{{ i + 1 }}</td>
                 <td>{{ item.problema }}</td>
-                <td *ngIf="item.Tecnico.nombre !== 'prueba'">{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</td>
-                <td *ngIf="item.Tecnico.nombre === 'prueba'">N/A</td>
+                <td *ngIf="item.Tecnico.Rol.rol1 !== 'administrador'">{{ item.Tecnico.nombre }} {{ item.Tecnico.apellido }}</td>
+                <td *ngIf="item.Tecnico.Rol.rol1 === 'administrador'">N/A</td>
                 <td>{{ item.fechaInicio }}</td>
                 <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
                 <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en proceso'">{{ item.Estatus.estatus1 }}</td>
@@ -161,7 +161,7 @@
     </table>
 </div>
 
-<!-- Tabla reportes de tecnico activos -->
+<!-- Tabla reportes de tecnico -->
 <div *ngIf="this.usuario.Rol.rol1 === 'técnico'" class="container animated fadeIn">
     <h1 class="display-4">Reportes activos</h1>
     <table class="table" *ngIf="!this.length">
@@ -171,7 +171,8 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Problema</th>
                 <th scope="col">Dirección</th>
-                <th scope="col"></th>
+                <th scope="col">Fecha de asignación</th>
+                <th scope="col">Estatus</th>
             </tr>
         </thead>
         <tbody>
@@ -181,7 +182,10 @@
                 <td>{{ item.problema }}</td>
                 <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
                     <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}</td>
-                <td><button class="btn btn-danger" (click)="cancelarReporte(item)"><i class="fa fa-ban"></i> Cancelar</button>&nbsp;<button class="btn btn-success"><i class="fa fa-check"></i> Resuelto</button></td>
+                <td>{{ item.fechaInicio }}</td>
+                <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
+                <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en proceso'">{{ item.Estatus.estatus1 }}</td>
+                <td class="text-success" *ngIf="item.Estatus.estatus1 === 'resuelto'">{{ item.Estatus.estatus1 }}</td>
             </tr>
         </tbody>
     </table>

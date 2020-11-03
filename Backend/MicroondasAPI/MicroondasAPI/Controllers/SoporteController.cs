@@ -245,7 +245,8 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
-            
+        
+        // Ver reportes de un cliente en especifico
         [HttpGet]
         [Route("api/MicroondasAPI/consultaUnicaSopU")]
         public IHttpActionResult consultaUnicaSopU(string id)
@@ -390,6 +391,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
+        // Ver reportes no atendidos
         [HttpGet]
         [Route("api/MicroondasAPI/consultaSopT")]
         public IHttpActionResult consultaSopT()
@@ -533,6 +535,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
+        // Agregar un reporte por parte del cliente
         [HttpPost]
         [Route("api/MicroondasAPI/agregarSoporteCli")]
         public IHttpActionResult agregarSoporteCli(Soporte soporte)
@@ -547,12 +550,13 @@ namespace MicroondasAPI.Controllers
                 }
 
                 var i = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "problema").FirstOrDefault();
+                var y = SessionController.getInstance().Usuario.Where(w => w.Rol.rol1 == "administrador").ToList();
 
                 var datos = new Soporte()
                 {
                     idSoporte = Guid.NewGuid(),
                     problema = soporte.problema,
-                    idTecnico = new Guid("00000000-0000-0000-0000-000000000000"),
+                    idTecnico = y[0].idUsuario,
                     idContrato = soporte.idContrato,
                     fechaInicio = DateTime.Today,
                     fechaFinal = new DateTime(),
@@ -746,6 +750,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
+        // Ver reportes del tecnico especifico
         [HttpGet]
         [Route("api/MicroondasAPI/consultaUnicaSoporteT")]
         public IHttpActionResult consultaUnicaSoporteT(string id)
@@ -754,9 +759,7 @@ namespace MicroondasAPI.Controllers
             {
                 Guid i = Guid.Parse(id.ToString());
 
-                var estatus = SessionController.getInstance().Estatus.Where(w => w.estatus1 == "en proceso").FirstOrDefault();
-
-                var accion = SessionController.getInstance().Soporte.Where(w => w.idTecnico == i && w.idEstatus == estatus.idEstatus).ToList();
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idTecnico == i).ToList();
 
                 if (accion.Count == 0)
                 {
@@ -840,7 +843,7 @@ namespace MicroondasAPI.Controllers
                             }
                         }
                     },
-                    Usuario = new
+                    Tecnico = new
                     {
                         idUsuario = s.Usuario.idUsuario,
                         nombre = s.Usuario.nombre,

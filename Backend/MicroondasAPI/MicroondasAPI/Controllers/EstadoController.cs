@@ -192,9 +192,7 @@ namespace MicroondasAPI.Controllers
                 {
                     idEstado = consulta.idEstado,
                     estado1 = consulta.estado1,
-                    activo = consulta.activo,
-                    Ciudad = consulta.Ciudad,
-                    Usuario = consulta.Usuario
+                    activo = consulta.activo
                 };
 
                 return Ok(resultado);

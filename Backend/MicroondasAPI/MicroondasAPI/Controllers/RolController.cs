@@ -163,8 +163,7 @@ namespace MicroondasAPI.Controllers
                 var resultado = new {
                     idRol = consulta.idRol,
                     rol1 = consulta.rol1,
-                    activo = consulta.activo,
-                    Usuario = consulta.Usuario
+                    activo = consulta.activo
                 };
 
                 return Ok(resultado);

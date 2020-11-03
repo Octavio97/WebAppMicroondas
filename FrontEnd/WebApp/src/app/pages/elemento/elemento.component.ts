@@ -107,9 +107,25 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.e = new Array<Estado>();
       this.rolS.consultaRol().subscribe( (resp: Rol[]) => {
         this.r = resp;
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
     }
     else if (this.id === 'Usuario' && this.id2 !== 'new') {
@@ -132,9 +148,41 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           // tslint:disable-next-line: no-shadowed-variable
           this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
             this.co = resp;
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          });
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
           });
         });
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
     }
     else if (this.id === 'Código postal' && this.id2 !== 'new') {
@@ -145,6 +193,22 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         // tslint:disable-next-line: no-shadowed-variable
         this.ciudadS.consultaUnica(this.codigoP.Ciudad.idEstado).subscribe( (resp: Ciudad[]) => {
           this.c = resp;
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
         });
       });
     }
@@ -160,7 +224,31 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           // tslint:disable-next-line: no-shadowed-variable
           this.codigoS.consultaUnica(this.colonia.CP.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
             this.cp = resp;
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
         });
       });
     }
@@ -172,22 +260,54 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         if (resp !== null) {
           this.p = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
       this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
         if (resp) {
           this.es = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
       this.usuarioS.verCliente().subscribe( (resp: Usuario[]) => {
         if (resp) {
           this.u = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
     }
     else if (this.id === 'Ciudad') {
       this.e = new Array<Estado>();
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
     }
     else if (this.id === 'Soporte') {
@@ -198,16 +318,40 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         if (resp) {
           this.con = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
       this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
         if (resp) {
           this.t = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
       this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
         if (resp) {
           this.es = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
     }
     else if (this.id === 'Propiedad' && this.id2 === 'new') {
@@ -216,12 +360,28 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           this.eq = new Array<Equipo>();
           this.eq = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
       this.usuarioS.verTecnico().subscribe( (resp: Usuario[]) => {
         if (resp) {
           this.t = new Array<Usuario>();
           this.t = resp;
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       });
     }
   }
@@ -250,6 +410,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.ciudad = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Código postal') {
@@ -259,6 +427,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.codigoP = resp;
           }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
         }
         else if (this.id === 'Colonia') {
@@ -268,6 +444,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.colonia = resp;
           }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
         }
         else if (this.id === 'Contrato') {
@@ -277,6 +461,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.contrato = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Equipo') {
@@ -286,6 +478,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.equipo = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Estado') {
@@ -295,6 +495,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.estado = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Estatus') {
@@ -304,6 +512,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.estatus = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Paquete') {
@@ -314,6 +530,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             this.paquete = resp;
             this.imagenL = this.paquete.nombre + '.png';
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'PaqueteEquipo') {
@@ -326,6 +550,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             if (resp) {
               this.eq = resp;
             }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
 
           this.propiedadS.verPropiedad(this.id2).subscribe( (resp: Propiedad[]) => {
@@ -355,6 +587,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.rol = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Usuario') {
@@ -364,6 +604,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.usuario = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Soporte') {
@@ -373,6 +621,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           if (resp) {
             this.soporte = resp;
           }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
         });
         }
         else if (this.id === 'Informes') {
@@ -382,6 +638,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             if (resp) {
               this.informes = resp;
             }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
         }
         else if (this.id === 'Imágenes promocionales') {
@@ -392,6 +656,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
               this.slides = resp;
               this.imagenL = this.slides.nombre + '.png';
             }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
         }
       }
@@ -499,6 +771,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -518,6 +798,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -539,6 +827,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -558,6 +854,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -582,6 +886,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     });
                   }
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -601,6 +913,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -622,6 +942,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -641,6 +969,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -663,6 +999,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -681,6 +1025,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -702,6 +1054,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -721,6 +1081,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -742,6 +1110,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             } else {
               this.estatusS.altaEstatus(this.estatus).subscribe( resp => {
@@ -760,6 +1136,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -783,6 +1167,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -802,6 +1194,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -820,6 +1220,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                   if (resp === true) {
                     this.addPropiedad(0);
                   }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
                 });
               }
               else {
@@ -845,6 +1253,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -864,6 +1280,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -887,6 +1311,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             } else {
               this.usuarioS.altaUsuario(this.usuario).subscribe( resp => {
@@ -904,6 +1336,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -926,6 +1366,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -945,6 +1393,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -967,6 +1423,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -986,6 +1450,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -1007,6 +1479,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
             else {
@@ -1026,6 +1506,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                     icon: 'error'
                   });
                 }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
               });
             }
           }
@@ -1058,6 +1546,14 @@ export class ElementoComponent implements OnInit, AfterViewInit {
           icon: 'error'
         });
       }
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
     });
   }
 
@@ -1084,18 +1580,42 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   cambio1(id?) {
     this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
       this.c = resp;
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
     });
   }
     // Obtener codigo postal de la ciudad seleccionada
   cambio2(id?) {
     this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
       this.cp = resp;
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
     });
   }
     // Obtener colonias del codigo postal seleccionado
   cambio3(id?) {
     this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
       this.co = resp;
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
     });
   }
     // guardamos los quipos que un tecnico tiene en su poder

@@ -1,6 +1,5 @@
-import { Colonia } from './colonia.model';
-import { Usuario } from './usuario.model';
 import { Ciudad } from './ciudad.model';
+
 export class CodigoPostal {
 
     idCP: string;

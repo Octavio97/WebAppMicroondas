@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre: &nbsp;</label>
-                    <input [ngClass]="'is-invalid : nombre.invalid && (nombre.dirty || nombre.touched)}'" type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="this.informes.nombre" #nombre="ngModel" placeholder="Ingrese su nombre y apellido" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="50">
+                    <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="this.informes.nombre" #nombre="ngModel" placeholder="Ingrese su nombre y apellido" required maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
                     <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre con la primera letra en mayúscula</div>
                     <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
                     <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>

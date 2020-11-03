@@ -19,8 +19,13 @@ namespace MicroondasAPI.Controllers
             try
             {
                 // consultar usuaro para inicio de sesion
-                var consulta = getInstance().Usuario.Where(w => w.correoE == correo && w.contrasena == contra).FirstOrDefault();
+                var consulta = getInstance().Usuario.Where(w => w.correoE == correo && w.contrasena == contra && 
+                (w.Rol.rol1 == "administrador" || w.Rol.rol1 == "técnico" || w.Rol.rol1 == "cliente")).FirstOrDefault();
 
+                if (consulta == null)
+                {
+                    return Ok(consulta);
+                }
                 // regresar usuario con los objetos que tiene en angular
                 var resultado = new
                 {

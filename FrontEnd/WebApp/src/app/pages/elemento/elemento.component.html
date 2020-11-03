@@ -2,11 +2,11 @@
     <h1 class="display-4">{{ this.id }}</h1>
     <!-- Usuario -->
     <div *ngIf="this.id === 'Usuario'">
+        <small *ngIf="this.usuario.Rol.rol1 === 'administrador'" class="text-danger">Este usuario puede ser importante para el funcionamiento de sistema</small>
         <form #log="ngForm" (submit)=alta(log) class="needs-validation">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel" required maxlength="50"
-                    title="hola esta mal xd" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel" required maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
                 <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre con la primera letra en mayúscula</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
                 <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -511,7 +511,7 @@
         <form #log="ngForm" (submit)="alta(log)">
             <div class="form-group">
                 <label for="nombre">Nombre: &nbsp;</label>
-                <input [ngClass]="'is-invalid : nombre.invalid && (nombre.dirty || nombre.touched)}'" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.informes.nombre" placeholder="Ingrese su nombre y apellido" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="50">
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.informes.nombre" placeholder="Ingrese su nombre y apellido" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="50">
                 <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese nombre con la primera letra en mayúscula</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
                 <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
@@ -548,7 +548,7 @@
         <form #log="ngForm" (submit)="alta(log)">
             <div class="form-group">
                 <label for="nombre">Encabezado:</label>
-                <input [ngClass]="'is-invalid : nombre.invalid && (nombre.dirty || nombre.touched)}'" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.slides.nombre" placeholder="Ingrese el encabezado del slide" required maxlength="30">
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.slides.nombre" placeholder="Ingrese el encabezado del slide" required maxlength="30">
                 <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese nombre con la primera letra en mayúscula</div>
                 <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 30 caracteres</div>
             </div>

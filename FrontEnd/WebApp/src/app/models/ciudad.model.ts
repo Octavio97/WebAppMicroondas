@@ -1,6 +1,4 @@
 import { Estado } from './estado.model';
-import { CodigoPostal } from './codigopostal.model';
-import { Usuario } from './usuario.model';
 
 export class Ciudad {
     idCiudad: string;

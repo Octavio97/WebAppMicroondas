@@ -35,14 +35,17 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.i = true;
-      this.usuarioS.login(this.usuario.correoE, this.usuario.contrasena).subscribe( (resp: any) => {
+      this.usuarioS.login(this.usuario.correoE, this.usuario.contrasena).subscribe( (resp: Usuario) => {
         if (resp === null) {
           Swal.fire({
             title: 'Error',
             text: 'Usuario incorrecto',
-            icon: 'error'
+            icon: 'error',
+            timer: 3000
           });
-        } else {
+          this.i = false;
+        }
+        else {
           this.usuario = resp;
           Swal.fire({
             title: 'Bienvenido',
@@ -62,6 +65,15 @@ export class LoginComponent implements OnInit {
           // se envia a la pagina principal y el id del usuario para evitar el ingresar por la ruta en el navegador
           this.router.navigate(['/inicio']);
         }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
+        this.i = false;
       });
     }
   }

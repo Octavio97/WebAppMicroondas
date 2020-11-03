@@ -18,7 +18,6 @@ import { ContratoService } from '../../services/contrato.service';
 import { Contrato } from '../../models/contrato.model';
 import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
-import { Paquete } from 'src/app/models/paquete.model';
 import { Estatus } from 'src/app/models/estatus.model';
 import { EstatusService } from '../../services/estatus.service';
 
@@ -67,32 +66,42 @@ export class PerfilComponent implements OnInit {
         this.r = new Array<Rol>();
         this.r = resp;
       }
+    }, (e: any) => {
+      console.log(e);
     });
 
     // consulta de ubicacion
-    this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
-      if (resp) {
+    this.estadoS.consultaEstado().subscribe( (resp1: Estado[]) => {
+      if (resp1) {
         this.e = new Array<Estado>();
-        this.e = resp;
-        this.ciudadS.consultaUnica(this.usuario.idEstado).subscribe( (resp: Ciudad[]) => {
-          if (resp) {
+        this.e = resp1;
+        this.ciudadS.consultaUnica(this.usuario.idEstado).subscribe( (resp2: Ciudad[]) => {
+          if (resp2) {
             this.c = new Array<Ciudad>();
-            this.c = resp;
-            this.codigoS.consultaUnica(this.usuario.idCiudad).subscribe( (resp: CodigoPostal[]) => {
-              if (resp) {
+            this.c = resp2;
+            this.codigoS.consultaUnica(this.usuario.idCiudad).subscribe( (resp3: CodigoPostal[]) => {
+              if (resp3) {
                 this.cp = new Array<CodigoPostal>();
-                this.cp = resp;
-                this.coloniaS.consultaUnica(this.usuario.idCP).subscribe( (resp: Colonia[]) => {
-                  if (resp) {
+                this.cp = resp3;
+                this.coloniaS.consultaUnica(this.usuario.idCP).subscribe( (resp4: Colonia[]) => {
+                  if (resp4) {
                     this.co = new Array<Colonia>();
-                    this.co = resp;
+                    this.co = resp4;
                   }
+                }, (e: any) => {
+                  console.log(e);
                 });
               }
+            }, (e: any) => {
+              console.log(e);
             });
           }
+        }, (e: any) => {
+          console.log(e);
         });
       }
+    }, (e: any) => {
+      console.log(e);
     });
 
     if (this.usuario.Rol.rol1 === 'cliente') {
@@ -101,14 +110,18 @@ export class PerfilComponent implements OnInit {
       if (resp) {
         this.contrato = new Contrato();
         this.contrato = resp;
-        this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp: Soporte[]) => {
-          resp.length === 0 ? this.length = true : this.length = false;
-          if (resp) {
+        this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp2: Soporte[]) => {
+          resp2.length === 0 ? this.length = true : this.length = false;
+          if (resp2) {
             this.s = new Array<Soporte>();
-            this.s = resp;
+            this.s = resp2;
           }
+        }, (e: any) => {
+          console.log(e);
         });
       }
+      }, (e: any) => {
+        console.log(e);
       });
     }
     else if (this.usuario.Rol.rol1 === 'técnico') {
@@ -118,6 +131,8 @@ export class PerfilComponent implements OnInit {
           this.s = new Array<Soporte>();
           this.s = resp;
         }
+      }, (e: any) => {
+        console.log(e);
       });
     }
   }
@@ -196,18 +211,24 @@ export class PerfilComponent implements OnInit {
   cambio1(id?) {
     this.ciudadS.consultaUnica(id).subscribe( (resp: Ciudad[]) => {
       this.c = resp;
+    }, (e: any) => {
+      console.log(e);
     });
   }
 
   cambio2(id?) {
     this.codigoS.consultaUnica(id).subscribe( (resp: CodigoPostal[]) => {
       this.cp = resp;
+    }, (e: any) => {
+      console.log(e);
     });
   }
 
   cambio3(id?) {
     this.coloniaS.consultaUnica(id).subscribe( (resp: Colonia[]) => {
       this.co = resp;
+    }, (e: any) => {
+      console.log(e);
     });
   }
 
@@ -244,6 +265,8 @@ export class PerfilComponent implements OnInit {
             icon: 'success'
           });
         }
+      }, (e: any) => {
+        console.log(e);
       });
     }
   }
@@ -259,8 +282,8 @@ export class PerfilComponent implements OnInit {
         confirmButtonText: 'Si',
         cancelButtonText: 'No',
         allowOutsideClick: false
-    }).then((resp) => {
-      if (resp) {
+    }).then((result) => {
+      if (result) {
         // mensaje para cargar informacion
         Swal.fire({
           title: 'Espere',
@@ -286,48 +309,50 @@ export class PerfilComponent implements OnInit {
               icon: 'error'
             });
           }
+        }, (e: any) => {
+          console.log(e);
         });
       }
     });
   }
 
-  reporteResuelto(id: Soporte){
-    Swal.fire({
-      title: 'Confirmación',
-      text: '¿Esta seguro de resolver el reporte?',
-      icon: 'question',
-      showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No',
-        allowOutsideClick: false
-    }).then((resp) => {
-      if (resp) {
-        // mensaje para cargar informacion
-        Swal.fire({
-          title: 'Espere',
-          text: 'Guardando información',
-          icon: 'info',
-          allowOutsideClick: false
-          });
-        Swal.showLoading();
+  // reporteResuelto(id: Soporte){
+  //   Swal.fire({
+  //     title: 'Confirmación',
+  //     text: '¿Esta seguro de resolver el reporte?',
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //       confirmButtonColor: '#3085d6',
+  //       cancelButtonColor: '#d33',
+  //       confirmButtonText: 'Si',
+  //       cancelButtonText: 'No',
+  //       allowOutsideClick: false
+  //   }).then((resp) => {
+  //     if (resp) {
+  //       // mensaje para cargar informacion
+  //       Swal.fire({
+  //         title: 'Espere',
+  //         text: 'Guardando información',
+  //         icon: 'info',
+  //         allowOutsideClick: false
+  //         });
+  //       Swal.showLoading();
 
-        this.estatusS.consultaUnicaEstatus('resuelto').subscribe( (resp: Estatus) => {
-          if (resp) {
-            id.idEstatus = resp.idEstatus;
-            this.soporteS.modificarSoporte(id).subscribe(resp => {
-              if (resp) {
-                Swal.fire({
-                  title: 'Éxito',
-                  text: 'Se ha resuelto el reporte',
-                  icon: 'success'
-                });
-              }
-            });
-          }
-        });
-      }
-    });
-  }
+  //       this.estatusS.consultaUnicaEstatus('resuelto').subscribe( (resp: Estatus) => {
+  //         if (resp) {
+  //           id.idEstatus = resp.idEstatus;
+  //           this.soporteS.modificarSoporte(id).subscribe(resp2 => {
+  //             if (resp2) {
+  //               Swal.fire({
+  //                 title: 'Éxito',
+  //                 text: 'Se ha resuelto el reporte',
+  //                 icon: 'success'
+  //               });
+  //             }
+  //           });
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 }

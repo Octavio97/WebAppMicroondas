@@ -1,5 +1,4 @@
 import { CodigoPostal } from './codigopostal.model';
-import { Usuario } from './usuario.model';
 
 export class Colonia {
     idColonia: string;

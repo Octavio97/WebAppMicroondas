@@ -100,6 +100,8 @@ prueba; // PRUEBA DE IMAGENES
           this.paquetes[index].imagen = this.dom.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${ this.paquetes[index].imagen }`);
         }
       }
+    }, (e: any) => {
+      console.log(e);
     });
     this.slideImgS.consultaSlideImg().subscribe( (resp: SlideImg[]) => {
       if (resp) {
@@ -109,6 +111,8 @@ prueba; // PRUEBA DE IMAGENES
           this.slides[index].imagen = this.dom.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${ this.slides[index].imagen }`);
         }
       }
+    }, (e: any) => {
+      console.log(e);
     });
     this.estadoS.consultaEInicio().subscribe( (resp: Estado[]) => {
       this.estado = [];
@@ -117,6 +121,8 @@ prueba; // PRUEBA DE IMAGENES
         // agregar estados disponibles a nuestro arreglo virtual
         this.getState(this.estado);
       }
+    }, (e: any) => {
+      console.log(e);
     });
     // si no esta el token de guardar sesion
     if (!localStorage.getItem('accessToken')) {
@@ -203,6 +209,8 @@ prueba; // PRUEBA DE IMAGENES
           onEachFeature: this.onEachFeature
         }).addTo(this.mymap);
       }
+    }, (e: any) => {
+      console.log(e);
     });
   }
 
@@ -330,6 +338,8 @@ prueba; // PRUEBA DE IMAGENES
           onEachFeature: this.onEachFeature
         }).addTo(this.mymap);
       }
+    }, (e: any) => {
+      console.log(e);
     });
   }
 
@@ -339,6 +349,8 @@ prueba; // PRUEBA DE IMAGENES
       if (resp) {
         this.colonia = resp;
       }
+    }, (e: any) => {
+      console.log(e);
     });
   }
 
@@ -437,7 +449,9 @@ prueba; // PRUEBA DE IMAGENES
             icon: 'error',
             });
          }
-       });
+       }, (e: any) => {
+        console.log(e);
+      });
     }
   }
 }
