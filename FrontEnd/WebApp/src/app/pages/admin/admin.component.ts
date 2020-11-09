@@ -93,7 +93,7 @@ export class AdminComponent implements OnInit {
       this.soporte = new Array<Soporte>();
       this.verReportes();
     }
-    else if (this.session.Rol.rol1 === 'cliente') {
+    else if (this.session.Rol.rol1 === 'cliente' || this.session.Rol.rol1 === 'técnico') {
       this.router.navigate(['perfil']);
     }
   }

@@ -237,37 +237,66 @@ export class PerfilComponent implements OnInit {
   }
 
   async addReport() {
-    const { value: text } = await Swal.fire({
-      title: 'Problema:',
-      input: 'textarea',
-      inputPlaceholder: 'Ingrese su problema...',
-      inputAttributes: {
-        'aria-label': 'Ingrese su problema...'
+    const { value: problem } = await Swal.fire({
+      title: '¿Cuál es sus problema?',
+      input: 'radio',
+      width: '80%',
+      inputOptions: {
+        1 : 'Su módem no está encendido',
+        2: 'No cuenta con conexión a internet',
+        3: 'Otro problema'
       },
-      showCancelButton: true
-    });
-    if (text) {
-      // mensaje para cargar informacion
-      Swal.fire({
-        title: 'Espere',
-        text: 'Guardando información',
-        icon: 'info',
-        allowOutsideClick: false
-        });
-      Swal.showLoading();
-      this.soporte.problema = text.toString();
-      this.soporte.idContrato = this.contrato.idContrato;
-      this.soporteS.agregarSoporteCli(this.soporte).subscribe( resp => {
-        if (resp) {
-          Swal.fire({
-            title: 'Exito',
-            text: 'Su reporte se ha agregado con exito',
-            icon: 'success'
-          });
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Necesita elegir uno';
         }
-      }, (e: any) => {
-        console.log(e);
-      });
+      }
+    });
+
+    if (problem) {
+      switch (problem) {
+        case '1':
+          break;
+
+        case '2':
+          break;
+
+        case '3':
+          const { value: text } = await Swal.fire({
+            title: 'Diganos su problema',
+            input: 'textarea',
+            inputPlaceholder: 'Ingrese su problema a resolver...',
+            inputAttributes: {
+              'aria-label': 'Ingrese su problema...'
+            },
+            showCancelButton: false,
+            confirmButtonColor: '#0C8902',
+          });
+          if (text) {
+            // mensaje para cargar informacion
+            Swal.fire({
+              title: 'Espere',
+              text: 'Guardando información',
+              icon: 'info',
+              allowOutsideClick: false
+              });
+            Swal.showLoading();
+            this.soporte.problema = text.toString();
+            this.soporte.idContrato = this.contrato.idContrato;
+            this.soporteS.agregarSoporteCli(this.soporte).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'Su reporte se ha agregado con exito',
+                  icon: 'success'
+                });
+              }
+            }, (e: any) => {
+              console.log(e);
+            });
+          }
+          break;
+      }
     }
   }
 

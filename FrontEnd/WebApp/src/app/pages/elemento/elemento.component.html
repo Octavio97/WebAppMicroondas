@@ -106,7 +106,7 @@
     </div>
     <!-- Rol -->
     <div *ngIf="this.id === 'Rol'">
-        <small *ngIf="this.rol.rol1 === 'administrador' || this.rol.rol1 === 'técnico' || this.rol.rol1 === 'cliente'" class="text-danger">Este registro es importante para el funcionamiento de sistema</small>
+        <small *ngIf="this.rol.rol1 === 'administrador' || this.rol.rol1 === 'técnico' || this.rol.rol1 === 'cliente' || this.rol.rol1 === 'secretario'" class="text-danger">Este registro es importante para el funcionamiento de sistema</small>
         <form #log="ngForm" (ngSubmit)=alta(log)>
             <div class="form-group">
                 <label for="rol1">Rol: </label>

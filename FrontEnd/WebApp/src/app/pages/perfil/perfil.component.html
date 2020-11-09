@@ -1,4 +1,5 @@
-<header>
+<div class="roll">
+    <!-- Barra de navegacion -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,15 +12,15 @@
             <button class="my-2 my-lg-0 btn btn-outline-light" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Salir</button>
         </div>
     </nav>
-</header>
-<!-- fondo de perfil -->
-<div class="animated fadeIn">
+    <div class="menu animated fadeIn">
+        <!-- fondo de perfil -->
+        <div class="animated fadeIn">
     <img src="../../../assets/img/screen.jpg" alt="screen" style="height: 300px; width: 100%;">
     <h1 class="animeted fadeIn display-2 container-fluid" style="margin-top: -100px; color:white">{{ this.usuario.nombre }} {{ this.usuario.apellido }}</h1>
-</div>
-<br>
-<!-- datos del perfil -->
-<div class="container animated fadeIn">
+        </div>
+        <br>
+        <!-- datos del perfil -->
+        <div class="container animated fadeIn">
     <div class="d-flex justify-content-end">
         <button *ngIf="mod === false" class="btn btn-info" (click)="modEvent()"><i class="fa fa-pen"></i> Modificar</button>
         <button *ngIf="mod === true" class="btn btn-danger" (click)="modEvent()"><i class="fa fa-ban"></i> Cancelar</button>
@@ -129,10 +130,10 @@
         <br>
         <button [hidden]="mod === false" type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
     </form>
-</div>
-<br>
-<!-- tabla de historial de reportes -->
-<div *ngIf="this.usuario.Rol.rol1 === 'cliente'" class="container animated fadeIn">
+        </div>
+        <br>
+        <!-- tabla de historial de reportes -->
+        <div *ngIf="this.usuario.Rol.rol1 === 'cliente'" class="container animated fadeIn">
     <h1 class="display-4">Historial de reportes</h1>
     <table class="table" *ngIf="!this.length">
         <thead>
@@ -159,10 +160,10 @@
             </tr>
         </tbody>
     </table>
-</div>
+        </div>
 
-<!-- Tabla reportes de tecnico -->
-<div *ngIf="this.usuario.Rol.rol1 === 'técnico'" class="container animated fadeIn">
+        <!-- Tabla reportes de tecnico -->
+        <div *ngIf="this.usuario.Rol.rol1 === 'técnico'" class="container animated fadeIn">
     <h1 class="display-4">Reportes activos</h1>
     <table class="table" *ngIf="!this.length">
         <thead>
@@ -189,11 +190,13 @@
             </tr>
         </tbody>
     </table>
-</div>
-<!-- Banner de sin registros -->
-<div *ngIf="length" class="alert alert-danger text-center mt-3 animated fadeIn faster container">
+        </div>
+        <!-- Banner de sin registros -->
+        <div *ngIf="length" class="alert alert-danger text-center mt-3 animated fadeIn faster container">
     <h4 class="alert-heading">No hay registros</h4>
     <p>
         <i class="fa fa-times-circle fa-3x"></i>
     </p>
+        </div>
+    </div>
 </div>
