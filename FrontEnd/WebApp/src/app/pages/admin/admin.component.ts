@@ -120,7 +120,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -145,7 +145,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -170,7 +170,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -195,7 +195,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -220,7 +220,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -245,7 +245,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -270,7 +270,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -295,7 +295,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -320,7 +320,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -345,7 +345,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -370,7 +370,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -395,7 +395,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -420,7 +420,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -445,7 +445,7 @@ export class AdminComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000
@@ -508,7 +508,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -530,7 +530,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -552,7 +552,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -574,7 +574,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -596,7 +596,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -618,7 +618,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -640,7 +640,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -662,7 +662,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -684,7 +684,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -706,7 +706,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -728,7 +728,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -750,7 +750,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -758,7 +758,7 @@ export class AdminComponent implements OnInit {
         });
       }
       else if (this.seleccion === 'Informes') {
-        this.soporteS.modificarSoporte(id, i).subscribe( resp => {
+        this.informesS.modificarInformes(id, i).subscribe( resp => {
           if (resp) {
             Swal.fire({
               title: 'Exito',
@@ -772,7 +772,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -794,7 +794,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -841,7 +841,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -863,7 +863,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -885,7 +885,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -907,7 +907,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -929,7 +929,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -951,7 +951,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -973,7 +973,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -995,7 +995,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -1017,7 +1017,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -1039,7 +1039,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -1061,7 +1061,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -1083,7 +1083,7 @@ export class AdminComponent implements OnInit {
         }, (e: any) => {
           Swal.fire({
             title: 'ERROR',
-            text: 'Error de conexión, intente mas tarde',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
             icon: 'error',
             showConfirmButton: false,
             timer: 3000
@@ -1176,7 +1176,7 @@ export class AdminComponent implements OnInit {
           }, (e: any) => {
             Swal.fire({
               title: 'ERROR',
-              text: 'Error de conexión, intente mas tarde',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
               icon: 'error',
               showConfirmButton: false,
               timer: 3000
@@ -1196,7 +1196,7 @@ export class AdminComponent implements OnInit {
     }, (e: any) => {
       Swal.fire({
         title: 'ERROR',
-        text: 'Error de conexión, intente mas tarde',
+        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
         icon: 'error',
         showConfirmButton: false,
         timer: 3000
@@ -1209,7 +1209,7 @@ export class AdminComponent implements OnInit {
     }, (e: any) => {
       Swal.fire({
         title: 'ERROR',
-        text: 'Error de conexión, intente mas tarde',
+        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
         icon: 'error',
         showConfirmButton: false,
         timer: 3000
@@ -1226,7 +1226,7 @@ export class AdminComponent implements OnInit {
     }, (e: any) => {
       Swal.fire({
         title: 'ERROR',
-        text: 'Error de conexión, intente mas tarde',
+        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
         icon: 'error',
         showConfirmButton: false,
         timer: 3000

@@ -37,6 +37,8 @@ export class PerfilComponent implements OnInit {
   contrato = new Contrato();
   soporte = new Soporte();
   mod = false;
+  plugin = '/assets/img/plugin.jpg';
+  plugmodem = '/assets/img/plugmodem.jpg';
 
   constructor(
     private router: Router,
@@ -202,6 +204,14 @@ export class PerfilComponent implements OnInit {
                 icon: 'error'
               });
             }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
           });
         }
       });
@@ -256,9 +266,89 @@ export class PerfilComponent implements OnInit {
     if (problem) {
       switch (problem) {
         case '1':
+          Swal.fire({
+            title: 'Solución',
+            text: 'Revise si el cable de alimentación este conectado a la energía y la luz de energia en el módem este encendida.',
+            imageUrl: this.plugin,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'lol',
+            confirmButtonText: '¿No funciona?',
+            confirmButtonColor: '#d33'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // mensaje para cargar informacion
+              Swal.fire({
+                title: 'Espere',
+                text: 'Guardando información',
+                icon: 'info',
+                allowOutsideClick: false
+              });
+              Swal.showLoading();
+              this.soporte.problema = 'El módem no enciende';
+              this.soporte.idContrato = this.contrato.idContrato;
+              this.soporteS.agregarSoporteCli(this.soporte).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'Su reporte se ha agregado con exito, un de nuestros tecnicos se contactará con usted pronto',
+                  icon: 'success'
+                });
+              }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+              });
+            }
+          });
           break;
 
         case '2':
+          Swal.fire({
+            title: 'Solución',
+            text: 'Revise si los cables de conexión estan bien enchufados al módem.',
+            imageUrl: this.plugmodem,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'lol',
+            confirmButtonText: '¿No funciona?',
+            confirmButtonColor: '#d33'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // mensaje para cargar informacion
+              Swal.fire({
+                title: 'Espere',
+                text: 'Guardando información',
+                icon: 'info',
+                allowOutsideClick: false
+              });
+              Swal.showLoading();
+              this.soporte.problema = 'No cuenta con conexión a internet';
+              this.soporte.idContrato = this.contrato.idContrato;
+              this.soporteS.agregarSoporteCli(this.soporte).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'Su reporte se ha agregado con exito, un de nuestros tecnicos se contactará con usted pronto',
+                  icon: 'success'
+                });
+              }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+              });
+            }
+          });
           break;
 
         case '3':
@@ -287,12 +377,18 @@ export class PerfilComponent implements OnInit {
               if (resp) {
                 Swal.fire({
                   title: 'Exito',
-                  text: 'Su reporte se ha agregado con exito',
+                  text: 'Su reporte se ha agregado con exito, un de nuestros tecnicos se contactará con usted pronto',
                   icon: 'success'
                 });
               }
             }, (e: any) => {
-              console.log(e);
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
             });
           }
           break;
@@ -312,7 +408,7 @@ export class PerfilComponent implements OnInit {
         cancelButtonText: 'No',
         allowOutsideClick: false
     }).then((result) => {
-      if (result) {
+      if (result.isConfirmed) {
         // mensaje para cargar informacion
         Swal.fire({
           title: 'Espere',

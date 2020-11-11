@@ -139,7 +139,6 @@ prueba; // PRUEBA DE IMAGENES
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
-    this.mymap.dragging.disable(); // deshabilatar mover mapa con el cursor
 
     this.info.onAdd = (map) => {
       this.div = L.DomUtil.create('div', 'info');
@@ -441,6 +440,7 @@ prueba; // PRUEBA DE IMAGENES
             text: 'Su información ha sido enviada con exito, uno de nuestros trabajadores se pondra en contacto con usted pronto',
             icon: 'success',
             });
+          datos.reset();
          }
          else {
           Swal.fire({

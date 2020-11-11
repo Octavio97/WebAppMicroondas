@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ElementoComponent } from './pages/elemento/elemento.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { Page404Component } from './pages/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     LoginComponent,
     AdminComponent,
     ElementoComponent,
-    PerfilComponent
+    PerfilComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
       { path: 'login', component: LoginComponent },
       { path: 'inicio', component: AdminComponent },
       { path: 'inicio/:id/:id2', component: ElementoComponent },
-      { path: 'perfil', component: PerfilComponent }
+      { path: 'perfil', component: PerfilComponent },
+      { path: '**', pathMatch: 'full', component: Page404Component }
     ])
   ],
   providers: [],

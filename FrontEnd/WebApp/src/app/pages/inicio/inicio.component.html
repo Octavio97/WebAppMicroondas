@@ -26,7 +26,7 @@
     <!-- Contenido -->
     <div class="menu animated fadeIn">
         <!-- Slide de imagenes y formulario -->
-        <div class="container animated fadeIn">
+        <div class="container-xl animated fadeIn">
             <!-- Slide de imagenes -->
             <div id="slide" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner">
@@ -67,7 +67,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="codigo">Código postal: &nbsp;</label>
-                            <input [ngClass]="{ 'is-invalid' : cp.invalid && (cp.dirty || cp.touched) }" type="number" id="codigo" name="codigo" class="form-control" [(ngModel)]="this.informes.cp" #cp="ngModel" placeholder="Ingrese su código postal" required pattern="[0-9]{5}">
+                            <input [ngClass]="{ 'is-invalid' : cp.invalid && (cp.dirty || cp.touched) }" type="number" id="codigo" name="codigo" class="form-control" [(ngModel)]="this.informes.cp" #cp="ngModel" placeholder="Ingrese su código postal" required pattern="[0-9]{5}" maxlength="5">
                             <div *ngIf="cp.errors?.required" class="invalid-feedback">Ingrese código postal</div>
                             <div *ngIf="cp.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
                             <div *ngIf="cp.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
@@ -89,7 +89,7 @@
         <br><br>
     
         <!-- Paquetes, Cobertura, Acerca de -->
-        <div class="container animated fadeIn">
+        <div class="container-xl animated fadeIn">
             <!-- Acerca de -->
             <section id="nosotros">
                 <h1 class="display-2">Nosotros</h1>
@@ -110,9 +110,12 @@
             <!-- Paquetes -->
             <section id="paquetes">
             <h1 class="display-2">Nuestros Paquetes</h1>
-            <div class="d-flex justify-content-between align-content-start flex-wrap" *ngFor="let item of paquetes">
-                <img [src]="item.imagen" [alt]="item.nombre" class="rounded float-left">
+            <div class="d-flex justify-content-around">
+                <div *ngFor="let item of paquetes">
+                    <img [src]="item.imagen" [alt]="item.nombre" class="p-2 bd-highlight rounded">
+                </div>
             </div>
+            
             </section>
     
             <!-- Cobertura -->
@@ -171,11 +174,12 @@
         <!-- Informes y formulario de ac -->
         <div style="background-color: cornflowerblue; color: white;">
             <!-- Informes de la empresa -->
-            <div class="animated fadeIn container" style="padding: 2%;">
+            <div class="animated fadeIn container-fluid" style="padding: 2%;">
                 <img src="../../../assets/img/logo2.png" alt="logo" style="height: 90px; width: 341;">
                 <h6>Desarrollo de sistemas TJ S.A de C.V</h6>
                 <h6>Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, México</h6>
                 <h6>Teléfono: (664) 199-8146</h6>
+                <br><br><br>
             </div>
         </div>
     </div>

@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
       }, (e: any) => {
         Swal.fire({
           title: 'ERROR',
-          text: 'Error de conexión, intente mas tarde',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
           icon: 'error',
           showConfirmButton: false,
           timer: 3000

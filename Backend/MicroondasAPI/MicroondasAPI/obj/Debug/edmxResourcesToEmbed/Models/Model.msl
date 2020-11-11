@@ -87,12 +87,12 @@
     <EntitySetMapping Name="Paquete">
       <EntityTypeMapping TypeName="MicroondasModel.Paquete">
         <MappingFragment StoreEntitySet="Paquete">
-          <ScalarProperty Name="imagen" ColumnName="imagen" />
           <ScalarProperty Name="idPaquete" ColumnName="idPaquete" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="imagen" ColumnName="imagen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -120,6 +120,16 @@
           <ScalarProperty Name="idRol" ColumnName="idRol" />
           <ScalarProperty Name="rol1" ColumnName="rol" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SlideImg">
+      <EntityTypeMapping TypeName="MicroondasModel.SlideImg">
+        <MappingFragment StoreEntitySet="SlideImg">
+          <ScalarProperty Name="idSlide" ColumnName="idSlide" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="imagen" ColumnName="imagen" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -158,13 +168,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SlideImg">
-      <EntityTypeMapping TypeName="MicroondasModel.SlideImg">
-        <MappingFragment StoreEntitySet="SlideImg">
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="imagen" ColumnName="imagen" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="idSlide" ColumnName="idSlide" />
+    <EntitySetMapping Name="Antena">
+      <EntityTypeMapping TypeName="MicroondasModel.Antena">
+        <MappingFragment StoreEntitySet="Antena">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="numExt" ColumnName="numExt" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="idColonia" ColumnName="idColonia" />
+          <ScalarProperty Name="idCP" ColumnName="idCP" />
+          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="idAntena" ColumnName="idAntena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

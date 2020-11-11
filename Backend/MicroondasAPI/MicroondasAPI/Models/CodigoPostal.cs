@@ -19,6 +19,7 @@ namespace MicroondasAPI.Models
         {
             this.Colonia = new HashSet<Colonia>();
             this.Usuario = new HashSet<Usuario>();
+            this.Antena = new HashSet<Antena>();
         }
     
         public System.Guid idCP { get; set; }
@@ -31,5 +32,7 @@ namespace MicroondasAPI.Models
         public virtual ICollection<Colonia> Colonia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Antena> Antena { get; set; }
     }
 }

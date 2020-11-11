@@ -123,3 +123,16 @@ CREATE TABLE SlideImg (
     imagen IMAGE,
     descripcion VARCHAR(MAX)
 );
+
+CREATE TABLE Antena (
+    idAntena UNIQUEIDENTIFIER PRIMARY KEY,
+    idEstado UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Estado(idEstado),
+    idCiudad UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Ciudad(idCiudad),
+    idCP UNIQUEIDENTIFIER FOREIGN KEY REFERENCES CodigoPostal(idCP),
+    idColonia UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Colonia(idColonia),
+    calle VARCHAR(50),
+    numExt int,
+    lat DECIMAL,
+    lon DECIMAL,
+    activo bit
+);
