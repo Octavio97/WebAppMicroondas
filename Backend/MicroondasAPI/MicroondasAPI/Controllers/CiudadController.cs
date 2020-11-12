@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarCiudad")]
         public IHttpActionResult eliminarCiudad(string id)
         {
@@ -64,8 +64,12 @@ namespace MicroondasAPI.Controllers
                 // Buscamos la ciudad a eliminar
                 var accion = SessionController.getInstance().Ciudad.Where(w => w.idCiudad == guid).FirstOrDefault();
 
-                // Deshablilitamos la ciudad
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Ciudad.Remove(accion);
 
                 // Ejecutamos los cambios
                 SessionController.getInstance().SaveChanges();

@@ -31,6 +31,8 @@ import { Informes } from 'src/app/models/informes.model';
 import { InformesService } from '../../services/informes.service';
 import { SlideImg } from 'src/app/models/slideImg.model';
 import { SlideImgService } from '../../services/slide-img.service';
+import { Antena } from '../../models/antena.model';
+import { AntenaService } from '../../services/antena.service';
 
 @Component({
   selector: 'app-elemento',
@@ -65,6 +67,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
   soporte: Soporte;
   informes: Informes;
   slides: SlideImg;
+  antena: Antena;
 
   // arreglos para los dropbox y/o tablas
   e: Estado[];
@@ -98,7 +101,8 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private soporteS: SoporteService,
     private informesS: InformesService,
-    private slideImgS: SlideImgService) { }
+    private slideImgS: SlideImgService,
+    private antenaS: AntenaService) { }
 
   // Metodo para cargar los dropbox dependiendo el formulario
   ngAfterViewInit(): void {
@@ -384,6 +388,62 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         });
       });
     }
+    else if (this.id === 'Antenas' && this.id2 !== 'new') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        this.e = resp;
+        // tslint:disable-next-line: no-shadowed-variable
+        this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+        this.c = resp;
+        // tslint:disable-next-line: no-shadowed-variable
+        this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+          this.cp = resp;
+          // tslint:disable-next-line: no-shadowed-variable
+          this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
+            this.co = resp;
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          });
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+    }
+    else if (this.id === 'Antenas' && this.id2 === 'new') {
+      this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
+        if (resp) {
+          this.e = resp;
+        }
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -666,6 +726,24 @@ export class ElementoComponent implements OnInit, AfterViewInit {
             });
           });
         }
+        else if (this.id === 'Antenas') {
+          this.antena = new Antena();
+          this.antena.idAntena = this.id2;
+
+          this.antenaS.verAntena(this.id2).subscribe( (resp: Antena) => {
+            if (resp) {
+              this.antena = resp;
+            }
+          }, (e: any) => {
+            Swal.fire({
+              title: 'ERROR',
+              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 3000
+            });
+          });
+        }
       }
       else { // si es nuevo...
         if (this.id === 'Ciudad') {
@@ -711,6 +789,9 @@ export class ElementoComponent implements OnInit, AfterViewInit {
         }
         else if (this.id === 'Imágenes promocionales') {
           this.slides = new SlideImg();
+        }
+        else if (this.id === 'Antenas') {
+          this.antena = new Antena();
         }
       }
     }
@@ -1503,6 +1584,62 @@ export class ElementoComponent implements OnInit, AfterViewInit {
                   Swal.fire({
                     title: 'Error',
                     text: 'El slide ya existe',
+                    icon: 'error'
+                  });
+                }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+              });
+            }
+          }
+          else if (this.id === 'Antenas') {
+            if (this.antena.idAntena) {
+              this.antenaS.modificarAntena(this.antena).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'La antena fue actualizada con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'La antena ya existe',
+                    icon: 'error'
+                  });
+                }
+              }, (e: any) => {
+                Swal.fire({
+                  title: 'ERROR',
+                  text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                  icon: 'error',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+              });
+            }
+            else {
+              this.antenaS.altaAntena(this.antena).subscribe( resp => {
+                if (resp) {
+                  Swal.fire({
+                    title: 'Exito',
+                    text: 'La antena fue guardado con exito',
+                    icon: 'success'
+                  });
+                  this.router.navigate(['/inicio']);
+                }
+                else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'La antena ya existe',
                     icon: 'error'
                   });
                 }

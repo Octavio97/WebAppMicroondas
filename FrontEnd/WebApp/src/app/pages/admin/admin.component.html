@@ -16,19 +16,19 @@
 
     <!-- Contenido -->
     <div class="roll d-flex flex-row">
+        <!-- Menu de tablas -->
         <div class="menu d-flex flex-column">
             <ul class="list-group" *ngFor="let item of tablas">
                 <li [ngClass]="{'active' : this.seleccion === item}" (click)="change(item)" class="list-group-item">{{ item }}</li>
             </ul>
         </div>
-        
-    
+
         <!-- Contenido -->
         <div class="container-fluid menu animated fadeIn">
             <!-- Administrador -->
             <div class="table-responsive-xl animated fadeIn" *ngIf="this.session.Rol.rol1 === 'administrador'">
                 <br>
-                <!-- Botones agregar, tabla y activos -->
+                <!-- Botones agregar y activos -->
                 <div *ngIf="seleccion !== 'Seleccione tabla...'">
                     <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;" [routerLink]="['/inicio', this.seleccion, 'new']"><i class="fas fa-plus"></i> Agregar</button>
                     <div class="form-check float-right">
@@ -469,6 +469,30 @@
                         <td><button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idSlide]"><i class="fas fa-pen"></i></button><button (click)="delete(item)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                     </tr>
                 </tbody>
+                </table>
+                <!-- Antena -->
+                <table class="table animated fadeIn" *ngIf="seleccion === 'Antenas' && !cargando && !length">
+                    <thead class="thead-dark">
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Coordenadas</th>
+                        <th scope="col">Activo</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of antena">
+                            <td>{{ item.calle }} num: {{ item.numExt }}, CP: {{ item.CP.codigo }}, {{ item.Colonia.colonia1 }}, {{ item.Ciudad.ciudad1 }}, {{ item.Estado.estado1 }}</td>
+                            <td>[{{ item.lat }},{{ item.lon }}]</td>
+                            <td *ngIf="item.activo || this.in">
+                                <span *ngIf="item.activo" class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span>
+                                <span *ngIf="!item.activo" class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span>
+                            </td>
+                            <td *ngIf="item.activo || this.in">
+                                <button class="btn btn-light" [routerLink]="['/inicio', this.seleccion, item.idAntena]"><i class="fas fa-pen"></i></button>
+                                <button *ngIf="item.activo === true" (click)="delete(item, true)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                <button *ngIf="item.activo === false" (click)="restoreRegistro(item, false)" class="btn btn-success"><i class="fas fa-trash-restore"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <br><br>
                 <!-- Banner de selección -->

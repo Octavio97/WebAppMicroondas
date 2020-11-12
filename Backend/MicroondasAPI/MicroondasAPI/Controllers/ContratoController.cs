@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarContrato")]
         public IHttpActionResult eliminarContrato(string id)
         {
@@ -65,8 +65,12 @@ namespace MicroondasAPI.Controllers
                 // buscamos el contrato a eliminar
                 var accion = SessionController.getInstance().Contrato.Where(w => w.idContrato == guid).FirstOrDefault();
 
-                // Deshabilitamos el contrato
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Contrato.Remove(accion);
 
                 // ejecutamos las acciones
                 SessionController.getInstance().SaveChanges();

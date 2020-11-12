@@ -32,6 +32,8 @@ import { Informes } from 'src/app/models/informes.model';
 import { InformesService } from '../../services/informes.service';
 import { SlideImgService } from '../../services/slide-img.service';
 import { SlideImg } from 'src/app/models/slideImg.model';
+import { Antena } from '../../models/antena.model';
+import { AntenaService } from '../../services/antena.service';
 
 @Component({
   selector: 'app-admin',
@@ -45,7 +47,7 @@ export class AdminComponent implements OnInit {
   length = false; // dimension del arreglo
   seleccion = 'Seleccione tabla...';
   in = false; // mostrar registros eliminados
-  tablas = ['Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte', 'Informes', 'Imágenes promocionales'];
+  tablas = ['Antenas', 'Usuario', 'Rol', 'Estatus', 'Ciudad', 'Código postal', 'Colonia', 'Contrato', 'Equipo', 'Estado', 'Paquete', 'Propiedad', 'Soporte', 'Informes', 'Imágenes promocionales'];
   rol: Rol[];
   slides: SlideImg[];
   estado: Estado[];
@@ -61,6 +63,7 @@ export class AdminComponent implements OnInit {
   paqueteEquipo: PaqueteEquipo[];
   propiedad: Propiedad[];
   informes: Informes[];
+  antena: Antena[];
 
   constructor(
     private rolS: RolService,
@@ -78,6 +81,7 @@ export class AdminComponent implements OnInit {
     private soporteS: SoporteService,
     private informesS: InformesService,
     private slideImgService: SlideImgService,
+    private antenaS: AntenaService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -381,16 +385,16 @@ export class AdminComponent implements OnInit {
       this.soporte = new Array<Soporte>();
       this.soporteS.consultaSoporte().subscribe( (resp: Soporte[]) => {
         resp.length === 0 ? this.length = true : this.length = false;
-        if (resp) {
-          this.soporte = resp;
-          this.cargando = false;
-        }
-        else {
+        if (resp === null) {
           Swal.fire({
             title: 'Error',
             text: 'Hubo un error inesperado',
             icon: 'error'
           });
+        }
+        else {
+          this.soporte = resp;
+          this.cargando = false;
         }
       }, (e: any) => {
         Swal.fire({
@@ -406,16 +410,16 @@ export class AdminComponent implements OnInit {
       this.informes = new Array<Informes>();
       this.informesS.consultaInformes().subscribe( (resp: Informes[]) => {
         resp.length === 0 ? this.length = true : this.length = false;
-        if (resp) {
-          this.informes = resp;
-          this.cargando = false;
-        }
-        else {
+        if (resp === null) {
           Swal.fire({
             title: 'Error',
             text: 'Hubo un error inesperado',
             icon: 'error'
           });
+        }
+        else {
+          this.informes = resp;
+          this.cargando = false;
         }
       }, (e: any) => {
         Swal.fire({
@@ -431,16 +435,41 @@ export class AdminComponent implements OnInit {
       this.slides = new Array<SlideImg>();
       this.slideImgService.consultaSlideImg().subscribe( (resp: SlideImg[]) => {
         resp.length === 0 ? this.length = true : this.length = false;
-        if (resp) {
-          this.slides = resp;
-          this.cargando = false;
-        }
-        else {
+        if (resp === null) {
           Swal.fire({
             title: 'Error',
             text: 'Hubo un error inesperado',
             icon: 'error'
           });
+        }
+        else {
+          this.slides = resp;
+          this.cargando = false;
+        }
+      }, (e: any) => {
+        Swal.fire({
+          title: 'ERROR',
+          text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000
+        });
+      });
+    }
+    else if (i === 'Antenas') {
+      this.antena = new Array<Antena>();
+      this.antenaS.consultarAntena().subscribe( (resp: Antena[]) => {
+        resp.length === 0 ? this.length = true : this.length = false;
+        if (resp === null) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Hubo un error inesperado',
+            icon: 'error'
+          });
+        }
+        else {
+          this.antena = resp;
+          this.cargando = false;
         }
       }, (e: any) => {
         Swal.fire({
@@ -801,6 +830,28 @@ export class AdminComponent implements OnInit {
           });
         });
       }
+      else if (this.seleccion === 'Antenas') {
+        this.antenaS.modificarAntena(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'La antena fue eliminado con exito',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            this.router.navigate(['/inicio']);
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+      }
     }
   });
   }
@@ -1074,6 +1125,28 @@ export class AdminComponent implements OnInit {
             Swal.fire({
               title: 'Exito',
               text: 'El informe fue restaurado con exito',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            this.router.navigate(['/inicio']);
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+      }
+      else if (this.seleccion === 'Antenas') {
+        this.antenaS.modificarAntena(id, i).subscribe( resp => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'La antena fue restaurado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000

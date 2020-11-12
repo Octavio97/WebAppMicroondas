@@ -47,7 +47,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarSoporte")]
         public IHttpActionResult eliminarSoporte(string id)
         {
@@ -57,7 +57,12 @@ namespace MicroondasAPI.Controllers
 
                 var accion = SessionController.getInstance().Soporte.Where(w => w.idSoporte == i).FirstOrDefault();
 
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Soporte.Remove(accion);
 
                 SessionController.getInstance().SaveChanges();
 

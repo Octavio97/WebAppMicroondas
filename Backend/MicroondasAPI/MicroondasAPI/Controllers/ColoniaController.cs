@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarColonia")]
         public IHttpActionResult eliminarColonia(string id)
         {
@@ -65,8 +65,12 @@ namespace MicroondasAPI.Controllers
                 // buscamos la colonia a eliminar
                 var accion = SessionController.getInstance().Colonia.Where(w => w.idColonia == guid).FirstOrDefault();
 
-                // Deshabilitamos la colonia
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Colonia.Remove(accion);
 
                 // ejecutamos las acciones
                 SessionController.getInstance().SaveChanges();

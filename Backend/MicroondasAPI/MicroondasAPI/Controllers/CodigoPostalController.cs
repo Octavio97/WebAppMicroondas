@@ -53,7 +53,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarCP")]
         public IHttpActionResult eliminarCP(string id)
         {
@@ -65,8 +65,12 @@ namespace MicroondasAPI.Controllers
                 // buscamos al codigo postal a eliminar
                 var accion = SessionController.getInstance().CodigoPostal.Where(w => w.idCP == guid).FirstOrDefault();
 
-                // Deshabilitamos al codigo postal
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().CodigoPostal.Remove(accion);
 
                 // ejecutamos las acciones
                 SessionController.getInstance().SaveChanges();

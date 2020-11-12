@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarEstatus")]
         public IHttpActionResult eliminarEstatus(string id)
         {
@@ -64,8 +64,12 @@ namespace MicroondasAPI.Controllers
                 // buscamos el estatus a eliminar
                 var accion = SessionController.getInstance().Estatus.Where(w => w.idEstatus == guid).FirstOrDefault();
 
-                // Deshabilitamos el estatus
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Estatus.Remove(accion);
 
                 // ejecutamos las acciones
                 SessionController.getInstance().SaveChanges();

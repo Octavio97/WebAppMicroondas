@@ -52,7 +52,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarEquipo")]
         public IHttpActionResult eliminarEquipo(string id)
         {
@@ -64,8 +64,12 @@ namespace MicroondasAPI.Controllers
                 // buscamos al equipo a eliminar
                 var accion = SessionController.getInstance().Equipo.Where(w => w.idEquipo == guid).FirstOrDefault();
 
-                // Deshabilitamos al equipo
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Equipo.Remove(accion);
 
                 // ejecutamos las acciones
                 SessionController.getInstance().SaveChanges();

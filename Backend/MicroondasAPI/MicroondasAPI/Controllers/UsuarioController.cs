@@ -57,7 +57,7 @@ namespace MicroondasAPI.Controllers
             }
         }
         
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarUsuario")]
         public IHttpActionResult eliminarUsuario(string id)
         {
@@ -69,8 +69,12 @@ namespace MicroondasAPI.Controllers
                 // Buscamos al usuario a eliminar
                 var accion = SessionController.getInstance().Usuario.Where(w => w.idUsuario == guid).FirstOrDefault();
 
-                // Deshabilitamos al usuario
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Usuario.Remove(accion);
 
                 // Guardamos los cambios
                 SessionController.getInstance().SaveChanges();

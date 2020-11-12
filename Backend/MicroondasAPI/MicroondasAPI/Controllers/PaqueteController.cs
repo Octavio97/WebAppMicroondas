@@ -55,7 +55,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarPaquete")]
         public IHttpActionResult eliminarPaquete(string id)
         {
@@ -67,8 +67,12 @@ namespace MicroondasAPI.Controllers
                 // buscamos el rol a eliminar
                 var accion = SessionController.getInstance().Paquete.Where(w => w.idPaquete == guid).FirstOrDefault();
 
-                // Deshabilitamos el rol
-                accion.activo = false;
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                SessionController.getInstance().Paquete.Remove(accion);
 
                 // ejecutamos las acciones
                 SessionController.getInstance().SaveChanges();

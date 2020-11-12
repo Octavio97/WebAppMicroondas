@@ -45,7 +45,7 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/MicroondasAPI/eliminarInformes")]
         public IHttpActionResult eliminarInformes(string id)
         {
@@ -60,7 +60,7 @@ namespace MicroondasAPI.Controllers
                     return Ok(false);
                 }
 
-                accion.activo = false;
+                SessionController.getInstance().Informes.Remove(accion);
 
                 SessionController.getInstance().SaveChanges();
 

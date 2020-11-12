@@ -567,4 +567,64 @@
             <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>
+    <!-- Antenas -->
+    <div *ngIf="this.id === 'Antenas'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð.]*"
+                    [(ngModel)]="this.antena.calle" #calle="ngModel">
+                <div *ngIf="calle.errors?.required" class="invalid-feedback">Solo ingresa tu calle</div>
+                <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="ext">Num.Ext:</label>
+                <input [ngClass]="{ 'is-invalid' : ext.invalid && (ext.dirty || ext.touched) }" type="number" class="form-control" id="ext" name="ext" placeholder="Ingrese Num.Ext" required pattern="[0-9]{2,5}" [(ngModel)]="this.antena.numExt" minlength="2" maxlength="5"
+                    #ext="ngModel">
+                <div *ngIf="ext.errors?.required" class="invalid-feedback">Ingrese su número de casa exterior</div>
+                <div *ngIf="ext.errors?.pattern" class="invalid-feedback">Debe ser un numero entre 2 y 5 dígitos</div>
+            </div>      
+            <div class="form-group">
+                <label for="estado">Estado: </label>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [(ngModel)]="this.antena.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
+            </div>
+            <div class="form-group">
+                <label for="idciudad">Ciudad: </label>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.antena.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
+            </div>
+            <div class="form-group">
+                <label for="codigo">Código postal: </label>
+                <select [ngClass]="{ 'is-invalid' : idcp.invalid && (idcp.dirty || idcp.touched) }" class="form-control" name="idcodigo" id="idcodigo" [(ngModel)]="this.antena.idCP" (ngModelChange)="cambio3($event)" #idcp="ngModel" required>
+                    <option *ngFor="let item of cp" [ngValue]="item.idCP">{{ item.codigo }}</option>
+                </select>
+                <div *ngIf="idcp.errors?.required" class="invalid-feedback">Seleccione código postal</div>
+            </div>
+            <div class="form-group">
+                <label for="idcolonia">Colonia: </label>
+                <select [ngClass]="{ 'is-invalid' : idcolonia.invalid && (idcolonia.dirty || idcolonia.touched) }" class="form-control" name="idcolonia" id="idcolonia" [(ngModel)]="this.antena.idColonia" #idcolonia="ngModel" required>
+                    <option *ngFor="let item of co" [ngValue]="item.idColonia">{{ item.colonia1 }}</option>
+                </select>
+                <div *ngIf="idcolonia.errors?.required" class="invalid-feedback">Seleccione colonia</div>
+            </div>
+            <div class="form-group">
+                <label for="lat">Latitud:</label>
+                <input type="text">
+            </div>
+            <div class="form-group">
+                <label for="lon">Longitud</label>
+                <input type="text">
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch16" name="activo" [(ngModel)]="this.antena.activo">
+                <label class="custom-control-label" for="customSwitch16">Activo</label>
+            </div>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
 </div>
