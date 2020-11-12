@@ -52,6 +52,8 @@ import { PaqueteService } from 'src/app/services/paquete.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SlideImg } from 'src/app/models/slideImg.model';
 import { SlideImgService } from '../../services/slide-img.service';
+import { AntenaService } from '../../services/antena.service';
+import { Antena } from 'src/app/models/antena.model';
 
 @Component({
   selector: 'app-inicio',
@@ -89,6 +91,7 @@ prueba; // PRUEBA DE IMAGENES
     private informesS: InformesService,
     private paquetesS: PaqueteService,
     private slideImgS: SlideImgService,
+    private antenaS: AntenaService,
     private dom: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -135,7 +138,7 @@ prueba; // PRUEBA DE IMAGENES
     }
 
     // asignamos caracteristicas que va a tener nuestro mapa
-    this.mymap = L.map('mapid', { zoomControl: false, scrollWheelZoom: false }).setView([22.021667, -102.356389], 5);
+    this.mymap = L.map('mapid', { zoomControl: false}).setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
@@ -160,11 +163,27 @@ prueba; // PRUEBA DE IMAGENES
       // cambiar arreglo para CP
       else if (props.NAME_2 !== null) {
         // tslint:disable-next-line: prefer-for-of
-        for (let index = 0; index < this.ciudad.length; index++) {
-          if (this.ciudad[index].ciudad1 === props.NAME_2) {
-            this.getCP(this.ciudad[index].idCiudad, props.NAME_1);
+        // for (let index = 0; index < this.ciudad.length; index++) {
+        //   if (this.ciudad[index].ciudad1 === props.NAME_2) {
+        //     this.getCP(this.ciudad[index].idCiudad, props.NAME_1);
+        //   }
+        // }
+
+        this.antenaS.verAntenas(props.NAME_2).subscribe( (resp: Antena[]) => {
+          if (resp) {
+            // tslint:disable-next-line: prefer-for-of
+            for (let i = 0; i < resp.length; i++) {
+              L.circle([resp[i].lat, resp[i].lon], {
+                color: 'blue',
+                filColor: '#0066F0',
+                fillOpacity: 0.5,
+                radius: 3000
+              }).addTo(this.mymap);
+            }
           }
-        }
+        }, (e: any) => {
+          console.log(e);
+        });
       }
     };
     this.info.addTo(this.mymap);

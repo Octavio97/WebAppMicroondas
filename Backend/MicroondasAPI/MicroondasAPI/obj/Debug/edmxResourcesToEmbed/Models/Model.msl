@@ -171,6 +171,8 @@
     <EntitySetMapping Name="Antena">
       <EntityTypeMapping TypeName="MicroondasModel.Antena">
         <MappingFragment StoreEntitySet="Antena">
+          <ScalarProperty Name="lon" ColumnName="lon" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="numExt" ColumnName="numExt" />
           <ScalarProperty Name="calle" ColumnName="calle" />

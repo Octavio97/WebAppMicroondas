@@ -33,4 +33,8 @@ export class AntenaService {
   verAntena(id: string) {
     return this.http.get( this.url + 'verAntena', { params: { id } } );
   }
+
+  verAntenas(ciudad: string){
+    return this.http.get( this.url + 'verAntenas', { params: { ciudad } } );
+  }
 }

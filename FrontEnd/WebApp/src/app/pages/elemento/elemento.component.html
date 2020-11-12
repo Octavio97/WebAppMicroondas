@@ -593,7 +593,7 @@
             </div>
             <div class="form-group">
                 <label for="idciudad">Ciudad: </label>
-                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.antena.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idCiudad" id="idCiudad" [(ngModel)]="this.antena.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
                     <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
                 </select>
                 <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
@@ -614,16 +614,19 @@
             </div>
             <div class="form-group">
                 <label for="lat">Latitud:</label>
-                <input type="text">
+                <input [ngClass]="{ 'is-invalid' : lat.invalid && (lat.dirty || lat.touched) }" class="form-control" [(ngModel)]="this.antena.lat" type="number" name="lat" #lat="ngModel" required>
+                <div *ngIf="lat.errors?.required" class="invalid-feedback">Ingrese latitud</div>
             </div>
             <div class="form-group">
                 <label for="lon">Longitud</label>
-                <input type="text">
+                <input [ngClass]="{ 'is-invalid' : lon.invalid && (lon.dirty || lon.touched) }" class="form-control" [(ngModel)]="this.antena.lon" type="number" name="lon" #lon="ngModel" required>
+                <div *ngIf="lon.errors?.required" class="invalid-feedback">Ingrese longitud</div>
             </div>
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch16" name="activo" [(ngModel)]="this.antena.activo">
                 <label class="custom-control-label" for="customSwitch16">Activo</label>
             </div>
+            <br>
             <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
         </form>
     </div>

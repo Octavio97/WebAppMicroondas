@@ -11,8 +11,8 @@ export class Antena {
     idColonia: string;
     calle: string;
     numExt: number;
-    lat: number;
-    lon: number;
+    lat: string;
+    lon: string;
     activo: boolean;
     Estado: Estado;
     Ciudad: Ciudad;

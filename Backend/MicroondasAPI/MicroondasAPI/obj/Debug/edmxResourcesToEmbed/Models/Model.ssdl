@@ -11,6 +11,8 @@
     <Property Name="idColonia" Type="uniqueidentifier" />
     <Property Name="calle" Type="varchar" MaxLength="50" />
     <Property Name="numExt" Type="int" />
+    <Property Name="lat" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="lon" Type="decimal" Precision="18" Scale="0" />
     <Property Name="activo" Type="bit" />
   </EntityType>
   <EntityType Name="Ciudad">
@@ -165,7 +167,7 @@
     <Property Name="idRol" Type="uniqueidentifier" />
     <Property Name="activo" Type="bit" />
   </EntityType>
-  <Association Name="FK__Antena__idCiudad__1DB06A4F">
+  <Association Name="FK__Antena__idCiudad__236943A5">
     <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
     <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
     <ReferentialConstraint>
@@ -177,7 +179,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Antena__idColoni__1F98B2C1">
+  <Association Name="FK__Antena__idColoni__25518C17">
     <End Role="Colonia" Type="Self.Colonia" Multiplicity="0..1" />
     <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
     <ReferentialConstraint>
@@ -189,7 +191,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Antena__idCP__1EA48E88">
+  <Association Name="FK__Antena__idCP__245D67DE">
     <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="0..1" />
     <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
     <ReferentialConstraint>
@@ -201,7 +203,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Antena__idEstado__1CBC4616">
+  <Association Name="FK__Antena__idEstado__22751F6C">
     <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
     <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
     <ReferentialConstraint>
@@ -434,19 +436,19 @@
     <EntitySet Name="SlideImg" EntityType="Self.SlideImg" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Antena__idCiudad__1DB06A4F" Association="Self.FK__Antena__idCiudad__1DB06A4F">
+    <AssociationSet Name="FK__Antena__idCiudad__236943A5" Association="Self.FK__Antena__idCiudad__236943A5">
       <End Role="Ciudad" EntitySet="Ciudad" />
       <End Role="Antena" EntitySet="Antena" />
     </AssociationSet>
-    <AssociationSet Name="FK__Antena__idColoni__1F98B2C1" Association="Self.FK__Antena__idColoni__1F98B2C1">
+    <AssociationSet Name="FK__Antena__idColoni__25518C17" Association="Self.FK__Antena__idColoni__25518C17">
       <End Role="Colonia" EntitySet="Colonia" />
       <End Role="Antena" EntitySet="Antena" />
     </AssociationSet>
-    <AssociationSet Name="FK__Antena__idCP__1EA48E88" Association="Self.FK__Antena__idCP__1EA48E88">
+    <AssociationSet Name="FK__Antena__idCP__245D67DE" Association="Self.FK__Antena__idCP__245D67DE">
       <End Role="CodigoPostal" EntitySet="CodigoPostal" />
       <End Role="Antena" EntitySet="Antena" />
     </AssociationSet>
-    <AssociationSet Name="FK__Antena__idEstado__1CBC4616" Association="Self.FK__Antena__idEstado__1CBC4616">
+    <AssociationSet Name="FK__Antena__idEstado__22751F6C" Association="Self.FK__Antena__idEstado__22751F6C">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="Antena" EntitySet="Antena" />
     </AssociationSet>

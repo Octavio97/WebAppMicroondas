@@ -11,7 +11,7 @@ namespace MicroondasAPI.Controllers
     public class AntenaController : ApiController
     {
         [HttpPost]
-        [Route("api/MicoondasAPI/agregarAntena")]
+        [Route("api/MicroondasAPI/agregarAntena")]
         public IHttpActionResult agregarAntena(Antena antena)
         {
             try
@@ -50,7 +50,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/MicoondasAPI/eliminarAntena")]
+        [Route("api/MicroondasAPI/eliminarAntena")]
         public IHttpActionResult eliminarAntena(string id)
         {
             try
@@ -77,7 +77,7 @@ namespace MicroondasAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/MicoondasAPI/consultarAntena")]
+        [Route("api/MicroondasAPI/consultarAntena")]
         public IHttpActionResult consultarAntena()
         {
             try
@@ -127,8 +127,8 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("api/MicoondasAPI/modificarAntena")]
+        [HttpPut]
+        [Route("api/MicroondasAPI/modificarAntena")]
         public IHttpActionResult modificarAntena(Antena antena)
         {
             try
@@ -160,8 +160,8 @@ namespace MicroondasAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("api/MicoondasAPI/verAntena")]
+        [HttpGet]
+        [Route("api/MicroondasAPI/verAntena")]
         public IHttpActionResult verAntena(string id)
         {
             try
@@ -204,6 +204,33 @@ namespace MicroondasAPI.Controllers
                         colonia1 = accion.Colonia.colonia1
                     }
                 };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verAntenas")]
+        public IHttpActionResult verAntenas(string ciudad)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Antena.Where(w => w.Ciudad.ciudad1 == ciudad).ToList();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.Select(s => new
+                {
+                    lat = s.lat,
+                    lon = s.lon
+                });
 
                 return Ok(resultado);
             }

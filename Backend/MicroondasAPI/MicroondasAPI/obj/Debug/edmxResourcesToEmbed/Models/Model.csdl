@@ -512,6 +512,8 @@
     <NavigationProperty Name="Colonia" Relationship="MicroondasModel.FK__Antena__idColoni__1F98B2C1" FromRole="Antena" ToRole="Colonia" />
     <NavigationProperty Name="CodigoPostal" Relationship="MicroondasModel.FK__Antena__idCP__1EA48E88" FromRole="Antena" ToRole="CodigoPostal" />
     <NavigationProperty Name="Estado" Relationship="MicroondasModel.FK__Antena__idEstado__1CBC4616" FromRole="Antena" ToRole="Estado" />
+    <Property Name="lat" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="lon" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
   <Association Name="FK__Antena__idCiudad__1DB06A4F">
     <End Type="MicroondasModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />

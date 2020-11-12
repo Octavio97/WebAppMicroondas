@@ -392,13 +392,13 @@ export class ElementoComponent implements OnInit, AfterViewInit {
       this.estadoS.consultaEstado().subscribe( (resp: Estado[]) => {
         this.e = resp;
         // tslint:disable-next-line: no-shadowed-variable
-        this.ciudadS.consultaUnica(this.usuario.Estado.idEstado).subscribe( (resp: Ciudad[]) => {
+        this.ciudadS.consultaUnica(this.antena.idEstado).subscribe( (resp: Ciudad[]) => {
         this.c = resp;
         // tslint:disable-next-line: no-shadowed-variable
-        this.codigoS.consultaUnica(this.usuario.Ciudad.idCiudad).subscribe( (resp: CodigoPostal[]) => {
+        this.codigoS.consultaUnica(this.antena.idCiudad).subscribe( (resp: CodigoPostal[]) => {
           this.cp = resp;
           // tslint:disable-next-line: no-shadowed-variable
-          this.coloniaS.consultaUnica(this.usuario.CP.idCP).subscribe( (resp: Colonia[]) => {
+          this.coloniaS.consultaUnica(this.antena.idCP).subscribe( (resp: Colonia[]) => {
             this.co = resp;
           }, (e: any) => {
             Swal.fire({
