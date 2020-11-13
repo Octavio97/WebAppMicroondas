@@ -16,7 +16,7 @@ export class PaqueteService {
   }
 
   bajaPaquete(id: string) {
-    return this.http.put( this.url + 'eliminarPaquete', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarPaquete', { params: { id } } );
   }
 
   consultaPaquete() {

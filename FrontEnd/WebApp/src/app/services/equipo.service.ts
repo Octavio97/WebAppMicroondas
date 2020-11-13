@@ -16,7 +16,7 @@ export class EquipoService {
   }
 
   bajaEquipo(id: string) {
-    return this.http.put( this.url + 'eliminarEquipo', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarEquipo', { params: { id } } );
   }
 
   consultaEquipo() {

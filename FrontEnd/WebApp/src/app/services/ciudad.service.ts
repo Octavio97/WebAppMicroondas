@@ -16,7 +16,7 @@ export class CiudadService {
   }
 
   bajaCiudad(id: string) {
-    return this.http.put( this.url + 'eliminarCiudad', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarCiudad', { params: { id } } );
   }
 
   consultaCiudad() {

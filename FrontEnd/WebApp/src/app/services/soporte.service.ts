@@ -15,7 +15,7 @@ export class SoporteService {
   }
 
   bajaSoporte(id: string) {
-    return this.http.put( this.url + 'eliminarSoporte', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarSoporte', { params: { id } } );
   }
 
   modificarSoporte(soporte: Soporte, i?){

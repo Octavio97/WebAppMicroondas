@@ -501,10 +501,10 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  delete(id, i?){
+  delete(id){
     Swal.fire({
       title: 'Confirmación',
-      text: 'Esta seguro de eliminar el registro',
+      text: '¿Esta seguro de eliminar  permanetemente el registro?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -513,7 +513,378 @@ export class AdminComponent implements OnInit {
       cancelButtonText: 'No',
       allowOutsideClick: false
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
+        // mensaje para cargar informacion
+        Swal.fire({
+          title: 'Espere',
+          text: 'Realizando proceso...',
+          icon: 'info',
+          allowOutsideClick: false,
+          });
+        Swal.showLoading();
+        switch (this.seleccion) {
+          case 'Antenas':
+            this.antenaS.bajaAntena(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'La antena fue eliminada con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Ciudad':
+            this.ciudadS.bajaCiudad(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'La ciudad fue eliminada con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Código postal':
+            this.codigoS.bajaCodigo(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El código postal fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Colonia':
+            this.coloniaS.bajaColonia(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'La colonia fue eliminada con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Contrato':
+            this.contratoS.bajaContrato(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El contrato fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Equipo':
+            this.equipoS.bajaEquipo(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El equipo fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Estado':
+            this.estadoS.bajaEstado(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El estado fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Estatus':
+            this.estatusS.bajaEstatus(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El estatus fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Informes':
+            this.informesS.bajaInformes(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El informe fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Paquete':
+            this.paqueteS.bajaPaquete(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El paquete fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Imágenes promocionales':
+            this.slideImgService.bajaSlideImg(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El slide fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Propiedad':
+            this.propiedadS.bajaPropiedad(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'La propiedad fue eliminada con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Rol':
+            this.rolS.bajaRol(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El rol fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Soporte':
+            this.soporteS.bajaSoporte(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El soporte fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+
+          case 'Usuario':
+            this.usuarioS.bajaUsuario(id).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El usuario fue eliminado con exito',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+                });
+                this.router.navigate(['/inicio']);
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+            break;
+        }
+      }
+    });
+  }
+
+  deshabilitar(id, i) {
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Esta seguro de deshabilitar el registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
         // mensaje para cargar informacion
       Swal.fire({
         title: 'Espere',
@@ -527,7 +898,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'La ciudad fue eliminada con exito',
+              text: 'La ciudad fue deshabilitada con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -549,7 +920,7 @@ export class AdminComponent implements OnInit {
             if (resp) {
               Swal.fire({
                 title: 'Exito',
-                text: 'El código postal fue eliminado con exito',
+                text: 'El código postal fue deshabilitado con exito',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000
@@ -571,7 +942,7 @@ export class AdminComponent implements OnInit {
             if (resp) {
               Swal.fire({
                 title: 'Exito',
-                text: 'La colonia fue eliminada con exito',
+                text: 'La colonia fue deshabilitada con exito',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000
@@ -593,7 +964,7 @@ export class AdminComponent implements OnInit {
             if (resp) {
               Swal.fire({
                 title: 'Exito',
-                text: 'El contrato fue eliminado con exito',
+                text: 'El contrato fue deshabilitado con exito',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000
@@ -615,7 +986,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El equipo fue eliminado con exito',
+              text: 'El equipo fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -637,7 +1008,7 @@ export class AdminComponent implements OnInit {
             if (resp) {
               Swal.fire({
                 title: 'Exito',
-                text: 'El estado fue eliminado con exito',
+                text: 'El estado fue deshabilitado con exito',
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000
@@ -659,7 +1030,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El estatus fue eliminado con exito',
+              text: 'El estatus fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -681,29 +1052,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El paquete fue eliminado con exito',
-              icon: 'success',
-              showConfirmButton: false,
-              timer: 3000
-            });
-            this.router.navigate(['/inicio']);
-          }
-        }, (e: any) => {
-          Swal.fire({
-            title: 'ERROR',
-            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 3000
-          });
-        });
-      }
-      else if (this.seleccion === 'Propiedad') {
-        this.propiedadS.bajaPropiedad(id).subscribe( resp => {
-          if (resp) {
-            Swal.fire({
-              title: 'Exito',
-              text: 'La propiedad fue eliminada con exito',
+              text: 'El paquete fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -725,7 +1074,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El rol fue eliminado con exito',
+              text: 'El rol fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -747,7 +1096,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El estado fue eliminado con exito',
+              text: 'El estado fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -769,7 +1118,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El reporte fue eliminado con exito',
+              text: 'El reporte fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -791,29 +1140,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'El informe fue eliminado con exito',
-              icon: 'success',
-              showConfirmButton: false,
-              timer: 3000
-            });
-            this.router.navigate(['/inicio']);
-          }
-        }, (e: any) => {
-          Swal.fire({
-            title: 'ERROR',
-            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 3000
-          });
-        });
-      }
-      else if (this.seleccion === 'Imágenes promocionales') {
-        this.slideImgService.bajaSlideImg(id.idSlide).subscribe( resp => {
-          if (resp) {
-            Swal.fire({
-              title: 'Exito',
-              text: 'El slide fue eliminado con exito',
+              text: 'El informe fue deshabilitado con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -835,7 +1162,7 @@ export class AdminComponent implements OnInit {
           if (resp) {
             Swal.fire({
               title: 'Exito',
-              text: 'La antena fue eliminado con exito',
+              text: 'La antena fue deshabilitada con exito',
               icon: 'success',
               showConfirmButton: false,
               timer: 3000
@@ -868,7 +1195,7 @@ export class AdminComponent implements OnInit {
       cancelButtonText: 'No',
       allowOutsideClick: false
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
         // mensaje para cargar informacion
       Swal.fire({
         title: 'Espere',
@@ -1229,7 +1556,7 @@ export class AdminComponent implements OnInit {
         cancelButtonText: 'No',
         allowOutsideClick: false
       }).then((result) => {
-        if (result) {
+        if (result.isConfirmed) {
           Swal.fire({
             title: 'Espere',
             text: 'Realizando proceso...',

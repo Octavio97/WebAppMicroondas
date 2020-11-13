@@ -16,7 +16,7 @@ export class ContratoService {
   }
 
   bajaContrato(id: string) {
-    return this.http.put( this.url + 'eliminarContrato', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarContrato', { params: { id } } );
   }
 
   consultaContrato() {

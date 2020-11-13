@@ -16,7 +16,7 @@ export class InformesService {
   }
 
   bajaInformes(id: string){
-    return this.http.put( this.url + 'eliminarInformes', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarInformes', { params: { id } } );
   }
 
   consultaInformes() {

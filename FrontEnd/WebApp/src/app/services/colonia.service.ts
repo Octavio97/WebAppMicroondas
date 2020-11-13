@@ -16,7 +16,7 @@ export class ColoniaService {
   }
 
   bajaColonia(id: string) {
-    return this.http.put( this.url + 'eliminarColonia', { params: { id } } );
+    return this.http.delete( this.url + 'eliminarColonia', { params: { id } } );
   }
 
   consultaColonia() {
