@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MicroondasModelStoreContainer" CdmEntityContainer="MicroondasEntities">
+    <EntitySetMapping Name="Antena">
+      <EntityTypeMapping TypeName="MicroondasModel.Antena">
+        <MappingFragment StoreEntitySet="Antena">
+          <ScalarProperty Name="idAntena" ColumnName="idAntena" />
+          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+          <ScalarProperty Name="idCP" ColumnName="idCP" />
+          <ScalarProperty Name="idColonia" ColumnName="idColonia" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="numExt" ColumnName="numExt" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lon" ColumnName="lon" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Ciudad">
       <EntityTypeMapping TypeName="MicroondasModel.Ciudad">
         <MappingFragment StoreEntitySet="Ciudad">
@@ -165,22 +181,6 @@
           <ScalarProperty Name="idCP" ColumnName="idCP" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
           <ScalarProperty Name="activo" ColumnName="activo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Antena">
-      <EntityTypeMapping TypeName="MicroondasModel.Antena">
-        <MappingFragment StoreEntitySet="Antena">
-          <ScalarProperty Name="lon" ColumnName="lon" />
-          <ScalarProperty Name="lat" ColumnName="lat" />
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="numExt" ColumnName="numExt" />
-          <ScalarProperty Name="calle" ColumnName="calle" />
-          <ScalarProperty Name="idColonia" ColumnName="idColonia" />
-          <ScalarProperty Name="idCP" ColumnName="idCP" />
-          <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
-          <ScalarProperty Name="idEstado" ColumnName="idEstado" />
-          <ScalarProperty Name="idAntena" ColumnName="idAntena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

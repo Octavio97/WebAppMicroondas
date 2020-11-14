@@ -1,5 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MicroondasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Antena">
+    <Key>
+      <PropertyRef Name="idAntena" />
+    </Key>
+    <Property Name="idAntena" Type="Guid" Nullable="false" />
+    <Property Name="idEstado" Type="Guid" />
+    <Property Name="idCiudad" Type="Guid" />
+    <Property Name="idCP" Type="Guid" />
+    <Property Name="idColonia" Type="Guid" />
+    <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="numExt" Type="Int32" />
+    <Property Name="lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="Ciudad" Relationship="Self.FK__Antena__idCiudad__2FCF1A8A" FromRole="Antena" ToRole="Ciudad" />
+    <NavigationProperty Name="Colonia" Relationship="Self.FK__Antena__idColoni__31B762FC" FromRole="Antena" ToRole="Colonia" />
+    <NavigationProperty Name="CodigoPostal" Relationship="Self.FK__Antena__idCP__30C33EC3" FromRole="Antena" ToRole="CodigoPostal" />
+    <NavigationProperty Name="Estado" Relationship="Self.FK__Antena__idEstado__2EDAF651" FromRole="Antena" ToRole="Estado" />
+  </EntityType>
   <EntityType Name="Ciudad">
     <Key>
       <PropertyRef Name="idCiudad" />
@@ -8,10 +27,10 @@
     <Property Name="ciudad1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="idEstado" Type="Guid" />
     <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="Antena" Relationship="Self.FK__Antena__idCiudad__2FCF1A8A" FromRole="Ciudad" ToRole="Antena" />
     <NavigationProperty Name="Estado" Relationship="Self.FK__Ciudad__idEstado__3C69FB99" FromRole="Ciudad" ToRole="Estado" />
     <NavigationProperty Name="CodigoPostal" Relationship="Self.FK__CodigoPos__idCiu__3F466844" FromRole="Ciudad" ToRole="CodigoPostal" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idCiuda__4D94879B" FromRole="Ciudad" ToRole="Usuario" />
-    <NavigationProperty Name="Antena" Relationship="MicroondasModel.FK__Antena__idCiudad__1DB06A4F" FromRole="Ciudad" ToRole="Antena" />
   </EntityType>
   <EntityType Name="CodigoPostal">
     <Key>
@@ -21,10 +40,10 @@
     <Property Name="codigo" Type="Int32" />
     <Property Name="idCiudad" Type="Guid" />
     <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="Antena" Relationship="Self.FK__Antena__idCP__30C33EC3" FromRole="CodigoPostal" ToRole="Antena" />
     <NavigationProperty Name="Ciudad" Relationship="Self.FK__CodigoPos__idCiu__3F466844" FromRole="CodigoPostal" ToRole="Ciudad" />
     <NavigationProperty Name="Colonia" Relationship="Self.FK__Colonia__idCP__49C3F6B7" FromRole="CodigoPostal" ToRole="Colonia" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idCP__4F7CD00D" FromRole="CodigoPostal" ToRole="Usuario" />
-    <NavigationProperty Name="Antena" Relationship="MicroondasModel.FK__Antena__idCP__1EA48E88" FromRole="CodigoPostal" ToRole="Antena" />
   </EntityType>
   <EntityType Name="Colonia">
     <Key>
@@ -34,9 +53,9 @@
     <Property Name="colonia1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="idCP" Type="Guid" />
     <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="Antena" Relationship="Self.FK__Antena__idColoni__31B762FC" FromRole="Colonia" ToRole="Antena" />
     <NavigationProperty Name="CodigoPostal" Relationship="Self.FK__Colonia__idCP__49C3F6B7" FromRole="Colonia" ToRole="CodigoPostal" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idColon__4E88ABD4" FromRole="Colonia" ToRole="Usuario" />
-    <NavigationProperty Name="Antena" Relationship="MicroondasModel.FK__Antena__idColoni__1F98B2C1" FromRole="Colonia" ToRole="Antena" />
   </EntityType>
   <EntityType Name="Contrato">
     <Key>
@@ -71,9 +90,9 @@
     <Property Name="idEstado" Type="Guid" Nullable="false" />
     <Property Name="estado1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="Antena" Relationship="Self.FK__Antena__idEstado__2EDAF651" FromRole="Estado" ToRole="Antena" />
     <NavigationProperty Name="Ciudad" Relationship="Self.FK__Ciudad__idEstado__3C69FB99" FromRole="Estado" ToRole="Ciudad" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idEstad__4CA06362" FromRole="Estado" ToRole="Usuario" />
-    <NavigationProperty Name="Antena" Relationship="MicroondasModel.FK__Antena__idEstado__1CBC4616" FromRole="Estado" ToRole="Antena" />
   </EntityType>
   <EntityType Name="Estatus">
     <Key>
@@ -190,6 +209,54 @@
     <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__idRol__5070F446" FromRole="Usuario" ToRole="Rol" />
     <NavigationProperty Name="Soporte" Relationship="Self.FK__Soporte__idTecni__5AEE82B9" FromRole="Usuario" ToRole="Soporte" />
   </EntityType>
+  <Association Name="FK__Antena__idCiudad__2FCF1A8A">
+    <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+    <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudad">
+        <PropertyRef Name="idCiudad" />
+      </Principal>
+      <Dependent Role="Antena">
+        <PropertyRef Name="idCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Antena__idColoni__31B762FC">
+    <End Role="Colonia" Type="Self.Colonia" Multiplicity="0..1" />
+    <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colonia">
+        <PropertyRef Name="idColonia" />
+      </Principal>
+      <Dependent Role="Antena">
+        <PropertyRef Name="idColonia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Antena__idCP__30C33EC3">
+    <End Role="CodigoPostal" Type="Self.CodigoPostal" Multiplicity="0..1" />
+    <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CodigoPostal">
+        <PropertyRef Name="idCP" />
+      </Principal>
+      <Dependent Role="Antena">
+        <PropertyRef Name="idCP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Antena__idEstado__2EDAF651">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+    <End Role="Antena" Type="Self.Antena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="idEstado" />
+      </Principal>
+      <Dependent Role="Antena">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Ciudad__idEstado__3C69FB99">
     <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
     <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
@@ -395,6 +462,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MicroondasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Antena" EntityType="Self.Antena" />
     <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
     <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" />
     <EntitySet Name="Colonia" EntityType="Self.Colonia" />
@@ -410,6 +478,22 @@
     <EntitySet Name="SlideImg" EntityType="Self.SlideImg" />
     <EntitySet Name="Soporte" EntityType="Self.Soporte" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Antena__idCiudad__2FCF1A8A" Association="Self.FK__Antena__idCiudad__2FCF1A8A">
+      <End Role="Ciudad" EntitySet="Ciudad" />
+      <End Role="Antena" EntitySet="Antena" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Antena__idColoni__31B762FC" Association="Self.FK__Antena__idColoni__31B762FC">
+      <End Role="Colonia" EntitySet="Colonia" />
+      <End Role="Antena" EntitySet="Antena" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Antena__idCP__30C33EC3" Association="Self.FK__Antena__idCP__30C33EC3">
+      <End Role="CodigoPostal" EntitySet="CodigoPostal" />
+      <End Role="Antena" EntitySet="Antena" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Antena__idEstado__2EDAF651" Association="Self.FK__Antena__idEstado__2EDAF651">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Antena" EntitySet="Antena" />
+    </AssociationSet>
     <AssociationSet Name="FK__Ciudad__idEstado__3C69FB99" Association="Self.FK__Ciudad__idEstado__3C69FB99">
       <End Role="Estado" EntitySet="Estado" />
       <End Role="Ciudad" EntitySet="Ciudad" />
@@ -478,89 +562,5 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <EntitySet Name="Antena" EntityType="MicroondasModel.Antena" />
-    <AssociationSet Name="FK__Antena__idCiudad__1DB06A4F" Association="MicroondasModel.FK__Antena__idCiudad__1DB06A4F">
-      <End Role="Ciudad" EntitySet="Ciudad" />
-      <End Role="Antena" EntitySet="Antena" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Antena__idColoni__1F98B2C1" Association="MicroondasModel.FK__Antena__idColoni__1F98B2C1">
-      <End Role="Colonia" EntitySet="Colonia" />
-      <End Role="Antena" EntitySet="Antena" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Antena__idCP__1EA48E88" Association="MicroondasModel.FK__Antena__idCP__1EA48E88">
-      <End Role="CodigoPostal" EntitySet="CodigoPostal" />
-      <End Role="Antena" EntitySet="Antena" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Antena__idEstado__1CBC4616" Association="MicroondasModel.FK__Antena__idEstado__1CBC4616">
-      <End Role="Estado" EntitySet="Estado" />
-      <End Role="Antena" EntitySet="Antena" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Antena">
-    <Key>
-      <PropertyRef Name="idAntena" />
-    </Key>
-    <Property Name="idAntena" Type="Guid" Nullable="false" />
-    <Property Name="idEstado" Type="Guid" />
-    <Property Name="idCiudad" Type="Guid" />
-    <Property Name="idCP" Type="Guid" />
-    <Property Name="idColonia" Type="Guid" />
-    <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="numExt" Type="Int32" />
-    <Property Name="activo" Type="Boolean" />
-    <NavigationProperty Name="Ciudad" Relationship="MicroondasModel.FK__Antena__idCiudad__1DB06A4F" FromRole="Antena" ToRole="Ciudad" />
-    <NavigationProperty Name="Colonia" Relationship="MicroondasModel.FK__Antena__idColoni__1F98B2C1" FromRole="Antena" ToRole="Colonia" />
-    <NavigationProperty Name="CodigoPostal" Relationship="MicroondasModel.FK__Antena__idCP__1EA48E88" FromRole="Antena" ToRole="CodigoPostal" />
-    <NavigationProperty Name="Estado" Relationship="MicroondasModel.FK__Antena__idEstado__1CBC4616" FromRole="Antena" ToRole="Estado" />
-    <Property Name="lat" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="lon" Type="Decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <Association Name="FK__Antena__idCiudad__1DB06A4F">
-    <End Type="MicroondasModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />
-    <End Type="MicroondasModel.Antena" Role="Antena" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ciudad">
-        <PropertyRef Name="idCiudad" />
-      </Principal>
-      <Dependent Role="Antena">
-        <PropertyRef Name="idCiudad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Antena__idColoni__1F98B2C1">
-    <End Type="MicroondasModel.Colonia" Role="Colonia" Multiplicity="0..1" />
-    <End Type="MicroondasModel.Antena" Role="Antena" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Colonia">
-        <PropertyRef Name="idColonia" />
-      </Principal>
-      <Dependent Role="Antena">
-        <PropertyRef Name="idColonia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Antena__idCP__1EA48E88">
-    <End Type="MicroondasModel.CodigoPostal" Role="CodigoPostal" Multiplicity="0..1" />
-    <End Type="MicroondasModel.Antena" Role="Antena" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CodigoPostal">
-        <PropertyRef Name="idCP" />
-      </Principal>
-      <Dependent Role="Antena">
-        <PropertyRef Name="idCP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Antena__idEstado__1CBC4616">
-    <End Type="MicroondasModel.Estado" Role="Estado" Multiplicity="0..1" />
-    <End Type="MicroondasModel.Antena" Role="Antena" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Estado">
-        <PropertyRef Name="idEstado" />
-      </Principal>
-      <Dependent Role="Antena">
-        <PropertyRef Name="idEstado" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

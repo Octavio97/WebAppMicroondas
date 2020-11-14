@@ -17,9 +17,9 @@ namespace MicroondasAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CodigoPostal()
         {
+            this.Antena = new HashSet<Antena>();
             this.Colonia = new HashSet<Colonia>();
             this.Usuario = new HashSet<Usuario>();
-            this.Antena = new HashSet<Antena>();
         }
     
         public System.Guid idCP { get; set; }
@@ -27,12 +27,12 @@ namespace MicroondasAPI.Models
         public Nullable<System.Guid> idCiudad { get; set; }
         public Nullable<bool> activo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Antena> Antena { get; set; }
         public virtual Ciudad Ciudad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Colonia> Colonia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Antena> Antena { get; set; }
     }
 }

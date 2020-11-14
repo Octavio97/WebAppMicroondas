@@ -132,7 +132,7 @@ CREATE TABLE Antena (
     idColonia UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Colonia(idColonia),
     calle VARCHAR(50),
     numExt int,
-    lat DECIMAL,
-    lon DECIMAL,
+    lat VARCHAR(50),
+    lon VARCHAR(50),
     activo bit
 );

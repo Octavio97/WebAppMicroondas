@@ -21,9 +21,9 @@ namespace MicroondasAPI.Models
         public Nullable<System.Guid> idColonia { get; set; }
         public string calle { get; set; }
         public Nullable<int> numExt { get; set; }
+        public string lat { get; set; }
+        public string lon { get; set; }
         public Nullable<bool> activo { get; set; }
-        public Nullable<decimal> lat { get; set; }
-        public Nullable<decimal> lon { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual Colonia Colonia { get; set; }

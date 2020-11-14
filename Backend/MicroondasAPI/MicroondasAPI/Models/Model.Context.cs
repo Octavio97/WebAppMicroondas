@@ -25,6 +25,7 @@ namespace MicroondasAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Antena> Antena { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<CodigoPostal> CodigoPostal { get; set; }
         public virtual DbSet<Colonia> Colonia { get; set; }
@@ -40,6 +41,5 @@ namespace MicroondasAPI.Models
         public virtual DbSet<SlideImg> SlideImg { get; set; }
         public virtual DbSet<Soporte> Soporte { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Antena> Antena { get; set; }
     }
 }
