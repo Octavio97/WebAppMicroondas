@@ -9,6 +9,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
   public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+  public readonly url2 = 'http://localhost:3000/formulario';
 
   altaUsuario(usuario: Usuario) {
     return this.http.post( this.url + 'agregarUsuario', usuario);
@@ -51,5 +52,9 @@ export class UsuarioService {
 
   verContrasena(correo: string) {
     return this.http.get( this.url + 'verContrasena', { params: { correo } } );
+  }
+
+  enviarCorreo(body) {
+    return this.http.post( this.url2, body );
   }
 }

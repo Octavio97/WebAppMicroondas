@@ -80,34 +80,56 @@ export class LoginComponent implements OnInit {
   async recuperar() {
     const { value: email } = await Swal.fire({
       title: 'Ingrese su correo electrónico',
+      text: 'Ingrese su correo electrónico para enviarle su contraseña',
       input: 'email',
       inputPlaceholder: 'Ingrese correo electrónco',
       inputValidator: (value) => {
         if (!value) {
           return 'Debe ingresar un correo';
         }
-        else {
-          const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
-          if (regex.test(value)) {
-            this.usuarioS.verContrasena(email.toString()).subscribe( (resp: Usuario) => {
-              if (resp) {
-                // aqui va lo del email
-              }
-              else {
-                return 'No se encontró correo electrónico';
-              }
-            });
-          }
-          else {
-            return 'Ingrese un correo válido';
-          }
-        }
       }
     });
 
     if (email) {
+      const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
+      if (regex.test(email.toString())) {
+        this.usuarioS.verContrasena(email.toString()).subscribe( (resp: Usuario) => {
+          if (resp) {
+            this.usuarioS.enviarCorreo(resp).subscribe( resp => {
+              Swal.fire({
+                title: 'Exito',
+                text: 'Tu contraseña se ha enviado a tu correo electrónico',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+          }
+          else {
+            return 'No se encontró correo electrónico';
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+      }
+      else {
+        return 'Ingrese un correo válido';
+      }
     }
   }
 }
