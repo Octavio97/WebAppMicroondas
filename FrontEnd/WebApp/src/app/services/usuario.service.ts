@@ -48,4 +48,8 @@ export class UsuarioService {
   verTecnico() {
     return this.http.get( this.url + 'verTecnico' );
   }
+
+  verContrasena(correo: string) {
+    return this.http.get( this.url + 'verContrasena', { params: { correo } } );
+  }
 }

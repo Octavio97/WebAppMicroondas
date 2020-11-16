@@ -97,5 +97,34 @@ namespace MicroondasAPI.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/verContrasena")]
+        public IHttpActionResult verContrasena(string correo)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Usuario.Where(w => w.correoE == correo).FirstOrDefault();
+
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = new
+                {
+                    nombre = accion.nombre,
+                    apellido = accion.apellido,
+                    correoE = accion.correoE,
+                    contrasena = accion.contrasena
+                };
+
+                return Ok(resultado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

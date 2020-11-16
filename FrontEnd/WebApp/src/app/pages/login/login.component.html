@@ -19,7 +19,7 @@
                 <input type="checkbox" class="form-check-input" id="check">
                 <label class="form-check-label" for="check">Recordar</label>
             </div>
-            <a href="">¿Olvido su contraseña?</a>
+            <label style="color: blue;" (click)="recuperar()">¿Olvido su contraseña?</label>
         </div>
         <button type="submit" class="btn btn-primary w-100"><span *ngIf="i" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Aceptar</button>
     </form>

@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
@@ -75,6 +74,40 @@ export class LoginComponent implements OnInit {
         });
         this.i = false;
       });
+    }
+  }
+
+  async recuperar() {
+    const { value: email } = await Swal.fire({
+      title: 'Ingrese su correo electrónico',
+      input: 'email',
+      inputPlaceholder: 'Ingrese correo electrónco',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Debe ingresar un correo';
+        }
+        else {
+          const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+          if (regex.test(value)) {
+            this.usuarioS.verContrasena(email.toString()).subscribe( (resp: Usuario) => {
+              if (resp) {
+                // aqui va lo del email
+              }
+              else {
+                return 'No se encontró correo electrónico';
+              }
+            });
+          }
+          else {
+            return 'Ingrese un correo válido';
+          }
+        }
+      }
+    });
+
+    if (email) {
+
     }
   }
 }
