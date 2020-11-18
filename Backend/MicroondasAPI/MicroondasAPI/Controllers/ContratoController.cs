@@ -179,7 +179,7 @@ namespace MicroondasAPI.Controllers
                 bool i = false;
 
                 // buscamos si existe el contrato a ingresar
-                var accion = SessionController.getInstance().Contrato.Where(w => w.idUsuario == contrato.idUsuario && w.idPaquete == contrato.idPaquete && w.fechaInicio == contrato.fechaInicio).FirstOrDefault();
+                var accion = SessionController.getInstance().Contrato.Where(w => w.idUsuario == contrato.idUsuario).FirstOrDefault();
 
                 // si no existe
                 if (accion != null)

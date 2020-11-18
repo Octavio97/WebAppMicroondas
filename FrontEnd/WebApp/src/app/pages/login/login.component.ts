@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private usuarioS: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
+    // ver si el usuario esta loggeado
     if (localStorage.getItem('accessToken')) {
       this.router.navigate(['/inicio']);
     }
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // METODO PARA INICIAR SESION
   login(data: NgForm) {
     if (data.invalid) {
       Swal.fire({
@@ -76,7 +78,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-
+  // METODO PARA RECUPERAR CONTRASEÑA
   async recuperar() {
     const { value: email } = await Swal.fire({
       title: 'Ingrese su correo electrónico',
@@ -92,8 +94,9 @@ export class LoginComponent implements OnInit {
 
     if (email) {
       const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-
+      // si el correo es valido
       if (regex.test(email.toString())) {
+        // consulta la bd y despues al sevidor de e-mail y envia la contraseña
         this.usuarioS.verContrasena(email.toString()).subscribe( (resp: Usuario) => {
           if (resp) {
             this.usuarioS.enviarCorreo(resp).subscribe( resp => {
@@ -113,7 +116,7 @@ export class LoginComponent implements OnInit {
                 timer: 3000
               });
             });
-          }
+          } // si no lo es
           else {
             return 'No se encontró correo electrónico';
           }

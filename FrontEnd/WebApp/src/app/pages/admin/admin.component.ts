@@ -34,6 +34,7 @@ import { SlideImgService } from '../../services/slide-img.service';
 import { SlideImg } from 'src/app/models/slideImg.model';
 import { Antena } from '../../models/antena.model';
 import { AntenaService } from '../../services/antena.service';
+import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'app-admin',
@@ -102,7 +103,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  // Metodo para cargar las tablas a elegir
+  // METODO PARA INTERCALAR ENTRE TABLAS
   change(i: string) {
     this.seleccion = i;
     this.cargando = true;
@@ -483,6 +484,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // METODO PARA CERRAR SESION
   logout() {
     Swal.fire({
       title: 'Confirmación',
@@ -501,10 +503,11 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // METODO PARA ELIMINAR REGISTRO PERMANENTEMENTE
   delete(id){
     Swal.fire({
       title: 'Confirmación',
-      text: '¿Esta seguro de eliminar  permanetemente el registro?',
+      text: '¿Esta seguro de eliminar permanetemente el registro?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -872,6 +875,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // METODO PARA DESACTIVAR REGISTRO
   deshabilitar(id, i) {
     Swal.fire({
       title: 'Confirmación',
@@ -1183,6 +1187,7 @@ export class AdminComponent implements OnInit {
   });
   }
 
+  // METODO PARA ACTIVAR REGISTRO
   restoreRegistro(id, i?) {
     Swal.fire({
       title: 'Confirmación',
@@ -1536,6 +1541,7 @@ export class AdminComponent implements OnInit {
   //   });
   // }
 
+  // METODO PARA ASIGNAR UN REPORTE A UN TECNICO
   asignarReporte(data: NgForm) {
     if (data.invalid) {
       Swal.fire({
@@ -1587,6 +1593,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  // METODO PARA VER UN REPORTE EN ESPECIFICO
   verReporte(id) {
     this.asignarRep = true;
     this.soporteS.verSoporte(id).subscribe( (resp: Soporte) => {
@@ -1617,6 +1624,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // METODO PARA VER TODOS LOS REPORTES QUE NO ESTEN ATENDIDOS
   verReportes() {
     this.asignarRep = false;
     this.soporteS.consultaSopT().subscribe( (resp: Soporte[]) => {

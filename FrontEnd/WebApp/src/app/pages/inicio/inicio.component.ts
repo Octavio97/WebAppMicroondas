@@ -61,9 +61,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: './inicio.component.html'
 })
 export class InicioComponent implements OnInit {
-informes = new Informes();
-paquetes = new Array<Paquete>();
-slides = new Array<SlideImg>();
+informes = new Informes(); // arreglo para enviar informes
+paquetes = new Array<Paquete>(); // arreglo de paquetes a ver en la pagina
+slides = new Array<SlideImg>(); // arreglo de imagenes en el slide
 icono = '/assets/img/icoAnt.png';
 private mymap: L.Maps; // variable para el mapa
 private geoJson; // variable para mapeo de regiones
@@ -73,6 +73,7 @@ private arrayRegion =  {
   features: []
 }; // arreglo para guardar las regiones activas(estados, ciudades o cp)
 private info = L.control(); // variable para modificar valores de region
+// Arregles para el mapa en la ubicacion
 usuario: Usuario;
 e = new Estado();
 c = new Ciudad();
@@ -82,7 +83,7 @@ estado: Estado[];
 ciudad: Ciudad[];
 codigo: CodigoPostal[];
 colonia: Colonia[];
-i = 'Mi cuenta';
+i = 'Mi cuenta'; // texto del boton de login
 prueba; // PRUEBA DE IMAGENES
 
   constructor(
@@ -140,11 +141,12 @@ prueba; // PRUEBA DE IMAGENES
     }
 
     // asignamos caracteristicas que va a tener nuestro mapa
-    this.mymap = L.map('mapid', { zoomControl: false}).setView([22.021667, -102.356389], 5);
+    this.mymap = L.map('mapid', { zoomControl: false, minZoom: 5}).setView([22.021667, -102.356389], 5);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.mymap);
 
+    // creamos un label de informacion en el mapa
     this.info.onAdd = (map) => {
       this.div = L.DomUtil.create('div', 'info');
       return this.div;
@@ -171,17 +173,19 @@ prueba; // PRUEBA DE IMAGENES
         //   }
         // }
 
+        // Devuelve las antenas en esa region y las marca en el mapa
         this.antenaS.verAntenas(props.NAME_2).subscribe( (resp: Antena[]) => {
           if (resp) {
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < resp.length; i++) {
+              // cobertura en el mapa
               L.circle([resp[i].lat, resp[i].lon], {
                 color: 'blue',
                 filColor: '#0066F0',
                 fillOpacity: 0.5,
                 radius: 30000
               }).addTo(this.mymap);
-
+              // icono de antena en el mapa
               L.marker([resp[i].lat, resp[i].lon], {icon:
                 L.icon({
                   iconUrl: this.icono,
@@ -200,6 +204,7 @@ prueba; // PRUEBA DE IMAGENES
     this.info.addTo(this.mymap);
   }
 
+  // METODOS PARA OBTENER REGION DEPENDIENDO LA SELECCION
   getState(id: Estado[]) {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < estados.features.length; i++) {
@@ -485,24 +490,12 @@ prueba; // PRUEBA DE IMAGENES
     }
   }
 
+  // METODO PARA VER LAS POLITICAS DE PRIVACIDAD
   politicas() {
     Swal.fire({
       title: 'Aviso de privacidad',
       html:
-      '<textarea rows="20" class="form-control" style="resize: none; text-align: justify;" readonly>Total Play Telecomunicaciones, S.A. de C.V., con domicilio convencional para oír y recibir notificaciones en Insurgentes Sur 3579, Torre 3, PH, ' +
-      'Colonia Tlalpan La Joya, Delegación Tlalpan, C.P. 14000, Ciudad de México, únicamente para temas de privacidad y de protección de datos personales (el “Responsable”), del tratamiento legítimo, ' +
-      'controlado e informado de los datos personales (los “Datos Personales”), de sus -Prospectos y clientes- (el “Titular”), y en congruencia con su política de privacidad, conforme a lo establecido ' +
-      'en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (la “LFPDPPP”) y demás normatividad secundaria vigente aplicable, así como estándares nacionales e internacionales ' +
-      'en materia de protección de datos personales, con el propósito de garantizar la privacidad y el derecho a la autodeterminación informativa y protección de los Datos Personales, que el Responsable ' +
-      'podrá recabar a través de los siguientes medios: (i) de manera personal, cuando el Titular los proporciona de manera física en nuestras instalaciones, (ii) de manera directa, cuando el Titular ' +
-      'los ingresa a través del sitio web www.totalplay.com.mx (el “Sitio Web”),(iii) de manera directa, cuando el Titular los proporciona vía telefónica, (iv) de manera indirecta, cuando otras empresas ' +
-      'los transfieren, y (v) de manera indirecta,cuando se obtienen a través de fuentes de acceso público permitidas por la LFPDPPP; pone a disposición del Titular el presente aviso de privacidad ' +
-      'integral (el "Aviso de Privacidad") -previo a la obtención de los Datos Personales- en estricto apego a los -principios de información, licitud, consentimiento, calidad, finalidad, lealtad, ' +
-      'proporcionalidad y responsabilidad- contempladosen la LFPDPPP. Con motivo del servicio que ofrece el Responsable conforme a lo establecido en el Contrato de Servicios denominado “Contrato de ' +
-      'Servicios de TotalPlay”(el “Contrato de Servicios”), y en cumplimiento a lo estatuido por el artículo 3, fracciones LXIV y LXXI de la Ley Federal de Telecomunicaciones y Radiodifusión (la “LFT”), ' +
-      'presta servicios de televisión, telefonía e internet a usuarios finales, a través de redes públicas de telecomunicaciones, mediante contrato y el pago periódico de una cantidad preestablecida. ' +
-      'Datos Personales que serán sometidos a tratamiento' +
-      '</textarea>',
+      `<textarea rows="20" class="form-control" style="resize: none; text-align: justify;" readonly>Desarrollo de sistemas TJ S.A de C.V, con domicilio convencional para oír y recibir notificaciones en Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, únicamente para temas de privacidad y de protección de datos personales (el “Responsable”), del tratamiento legítimo, controlado e informado de los datos personales (los “Datos Personales”), de sus -Prospectos y clientes- (el “Titular”), y en congruencia con su política de privacidad, conforme a lo establecido en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (la “LFPDPPP”) y demás normatividad secundaria vigente aplicable, así como estándares nacionales e internacionales en materia de protección de datos personales, con el propósito de garantizar la privacidad y el derecho a la autodeterminación informativa y protección de los Datos Personales, que el Responsable podrá recabar a través de los siguientes medios: (i) de manera personal, cuando el Titular los proporciona de manera física en nuestras instalaciones, (ii) de manera directa, cuando el Titular los ingresa a través del sitio web www.solucionestj.com.mx (el “Sitio Web”),(iii) de manera directa, cuando el Titular los proporciona vía telefónica, (iv) de manera indirecta, cuando otras empresas nos los transfieren, y (v) de manera indirecta,cuando se obtienen a través de fuentes de acceso público permitidas por la LFPDPPP; pone a disposición del Titular el presente aviso de privacidad integral (el "Aviso de Privacidad") -previo a la obtención de los Datos Personales- en estricto apego a los -principios de información, licitud, consentimiento, calidad, finalidad, lealtad, proporcionalidad y responsabilidad- contempladosen la LFPDPPP.</textarea>`,
       width: '80%',
       confirmButtonText: 'Aceptar',
       confirmButtonColor: '#268108'

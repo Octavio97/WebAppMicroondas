@@ -417,7 +417,7 @@
                             <td class="text-success" *ngIf="item.Estatus.estatus1 === 'resuelto'">{{ item.Estatus.estatus1 }}</td>
                         </div>
                         <td *ngIf="item.activo || this.in">{{ item.fechaInicio }}</td>
-                        <td *ngIf="(item.activo || this.in)">{{ item.fechaFinal }}</td>
+                        <td *ngIf="(item.activo || this.in)"><p *ngIf="item.fechaInicio">N/A</p><p *ngIf="item.fechaInicio">{{ item.fechaFinal }}</p></td>
                         <td *ngIf="item.activo || this.in">
                             <span *ngIf="item.activo" class="rounded-circle border border-success bg-success">&nbsp; &nbsp; &nbsp;</span>
                             <span *ngIf="!item.activo" class="rounded-circle border border-danger bg-danger">&nbsp; &nbsp; &nbsp;</span>
