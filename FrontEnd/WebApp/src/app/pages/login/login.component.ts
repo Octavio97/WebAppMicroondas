@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   usuario = new Usuario();
   i = false;
+  contra: boolean;
 
   constructor(private usuarioS: UsuarioService, private router: Router) { }
 
@@ -78,6 +79,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
   // METODO PARA RECUPERAR CONTRASEÑA
   async recuperar() {
     const { value: email } = await Swal.fire({
@@ -134,5 +136,10 @@ export class LoginComponent implements OnInit {
         return 'Ingrese un correo válido';
       }
     }
+  }
+
+  // METODO PARA VER CONTRASEÑA
+  verContrasena() {
+    this.contra = !this.contra;
   }
 }

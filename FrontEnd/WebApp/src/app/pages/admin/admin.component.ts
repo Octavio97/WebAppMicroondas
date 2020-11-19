@@ -535,7 +535,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.antenaS.consultarAntena().subscribe( (arr: Antena[]) => {
+                  if (arr) {
+                    this.antena = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -558,7 +570,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.ciudadS.consultaCiudad().subscribe( (arr: Ciudad[]) => {
+                  if (arr) {
+                    this.ciudad = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -581,7 +605,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.codigoS.consultaCodigo().subscribe( (arr: CodigoPostal[]) => {
+                  if (arr) {
+                    this.codigo = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -604,7 +640,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.coloniaS.consultaColonia().subscribe( (arr: Colonia[]) => {
+                  if (arr) {
+                    this.colonia = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -627,7 +675,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.contratoS.consultaContrato().subscribe( (arr: Contrato[]) => {
+                  if (arr) {
+                    this.contrato = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -650,7 +710,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.equipoS.consultaEquipo().subscribe( (arr: Equipo[]) => {
+                  if (arr) {
+                    this.equipo = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -673,7 +745,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.estadoS.consultaEstado().subscribe( (arr: Estado[]) => {
+                  if (arr) {
+                    this.estado = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -696,7 +780,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.estatusS.consultaEstatus().subscribe( (arr: Estatus[]) => {
+                  if (arr) {
+                    this.estatus = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -719,7 +815,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.informesS.consultaInformes().subscribe( (arr: Informes[]) => {
+                  if (arr) {
+                    this.informes = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -742,7 +850,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.paqueteS.consultaPaquete().subscribe( (arr: Paquete[]) => {
+                  if (arr) {
+                    this.paquete = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -765,7 +885,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.slideImgService.consultaSlideImg().subscribe( (arr: SlideImg[]) => {
+                  if (arr) {
+                    this.slides = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -788,7 +920,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.propiedadS.consultaPropiedad().subscribe( (arr: Propiedad[]) => {
+                  if (arr) {
+                    this.propiedad = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -811,7 +955,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.rolS.consultaRol().subscribe( (arr: Rol[]) => {
+                  if (arr) {
+                    this.rol = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -834,7 +990,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.soporteS.consultaSoporte().subscribe( (arr: Soporte[]) => {
+                  if (arr) {
+                    this.soporte = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -857,7 +1025,19 @@ export class AdminComponent implements OnInit {
                   showConfirmButton: false,
                   timer: 3000
                 });
-                this.router.navigate(['/inicio']);
+                this.usuarioS.consultaUsuario().subscribe( (arr: Usuario[]) => {
+                  if (arr) {
+                    this.usuario = arr;
+                  }
+                }, (e: any) => {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+                });
               }
             }, (e: any) => {
               Swal.fire({
@@ -888,7 +1068,7 @@ export class AdminComponent implements OnInit {
       allowOutsideClick: false
     }).then((result) => {
       if (result.isConfirmed) {
-        // mensaje para cargar informacion
+      // mensaje para cargar informacion
       Swal.fire({
         title: 'Espere',
         text: 'Realizando proceso...',
