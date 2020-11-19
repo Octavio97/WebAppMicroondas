@@ -20,7 +20,7 @@ namespace MicroondasAPI.Controllers
             {
                 // consultar usuaro para inicio de sesion
                 var consulta = getInstance().Usuario.Where(w => w.correoE == correo && w.contrasena == contra && 
-                (w.Rol.rol1 == "administrador" || w.Rol.rol1 == "técnico" || w.Rol.rol1 == "cliente")).FirstOrDefault();
+                (w.Rol.rol1 == "administrador" || w.Rol.rol1 == "técnico" || w.Rol.rol1 == "cliente" || w.Rol.rol1 == "secretario") && w.activo == true).FirstOrDefault();
 
                 if (consulta == null)
                 {

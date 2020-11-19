@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
@@ -18,7 +18,6 @@ import { ContratoService } from '../../services/contrato.service';
 import { Contrato } from '../../models/contrato.model';
 import { SoporteService } from '../../services/soporte.service';
 import { Soporte } from 'src/app/models/soporte.model';
-import { Estatus } from 'src/app/models/estatus.model';
 import { EstatusService } from '../../services/estatus.service';
 
 @Component({
@@ -139,6 +138,7 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  // METODO PARA CERRAR SESION
   logout() {
     Swal.fire({
       title: 'Confirmación',
@@ -157,6 +157,7 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  // METODO PARA MODIFICAR USUARIO
   alta(data: NgForm) {
     if (data.invalid) {
       // mostramos el mensaje de error
@@ -242,10 +243,12 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  // METODO PARA ACTIVAR Y DESACTIVAR FORMULARIO DEL CLIENTE PARA MODIFICAR
   modEvent(){
     this.mod = !this.mod;
   }
 
+  // METODO PARA AGREGAR UN REPORTE
   async addReport() {
     const { value: problem } = await Swal.fire({
       title: '¿Cuál es sus problema?',
@@ -291,7 +294,7 @@ export class PerfilComponent implements OnInit {
               if (resp) {
                 Swal.fire({
                   title: 'Exito',
-                  text: 'Su reporte se ha agregado con exito, un de nuestros tecnicos se contactará con usted pronto',
+                  text: 'Su reporte se ha agregado con exito, uno de nuestros técnicos se contactará con usted pronto',
                   icon: 'success'
                 });
               }
@@ -334,7 +337,7 @@ export class PerfilComponent implements OnInit {
               if (resp) {
                 Swal.fire({
                   title: 'Exito',
-                  text: 'Su reporte se ha agregado con exito, un de nuestros tecnicos se contactará con usted pronto',
+                  text: 'Su reporte se ha agregado con exito, uno de nuestros técnicos se contactará con usted pronto',
                   icon: 'success'
                 });
               }
@@ -377,7 +380,7 @@ export class PerfilComponent implements OnInit {
               if (resp) {
                 Swal.fire({
                   title: 'Exito',
-                  text: 'Su reporte se ha agregado con exito, un de nuestros tecnicos se contactará con usted pronto',
+                  text: 'Su reporte se ha agregado con exito, uno de nuestros técnicos se contactará con usted pronto',
                   icon: 'success'
                 });
               }
@@ -396,6 +399,7 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  // METODO PARA CANCELAR REPORTE
   cancelarReporte(id: string){
     Swal.fire({
       title: 'Confirmación',

@@ -17,7 +17,7 @@
     <!-- Contenido -->
     <div class="roll d-flex flex-row">
         <!-- Menu de tablas -->
-        <div class="menu d-flex flex-column">
+        <div *ngIf="this.session.Rol.rol1 === 'administrador'" class="menu d-flex flex-column">
             <ul class="list-group" *ngFor="let item of tablas">
                 <li [ngClass]="{'active' : this.seleccion === item}" (click)="change(item)" class="list-group-item">{{ item }}</li>
             </ul>
@@ -535,7 +535,7 @@
             <!-- Secretario -->
             <div class="table-responsive-xl animated fadeIn" *ngIf="this.session.Rol.rol1 === 'secretario'">
             <!-- Tabla de reportes sin asignar -->
-            <div class="animated fadeIn" *ngIf="!asignarRep">
+            <div class="animated fadeIn" *ngIf="!asignarRep && !cargando && !length">
                 <div>
                     <h1 class="display-4">Reportes</h1>
                 </div>
@@ -545,6 +545,7 @@
                             <th scope="col">Cliente</th>
                             <th scope="col">Problema</th>
                             <th scope="col">Dirección</th>
+                            <th scope="col">Estatus</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -553,8 +554,11 @@
                             <td>{{ item.Contrato.Usuario.nombre }} {{ item.Contrato.Usuario.apellido }}</td>
                             <td>{{ item.problema }}</td>
                             <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
-                                <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}</td>
-                            <td><button class="btn btn-light" (click)="verReporte(item.idSoporte)"><i class="fas fa-pen"></i> Asignar</button></td>
+                                <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}
+                            </td>
+                            <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">Problema</td>
+                            <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en progreso'">En progreso</td>
+                            <td><button class="btn btn-light" (click)="verReporte(item.idSoporte)" title="Asignar"><i class="fas fa-pen"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -564,11 +568,15 @@
                 <button style="margin-top: 2%;" class="btn btn-danger" (click)="verReportes()"><i class="fas fa-long-arrow-alt-left"></i> Regresar</button>
                 <form #log="ngForm" (submit)="asignarReporte(log)">
                     <div class="form-group">
-                        <h1 class="display-4">Asignación de reporte:</h1>
+                        <h1 class="display-4">Asignación de reporte</h1>
                         <h3>Cliente: </h3>
-                        <h6>{{ this.reporte.Contrato.Usuario.nombre }} {{ this.reporte.Contrato.Usuario.apellido }}</h6>
+                        <h6>{{ this.reporte.Contrato.Usuario.nombre }} {{ this.reporte.Contrato.Usuario.apellido }}</h6><br>
                         <h3>Problema: </h3>
-                        <h6>{{ this.reporte.problema }}</h6>
+                        <h6>{{ this.reporte.problema }}</h6><br>
+                        <label for="estatus">Estatus: </label>
+                        <select class="form-control" name="estatus" id="estatus" [(ngModel)]="this.reporte.idEstatus">
+                            <option *ngFor="let item of estatus" [ngValue]="item.idEstatus">{{ item.estatus1 }}</option>
+                        </select><br>
                         <h3>Técnicos:</h3>
                         <table class="table table-sm">
                             <thead>
@@ -589,6 +597,23 @@
                         <button class="btn btn-success w-100" type="submit"><i class="fa fa-save"></i> Aceptar</button>
                     </div>
                 </form>
+            </div>
+            <!-- Banner de carga -->
+            <div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
+                <h4 class="alert-heading">Cargando</h4>
+                <p>
+                    <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+                </p>
+                <p class="mb-0">
+                    Espere por favor
+                </p>
+            </div>
+            <!-- Banner de sin registros -->
+            <div *ngIf="!cargando && length" class="alert alert-danger text-center mt-3 animated fadeIn faster">
+                <h4 class="alert-heading">No hay registros</h4>
+                <p>
+                    <i class="fa fa-times-circle fa-3x"></i>
+                </p>
             </div>
             </div>
         </div>

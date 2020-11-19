@@ -54,7 +54,6 @@ import { SlideImg } from 'src/app/models/slideImg.model';
 import { SlideImgService } from '../../services/slide-img.service';
 import { AntenaService } from '../../services/antena.service';
 import { Antena } from 'src/app/models/antena.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-inicio',
@@ -389,12 +388,14 @@ prueba; // PRUEBA DE IMAGENES
   }
 
   // METODOS PARA EL MAPA
+  // metodo para asignar cada accion a cada metodo en el mapa
   onEachFeature = (feature, layer) => {
     layer.on('click', this.zoomToFeature);
     layer.on('mouseover', this.highlightFeature);
     layer.on('mouseout', this.resetHighlight);
   }
 
+  // metodo para cambiar diseño al pasar el cursor sobre zona seleccionada
   highlightFeature = (e) => {
     const layer = e.target;
 
@@ -423,16 +424,19 @@ prueba; // PRUEBA DE IMAGENES
     }
   }
 
+  // metodo para cambiar diseño al quitar el cursor de la zona seleccionada
   resetHighlight = (e) => {
     this.geoJson.resetStyle(e.target);
   }
 
+  // metodo para ajustar zoom al seleccionar una zona
   zoomToFeature = (e) => {
     const layer = e.target;
     this.mymap.fitBounds(e.target.getBounds());
     this.info.update(layer.feature.properties);
   }
 
+  // metodo para asignar estilo a la zona
   style = (feature) => {
     return {
         fillColor: '#209DFF',

@@ -34,7 +34,6 @@ import { SlideImgService } from '../../services/slide-img.service';
 import { SlideImg } from 'src/app/models/slideImg.model';
 import { Antena } from '../../models/antena.model';
 import { AntenaService } from '../../services/antena.service';
-import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'app-admin',
@@ -93,7 +92,7 @@ export class AdminComponent implements OnInit {
     }
     this.session = new Usuario();
     this.session = JSON.parse(localStorage.getItem('currentUser'));
-    if (this.session.Rol.rol1 === 'técnico') {
+    if (this.session.Rol.rol1 === 'secretario') {
       this.reporte = new Soporte();
       this.soporte = new Array<Soporte>();
       this.verReportes();
@@ -1622,14 +1621,22 @@ export class AdminComponent implements OnInit {
         timer: 3000
       });
     });
+    this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
+      if (resp) {
+        this.estatus = resp;
+      }
+    });
   }
 
   // METODO PARA VER TODOS LOS REPORTES QUE NO ESTEN ATENDIDOS
   verReportes() {
     this.asignarRep = false;
+    this.cargando = true;
     this.soporteS.consultaSopT().subscribe( (resp: Soporte[]) => {
+      resp.length === 0 ? this.length = true : this.length = false;
       if (resp) {
         this.soporte = resp;
+        this.cargando = false;
       }
     }, (e: any) => {
       Swal.fire({

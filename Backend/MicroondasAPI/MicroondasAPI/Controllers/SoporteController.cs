@@ -403,7 +403,7 @@ namespace MicroondasAPI.Controllers
         {
             try
             {
-                var accion = SessionController.getInstance().Soporte.Where(w => w.Estatus.estatus1 == "problema" && w.Usuario.idUsuario == new Guid("00000000-0000-0000-0000-000000000000")).ToList();
+                var accion = SessionController.getInstance().Soporte.Where(w => w.Estatus.estatus1 == "problema" || w.Estatus.estatus1 == "en progreso").ToList();
 
                 if (accion == null)
                 {
@@ -764,7 +764,7 @@ namespace MicroondasAPI.Controllers
             {
                 Guid i = Guid.Parse(id.ToString());
 
-                var accion = SessionController.getInstance().Soporte.Where(w => w.idTecnico == i).ToList();
+                var accion = SessionController.getInstance().Soporte.Where(w => w.idTecnico == i && (w.Estatus.estatus1 == "problema" || w.Estatus.estatus1 == "en progreso")).ToList();
 
                 if (accion.Count == 0)
                 {

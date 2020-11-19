@@ -1659,6 +1659,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // metodo recursivo que agrega equipos a la propiedad de un tecnico
   addPropiedad(id: number) {
     this.propiedad.idEquipo = this.equipos[id].idEquipo;
     this.propiedadS.altaPropiedad(this.propiedad).subscribe( resp => {
@@ -1694,6 +1695,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // obtener imagen en formato binario para guardar en base de datos
   verArchivo(e) {
     const image = e.target.files[0];
     this.imagenL = image.name;
@@ -1702,6 +1704,7 @@ export class ElementoComponent implements OnInit, AfterViewInit {
     reader.readAsBinaryString(image);
   }
 
+  // agregar imagen en arreglo especifico
   handleFile(event) {
     const binaryString = event.target.result;
     if (this.id === 'Paquete') {
