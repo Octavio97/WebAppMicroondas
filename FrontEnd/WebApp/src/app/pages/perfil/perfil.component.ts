@@ -422,14 +422,31 @@ export class PerfilComponent implements OnInit {
           });
         Swal.showLoading();
 
-        this.soporteS.cancelarSoporte(id).subscribe( resp => {
-          if (resp) {
+        this.soporteS.cancelarSoporte(id).subscribe( respt => {
+          if (respt) {
             Swal.fire({
               title: 'Exito',
               text: 'El reporte fue eliminado con exito',
               icon: 'success'
             });
-            this.router.navigate(['/perfil']);
+            // consulta del contrato y reportes
+            this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {
+              if (resp) {
+                this.contrato = new Contrato();
+                this.contrato = resp;
+                this.soporteS.consultaUnicaSopU(this.contrato.idContrato).subscribe( (resp2: Soporte[]) => {
+                  resp2.length === 0 ? this.length = true : this.length = false;
+                  if (resp2) {
+                    this.s = new Array<Soporte>();
+                    this.s = resp2;
+                  }
+                }, (e: any) => {
+                  console.log(e);
+                });
+              }
+            }, (e: any) => {
+              console.log(e);
+            });
           }
           else {
             Swal.fire({

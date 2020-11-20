@@ -19,7 +19,7 @@
         <!-- Menu de tablas -->
         <div *ngIf="this.session.Rol.rol1 === 'administrador'" class="menu d-flex flex-column">
             <ul class="list-group" *ngFor="let item of tablas">
-                <li [ngClass]="{'active' : this.seleccion === item}" (click)="change(item)" class="list-group-item">{{ item }}</li>
+                <li [ngClass]="{'active text-dark' : this.seleccion === item}" (click)="change(item)" class="list-group-item" style="background-color: #C4E8FF;">{{ item }}</li>
             </ul>
         </div>
 
@@ -63,7 +63,7 @@
                             <td *ngIf="item.activo || this.in">{{ item.nombre }}</td>
                             <td *ngIf="item.activo || this.in">{{ item.apellido }}</td>
                             <td *ngIf="item.activo || this.in">{{ item.telefono }}</td>
-                            <td *ngIf="item.activo || this.in">{{ item.correoE }}</td>
+                            <td class="text-break" *ngIf="item.activo || this.in">{{ item.correoE }}</td>
                             <td *ngIf="item.activo || this.in">{{ item.contrasena }}</td>
                             <td *ngIf="item.activo || this.in">{{ item.calle }} {{ item.numInt }} {{ item.numExt }}, CP: {{item.CP.codigo}}, {{item.Colonia.colonia1}}, {{ item.Ciudad.ciudad1 }}, {{ item.Estado.estado1 }}</td>
                             <td *ngIf="item.activo || this.in">{{ item.Rol.rol1 }}</td>
