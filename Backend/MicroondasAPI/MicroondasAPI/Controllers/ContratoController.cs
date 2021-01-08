@@ -1,6 +1,7 @@
 ﻿using MicroondasAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -429,6 +430,105 @@ namespace MicroondasAPI.Controllers
                 return Ok(true);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarContrato")]
+        public IHttpActionResult buscarContrato(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Contrato.Where(w =>
+                    w.Paquete.nombre.Contains(key) ||
+                    w.Usuario.nombre.Contains(key) ||
+                    w.Usuario.apellido.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    DateTime dia = DateTime.ParseExact(key, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                    accion = SessionController.getInstance().Contrato.Where(w =>
+                        w.fechaInicio == dia ||
+                        w.fechaFinal == dia
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    }                    
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idContrato = s.idContrato,
+                    pdf = s.pdf,
+                    archivo = s.archivo,
+                    fechaInicio = Convert.ToDateTime(s.fechaInicio).ToString("dd/MM/yyyy"),
+                    fechaFinal = Convert.ToDateTime(s.fechaFinal).ToString("dd/MM/yyyy"),
+                    idPaquete = s.idPaquete,
+                    idUsuario = s.idUsuario,
+                    activo = s.activo,
+                    Paquete = new
+                    {
+                        idPaquete = s.Paquete.idPaquete,
+                        nombre = s.Paquete.nombre,
+                        precio = s.Paquete.precio,
+                        activo = s.Paquete.activo,
+                        descripcion = s.Paquete.descripcion
+                    },
+                    Usuario = new
+                    {
+                        idUsuario = s.Usuario.idUsuario,
+                        nombre = s.Usuario.nombre,
+                        apellido = s.Usuario.apellido,
+                        telefono = s.Usuario.telefono,
+                        correoE = s.Usuario.correoE,
+                        calle = s.Usuario.calle,
+                        numInt = s.Usuario.numInt,
+                        numExt = s.Usuario.numExt,
+                        idEstado = s.Usuario.idEstado,
+                        idCiudad = s.Usuario.idCiudad,
+                        idCP = s.Usuario.idCP,
+                        idColonia = s.Usuario.idColonia,
+                        idRol = s.Usuario.idRol,
+                        activo = s.Usuario.activo,
+                        contrasena = s.Usuario.contrasena,
+                        CP = new
+                        {
+                            idCP = s.Usuario.CodigoPostal.idCP,
+                            codigo = s.Usuario.CodigoPostal.codigo
+                        },
+                        Colonia = new
+                        {
+                            idColonia = s.Usuario.Colonia.idColonia,
+                            colonia1 = s.Usuario.Colonia.colonia1,
+                        },
+                        Ciudad = new
+                        {
+                            idCiudad = s.Usuario.Ciudad.idCiudad,
+                            ciudad1 = s.Usuario.Ciudad.ciudad1
+                        },
+                        Estado = new
+                        {
+                            idEstado = s.Usuario.idEstado,
+                            estado1 = s.Usuario.Estado.estado1
+                        },
+                        Rol = new
+                        {
+                            idRol = s.Usuario.Rol.idRol,
+                            rol1 = s.Usuario.Rol.rol1
+                        }
+                    }
+                });
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
             {
                 return BadRequest();
             }

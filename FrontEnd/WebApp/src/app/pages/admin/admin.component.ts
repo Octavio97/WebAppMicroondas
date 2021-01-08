@@ -34,6 +34,7 @@ import { SlideImgService } from '../../services/slide-img.service';
 import { SlideImg } from 'src/app/models/slideImg.model';
 import { Antena } from '../../models/antena.model';
 import { AntenaService } from '../../services/antena.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-admin',
@@ -53,6 +54,7 @@ export class AdminComponent implements OnInit {
   estado: Estado[];
   estatus: Estatus[];
   usuario: Usuario[];
+  cliente: Contrato[];
   ciudad: Ciudad[];
   codigo: CodigoPostal[];
   colonia: Colonia[];
@@ -1677,6 +1679,7 @@ export class AdminComponent implements OnInit {
     }
   });
   }
+
   // antenderReporte(x?, y?, z?){
   //   Swal.fire({
   //     title: 'Confirmación',
@@ -1720,7 +1723,7 @@ export class AdminComponent implements OnInit {
   //   });
   // }
 
-  // METODO PARA ASIGNAR UN REPORTE A UN TECNICO
+  /* METODO PARA AGREGAR O MODIFICAR REPORTE*/
   asignarReporte(data: NgForm) {
     if (data.invalid) {
       Swal.fire({
@@ -1730,45 +1733,94 @@ export class AdminComponent implements OnInit {
       });
     }
     else {
-      Swal.fire({
-        title: 'Confirmación',
-        text: 'Esta seguro de eliminar el registro',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No',
-        allowOutsideClick: false
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: 'Espere',
-            text: 'Realizando proceso...',
-            icon: 'info',
-            allowOutsideClick: false,
-            });
-          Swal.showLoading();
-          this.soporteS.modificarSoporte(this.reporte).subscribe( resp => {
-            if (resp) {
-              Swal.fire({
-                title: 'Exito',
-                text: 'Se le ha asignado un técnico a este reporte',
-                icon: 'success'
-              });
-              this.asignarRep = false;
-            }
-          }, (e: any) => {
+      if (this.reporte.idSoporte === null) {
+        Swal.fire({
+          title: 'Confirmación',
+          text: '¿Esta seguro de confirmar el reporte?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No',
+          allowOutsideClick: false
+        }).then((result) => {
+          if (result.isConfirmed) {
             Swal.fire({
-              title: 'ERROR',
-              text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
-              icon: 'error',
-              showConfirmButton: false,
-              timer: 3000
+              title: 'Espere',
+              text: 'Realizando proceso...',
+              icon: 'info',
+              allowOutsideClick: false,
+              });
+            Swal.showLoading();
+            this.soporteS.altaSoporte(this.reporte).subscribe(resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'El reporte fue guardado con exito',
+                  icon: 'success',
+                  timer: 4000,
+                  showConfirmButton: false
+                });
+                this.asignarRep = false;
+                this.verReportes();
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
             });
-          });
-        }
-      });
+          }
+        });
+      }
+      else {
+        Swal.fire({
+          title: 'Confirmación',
+          text: '¿Esta seguro de confirmar el reporte?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No',
+          allowOutsideClick: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: 'Espere',
+              text: 'Realizando proceso...',
+              icon: 'info',
+              allowOutsideClick: false,
+              });
+            Swal.showLoading();
+            this.soporteS.modificarSoporte(this.reporte).subscribe( resp => {
+              if (resp) {
+                Swal.fire({
+                  title: 'Exito',
+                  text: 'Se ha actualizado el reporte',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 4000
+                });
+                this.asignarRep = false;
+                this.verReportes();
+              }
+            }, (e: any) => {
+              Swal.fire({
+                title: 'ERROR',
+                text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 3000
+              });
+            });
+          }
+        });
+      }
     }
   }
 
@@ -1788,24 +1840,7 @@ export class AdminComponent implements OnInit {
         timer: 3000
       });
     });
-    this.usuarioS.verTecnico().subscribe((resp: Usuario[]) => {
-      if (resp) {
-        this.usuario = resp;
-      }
-    }, (e: any) => {
-      Swal.fire({
-        title: 'ERROR',
-        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 3000
-      });
-    });
-    this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
-      if (resp) {
-        this.estatus = resp;
-      }
-    });
+    this.verForm();
   }
 
   // METODO PARA VER TODOS LOS REPORTES QUE NO ESTEN ATENDIDOS
@@ -1826,6 +1861,401 @@ export class AdminComponent implements OnInit {
         showConfirmButton: false,
         timer: 3000
       });
+    });
+  }
+
+  // METODO PARA BUSCAR REGISTRO(S) EN UNA TABLA
+  buscarElemento() {
+    const elemento = document.getElementById('busqueda') as HTMLInputElement;
+
+    if (elemento.value === '') {
+      Swal.fire({
+        title: 'Error',
+        text: 'Ingrese algun dato para poder buscar',
+        icon: 'error',
+        timer: 4000,
+        showConfirmButton: false
+      });
+    }
+    else {
+      switch (this.seleccion) {
+      case 'Ciudad':
+        this.ciudadS.buscarCiudad(elemento.value).subscribe( (resp: Ciudad[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.ciudad = new Array<Ciudad>();
+            this.ciudad = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Código postal':
+        this.codigoS.buscarCP(elemento.value).subscribe( (resp: CodigoPostal[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.codigo = new Array<CodigoPostal>();
+            this.codigo = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Colonia':
+        this.coloniaS.buscarColonia(elemento.value).subscribe( (resp: Colonia[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.colonia = new Array<Colonia>();
+            this.colonia = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Contrato':
+        this.contratoS.buscarContrato(elemento.value).subscribe( (resp: Contrato[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.contrato = new Array<Contrato>();
+            this.contrato = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Equipo':
+        this.equipoS.buscarEquipo(elemento.value).subscribe( (resp: Equipo[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.equipo = new Array<Equipo>();
+            this.equipo = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Estado':
+        this.estadoS.buscarEstado(elemento.value).subscribe( (resp: Estado[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.estado = new Array<Estado>();
+            this.estado = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Estatus':
+        this.estatusS.buscarEstatus(elemento.value).subscribe( (resp: Estatus[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.estatus = new Array<Estatus>();
+            this.estatus = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Paquete':
+        this.paqueteS.buscarPaquete(elemento.value).subscribe( (resp: Paquete[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.paquete = new Array<Paquete>();
+            this.paquete = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Propiedad':
+        this.propiedadS.buscarPropiedad(elemento.value).subscribe( (resp: Propiedad[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.propiedad = new Array<Propiedad>();
+            this.propiedad = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Rol':
+        this.rolS.buscarRol(elemento.value).subscribe( (resp: Rol[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.rol = new Array<Rol>();
+            this.rol = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Usuario':
+        this.usuarioS.buscarUsuario(elemento.value).subscribe( (resp: Usuario[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.usuario = new Array<Usuario>();
+            this.usuario = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Soporte':
+        this.soporteS.buscarSoporte(elemento.value).subscribe( (resp: Soporte[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.soporte = new Array<Soporte>();
+            this.soporte = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Informes':
+        this.informesS.buscarInformes(elemento.value).subscribe( (resp: Informes[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.informes = new Array<Informes>();
+            this.informes = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Antenas':
+        this.antenaS.buscarAntena(elemento.value).subscribe( (resp: Antena[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.antena = new Array<Antena>();
+            this.antena = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+      case 'Imágenes promocionales':
+        this.slideImgService.buscarSlideImg(elemento.value).subscribe( (resp: SlideImg[]) => {
+          resp.length === 0 ? this.length = true : this.length = false;
+          if (resp) {
+            this.cargando = true;
+            this.slides = new Array<SlideImg>();
+            this.slides = resp;
+            this.cargando = false;
+          }
+        }, (e: any) => {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 3000
+          });
+        });
+        break;
+    }
+    }
+  }
+
+  // METODO PARA VOLVER A CARGAR TABLA DESPUES DE BUSCAR
+  reestablecerTabla(i) {
+    if (i.data === null) {
+      this.change(this.seleccion);
+    }
+  }
+
+  // METODO PARA VER EL FORMULARIO DE AGREGAR O MODIFICAR REPORTE
+  verForm() {
+    this.asignarRep = true;
+    this.reporte = new Soporte();
+
+    this.usuarioS.verTecnico().subscribe((resp: Usuario[]) => {
+      if (resp) {
+        this.usuario = resp;
+      }
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    });
+    this.estatusS.consultaEstatus().subscribe( (resp: Estatus[]) => {
+      if (resp) {
+        this.estatus = resp;
+      }
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    });
+    this.contratoS.consultaContrato().subscribe( (resp: Contrato[]) => {
+      if (resp) {
+        this.cliente = new Array<Contrato>();
+        this.cliente = resp;
+      }
+    }, (e: any) => {
+      Swal.fire({
+        title: 'ERROR',
+        text: 'Error de conexión, vuelva a cargar la página o intente mas tarde',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    });
+  }
+
+  // METODO PARA CANCELAR REPORTE
+  cancelarReporte(i: Soporte) {
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Desea cancelar el registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Espere',
+          text: 'Realizando proceso...',
+          icon: 'info',
+          allowOutsideClick: false,
+          });
+        Swal.showLoading();
+        this.soporteS.modificarSoporte(i, true).subscribe((resp) => {
+          if (resp) {
+            Swal.fire({
+              title: 'Exito',
+              text: 'El reporte fue eliminado con exito',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 4000
+            });
+            this.verReportes();
+          }
+        });
+      }
     });
   }
 }

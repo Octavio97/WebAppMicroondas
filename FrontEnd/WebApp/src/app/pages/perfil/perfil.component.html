@@ -156,7 +156,7 @@
                 <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">{{ item.Estatus.estatus1 }}</td>
                 <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en proceso'">{{ item.Estatus.estatus1 }}</td>
                 <td class="text-success" *ngIf="item.Estatus.estatus1 === 'resuelto'">{{ item.Estatus.estatus1 }}</td>
-                <td *ngIf="item.Estatus.estatus1 !== 'resuelto'"><button class="btn btn-danger" (click)="cancelarReporte(item.idSoporte)"><i class="fa fa-ban"></i> Cancelar</button></td>
+                <td *ngIf="item.Estatus.estatus1 !== 'resuelto'"><button class="btn btn-danger" (click)="cancelarReporte(item.idSoporte)" title="Cancelar"><i class="fa fa-ban"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -192,7 +192,7 @@
     </table>
         </div>
         <!-- Banner de sin registros -->
-        <div *ngIf="length" class="alert alert-danger text-center mt-3 animated fadeIn faster container">
+        <div *ngIf="length && (this.usuario.Rol.rol1 === 'técnico' || this.usuario.Rol.rol1 === 'cliente')" class="alert alert-danger text-center mt-3 animated fadeIn faster container">
     <h4 class="alert-heading">No hay registros</h4>
     <p>
         <i class="fa fa-times-circle fa-3x"></i>

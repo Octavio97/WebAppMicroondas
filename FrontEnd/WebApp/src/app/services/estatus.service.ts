@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Estatus } from '../models/estatus.model';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstatusService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaEstatus(estatus: Estatus) {
     return this.http.post( this.url + 'agregarEstatus', estatus );
@@ -27,6 +31,9 @@ export class EstatusService {
     if (i === true) {
       estatus.activo = false;
     }
+    else if (i === false) {
+      estatus.activo = true;
+    }
     return this.http.put( this.url + 'modificarEstatus', estatus );
   }
 
@@ -40,5 +47,9 @@ export class EstatusService {
 
   consultaUnicaEstatus(estatus: string) {
     return this.http.get( this.url + 'consultaUnicaEstatus', { params: { estatus } } );
+  }
+
+  buscarEstatus(key: string) {
+    return this.http.get( this.url + 'buscarEstatus', { params: { key } } );
   }
 }

@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CodigoPostal } from '../models/codigopostal.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodigopostalService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaCodigo(codigo: CodigoPostal) {
     return this.http.post( this.url + 'agregarCP', codigo );
@@ -27,6 +31,9 @@ export class CodigopostalService {
     if (i === true) {
       codigo.activo = false;
     }
+    else if (i === false) {
+      codigo.activo = true;
+    }
     return this.http.put( this.url + 'modificarCP', codigo );
   }
 
@@ -40,5 +47,9 @@ export class CodigopostalService {
 
   verCP(id: string) {
     return this.http.get( this.url + 'verCP', { params: { id } } );
+  }
+
+  buscarCP(key: string) {
+    return this.http.get( this.url + 'buscarCP', { params: { key } } );
   }
 }

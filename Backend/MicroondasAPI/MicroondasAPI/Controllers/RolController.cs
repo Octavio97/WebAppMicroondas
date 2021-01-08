@@ -108,7 +108,7 @@ namespace MicroondasAPI.Controllers
                 // Devolvemos los datos
                 return Ok(resultado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }
@@ -173,6 +173,38 @@ namespace MicroondasAPI.Controllers
                 return Ok(resultado);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarRol")]
+        public IHttpActionResult buscarRol(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Rol.Where(w =>
+                    w.rol1.Contains(key)
+                ).ToList();
+                
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idRol = s.idRol,
+                    rol1 = s.rol1,
+                    activo = s.activo
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
             {
                 return BadRequest();
             }

@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Antena } from '../models/antena.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AntenaService {
 
-  constructor(private http: HttpClient) { }
+  public readonly url;
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
+
+    this.url = url.url;
+  }
 
   altaAntena(antena: Antena) {
     return this.http.post( this.url + 'agregarAntena', antena );
@@ -27,6 +32,10 @@ export class AntenaService {
     if (i === true) {
       antena.activo = false;
     }
+    else if (i === false) {
+      antena.activo = true;
+    }
+
     return this.http.put( this.url + 'modificarAntena', antena );
   }
 
@@ -36,5 +45,9 @@ export class AntenaService {
 
   verAntenas(ciudad: string){
     return this.http.get( this.url + 'verAntenas', { params: { ciudad } } );
+  }
+
+  buscarAntena(key: string) {
+    return this.http.get( this.url + 'buscarAntena' , { params: { key } } );
   }
 }

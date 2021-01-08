@@ -293,5 +293,61 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarCP")]
+        public IHttpActionResult buscarCP(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().CodigoPostal.Where(w =>
+                    w.Ciudad.ciudad1.Contains(key) ||
+                    w.Ciudad.Estado.estado1.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    int num = Convert.ToInt32(key);
+
+                    accion = SessionController.getInstance().CodigoPostal.Where(w =>
+                        w.codigo == num
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    }
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idCP = s.idCP,
+                    codigo = s.codigo,
+                    idCiudad = s.idCiudad,
+                    activo = s.activo,
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1,
+                        idEstado = s.Ciudad.idEstado,
+                        activo = s.activo,
+                        Estado = new
+                        {
+                            idEstado = s.Ciudad.Estado.idEstado,
+                            estado1 = s.Ciudad.Estado.estado1,
+                            activo = s.Ciudad.Estado.activo
+                        }
+                    }
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

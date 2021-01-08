@@ -1,14 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AppComponent } from '../app.component';
 import { Soporte } from '../models/soporte.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SoporteService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
+
+    this.url = url.url;
+  }
 
   altaSoporte(soporte: Soporte) {
     return this.http.post( this.url + 'agregarSoporte', soporte );
@@ -21,6 +26,9 @@ export class SoporteService {
   modificarSoporte(soporte: Soporte, i?){
     if (i === true) {
       soporte.activo = false;
+    }
+    else if (i === false) {
+      soporte.activo = true;
     }
     return this.http.put( this.url + 'modificarSoporte', soporte );
   }
@@ -55,5 +63,9 @@ export class SoporteService {
 
   cancelarSoporte(id: string) {
     return this.http.delete( this.url + 'cancelarSoporte', { params: { id } } );
+  }
+
+  buscarSoporte(key: string) {
+    return this.http.get( this.url + 'buscarSoporte', { params: { key } } );
   }
 }

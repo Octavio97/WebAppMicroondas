@@ -179,5 +179,37 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarEquipo")]
+        public IHttpActionResult buscarEquipo(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Equipo.Where(w =>
+                    w.equipo1.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idEquipo = s.idEquipo,
+                    equipo1 = s.equipo1,
+                    activo = s.activo
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

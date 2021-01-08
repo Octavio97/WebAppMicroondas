@@ -14,7 +14,7 @@
                 <input [ngClass]="{ 'is-invalid' : contrasena.invalid && (contrasena.dirty || contrasena.touched) }" [type]="this.contra ? 'text' : 'password'" class="form-control" id="contrasena" name="contrasena" [(ngModel)]="this.usuario.contrasena" #contrasena="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$">
                 <div class="input-group-prepend"><span class="input-group-text" (click)="verContrasena()"><i [ngClass]="{ 'far fa-eye': !this.contra, 'far fa-eye-slash': this.contra }" class="fas fa-eye"></i></span></div>
                 <div *ngIf="contrasena.errors?.required" class="invalid-feedback">Ingrese contraseña</div>
-                <div *ngIf="contrasena.errors?.pattern" class="invalid-feedback">La contraseña debe contener al menos una letra mayúscula, una letra minuscula, un número, un símbolo(!@#$%^&*_=+-) y debe de estar entre los 8 y 16 caracteres</div>
+                <div *ngIf="contrasena.errors?.pattern" class="invalid-feedback text-break">La contraseña debe contener al menos una letra mayúscula, una letra minuscula, un número, un símbolo(!@#$%^&*_=+-) y debe de estar entre los 8 y 16 caracteres</div>
             </div>
         </div>
         <div class="d-flex justify-content-between">

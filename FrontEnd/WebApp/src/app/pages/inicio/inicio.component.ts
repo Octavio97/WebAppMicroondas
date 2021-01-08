@@ -11,38 +11,6 @@ import { ColoniaService } from '../../services/colonia.service';
 import { Colonia } from 'src/app/models/colonia.model';
 import estados from '../../../assets/coordenadas/estados/mexicoHigh.json';
 import municipios from '../../../assets/coordenadas/municipios/MunicipiosMexico.json';
-// import ags from '../../../assets/coordenadas/CP/01_Ags_CP.json';
-import bc from '../../../assets/coordenadas/CP/02_BC_CP.json';
-// import bcs from '../../../assets/coordenadas/CP/03_BCS_CP.json';
-// import camp from '../../../assets/coordenadas/CP/04_Camp_CP.json';
-// import coah from '../../../assets/coordenadas/CP/05_Coah_CP.json';
-// import col from '../../../assets/coordenadas/CP/06_Col_CP.json';
-// import chis from '../../../assets/coordenadas/CP/07_Chis_CP.json';
-// import chih from '../../../assets/coordenadas/CP/08_Chih_CP.json';
-// import cdmx from '../../../assets/coordenadas/CP/09_Cdmx_CP.json';
-// import dgo from '../../../assets/coordenadas/CP/10_Dgo_CP.json';
-// import gto from '../../../assets/coordenadas/CP/11_Gto_CP.json';
-// import gro from '../../../assets/coordenadas/CP/12_Gro_CP.json';
-// import hgo from '../../../assets/coordenadas/CP/13_Hgo_CP.json';
-// import jal from '../../../assets/coordenadas/CP/14_Jal_CP.json';
-// import mex from '../../../assets/coordenadas/CP/15_Mex_CP.json';
-// import mich from '../../../assets/coordenadas/CP/16_Mich_CP.json';
-// import mor from '../../../assets/coordenadas/CP/17_Mor_CP.json';
-// import nay from '../../../assets/coordenadas/CP/18_Nay_CP.json';
-// import nl from '../../../assets/coordenadas/CP/19_NL_CP.json';
-// import oax from '../../../assets/coordenadas/CP/20_Oax_CP.json';
-// import pue from '../../../assets/coordenadas/CP/21_Pue_CP.json';
-// import qro from '../../../assets/coordenadas/CP/22_Qro_CP.json';
-// import qroo from '../../../assets/coordenadas/CP/23_QRoo_CP.json';
-// import slp from '../../../assets/coordenadas/CP/24_SLP_CP.json';
-// import sin from '../../../assets/coordenadas/CP/25_Sin_CP.json';
-// import son from '../../../assets/coordenadas/CP/26_Son_CP.json';
-// import tab from '../../../assets/coordenadas/CP/27_Tab_CP.json';
-// import tamps from '../../../assets/coordenadas/CP/28_Tamps_CP.json';
-// import tlax from '../../../assets/coordenadas/CP/29_Tlax_CP.json';
-// import ver from '../../../assets/coordenadas/CP/30_Ver_CP.json';
-// import yuc from '../../../assets/coordenadas/CP/31_Yuc_CP.json';
-// import zac from '../../../assets/coordenadas/CP/32_Zac_CP.json';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Informes } from '../../models/informes.model';
@@ -88,7 +56,6 @@ prueba; // PRUEBA DE IMAGENES
   constructor(
     private estadoS: EstadoService,
     private ciudadS: CiudadService,
-    private codigoS: CodigopostalService,
     private coloniaS: ColoniaService,
     private informesS: InformesService,
     private paquetesS: PaqueteService,
@@ -249,131 +216,131 @@ prueba; // PRUEBA DE IMAGENES
 
   getCP(id: string, state?: string) {
     // let flag: any;
-    this.codigoS.consultaCPinicio(id).subscribe( (resp: CodigoPostal[]) => {
-      this.codigo = [];
-      if (resp) {
-        this.codigo = resp;
-        this.arrayRegion.features = [];
+    // this.codigoS.consultaCPinicio(id).subscribe( (resp: CodigoPostal[]) => {
+    //   this.codigo = [];
+    //   if (resp) {
+    //     this.codigo = resp;
+    //     this.arrayRegion.features = [];
 
-        // FUNCION DEL MAPA
-        // acignamos a nuestro objeto 'flag' al json del estado al que se quiere buscar la cobertura
-        // tslint:disable-next-line: prefer-for-of
-        // switch (state) {
-        //   case 'Aguascalientes':
-        //     flag = ags;
-        //     break;
-        //   case 'Baja California':
-        //     flag = bc;
-        //     break;
-        //   case 'Baja California Sur':
-        //     flag = bcs;
-        //     break;
-        //   case 'Campeche':
-        //     flag = camp;
-        //     break;
-        //   case 'Coahuila':
-        //     flag = coah;
-        //     break;
-        //   case 'Colima':
-        //     flag = col;
-        //     break;
-        //   case 'Chiapas':
-        //     flag = chis;
-        //     break;
-        //   case 'Chihuahua':
-        //     flag = chih;
-        //     break;
-        //   case 'Ciudad de México':
-        //     flag = cdmx;
-        //     break;
-        //   case 'Durango':
-        //     flag = dgo;
-        //     break;
-        //   case 'Guanajuato':
-        //     flag = gto;
-        //     break;
-        //   case 'Guerrero':
-        //     flag = gro;
-        //     break;
-        //   case 'Hidalgo':
-        //     flag = hgo;
-        //     break;
-        //   case 'Jalisco':
-        //     flag = jal;
-        //     break;
-        //   case 'Estado de México':
-        //     flag = mex;
-        //     break;
-        //   case 'Michoacán':
-        //     flag = mich;
-        //     break;
-        //   case 'Morelos':
-        //     flag = mor;
-        //     break;
-        //   case 'Nayarit':
-        //     flag = nay;
-        //     break;
-        //   case 'Nuevo León':
-        //     flag = nl;
-        //     break;
-        //   case 'Oaxaca':
-        //     flag = oax;
-        //     break;
-        //   case 'Puebla':
-        //     flag = pue;
-        //     break;
-        //   case 'Querétaro':
-        //     flag = qro;
-        //     break;
-        //   case 'Quintana Roo':
-        //     flag = qroo;
-        //     break;
-        //   case 'San Luis Potosí':
-        //     flag = slp;
-        //     break;
-        //   case 'Sinaloa':
-        //     flag = sin;
-        //     break;
-        //   case 'Sonora':
-        //     flag = son;
-        //     break;
-        //   case 'Tabasco':
-        //     flag = tab;
-        //     break;
-        //   case 'Tamaulipas':
-        //     flag = tamps;
-        //     break;
-        //   case 'Tlaxcala':
-        //     flag = tlax;
-        //     break;
-        //   case 'Veracruz':
-        //     flag = ver;
-        //     break;
-        //   case 'Yucatán':
-        //     flag = yuc;
-        //     break;
-        //   case 'Zacatecas':
-        //     flag = zac;
-        //     break;
-        // }
+    //     // FUNCION DEL MAPA
+    //     asignamos a nuestro objeto 'flag' al json del estado al que se quiere buscar la cobertura
+    //     tslint:disable-next-line: prefer-for-of
+    //     switch (state) {
+    //       case 'Aguascalientes':
+    //         flag = ags;
+    //         break;
+    //       case 'Baja California':
+    //         flag = bc;
+    //         break;
+    //       case 'Baja California Sur':
+    //         flag = bcs;
+    //         break;
+    //       case 'Campeche':
+    //         flag = camp;
+    //         break;
+    //       case 'Coahuila':
+    //         flag = coah;
+    //         break;
+    //       case 'Colima':
+    //         flag = col;
+    //         break;
+    //       case 'Chiapas':
+    //         flag = chis;
+    //         break;
+    //       case 'Chihuahua':
+    //         flag = chih;
+    //         break;
+    //       case 'Ciudad de México':
+    //         flag = cdmx;
+    //         break;
+    //       case 'Durango':
+    //         flag = dgo;
+    //         break;
+    //       case 'Guanajuato':
+    //         flag = gto;
+    //         break;
+    //       case 'Guerrero':
+    //         flag = gro;
+    //         break;
+    //       case 'Hidalgo':
+    //         flag = hgo;
+    //         break;
+    //       case 'Jalisco':
+    //         flag = jal;
+    //         break;
+    //       case 'Estado de México':
+    //         flag = mex;
+    //         break;
+    //       case 'Michoacán':
+    //         flag = mich;
+    //         break;
+    //       case 'Morelos':
+    //         flag = mor;
+    //         break;
+    //       case 'Nayarit':
+    //         flag = nay;
+    //         break;
+    //       case 'Nuevo León':
+    //         flag = nl;
+    //         break;
+    //       case 'Oaxaca':
+    //         flag = oax;
+    //         break;
+    //       case 'Puebla':
+    //         flag = pue;
+    //         break;
+    //       case 'Querétaro':
+    //         flag = qro;
+    //         break;
+    //       case 'Quintana Roo':
+    //         flag = qroo;
+    //         break;
+    //       case 'San Luis Potosí':
+    //         flag = slp;
+    //         break;
+    //       case 'Sinaloa':
+    //         flag = sin;
+    //         break;
+    //       case 'Sonora':
+    //         flag = son;
+    //         break;
+    //       case 'Tabasco':
+    //         flag = tab;
+    //         break;
+    //       case 'Tamaulipas':
+    //         flag = tamps;
+    //         break;
+    //       case 'Tlaxcala':
+    //         flag = tlax;
+    //         break;
+    //       case 'Veracruz':
+    //         flag = ver;
+    //         break;
+    //       case 'Yucatán':
+    //         flag = yuc;
+    //         break;
+    //       case 'Zacatecas':
+    //         flag = zac;
+    //         break;
+    //     }
 
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < bc.features.length; i++) {
-          // tslint:disable-next-line: prefer-for-of
-          for (let y = 0; y < this.codigo.length; y++) {
-            if (bc.features[i].properties.d_cp === this.codigo[y].codigo.toString()) {
-              this.arrayRegion.features.push(bc.features[i]);
-            }
-          }
-        }
-        this.geoJson = L.geoJson(this.arrayRegion, {
-          style: this.style,
-          onEachFeature: this.onEachFeature
-        }).addTo(this.mymap);
-      }
-    }, (e: any) => {
-      console.log(e);
-    });
+    //     // tslint:disable-next-line: prefer-for-of
+    //     for (let i = 0; i < bc.features.length; i++) {
+    //       // tslint:disable-next-line: prefer-for-of
+    //       for (let y = 0; y < this.codigo.length; y++) {
+    //         if (bc.features[i].properties.d_cp === this.codigo[y].codigo.toString()) {
+    //           this.arrayRegion.features.push(bc.features[i]);
+    //         }
+    //       }
+    //     }
+    //     this.geoJson = L.geoJson(this.arrayRegion, {
+    //       style: this.style,
+    //       onEachFeature: this.onEachFeature
+    //     }).addTo(this.mymap);
+    //   }
+    // }, (e: any) => {
+    //   console.log(e);
+    // });
   }
 
   getColonia(id) {

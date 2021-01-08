@@ -25,7 +25,7 @@ import { EstatusService } from '../../services/estatus.service';
   templateUrl: './perfil.component.html'
 })
 export class PerfilComponent implements OnInit {
-  length = false;
+  length = true;
   usuario = new Usuario();
   e: Estado[];
   c: Ciudad[];
@@ -195,7 +195,9 @@ export class PerfilComponent implements OnInit {
               Swal.fire({
                 title: 'Exito',
                 text: 'El usuario fue actualizada con exito',
-                icon: 'success'
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 4000
               });
               this.router.navigate(['/inicio']);
             } else {
@@ -295,7 +297,9 @@ export class PerfilComponent implements OnInit {
                 Swal.fire({
                   title: 'Exito',
                   text: 'Su reporte se ha agregado con exito, uno de nuestros técnicos se contactará con usted pronto',
-                  icon: 'success'
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 4000
                 });
               }
               }, (e: any) => {
@@ -427,7 +431,9 @@ export class PerfilComponent implements OnInit {
             Swal.fire({
               title: 'Exito',
               text: 'El reporte fue eliminado con exito',
-              icon: 'success'
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 4000
             });
             // consulta del contrato y reportes
             this.contratoS.consultaUnicaCli(this.usuario.idUsuario).subscribe( (resp: Contrato) => {

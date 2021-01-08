@@ -78,6 +78,11 @@ namespace MicroondasAPI.Controllers
             {
                 var consulta = SessionController.getInstance().SlideImg.ToList();
 
+                if (consulta == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultado = consulta.Select(s => new
                 {
                     idSlide = s.idSlide,
@@ -147,6 +152,38 @@ namespace MicroondasAPI.Controllers
                 return Ok(resultado);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarSlideImg")]
+        public IHttpActionResult buscarSlideImg(string key)
+        {
+            try
+            {
+                var consulta = SessionController.getInstance().SlideImg.Where(w =>
+                    w.nombre.Contains(key) ||
+                    w.descripcion.Contains(key)
+                ).ToList();
+
+                if (consulta.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = consulta.Select(s => new
+                {
+                    idSlide = s.idSlide,
+                    nombre = s.nombre,
+                    imagen = s.imagen,
+                    descripcion = s.descripcion
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception ex)
             {
                 return BadRequest();
             }

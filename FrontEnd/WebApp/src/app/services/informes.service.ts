@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AppComponent } from '../app.component';
 import { Informes } from '../models/informes.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InformesService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaInformes(informes: Informes) {
     return this.http.post( this.url + 'agregarInformes', informes );
@@ -27,10 +31,17 @@ export class InformesService {
     if (i === true) {
       informes.activo = false;
     }
+    else if (i === false) {
+      informes.activo = true;
+    }
     return this.http.put( this.url + 'modificarInformes', informes );
   }
 
   verInformes(id: string) {
     return this.http.get( this.url + 'verInformes', { params: { id } } );
+  }
+
+  buscarInformes(key: string) {
+    return this.http.get( this.url + 'buscarInformes', { params: { key } } );
   }
 }

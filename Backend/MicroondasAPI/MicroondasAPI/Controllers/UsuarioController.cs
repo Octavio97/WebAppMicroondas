@@ -403,5 +403,92 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarUsuario")]
+        public IHttpActionResult buscarUsuario(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Usuario.Where(w =>
+                    w.nombre.Contains(key) ||
+                    w.apellido.Contains(key) ||
+                    w.telefono.Contains(key) ||
+                    w.numInt.Contains(key) ||
+                    w.Estado.estado1.Contains(key) ||
+                    w.Ciudad.ciudad1.Contains(key) ||
+                    w.Colonia.colonia1.Contains(key) ||
+                    w.correoE.Contains(key) ||
+                    w.contrasena.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    int num = Convert.ToInt32(key);
+
+                    accion = SessionController.getInstance().Usuario.Where(w =>
+                    w.numExt ==  num ||
+                    w.CodigoPostal.codigo == num
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    }
+                }
+
+                // Ajustamos los datos para devolverlso
+                var resultado = accion.Select(s => new
+                {
+                    idUsuario = s.idUsuario,
+                    nombre = s.nombre,
+                    apellido = s.apellido,
+                    telefono = s.telefono,
+                    correoE = s.correoE,
+                    calle = s.calle,
+                    numInt = s.numInt,
+                    numExt = s.numExt,
+                    idEstado = s.idEstado,
+                    idCiudad = s.idCiudad,
+                    idCP = s.idCP,
+                    idColonia = s.idColonia,
+                    idRol = s.idRol,
+                    activo = s.activo,
+                    contrasena = s.contrasena,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo
+                    },
+                    Colonia = new
+                    {
+                        idColonia = s.Colonia.idColonia,
+                        colonia1 = s.Colonia.colonia1,
+                    },
+                    Ciudad = new
+                    {
+                        idCiudad = s.Ciudad.idCiudad,
+                        ciudad1 = s.Ciudad.ciudad1
+                    },
+                    Estado = new
+                    {
+                        idEstado = s.idEstado,
+                        estado1 = s.Estado.estado1
+                    },
+                    Rol = new
+                    {
+                        idRol = s.Rol.idRol,
+                        rol1 = s.Rol.rol1
+                    }
+                });
+
+                // manda resultados
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

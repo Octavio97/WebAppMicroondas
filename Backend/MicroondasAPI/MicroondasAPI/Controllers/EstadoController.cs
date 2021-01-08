@@ -171,7 +171,7 @@ namespace MicroondasAPI.Controllers
 
                 return Ok(resultado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }
@@ -202,6 +202,38 @@ namespace MicroondasAPI.Controllers
                 return Ok(resultado);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarEstado")]
+        public IHttpActionResult buscarEstado(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Estado.Where(w =>
+                    w.estado1.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idEstado = s.idEstado,
+                    estado1 = s.estado1,
+                    activo = s.activo
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
             {
                 return BadRequest();
             }

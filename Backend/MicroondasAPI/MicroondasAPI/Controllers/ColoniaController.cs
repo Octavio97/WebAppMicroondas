@@ -320,5 +320,69 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarColonia")]
+        public IHttpActionResult buscarColonia(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Colonia.Where(w =>
+                    w.colonia1.Contains(key) ||
+                    w.CodigoPostal.Ciudad.ciudad1.Contains(key) ||
+                    w.CodigoPostal.Ciudad.Estado.estado1.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    int num = Convert.ToInt32(key);
+
+                    accion = SessionController.getInstance().Colonia.Where(w =>
+                        w.CodigoPostal.codigo == num
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    }
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idColonia = s.idColonia,
+                    colonia1 = s.colonia1,
+                    idCP = s.idCP,
+                    activo = s.activo,
+                    CP = new
+                    {
+                        idCP = s.CodigoPostal.idCP,
+                        codigo = s.CodigoPostal.codigo,
+                        idCiudad = s.CodigoPostal.idCiudad,
+                        activo = s.CodigoPostal.activo,
+                        Ciudad = new
+                        {
+                            idCiudad = s.CodigoPostal.Ciudad.idCiudad,
+                            ciudad1 = s.CodigoPostal.Ciudad.ciudad1,
+                            idEstado = s.CodigoPostal.Ciudad.idEstado,
+                            activo = s.CodigoPostal.activo,
+                            Estado = new
+                            {
+                                idEstado = s.CodigoPostal.Ciudad.Estado.idEstado,
+                                estado1 = s.CodigoPostal.Ciudad.Estado.estado1,
+                                activo = s.CodigoPostal.Ciudad.Estado.activo
+                            }
+                        }
+                    }
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

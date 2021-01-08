@@ -206,5 +206,37 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarEstatus")]
+        public IHttpActionResult buscarEstatus(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Estatus.Where(w =>
+                    w.estatus1.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idEstatus = s.idEstatus,
+                    estatus1 = s.estatus1,
+                    activo = s.activo
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

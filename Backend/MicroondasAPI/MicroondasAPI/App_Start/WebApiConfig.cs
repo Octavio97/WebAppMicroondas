@@ -11,7 +11,9 @@ namespace MicroondasAPI
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web
-            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*"));// habilitar permisos para ingresar a esta api por angular
+            // habilitar permisos para ingresar a esta api por angular
+            config.EnableCors(new EnableCorsAttribute("http://localhost:4200", headers: "*", methods: "*")); // version desarrollo
+            // config.EnableCors(new EnableCorsAttribute("http://192.168.1.105:80", headers: "*", methods: "*")); // version final
             // Rutas de API web
             config.MapHttpAttributeRoutes();
 

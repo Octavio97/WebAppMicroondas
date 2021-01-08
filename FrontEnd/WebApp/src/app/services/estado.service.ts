@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Estado } from '../models/estado.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstadoService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaEstado(estado: Estado) {
     return this.http.post( this.url + 'agregarEstado', estado );
@@ -27,6 +31,9 @@ export class EstadoService {
     if (i === true) {
       estado.activo = false;
     }
+    else if (i === false) {
+      estado.activo = true;
+    }
     return this.http.put( this.url + 'modificarEstado', estado );
   }
 
@@ -36,5 +43,9 @@ export class EstadoService {
 
   verEstado(id: string) {
     return this.http.get( this.url + 'verEstado', { params: { id } } );
+  }
+
+  buscarEstado(key: string) {
+    return this.http.get( this.url + 'buscarEstado', { params: { key } } );
   }
 }

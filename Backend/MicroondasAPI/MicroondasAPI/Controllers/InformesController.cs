@@ -80,6 +80,11 @@ namespace MicroondasAPI.Controllers
             {
                 var accion = SessionController.getInstance().Informes.ToList();
 
+                if (accion == null)
+                {
+                    return Ok(false);
+                }
+
                 var resultados = accion.Select(s => new
                 {
                     idInformes = s.idInformes,
@@ -157,6 +162,49 @@ namespace MicroondasAPI.Controllers
             catch (Exception)
             {
                 return (BadRequest());
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarInformes")]
+        public IHttpActionResult buscarInformes(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Informes.Where(w =>
+                    w.nombre.Contains(key) ||
+                    w.telefono.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    int num = Convert.ToInt32(key);
+
+                    accion = SessionController.getInstance().Informes.Where(w =>
+                        w.cp == num
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    } 
+                }
+
+                var resultados = accion.Select(s => new
+                {
+                    idInformes = s.idInformes,
+                    nombre = s.nombre,
+                    cp = s.cp,
+                    telefono = s.telefono,
+                    visto = s.visto,
+                    activo = s.activo
+                });
+
+                return Ok(resultados);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
             }
         }
     }

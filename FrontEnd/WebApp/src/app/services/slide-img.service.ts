@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AppComponent } from '../app.component';
 import { SlideImg } from '../models/slideImg.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SlideImgService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaSlideImg(slideImg: SlideImg) {
     return this.http.post( this.url + 'agregarSlideImg', slideImg );
@@ -29,5 +33,9 @@ export class SlideImgService {
 
   verSlideImg(id: string) {
     return this.http.get( this.url + 'verSlideImg', { params: { id } } );
+  }
+
+  buscarSlideImg(key: string) {
+    return this.http.get( this.url + 'buscarSlideImg', { params: { key } } );
   }
 }

@@ -257,5 +257,45 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarCiudad")]
+        public IHttpActionResult buscarCiudad(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Ciudad.Where(w =>
+                    w.ciudad1.Contains(key) ||
+                    w.Estado.estado1.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                // Estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                idCiudad = s.idCiudad,
+                ciudad1 = s.ciudad1,
+                idEstado = s.idEstado,
+                activo = s.activo,
+                Estado = new
+                {
+                    idEstado = s.Estado.idEstado,
+                    estado1 = s.Estado.estado1,
+                    activo = s.Estado.activo
+                }
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

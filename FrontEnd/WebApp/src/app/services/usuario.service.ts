@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../models/usuario.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+  public readonly url;
+  public readonly url2;
 
-  constructor(private http: HttpClient) { }
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
-  public readonly url2 = 'http://localhost:3000/formulario';
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
+    this.url2 = url.url2;
+    this.url = url.url;
+  }
 
   altaUsuario(usuario: Usuario) {
     return this.http.post( this.url + 'agregarUsuario', usuario);
@@ -26,6 +31,9 @@ export class UsuarioService {
   modificarUsuario(usuario: Usuario, i?) {
     if (i === true) {
       usuario.activo = false;
+    }
+    else if (i === false) {
+      usuario.activo = true;
     }
     return this.http.put( this.url + 'modificarUsuario', usuario );
   }
@@ -56,5 +64,9 @@ export class UsuarioService {
 
   enviarCorreo(body) {
     return this.http.post( this.url2, body );
+  }
+
+  buscarUsuario(key: string) {
+    return this.http.get( this.url + 'buscarUsuario', { params: { key } } );
   }
 }

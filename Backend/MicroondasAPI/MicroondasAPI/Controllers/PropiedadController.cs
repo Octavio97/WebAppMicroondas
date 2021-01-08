@@ -46,7 +46,7 @@ namespace MicroondasAPI.Controllers
                 //devolvemos el valor
                 return Ok(i);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest();
             }
@@ -212,6 +212,58 @@ namespace MicroondasAPI.Controllers
                 return Ok(resultado);
             }
             catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarPropiedad")]
+        public IHttpActionResult buscarPropiedad(string key)
+        {
+            try
+            {
+                // consultamos la tabla propiedad
+                var accion = SessionController.getInstance().Propiedad.
+                    Join(
+                        SessionController.getInstance().Usuario,
+                        propiedad => propiedad.idUsuario,
+                        usuario => usuario.idUsuario,
+                        (propiedad, usuario) => new
+                        {
+                            propiedad,
+                            usuario
+                        }
+                    )
+                    .Where(w =>
+                        w.usuario.nombre.Contains(key) ||
+                        w.usuario.apellido.Contains(key) ||
+                        w.propiedad.Equipo.equipo1.Contains(key)
+                    ).
+                    ToList();
+
+                if (accion.Count == 0)
+                {
+                    return Ok(false);
+                }
+
+                var resultado = accion.GroupBy(g => new { g.usuario.idUsuario, g.usuario.nombre, g.usuario.apellido }).
+                    Select(s => new
+                    {
+                        idUsuario = s.Key.idUsuario,
+                        count = s.Count(),
+                        Usuario = new
+                        {
+                            idUsuario = s.Key.idUsuario,
+                            nombre = s.Key.nombre,
+                            apellido = s.Key.apellido
+                        }
+                    });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
             {
                 return BadRequest();
             }

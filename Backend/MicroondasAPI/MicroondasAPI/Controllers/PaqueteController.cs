@@ -219,5 +219,50 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarPaquete")]
+        public IHttpActionResult buscarPaquete(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Paquete.Where(w =>
+                    w.nombre.Contains(key) ||
+                    w.descripcion.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    decimal num = Convert.ToDecimal(key);
+
+                    accion = SessionController.getInstance().Paquete.Where(w =>
+                        w.precio == num
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    }
+                }
+
+                // estructuramos los datos
+                var resultado = accion.Select(s => new
+                {
+                    idPaquete = s.idPaquete,
+                    nombre = s.nombre,
+                    precio = s.precio,
+                    activo = s.activo,
+                    descripcion = s.descripcion,
+                    imagen = s.imagen
+                });
+
+                // Devolvemos los datos
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

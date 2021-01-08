@@ -30,12 +30,16 @@
                 <br>
                 <!-- Botones agregar y activos -->
                 <div *ngIf="seleccion !== 'Seleccione tabla...'">
-                    <button class="btn btn-success float-left" style="margin-right: 2%; margin-bottom: 1%;" [routerLink]="['/inicio', this.seleccion, 'new']"><i class="fas fa-plus"></i> Agregar</button>
-                    <div class="form-check float-right">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="in = !in">
-                        <label class="form-check-label" for="defaultCheck1">
-                            Todos
-                        </label>
+                    <div class="input-group mb-3">
+                        <button class="btn btn-success" [routerLink]="['/inicio', this.seleccion, 'new']"><i class="fas fa-plus"></i> Agregar</button>
+                        <input style="margin-left: 1%;" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon1" id="busqueda" (input)="reestablecerTabla($event)">
+                        <span style="margin-right: 1%;" class="input-group-text" id="basic-addon1" (click)="buscarElemento()"><i class="fas fa-search"></i></span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="in = !in">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Todos
+                            </label>
+                        </div>                 
                     </div>
                 </div>
         
@@ -535,16 +539,19 @@
             <!-- Secretario -->
             <div class="table-responsive-xl animated fadeIn" *ngIf="this.session.Rol.rol1 === 'secretario'">
             <!-- Tabla de reportes sin asignar -->
-            <div class="animated fadeIn" *ngIf="!asignarRep && !cargando && !length">
+            <div class="animated fadeIn" *ngIf="!asignarRep">
                 <div>
                     <h1 class="display-4">Reportes</h1>
                 </div>
-                <table class="table">
+                <button class="btn btn-success" (click)="verForm()" style="margin-bottom: 1%;"><i class="fas fa-plus"></i> Agregar</button>
+                <table class="table" *ngIf="!asignarRep && !cargando && !length">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Cliente</th>
                             <th scope="col">Problema</th>
                             <th scope="col">Dirección</th>
+                            <th scope="col">Fecha del reporte</th>
+                            <th scope="col">Fecha de atención</th>
                             <th scope="col">Estatus</th>
                             <th scope="col"></th>
                         </tr>
@@ -556,9 +563,11 @@
                             <td>{{ item.Contrato.Usuario.calle }} {{ item.Contrato.Usuario.numExt }}
                                 <p *ngIf="item.Contrato.Usuario.numInt !== null">Int: {{ item.Contrato.Usuario.numInt }}</p> CP: {{ item.Contrato.Usuario.CP.codigo }}, {{ item.Contrato.Usuario.Colonia.colonia1 }}, {{ item.Contrato.Usuario.Ciudad.ciudad1 }}, {{ item.Contrato.Usuario.Estado.estado1 }}
                             </td>
+                            <td>{{ item.fechaInicio }}</td>
+                            <td>{{ item.fechaFinal }}</td>
                             <td class="text-danger" *ngIf="item.Estatus.estatus1 === 'problema'">Problema</td>
                             <td class="text-warning" *ngIf="item.Estatus.estatus1 === 'en progreso'">En progreso</td>
-                            <td><button class="btn btn-light" (click)="verReporte(item.idSoporte)" title="Asignar"><i class="fas fa-pen"></i></button></td>
+                            <td><button class="btn btn-light" (click)="verReporte(item.idSoporte)" title="Asignar" style="margin-right: 1%;"><i class="fas fa-pen"></i></button><button class="btn btn-danger" title="Cancelar" (click)="cancelarReporte(item)"><i class="fas fa-ban"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -569,15 +578,44 @@
                 <form #log="ngForm" (submit)="asignarReporte(log)">
                     <div class="form-group">
                         <h1 class="display-4">Asignación de reporte</h1>
-                        <h3>Cliente: </h3>
-                        <h6>{{ this.reporte.Contrato.Usuario.nombre }} {{ this.reporte.Contrato.Usuario.apellido }}</h6><br>
-                        <h3>Problema: </h3>
-                        <h6>{{ this.reporte.problema }}</h6><br>
+                        <br>
+                        <label for="cliente">Cliente:</label>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of cliente">
+                                    <td><input type="radio" name="idUsuario" [(ngModel)]="this.reporte.idContrato" [value]="item.idContrato"></td>
+                                    <td>{{ item.Usuario.nombre }}</td>
+                                    <td>{{ item.Usuario.apellido }}</td>
+                                </tr>
+                            </tbody>
+                        </table>   
+                        <div class="form-group">
+                            <label for="problema">Problema:</label>
+                            <input [ngClass]="{ 'is-invalid' : problema.invalid && (problema.dirty || problema.touched)}" class="form-control" type="text" name="problema" id="problema" [(ngModel)]="this.reporte.problema" #problema="ngModel" placeholder="Ingrese problema" required>
+                            <div *ngIf="problema.errors?.required" class="invalid-feedback">Ingrese problema</div>
+                        </div>
                         <label for="estatus">Estatus: </label>
                         <select class="form-control" name="estatus" id="estatus" [(ngModel)]="this.reporte.idEstatus">
                             <option *ngFor="let item of estatus" [ngValue]="item.idEstatus">{{ item.estatus1 }}</option>
-                        </select><br>
-                        <h3>Técnicos:</h3>
+                        </select>
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha del reporte: </label>
+                            <input ngClass="{ 'is-invalid': fechaInicio.invalid && (fechaInicio.dirty || fechaInicio.touched) }" class="form-control" type="date" name="fechaInicio" id="fechaInicio" #fechaInicio="ngModel" [(ngModel)]="this.reporte.fechaInicio" required>
+                            <div *ngIf="fechaInicio.errors?.required" class="invalid-feedback">Ingrese fecha de inicio</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaFinal">Fecha de atención: </label>
+                            <input ngClass="{ 'is-invalid': fechaFinal.invalid && (fechaFinal.dirty || fechaFinal.touched) }" class="form-control" type="date" name="fechaFinal" id="fechaFinal" #fechaFinal="ngModel" [(ngModel)]="this.reporte.fechaFinal" required>
+                            <div *ngIf="fechaFinal.errors?.required" class="invalid-feedback">Ingrese fecha de inicio</div>
+                        </div>
+                        <label>Técnicos:</label>
                         <table class="table table-sm">
                             <thead>
                                 <tr>
@@ -594,6 +632,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitch33" name="activo" [(ngModel)]="this.reporte.activo">
+                            <label class="custom-control-label" for="customSwitch33">Activo</label>
+                        </div>
+                        <br>
                         <button class="btn btn-success w-100" type="submit"><i class="fa fa-save"></i> Aceptar</button>
                     </div>
                 </form>
@@ -609,7 +652,7 @@
                 </p>
             </div>
             <!-- Banner de sin registros -->
-            <div *ngIf="!cargando && length" class="alert alert-danger text-center mt-3 animated fadeIn faster">
+            <div *ngIf="!cargando && length && !asignarRep" class="alert alert-danger text-center mt-3 animated fadeIn faster">
                 <h4 class="alert-heading">No hay registros</h4>
                 <p>
                     <i class="fa fa-times-circle fa-3x"></i>

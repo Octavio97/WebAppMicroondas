@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Colonia } from '../models/colonia.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColoniaService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaColonia(colonia: Colonia) {
     return this.http.post( this.url + 'agregarColonia', colonia );
@@ -27,6 +31,9 @@ export class ColoniaService {
     if (i === true) {
       colonia.activo = false;
     }
+    else if (i === false) {
+      colonia.activo = true;
+    }
     return this.http.put( this.url + 'modificarColonia', colonia );
   }
 
@@ -40,5 +47,9 @@ export class ColoniaService {
 
   consultaCoInicio(id: string) {
     return this.http.get( this.url + 'consultaCoInicio', { params: { id } } );
+  }
+
+  buscarColonia(key: string) {
+    return this.http.get( this.url + 'buscarColonia', { params: { key } } );
   }
 }

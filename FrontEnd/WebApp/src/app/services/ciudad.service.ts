@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ciudad } from '../models/ciudad.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CiudadService {
+  public readonly url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url: AppComponent = new AppComponent();
 
-  public readonly url = 'http://localhost:55791/api/MicroondasAPI/';
+    this.url = url.url;
+  }
 
   altaCiudad(ciudad: Ciudad) {
     return this.http.post( this.url + 'agregarCiudad', ciudad );
@@ -27,6 +31,9 @@ export class CiudadService {
     if (i === true) {
       ciudad.activo = false;
     }
+    else if (i === false) {
+      ciudad.activo = true;
+    }
     return this.http.put( this.url + 'modificarCiudad', ciudad );
   }
 
@@ -40,5 +47,9 @@ export class CiudadService {
 
   verCiudad(id: string) {
     return this.http.get( this.url + 'verCiudad', { params: { id } } );
+  }
+
+  buscarCiudad(key: string) {
+    return this.http.get( this.url + 'buscarCiudad' , { params: { key } } );
   }
 }

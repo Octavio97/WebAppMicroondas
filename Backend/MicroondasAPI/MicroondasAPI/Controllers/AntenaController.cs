@@ -239,5 +239,72 @@ namespace MicroondasAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet]
+        [Route("api/MicroondasAPI/buscarAntena")]
+        public IHttpActionResult buscarAntena(string key)
+        {
+            try
+            {
+                var accion = SessionController.getInstance().Antena.Where(w =>
+                    w.Estado.estado1.Contains(key) ||
+                    w.Ciudad.ciudad1.Contains(key) ||
+                    w.Colonia.colonia1.Contains(key) ||
+                    w.calle.Contains(key) ||
+                    w.lat.Contains(key) ||
+                    w.lon.Contains(key)
+                ).ToList();
+
+                if (accion.Count == 0)
+                {
+                    int num = Convert.ToInt32(key);
+                    accion = SessionController.getInstance().Antena.Where(w =>
+                        w.CodigoPostal.codigo == num||
+                        w.numExt == num
+                    ).ToList();
+
+                    if (accion.Count == 0)
+                    {
+                        return Ok(false);
+                    }
+                }
+
+                var resultado = accion.Select(s => new
+                {
+                    idAntena = s.idAntena,
+                    idEstado = s.idEstado,
+                    idCiudad = s.idCiudad,
+                    idCP = s.idCP,
+                    idColonia = s.idColonia,
+                    calle = s.calle,
+                    numExt = s.numExt,
+                    lat = s.lat,
+                    lon = s.lon,
+                    activo = s.activo,
+                    Estado = new
+                    {
+                        estado1 = s.Estado.estado1
+                    },
+                    Ciudad = new
+                    {
+                        ciudad1 = s.Ciudad.ciudad1
+                    },
+                    CP = new
+                    {
+                        codigo = s.CodigoPostal.codigo
+                    },
+                    Colonia = new
+                    {
+                        colonia1 = s.Colonia.colonia1
+                    }
+                });
+
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
