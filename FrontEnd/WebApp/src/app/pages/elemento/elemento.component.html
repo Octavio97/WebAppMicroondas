@@ -1,0 +1,633 @@
+<div class="container animated fadeIn">
+    <h1 class="display-4">{{ this.id }}</h1>
+    <!-- Usuario -->
+    <div *ngIf="this.id === 'Usuario'">
+        <small *ngIf="this.usuario.Rol.rol1 === 'administrador'" class="text-danger">Este usuario puede ser importante para el funcionamiento de sistema</small>
+        <form #log="ngForm" (submit)=alta(log) class="needs-validation">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nombre" [(ngModel)]="this.usuario.nombre" #nombre="ngModel" required maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre con la primera letra en mayúscula</div>
+                <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input [ngClass]="{ 'is-invalid' : apellido.invalid && (apellido.dirty || apellido.touched) }" type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese apellido" required [(ngModel)]="this.usuario.apellido" #apellido="ngModel"
+                    maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" title="hola esta mal xd">
+                <div *ngIf="apellido.errors?.required" class="invalid-feedback">Ingrese sus apellidos</div>
+                <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" class="form-control" id="telefono" name="telefono" placeholder="Ingrese teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}" required [(ngModel)]="this.usuario.telefono"
+                    #telefono="ngModel">
+                <div *ngIf="telefono.errors?.required" class="invalid-feedback">Ingrese su teléfono</div>
+                <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">Ingrese un numero valido con area y numero completo Ej.(123) 545-1234</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input [ngClass]="{ 'is-invalid' : correo.invalid && (correo.dirty || correo.touched) }" type="email" class="form-control" id="email" name="email" placeholder="Ingrese correo electrónico" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="this.usuario.correoE"
+                    #correo="ngModel">
+                <div *ngIf="correo.errors?.required" class="invalid-feedback">Ingrese su correo electrónico</div>
+                <div *ngIf="correo.errors?.pattern" class="invalid-feedback">Ingrese un correo adecuado Ej. nombre@dominio.com</div>
+            </div>
+            <div class="form-group">
+                <label for="pass">Contraseña:</label>
+                <input [ngClass]="{ 'is-invalid' : pass.invalid && (pass.dirty || pass.touched) }" type="text" class="form-control" id="pass" name="pass" placeholder="Ingrese contraseña" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$"
+                    [(ngModel)]="this.usuario.contrasena" #pass="ngModel">
+                <div *ngIf="pass.errors?.required" class="invalid-feedback">Ingresa contraseña</div>
+                <div *ngIf="pass.errors?.pattern" class="invalid-feedback">La contraseña debe contener al menos una letra mayúscula, una letra minuscula, un número, un símbolo(!@#$%^&*_=+-) y debe de estar entre los 8 y 16 caracteres</div>
+            </div>
+            <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð.]*"
+                    [(ngModel)]="this.usuario.calle" #calle="ngModel">
+                <div *ngIf="calle.errors?.required" class="invalid-feedback">Solo ingresa tu calle</div>
+                <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="int">Num.Int:</label>
+                <input [ngClass]="{ 'is-invalid' : int.invalid && (int.dirty || int.touched ) }" type="text" class="form-control" id="int" name="int" placeholder="Ingrese Num.Int (Opcional)" pattern="[0-9A-Za-z]*" [(ngModel)]="this.usuario.numInt" #int="ngModel" minlength="2"
+                    maxlength="5">
+                <div *ngIf="int.errors?.minLength">Ingrese mas de un número</div>
+                <div *ngIf="int.errors?.pattern" class="invalid-feedback">Debe ser numeros o letras entre 2 y 5 dígitos</div>
+            </div>
+            <div class="form-group">
+                <label for="ext">Num.Ext:</label>
+                <input [ngClass]="{ 'is-invalid' : ext.invalid && (ext.dirty || ext.touched) }" type="number" class="form-control" id="ext" name="ext" placeholder="Ingrese Num.Ext" required pattern="[0-9]{2,5}" [(ngModel)]="this.usuario.numExt" minlength="2" maxlength="5"
+                    #ext="ngModel">
+                <div *ngIf="ext.errors?.required" class="invalid-feedback">Ingrese su número de casa exterior</div>
+                <div *ngIf="ext.errors?.pattern" class="invalid-feedback">Debe ser un numero entre 2 y 5 dígitos</div>
+            </div>
+            <label for="estado">Estado: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [(ngModel)]="this.usuario.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
+            </div>
+            <label for="idciudad">Ciudad: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.usuario.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
+            </div>
+            <label for="codigo">Código postal: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idcp.invalid && (idcp.dirty || idcp.touched) }" class="form-control" name="idcodigo" id="idcodigo" [(ngModel)]="this.usuario.idCP" (ngModelChange)="cambio3($event)" #idcp="ngModel" required>
+                    <option *ngFor="let item of cp" [ngValue]="item.idCP">{{ item.codigo }}</option>
+                </select>
+                <div *ngIf="idcp.errors?.required" class="invalid-feedback">Seleccione código postal</div>
+            </div>
+            <label for="idcolonia">Colonia: </label>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idcolonia.invalid && (idcolonia.dirty || idcolonia.touched) }" class="form-control" name="idcolonia" id="idcolonia" [(ngModel)]="this.usuario.idColonia" #idcolonia="ngModel" required>
+                    <option *ngFor="let item of co" [ngValue]="item.idColonia">{{ item.colonia1 }}</option>
+                </select>
+                <div *ngIf="idcolonia.errors?.required" class="invalid-feedback">Seleccione colonia</div>
+            </div>
+            <div class="form-group">
+                <label for="rol">Rol:</label>
+                <select [ngClass]="{ 'is-invalid' : idRol.invalid && (idRol.dirty || idRol.touched) }" class="form-control" name="idRol" id="idRol" [(ngModel)]="this.usuario.idRol" #idRol="ngModel" required>
+                    <option *ngFor="let item of r" [ngValue]="item.idRol">{{ item.rol1 }}</option>
+                </select>
+                <div *ngIf="idRol.errors?.required" class="invalid-feedback">Seleccione rol</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" name="activo" id="customSwitch1" [(ngModel)]="this.usuario.activo">
+                <label class="custom-control-label" for="customSwitch1">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Rol -->
+    <div *ngIf="this.id === 'Rol'">
+        <small *ngIf="this.rol.rol1 === 'administrador' || this.rol.rol1 === 'técnico' || this.rol.rol1 === 'cliente' || this.rol.rol1 === 'secretario'" class="text-danger">Este registro es importante para el funcionamiento de sistema</small>
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="rol1">Rol: </label>
+                <input [ngClass]="{ 'is-invalid' : rol1.invalid && (rol1.dirty || rol1.touched) }" class="form-control" type="text" id="rol1" name="rol1" placeholder="Ingresar rol" [(ngModel)]="this.rol.rol1" #rol1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
+                    maxlength="30">
+                <div *ngIf="rol1.errors?.required" class="invalid-feedback">Ingrese rol</div>
+                <div *ngIf="rol1.errors?.pattern" class="invalid-feedback">No ingrese numeros</div>
+                <div *ngIf="rol1.errors?.maxlength" class="invalid-feedback">No debe pasar de 30 caracteres</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch2" name="activo" [(ngModel)]="this.rol.activo">
+                <label class="custom-control-label" for="customSwitch2">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Estatus -->
+    <div *ngIf="this.id === 'Estatus'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="estatus1">Estatus: </label>
+                <input [ngClass]="{ 'is-invalid' : estatus1.invalid && (estatus1.dirty || estatus1.touched) }" #estatus1="ngModel" class="form-control" type="text" id="estatus" name="estatus1" placeholder="Ingresar estatus" [(ngModel)]="this.estatus.estatus1" required
+                    maxlength="30" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
+                <div *ngIf="estatus1.errors?.required" class="invalid-feedback">Ingrese estatus</div>
+                <div *ngIf="estatus1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="estatus1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch3" name="activo" [(ngModel)]="this.estatus.activo">
+                <label class="custom-control-label" for="customSwitch3">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Estado -->
+    <div *ngIf="this.id === 'Estado'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="estado">Estado: </label>
+                <input [ngClass]="{ 'is-invalid' : estado1.invalid && (estado1.dirty || estado1.touched) }" class="form-control" type="text" id="estado" name="estado" placeholder="Ingresar estado" [(ngModel)]="this.estado.estado1" #estado1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
+                    maxlength="30">
+                <div *ngIf="estado1.errors?.required" class="invalid-feedback">Ingrese estado</div>
+                <div *ngIf="estado1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="estado1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch4" name="activo" [(ngModel)]="this.estado.activo">
+                <label class="custom-control-label" for="customSwitch4">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Ciudad -->
+    <div *ngIf="this.id === 'Ciudad'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <label for="idestado">Estado: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.ciudad.idEstado" #idestado="ngModel" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Ingrese un estado</div>
+            </div>
+            <div class="form-group">
+                <label for="ciudad">Ciudad: </label>
+                <input [ngClass]="{ 'is-invalid' : ciudad1.invalid && (ciudad1.dirty || ciudad1.touched) }" class="form-control" type="text" id="ciudad" name="ciudad" placeholder="Ingresar ciudad" [(ngModel)]="this.ciudad.ciudad1" #ciudad1="ngModel" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
+                    maxlength="50">
+                <div *ngIf="ciudad1.errors?.required" class="invalid-feedback">Ingrese ciudad</div>
+                <div *ngIf="ciudad1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="ciudad1.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 30 caracteres</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch5" name="activo" [(ngModel)]="this.ciudad.activo">
+                <label class="custom-control-label" for="customSwitch5">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Codigo Postal -->
+    <div *ngIf="this.id === 'Código postal'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <label for="idestado">Estado: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" class="form-control" name="idestado" id="idestado" [(ngModel)]="this.codigoP.Ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
+            </div>
+            <label for="ciudad">Ciudad: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.codigoP.idCiudad" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccionar ciudad</div>
+            </div>
+            <div class="form-group">
+                <label for="codigo">Código postal: </label>
+                <input [ngClass]="{ 'is-invalid' : codigo.invalid && (codigo.dirty || codigo.touched) }" class="form-control" type="text" id="codigo" name="codigo" placeholder="Ingresar código postal" [(ngModel)]="this.codigoP.codigo" #codigo="ngModel" required pattern="[0-9]{5}"
+                    maxlength="5">
+                <div *ngIf="codigo.errors?.required" class="invalid-feedback">Ingrese código postal</div>
+                <div *ngIf="codigo.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
+                <div *ngIf="codigo.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch6" name="activo" [(ngModel)]="this.codigoP.activo">
+                <label class="custom-control-label" for="customSwitch6">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Paquete -->
+    <div *ngIf="this.id === 'Paquete'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="nombre">Nombre del paquete: </label>
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched ) }" class="form-control" type="text" name="nombre" id="nombre" [(ngModel)]="this.paquete.nombre" #nombre="ngModel" placeholder="Ingrese nombre del paquete" required
+                    pattern="[A-Z a-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="30">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese paquete</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="nombre.errors?.maxlength">No debes ingresar mas de 30 caracteres</div>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio: </label>
+                <input [ngClass]="{ 'is-invalid' : precio.invalid && (precio.dirty || precio.touched) }" class="form-control" type="number" name="precio" id="precio" [(ngModel)]="this.paquete.precio" #precio="ngModel" placeholder="Ingrese precio" required>
+                <div *ngIf="precio.errors?.required" class="invalid-feedback">Ingrese precio</div>
+                <div *ngIf="precio.errors?.pattern" class="invalid-feedback">Ingrese solo numeros</div>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción: </label>
+                <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="descripcion" name="descripcion" [(ngModel)]="this.paquete.descripcion" #descripcion="ngModel"
+                    placeholder="Ingresar descripción" required maxlength="100"></textarea>
+                <div *ngIf="descripcion.errors?.required" class="invalid-feedback">Ingrese descripción</div>
+            </div>
+            <div class="form-group">
+                <label for="">Imagen para página web:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png" (change)="verArchivo($event)" required>
+                    <label class="custom-file-label" for="imagen">{{ imagenL }}</label>
+                </div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch7" name="activo" [(ngModel)]="this.paquete.activo">
+                <label class="custom-control-label" for="customSwitch7">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Equipo -->
+    <div *ngIf="this.id === 'Equipo'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <div class="form-group">
+                <label for="equipo">Equipo: </label>
+                <input [ngClass]="{ 'is-invalid' : equipo1.invalid && (equipo1.dirty || equipo1.touched)}" class="form-control" type="text" name="equipo" id="equipo" [(ngModel)]="this.equipo.equipo1" #equipo1="ngModel" placeholder="Ingrese equipo" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*"
+                    maxlength="30">
+                <div *ngIf="equipo1.errors?.required" class="invalid-feedback">Ingrese equipo</div>
+                <div *ngIf="equipo1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="equipo1.errors?.maxlength" class="invalid-feedback">No debes ingresar mas de 30 caracteres</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch8" name="activo" [(ngModel)]="this.equipo.activo">
+                <label class="custom-control-label" for="customSwitch8">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- PaqueteEquipo -->
+    <div *ngIf="this.id === 'PaqueteEquipo'"></div>
+    <!-- Colonia -->
+    <div *ngIf="this.id === 'Colonia'">
+        <form #log="ngForm" (ngSubmit)=alta(log)>
+            <label for="estado">Estado: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [ngModel]="this.colonia.CP.Ciudad.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
+            </div>
+            <label for="idciudad">Ciudad: </label><br>
+            <div class="form-group">
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idciudad" id="idciudad" [(ngModel)]="this.colonia.CP.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
+            </div>
+            <label for="codigo">Código postal: </label><br>
+            <div class="form-group">
+                <select [ngClass]="{ 'is-invalid' : idcp.invalid && (idcp.dirty || idcp.touched) }" class="form-control" name="idcodigo" id="idcodigo" [(ngModel)]="this.colonia.idCP" #idcp="ngModel" required>
+                    <option *ngFor="let item of cp" [ngValue]="item.idCP">{{ item.codigo }}</option>
+                </select>
+                <div *ngIf="idcp.errors?.required" class="invalid-feedback">Seleccione código postal</div>
+            </div>
+            <div class="form-group">
+                <label for="colonia">Colonia: </label>
+                <input [ngClass]="{ 'is-invalid' :  colonia1.invalid && (colonia1.dirty || colonia1.touched)}" class="form-control" type="text" id="colonia" name="colonia" placeholder="Ingresar código postal" [(ngModel)]="this.colonia.colonia1" #colonia1="ngModel" required
+                    pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" max="50">
+                <div *ngIf="colonia1.errors?.required" class="invalid-feedback">Ingrese colonia</div>
+                <div *ngIf="colonia1.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                <div *ngIf="colonia1.errors?.maxlenght" class="invalid-feedback">No debes de ingresar mas de 50 caracteres</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch10" name="activo" [(ngModel)]="this.colonia.activo">
+                <label class="custom-control-label" for="customSwitch10">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Propiedad -->
+    <div *ngIf="this.id === 'Propiedad'">
+        <div *ngIf="this.id2 === 'new'">
+            <form #log="ngForm" (submit)="alta(log)">
+                <div class="form-group">
+                    <label for="idTecnico">Técnico:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of t">
+                                <td><input class="form-check-input" type="radio" name="idUsuario" id="idUsuario" [(ngModel)]="this.propiedad.idUsuario" [value]="item.idUsuario"></td>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.apellido }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <label for="idEquipo">Equipos:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Equipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eq; let i = index">
+                                <td><input class="form-check-input" type="checkbox" [checked] (change)="cambio4($event, item)"></td>
+                                <td>{{ item.equipo1 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+            </form>
+        </div>
+        <div *ngIf="this.id2 !== 'new'">
+            <form #log="ngForm" (submit)="alta(log)">
+                <div class="form-group">
+                    <h4>Técnico: {{ this.propiedad.Usuario.nombre}} {{ this.propiedad.Usuario.apellido }}</h4>
+                </div>
+                <div class="form-group">
+                    <label for="idEquipo">Equipos:</label>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Equipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of eq; let i = index">
+                                <td><input class="form-check-input" type="checkbox" [checked]="item.activo" (change)="cambio4($event, item)"></td>
+                                <td>{{ item.equipo1 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+            </form>
+        </div>
+    </div>
+    <!-- Contrato -->
+    <div *ngIf="this.id === 'Contrato'">
+        <form #log=ngForm (submit)="alta(log)">
+            <div class="form-group">
+                <label for="fechaI">Fecha de inicio: </label>
+                <input [ngClass]="{ 'is-invalid' : fechaInicio.invalid && (fechaInicio.dirty || fechaInicio.touched) }" class="form-control" type="date" id="fechaI" name="fechaI" [(ngModel)]="this.contrato.fechaInicio" #fechaInicio="ngModel" required>
+                <div class="invalid-feedback" *ngIf="fechaInicio.errors?.required">Ingrese fecha de inicio</div>
+            </div>
+            <div class="form-group">
+                <label for="fechaF">Fecha final: </label>
+                <input [ngClass]="{ 'is-invalid' : fechaFinal.invalid && (fechaFinal.dirty || fechaFinal.touched) }" class="form-control" type="date" name="fechaF" id="fechaF" [(ngModel)]="this.contrato.fechaFinal" #fechaFinal="ngModel" required>
+                <div class="invalid-feedback" *ngIf="fechaFinal.errors?.required">Ingrese fecha final</div>
+            </div>
+            <div class="form-group">
+                <label for="idUsuario">Cliente:</label>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of u">
+                            <td><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.contrato.idUsuario" [value]="item.idUsuario"></td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="cliente">Paquete: </label>
+                <select [ngClass]="{ 'is-invalid' : idPaquete.invalid && ( idPaquete.dirty || idPaquete.touched ) }" class="form-control" name="cliente" id="cliente" [(ngModel)]="this.contrato.idPaquete" #idPaquete="ngModel" required>
+                    <option *ngFor="let item of p" [ngValue]="item.idPaquete">{{ item.nombre }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="idPaquete.errors?.required">Seleccione paquete</div>
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch12" name="activo" [(ngModel)]="this.contrato.activo">
+                <label class="custom-control-label" for="customSwitch12">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Soporte -->
+    <div *ngIf="this.id === 'Soporte'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="problema">Problema: </label>
+                <textarea class="form-control" name="problema" id="problema" [(ngModel)]="this.soporte.problema"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fechaInicio">Fecha del reporte: </label>
+                <input class="form-control" type="date" name="fechaInicio" id="fechaInicio" [(ngModel)]="this.soporte.fechaInicio">
+            </div>
+            <div class="form-group">
+                <label for="fechaFinal">Fecha de atención: </label>
+                <input class="form-control" type="date" name="fechaFinal" id="fechaFinal" [(ngModel)]="this.soporte.fechaFinal">
+            </div>
+            <div class="form-group">
+                <label for="idTecnico">Técnico:</label>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of t">
+                            <td><input class="form-check-input" type="radio" name="idtecnico" id="idtecnico" [(ngModel)]="this.soporte.idTecnico" [value]="item.idUsuario"></td>
+                            <td>{{ item.nombre }}</td>
+                            <td>{{ item.apellido }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="idContrato">Cliente:</label>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of con">
+                            <td><input class="form-check-input" type="radio" name="idcontrato" id="idcontrato" [(ngModel)]="this.soporte.idContrato" [value]="item.idContrato"></td>
+                            <td>{{ item.Usuario.nombre }}</td>
+                            <td>{{ item.Usuario.apellido }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="estatus">Estatus: </label>
+                <select class="form-control" name="estatus" id="estatus" [(ngModel)]="this.soporte.idEstatus">
+                    <option *ngFor="let item of es" [ngValue]="item.idEstatus">{{ item.estatus1 }}</option>
+                </select>
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch13" name="activo" [(ngModel)]="this.soporte.activo">
+                <label class="custom-control-label" for="customSwitch13">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Informes -->
+    <div *ngIf="this.id === 'Informes'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="nombre">Nombre: &nbsp;</label>
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.informes.nombre" placeholder="Ingrese su nombre y apellido" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*" maxlength="50">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese nombre con la primera letra en mayúscula</div>
+                <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
+                <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="codigo">Código postal: &nbsp;</label>
+                <input [ngClass]="{ 'is-invalid' : cp.invalid && (cp.dirty || cp.touched) }" type="number" id="codigo" name="codigo" class="form-control" #cp="ngModel" [(ngModel)]="this.informes.cp" placeholder="Ingrese su código postal" required pattern="[0-9]{5}">
+                <div *ngIf="cp.errors?.required" class="invalid-feedback">Ingrese código postal</div>
+                <div *ngIf="cp.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
+                <div *ngIf="cp.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" id="telefono" name="telefono" class="form-control" #telefono="ngModel" [(ngModel)]="this.informes.telefono" placeholder="Ingrese su teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}" required>
+                <div *ngIf="telefono.errors?.required" class="invalid-feedback">Ingrese teléfono</div>
+                <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">Ingrese un numero valido con area y numero completo Ej.(123) 545-1234</div>        
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch14" name="visto" [(ngModel)]="this.informes.visto">
+                <label class="custom-control-label" for="customSwitch14">Visto</label>
+            </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch15" name="activo" [(ngModel)]="this.informes.activo">
+                <label class="custom-control-label" for="customSwitch15">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Imágenes promocionales -->
+    <div *ngIf="this.id === 'Imágenes promocionales'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="nombre">Encabezado:</label>
+                <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" id="nombre" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="this.slides.nombre" placeholder="Ingrese el encabezado del slide" required maxlength="30">
+                <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese nombre con la primera letra en mayúscula</div>
+                <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 30 caracteres</div>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea [ngClass]="{ 'is-invalid' : descripcion.invalid && (descripcion.touched || descripcion.dirty) }" class="form-control" aria-label="With textarea" id="descripcion" name="descripcion" [(ngModel)]="this.slides.descripcion" #descripcion="ngModel" placeholder="Ingresar descripción" required maxlength="300"></textarea>
+                <div *ngIf="descripcion.errors?.required" class="invalid-feedback">Ingrese descripción</div>
+            </div>
+            <div class="form-group">
+                <label for="imagen">Imágen:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png" (change)="verArchivo($event)" required>
+                    <label class="custom-file-label" for="imagen">{{ imagenL }}</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+    <!-- Antenas -->
+    <div *ngIf="this.id === 'Antenas'">
+        <form #log="ngForm" (submit)="alta(log)">
+            <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input [ngClass]="{ 'is-invalid' : calle.invalid && (calle.dirty || calle.touched) }" type="text" class="form-control" id="calle" name="calle" placeholder="Ingrese calle" required pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð.]*"
+                    [(ngModel)]="this.antena.calle" #calle="ngModel">
+                <div *ngIf="calle.errors?.required" class="invalid-feedback">Solo ingresa tu calle</div>
+                <div *ngIf="calle.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+            </div>
+            <div class="form-group">
+                <label for="ext">Num.Ext:</label>
+                <input [ngClass]="{ 'is-invalid' : ext.invalid && (ext.dirty || ext.touched) }" type="number" class="form-control" id="ext" name="ext" placeholder="Ingrese Num.Ext" required pattern="[0-9]{2,5}" [(ngModel)]="this.antena.numExt" minlength="2" maxlength="5"
+                    #ext="ngModel">
+                <div *ngIf="ext.errors?.required" class="invalid-feedback">Ingrese su número de casa exterior</div>
+                <div *ngIf="ext.errors?.pattern" class="invalid-feedback">Debe ser un numero entre 2 y 5 dígitos</div>
+            </div>      
+            <div class="form-group">
+                <label for="estado">Estado: </label>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idestado.invalid && (idestado.dirty || idestado.touched) }" name="idestado" id="idestado" [(ngModel)]="this.antena.idEstado" #idestado="ngModel" (ngModelChange)="cambio1($event)" required>
+                    <option *ngFor="let item of e" [ngValue]="item.idEstado">{{ item.estado1 }}</option>
+                </select>
+                <div *ngIf="idestado.errors?.required" class="invalid-feedback">Seleccione estado</div>
+            </div>
+            <div class="form-group">
+                <label for="idciudad">Ciudad: </label>
+                <select class="form-control" [ngClass]="{ 'is-invalid' : idciudad.invalid && (idciudad.dirty || idciudad.touched) }" name="idCiudad" id="idCiudad" [(ngModel)]="this.antena.idCiudad" (ngModelChange)="cambio2($event)" #idciudad="ngModel" required>
+                    <option *ngFor="let item of c" [ngValue]="item.idCiudad">{{ item.ciudad1 }}</option>
+                </select>
+                <div *ngIf="idciudad.errors?.required" class="invalid-feedback">Seleccione ciudad</div>
+            </div>
+            <div class="form-group">
+                <label for="codigo">Código postal: </label>
+                <select [ngClass]="{ 'is-invalid' : idcp.invalid && (idcp.dirty || idcp.touched) }" class="form-control" name="idcodigo" id="idcodigo" [(ngModel)]="this.antena.idCP" (ngModelChange)="cambio3($event)" #idcp="ngModel" required>
+                    <option *ngFor="let item of cp" [ngValue]="item.idCP">{{ item.codigo }}</option>
+                </select>
+                <div *ngIf="idcp.errors?.required" class="invalid-feedback">Seleccione código postal</div>
+            </div>
+            <div class="form-group">
+                <label for="idcolonia">Colonia: </label>
+                <select [ngClass]="{ 'is-invalid' : idcolonia.invalid && (idcolonia.dirty || idcolonia.touched) }" class="form-control" name="idcolonia" id="idcolonia" [(ngModel)]="this.antena.idColonia" #idcolonia="ngModel" required>
+                    <option *ngFor="let item of co" [ngValue]="item.idColonia">{{ item.colonia1 }}</option>
+                </select>
+                <div *ngIf="idcolonia.errors?.required" class="invalid-feedback">Seleccione colonia</div>
+            </div>
+            <div class="form-group">
+                <label for="lat">Latitud:</label>
+                <input [ngClass]="{ 'is-invalid' : lat.invalid && (lat.dirty || lat.touched) }" class="form-control" [(ngModel)]="this.antena.lat" type="number" name="lat" #lat="ngModel" required>
+                <div *ngIf="lat.errors?.required" class="invalid-feedback">Ingrese latitud</div>
+            </div>
+            <div class="form-group">
+                <label for="lon">Longitud</label>
+                <input [ngClass]="{ 'is-invalid' : lon.invalid && (lon.dirty || lon.touched) }" class="form-control" [(ngModel)]="this.antena.lon" type="number" name="lon" #lon="ngModel" required>
+                <div *ngIf="lon.errors?.required" class="invalid-feedback">Ingrese longitud</div>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch16" name="activo" [(ngModel)]="this.antena.activo">
+                <label class="custom-control-label" for="customSwitch16">Activo</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success w-100"><i class="far fa-save"></i> Aceptar</button>
+        </form>
+    </div>
+</div>

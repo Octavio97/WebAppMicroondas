@@ -1,21 +1,187 @@
-<div id="carouselExampleFade" class="animated fadeIn container carousel slide carousel-fade" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://i.ytimg.com/vi/9QNUXxuwt1Y/maxresdefault.jpg" class="d-block w-100" alt="...">
+<div class="roll">
+    <!-- Barra de navegacio -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <a href="/"><img src="../../../assets/img/logo2.png" alt="logo" style="height: 48px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#nosotros">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#paquetes">Paquetes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cobertura">Cobertura</a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-light my-2 my-sm-0" [routerLink]="['/login']">
+                <i class="far fa-user"></i> {{ i }}
+            </button>
         </div>
-        <div class="carousel-item">
-            <img src="https://www.viajejet.com/wp-content/viajes/Lago-Moraine-Parque-Nacional-Banff-Alberta-Canada-1440x810.jpg" class="d-block w-100" alt="...">
+    </nav>
+    <!-- Contenido -->
+    <div class="menu animated fadeIn">
+        <!-- Slide de imagenes y formulario -->
+        <div class="container-xl animated fadeIn">
+            <!-- Slide de imagenes -->
+            <div id="slide" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div *ngFor="let item of slides; let i = index" [ngClass]="{ 'active': i == 0 }" class="carousel-item" data-interval="3000">
+                    <img [src]="item.imagen" class="d-block w-100" [alt]="item.nombre">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ item.nombre }}</h5>
+                        <p>{{ item.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#slide" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#slide" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            </div>
+            <br>
+            <!-- Formulario -->
+            <div class="rounded border border-primary d-inline-flex p-2 bd-highlight">
+            <img src="../../../assets/img/antena.png" alt="logo" class="rounded float-left img-fluid" style="width: 400px; height: 400px;"><br>
+            <form style="padding-left: 2%;" #log="ngForm" (submit)="enviarDatos(log)">
+                <div class="form-group">
+                    <div class="form-group">
+                        <h1 class="display-4">Mayores informes</h1>
+                        <h4>Ingrese sus datos para obtener mas información sobre nuestros servicios y cobertura</h4>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre: &nbsp;</label>
+                        <input [ngClass]="{ 'is-invalid' : nombre.invalid && (nombre.dirty || nombre.touched) }" type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="this.informes.nombre" #nombre="ngModel" placeholder="Ingrese su nombre y apellido" required maxlength="50" pattern="[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*">
+                        <div *ngIf="nombre.errors?.required" class="invalid-feedback">Ingrese su nombre con la primera letra en mayúscula</div>
+                        <div *ngIf="nombre.errors?.maxlenght" class="invalid-feedback">El nombre no debe de pasar de 50 caracteres</div>
+                        <div *ngIf="nombre.errors?.pattern" class="invalid-feedback">Solo debes ingresar letras</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="codigo">Código postal: &nbsp;</label>
+                            <input [ngClass]="{ 'is-invalid' : cp.invalid && (cp.dirty || cp.touched) }" type="number" id="codigo" name="codigo" class="form-control" [(ngModel)]="this.informes.cp" #cp="ngModel" placeholder="Ingrese su código postal" required pattern="[0-9]{5}" maxlength="5">
+                            <div *ngIf="cp.errors?.required" class="invalid-feedback">Ingrese código postal</div>
+                            <div *ngIf="cp.errors?.pattern" class="invalid-feedback">Solo ingrese números</div>
+                            <div *ngIf="cp.errors?.maxlength" class="invalid-feedback">No debes de ingresar mas de 5 números</div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input [ngClass]="{ 'is-invalid' : telefono.invalid && (telefono.dirty || telefono.touched) }" type="tel" id="telefono" name="telefono" class="form-control" [(ngModel)]="this.informes.telefono" #telefono="ngModel" placeholder="Ingrese su teléfono" pattern="\([0-9]{3}\) [0-9]{3}[ -][0-9]{4}" required>
+                            <div *ngIf="telefono.errors?.required" class="invalid-feedback">Ingrese su teléfono</div>
+                            <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">Ingrese un numero valido con area y numero completo Ej.(123) 545-1234</div>        
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <small>Antes de continuar lea nuestra <label (click)="politicas()" style="color: blue;">aviso de privacidad</label></small>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Enviar</button>
+                </div>
+            </form>
+            </div>
         </div>
-        <div class="carousel-item">
-            <img src="https://static.vix.com/es/sites/default/files/styles/4x3/public/imj/p/paisajes-espectaculares-del-mundo-1.jpg" class="d-block w-100" alt="...">
+        <br><br>
+    
+        <!-- Paquetes, Cobertura, Acerca de -->
+        <div class="container-xl animated fadeIn">
+            <!-- Acerca de -->
+            <section id="nosotros">
+                <h1 class="display-2">Nosotros</h1>
+                <blockquote class="blockquote">
+                    <p class="mb-0">Misión</p>
+                    <footer class="blockquote-footer"><cite title="Source Title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ducimus a dolor aperiam et! Rem similique id iste vero veritatis quia numquam iusto error? Itaque exercitationem quidem delectus tenetur consequatur.</cite></footer>
+                </blockquote>
+                <blockquote class="blockquote">
+                    <p class="mb-0">Visión</p>
+                    <footer class="blockquote-footer"><cite title="Source Title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ducimus a dolor aperiam et! Rem similique id iste vero veritatis quia numquam iusto error? Itaque exercitationem quidem delectus tenetur consequatur.</cite></footer>
+                </blockquote>
+                <blockquote class="blockquote">
+                    <p class="mb-0">Valores</p>
+                    <footer class="blockquote-footer"><cite title="Source Title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ducimus a dolor aperiam et! Rem similique id iste vero veritatis quia numquam iusto error? Itaque exercitationem quidem delectus tenetur consequatur.</cite></footer>
+                </blockquote>
+            </section>
+    
+            <!-- Paquetes -->
+            <section id="paquetes">
+            <h1 class="display-2">Nuestros Paquetes</h1>
+            <div class="d-flex justify-content-around">
+                <div *ngFor="let item of paquetes">
+                    <img [src]="item.imagen" [alt]="item.nombre" class="p-2 bd-highlight rounded">
+                </div>
+            </div>
+            
+            </section>
+    
+            <!-- Cobertura -->
+            <section id="cobertura">
+            <!-- Titulo -->
+            <div>
+                <h1 class="display-2 d-inline-flex p-2 bd-highlight">Nuestra Cobertura</h1>
+                <p class="lead">Revisa nuestras zonas de cobertura</p>
+            </div>
+    
+            <!-- Mapa y formulario -->
+            <div class="d-flex flex-wrap justify-content-around bd-highlight">
+                <!-- Mapa -->
+                <div id="mapid" class="p-2 flex-grow-1 bd-highlight rounded border border-primary animated fadeIn"></div>
+                <!-- Formulario -->
+                <!-- <form class="p-2 bd-highlight">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p class="lead">Ingrese los datos de tu ubicación</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado: &nbsp;</label>
+                            <select class="form-control" name="estado" id="estado" [(ngModel)]="this.e.estado1" (ngModelChange)="getCity($event)">
+                                <option *ngFor="let item of estado" [ngValue]="item">{{ item.estado1 }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ciudad">Ciudad: &nbsp;</label>
+                            <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="this.c.ciudad1" (ngModelChange)="getCP($event)">
+                                <option *ngFor="let item of ciudad" [ngValue]="item">{{ item.ciudad1 }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="codigo">Código postal: &nbsp;</label>
+                            <select class="form-control" name="codigo" id="codigo" [(ngModel)]="this.cp.codigo" (ngModelChange)="getColonia($event)">
+                                <option [ngValue]="item.idCP" *ngFor="let item of codigo">{{ item.codigo }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="colonia">Colonia: &nbsp;</label>
+                            <select class="form-control" name="colonia" id="colonia" [(ngModel)]="this.co.colonia1">
+                                <option [ngValue]="item.idColonia" *ngFor="let item of colonia">{{ item.colonia1 }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Calle y número: &nbsp;</label>
+                            <input type="text" class="form-control" placeholder="Ingrese calle y número">
+                        </div>
+                    </div>
+                </form> -->
+            </div>
+            </section>
+            <br>
+        </div>
+
+        <!-- Informes y formulario de ac -->
+        <div style="background-color: cornflowerblue; color: white;">
+            <!-- Informes de la empresa -->
+            <div class="animated fadeIn container-fluid" style="padding: 2%;">
+                <img src="../../../assets/img/logo2.png" alt="logo" style="height: 90px; width: 341;">
+                <h6>Desarrollo de sistemas TJ S.A de C.V</h6>
+                <h6>Calle San Renovato #13020 Colonia Montebello C.P 22480, Tijuana, Baja California, México</h6>
+                <h6>Teléfono: (664) 199-8146</h6>
+                <br><br><br>
+            </div>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
